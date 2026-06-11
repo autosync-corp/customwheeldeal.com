@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ford Tires & Wheels - Holbrook</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .signature-gradient { background: linear-gradient(135deg, #850824 0%, #a62639 100%); }
+  .glass-header { background: rgba(249, 249, 252, 0.8); backdrop-filter: blur(20px); }
+  body { font-family: 'Inter', sans-serif; background-color: #f9f9fc; color: #1a1c1e; }
+  h1, h2, h3, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+  @keyframes slide-up { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .animate-slide-up { animation: slide-up 0.3s ease-out; }
+</style>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#850824", "primary-container": "#a62639",
+          "secondary": "#5a5b84", "secondary-container": "#cecdfd",
+          "tertiary": "#543e00", "tertiary-container": "#715400",
+          "tertiary-fixed-dim": "#f9bd14",
+          "on-surface": "#1a1c1e", "on-surface-variant": "#584141",
+          "on-background": "#1a1c1e", "on-primary": "#ffffff",
+          "on-secondary-container": "#55567f", "on-tertiary-container": "#ffc73f",
+          "surface": "#f9f9fc", "surface-bright": "#f9f9fc",
+          "surface-dim": "#dadadc", "surface-variant": "#e2e2e5",
+          "surface-container": "#eeeef0", "surface-container-low": "#f3f3f6",
+          "surface-container-high": "#e8e8ea", "surface-container-highest": "#e2e2e5",
+          "surface-container-lowest": "#ffffff",
+          "outline": "#8c7071", "outline-variant": "#e0bfbf",
+          "error": "#ba1a1a", "on-error": "#ffffff",
+          "inverse-surface": "#2f3133", "inverse-on-surface": "#f0f0f3",
+        },
+        fontFamily: { "headline": ["Space Grotesk"], "body": ["Inter"], "label": ["Inter"] },
+        borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+      },
+    },
+  }
+</script>
+<script src="../../js/api.js" defer></script>
+<script src="../../js/cart.js" defer></script>
+<script src="../../js/components.js" defer></script>
+</head>
+<body class="bg-surface text-on-surface">
+<div id="headerMount"></div>
+
+<main class="pt-20">
+<div id="breadcrumbMount"></div>
+<div id="vehicleReinforcementBar" class="bg-surface-container-low border-b border-outline-variant/20 hidden"></div>
+
+<!-- Hero Section -->
+<section class="signature-gradient text-white py-16 md:py-24">
+<div class="max-w-7xl mx-auto px-8 text-center">
+<h1 class="text-5xl md:text-6xl font-bold mb-4 tracking-tight">FORD</h1>
+<p class="text-lg md:text-xl opacity-90">Premium tires and wheels tailored for your Ford</p>
+</div>
+</section>
+
+<!-- Popular Models Section -->
+<section class="py-16 px-8 bg-surface">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-3xl font-bold mb-8">POPULAR FORD MODELS</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+<div class="bg-surface-container-lowest p-8 rounded-lg border border-outline-variant/10">
+<h3 class="font-bold text-lg mb-4 text-on-surface">Popular Models</h3>
+<ul class="space-y-3">
+<li class="text-on-surface-variant">• F-150</li>
+<li class="text-on-surface-variant">• Mustang</li>
+<li class="text-on-surface-variant">• Explorer</li>
+<li class="text-on-surface-variant">• Escape</li>
+<li class="text-on-surface-variant">• Edge</li>
+<li class="text-on-surface-variant">• Focus</li>
+</ul>
+</div>
+<div class="bg-primary text-white p-8 rounded-lg">
+<h3 class="font-bold text-lg mb-4">Find Your Perfect Fit</h3>
+<p class="text-sm mb-6 opacity-90">Use our vehicle fitment widget to find tires and wheels specifically sized for your Ford.</p>
+<button class="bg-white text-primary px-6 py-2 rounded-md font-bold text-sm hover:bg-white/90 transition-all">START FITMENT</button>
+</div>
+<div class="bg-surface-container-low p-8 rounded-lg border border-outline-variant">
+<h3 class="font-bold text-lg mb-4">Why Choose Holbrook?</h3>
+<ul class="space-y-3 text-sm">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-5 mt-0.5">check_circle</span>
+<span>OEM and performance fitments</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-5 mt-0.5">check_circle</span>
+<span>Expert installation network</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-5 mt-0.5">check_circle</span>
+<span>Guaranteed best pricing</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Compatible Tires Section -->
+<section class="py-16 px-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="flex items-end justify-between mb-8">
+<div>
+<h2 class="text-3xl font-bold">COMPATIBLE TIRES</h2>
+<p class="text-on-surface-variant mt-2">Browse all tire options for Ford vehicles</p>
+</div>
+<a href="../../tires/" class="signature-gradient text-white px-6 py-3 rounded-md text-sm font-bold uppercase hover:opacity-90 transition-all">SHOP ALL TIRES</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
+<div class="bg-surface-container-lowest p-6 rounded-lg text-center border border-outline-variant/10 hover:shadow-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary text-4xl block mb-3">tire_repair</span>
+<h3 class="font-bold text-sm mb-2">All-Season Tires</h3>
+<p class="text-xs text-on-surface-variant">Reliable year-round performance</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg text-center border border-outline-variant/10 hover:shadow-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary text-4xl block mb-3">grain</span>
+<h3 class="font-bold text-sm mb-2">Winter Tires</h3>
+<p class="text-xs text-on-surface-variant">Superior snow & ice grip</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg text-center border border-outline-variant/10 hover:shadow-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary text-4xl block mb-3">flash_on</span>
+<h3 class="font-bold text-sm mb-2">Performance Tires</h3>
+<p class="text-xs text-on-surface-variant">Enhanced handling & speed</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg text-center border border-outline-variant/10 hover:shadow-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary text-4xl block mb-3">directions_car</span>
+<h3 class="font-bold text-sm mb-2">Off-Road Tires</h3>
+<p class="text-xs text-on-surface-variant">Rugged terrain capability</p>
+</div>
+</div>
+</section>
+
+<!-- Compatible Wheels Section -->
+<section class="py-16 px-8 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="flex items-end justify-between mb-8">
+<div>
+<h2 class="text-3xl font-bold">COMPATIBLE WHEELS</h2>
+<p class="text-on-surface-variant mt-2">Custom wheel options for Ford</p>
+</div>
+<a href="../../wheels/" class="signature-gradient text-white px-6 py-3 rounded-md text-sm font-bold uppercase hover:opacity-90 transition-all">SHOP ALL WHEELS</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
+<div class="bg-surface-container-lowest p-6 rounded-lg text-center border border-outline-variant/10 hover:shadow-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary text-4xl block mb-3">settings</span>
+<h3 class="font-bold text-sm mb-2">Alloy Wheels</h3>
+<p class="text-xs text-on-surface-variant">Lightweight & stylish</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg text-center border border-outline-variant/10 hover:shadow-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary text-4xl block mb-3">star</span>
+<h3 class="font-bold text-sm mb-2">OEM Replicas</h3>
+<p class="text-xs text-on-surface-variant">Factory style options</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg text-center border border-outline-variant/10 hover:shadow-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary text-4xl block mb-3">favorite</span>
+<h3 class="font-bold text-sm mb-2">Custom Designs</h3>
+<p class="text-xs text-on-surface-variant">Unique premium finishes</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg text-center border border-outline-variant/10 hover:shadow-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary text-4xl block mb-3">landscape</span>
+<h3 class="font-bold text-sm mb-2">Off-Road Wheels</h3>
+<p class="text-xs text-on-surface-variant">Built tough for adventure</p>
+</div>
+</div>
+</section>
+
+<!-- Fitment Widget CTA -->
+<section class="py-20 px-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="bg-gradient-to-r from-primary to-primary-container rounded-xl p-12 text-white text-center">
+<h2 class="text-3xl md:text-4xl font-bold mb-4">FIND YOUR PERFECT FIT</h2>
+<p class="text-lg mb-8 opacity-90">Get personalized tire and wheel recommendations for your Ford</p>
+<button class="bg-white text-primary px-8 py-3 rounded-md font-bold text-sm uppercase hover:bg-white/90 transition-all">START THE FITMENT WIDGET</button>
+</div>
+</section>
+
+</main>
+<div id="footerMount"></div>
+
+<script src="../../js/vvs.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('headerMount').innerHTML = HolbrookUI.renderHeader('vehicles');
+    document.getElementById('footerMount').innerHTML = HolbrookUI.renderFooter();
+    document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb([
+        { text: 'Vehicles', href: '../index.html' },
+        { text: 'FORD', href: '#' }
+    ]);
+    HolbrookUI.updateGarageCount();
+    HolbrookUI.renderVehicleBar();
+    if (typeof HolbrookCart !== 'undefined') HolbrookCart.init();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexible Tire Financing — Affirm & Katapult | Custom Wheel Deal</title>
+  <meta name="description" content="Finance your tires and services at Custom Wheel Deal with Affirm or Katapult. Get pre-approved in seconds, no credit required with Katapult, zero hidden fees with Affirm. Three Detroit-area locations.">
+  <link rel="canonical" href="https://customwheeldeal.com/financing/">
+  <meta property="og:title" content="Flexible Tire Financing — Affirm & Katapult | Custom Wheel Deal">
+  <meta property="og:description" content="Safety shouldn't wait for payday. Split your tire and service costs into manageable payments. Pre-approve in seconds without affecting your credit score.">
+  <meta property="og:url" content="https://customwheeldeal.com/financing/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Custom Wheel Deal">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flexible Tire Financing — Affirm & Katapult | Custom Wheel Deal">
+  <meta name="twitter:description" content="Safety shouldn't wait for payday. Split your tire and service costs into manageable payments with Affirm or Katapult.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I use financing for both tires and in-shop services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can use your approved financing amount to cover tires, mounting and balancing, alignments, TPMS resets, and wheel repairs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will checking my eligibility hurt my credit score?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Both Affirm and Katapult use a soft credit pull to check your eligibility instantly, which has zero impact on your FICO credit score."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Affirm and Katapult?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Affirm offers conventional buy now, pay later micro-loans based on creditworthiness with 3, 6, or 12 monthly payment options. Katapult is a lease-to-own program designed for non-prime or developing credit profiles, giving you up to $3,500 in shopping strength with no credit required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Katapult require a credit check?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Katapult looks beyond traditional credit scores, making it ideal for customers with no credit history, lower credit scores, or those who have been turned down for traditional financing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are there any hidden fees with Affirm?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Affirm shows you exactly what you owe upfront. There are never any late fees, annual fees, or hidden surprises — what you see is exactly what you pay."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v9">
+</head>
+<body>
+<div id="app"></div>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="/js/setup.js?v9"></script>
+<script src="/js/data.js?v9"></script>
+<script src="/js/api.js?v9"></script>
+<script src="/js/cart.js?v9"></script>
+<script src="/js/layout.js?v10"></script>
+<script>
+function FinancingPage() {
+  var primary = tokens.primary;
+  var ink = tokens.ink;
+  var mute = tokens.mute;
+  var line = tokens.line;
+  var surfLow = tokens.surfLow;
+
+  var affirmPoints = [
+    { icon: 'visibility', title: 'No Hidden Fees', body: 'You see exactly what you owe upfront — no late fees, no annual fees, no surprises. What you see is exactly what you pay.' },
+    { icon: 'calendar_month', title: 'Flexible Monthly Plans', body: 'Choose the payment schedule that fits your lifestyle — typically 3, 6, or 12 monthly payments.' },
+    { icon: 'credit_score', title: 'Zero Credit Impact to Check', body: 'Pre-qualifying uses a soft credit check only. It will not lower your credit score.' }
+  ];
+  var katapultPoints = [
+    { icon: 'no_accounts', title: 'No Credit Needed', body: 'Katapult looks beyond traditional credit scores to give you up to $3,500 in shopping strength for tires or wheels.' },
+    { icon: 'block', title: 'Never Any Late Fees', body: 'Simple, straightforward payment paths with zero late fee penalties — ever.' },
+    { icon: 'savings', title: 'Save with Early Buyouts', body: 'Take advantage of a 90-day early purchase option to pay off your lease early and save the most money.' }
+  ];
+  var steps = [
+    { number: '1', icon: 'shopping_cart', title: 'Shop', body: 'Add tires or services to your cart and head to checkout.' },
+    { number: '2', icon: 'account_balance_wallet', title: 'Choose', body: 'Select Affirm or Katapult as your payment method.' },
+    { number: '3', icon: 'directions_car', title: 'Drive Away', body: 'Complete a quick, instant application and enjoy your ride!' }
+  ];
+  var faqs = [
+    { q: 'Can I use financing for both tires and in-shop services?', a: 'Yes! Financing covers tires, mounting & balancing, alignments, TPMS resets, and wheel repairs.' },
+    { q: 'Will checking my eligibility hurt my credit score?', a: 'Not at all. Both Affirm and Katapult use a soft credit pull — zero impact on your FICO score.' },
+    { q: 'What is the difference between Affirm and Katapult?', a: 'Affirm is a buy now, pay later loan for established or building credit. Katapult is a lease-to-own program with no credit required — perfect if you\'ve been turned down before.' }
+  ];
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null,
+
+    /* ── Hero ── */
+    /*#__PURE__*/React.createElement('div', { style: { background: 'linear-gradient(135deg, #1a1c1e 0%, #1f2029 100%)', color: '#fff', padding: '80px 24px 72px', textAlign: 'center' } },
+      /*#__PURE__*/React.createElement('div', { style: { maxWidth: 760, margin: '0 auto' } },
+        /*#__PURE__*/React.createElement('div', { style: { display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(192,0,12,.18)', border: '1px solid rgba(192,0,12,.4)', borderRadius: 999, padding: '4px 14px', fontSize: 11, fontWeight: 800, letterSpacing: '.16em', textTransform: 'uppercase', color: '#ff8080', marginBottom: 20 } },
+          /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 14 } }, 'credit_card'),
+          'Flexible Financing'
+        ),
+        /*#__PURE__*/React.createElement('h1', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 700, lineHeight: 1.1, margin: '0 0 20px', letterSpacing: '-.02em' } },
+          'Flexible Tire & Service Financing'
+        ),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 18, lineHeight: 1.6, color: 'rgba(255,255,255,.72)', maxWidth: 620, margin: '0 auto 12px' } },
+          'Safety on the road shouldn\'t have to wait for payday.'
+        ),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 16, lineHeight: 1.6, color: 'rgba(255,255,255,.55)', maxWidth: 600, margin: '0 auto 32px' } },
+          'Get pre-approved in seconds without affecting your credit score. Split your costs into manageable payments and get back on the road today.'
+        ),
+        /*#__PURE__*/React.createElement('a', { href: '/tires/', style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: primary, color: '#fff', borderRadius: 8, fontWeight: 800, fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: 'none' } },
+          /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18 } }, 'tire_repair'),
+          'Shop Tires'
+        )
+      )
+    ),
+
+    /*#__PURE__*/React.createElement('div', { style: { maxWidth: 1100, margin: '0 auto', padding: '0 24px' } },
+
+      /* ── Two Options ── */
+      /*#__PURE__*/React.createElement('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 32, padding: '72px 0', borderBottom: '1px solid ' + line } },
+
+        /* Affirm */
+        /*#__PURE__*/React.createElement('div', { style: { border: '1px solid ' + line, borderRadius: 16, padding: '32px 28px', background: '#fff' } },
+          /*#__PURE__*/React.createElement('div', { style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 } },
+            /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontSize: 22, fontWeight: 800, color: ink, letterSpacing: '-.01em' } }, 'Affirm'),
+            /*#__PURE__*/React.createElement('div', { style: { background: '#dbeafe', color: '#1e40af', fontSize: 10, fontWeight: 800, padding: '3px 10px', borderRadius: 999, letterSpacing: '.1em', textTransform: 'uppercase' } }, 'Buy Now, Pay Later')
+          ),
+          /*#__PURE__*/React.createElement('div', { style: { fontSize: 13, color: mute, marginBottom: 24 } }, 'Best for customers with established or building credit looking for a traditional payment plan with zero hidden surprises.'),
+          /*#__PURE__*/React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 16 } },
+            affirmPoints.map(function(p) {
+              return /*#__PURE__*/React.createElement('div', { key: p.title, style: { display: 'flex', gap: 12, alignItems: 'flex-start' } },
+                /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18, color: '#2563eb', flexShrink: 0, marginTop: 1 } }, p.icon),
+                /*#__PURE__*/React.createElement('div', null,
+                  /*#__PURE__*/React.createElement('div', { style: { fontWeight: 700, fontSize: 13, color: ink, marginBottom: 2 } }, p.title),
+                  /*#__PURE__*/React.createElement('div', { style: { fontSize: 13, lineHeight: 1.55, color: mute } }, p.body)
+                )
+              );
+            })
+          )
+        ),
+
+        /* Katapult */
+        /*#__PURE__*/React.createElement('div', { style: { border: '1px solid ' + line, borderRadius: 16, padding: '32px 28px', background: '#fff' } },
+          /*#__PURE__*/React.createElement('div', { style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 } },
+            /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontSize: 22, fontWeight: 800, color: ink, letterSpacing: '-.01em' } }, 'Katapult'),
+            /*#__PURE__*/React.createElement('div', { style: { background: '#dcfce7', color: '#166534', fontSize: 10, fontWeight: 800, padding: '3px 10px', borderRadius: 999, letterSpacing: '.1em', textTransform: 'uppercase' } }, 'Lease-to-Own')
+          ),
+          /*#__PURE__*/React.createElement('div', { style: { fontSize: 13, color: mute, marginBottom: 24 } }, 'Best for customers with no credit history, lower scores, or those who have been turned down for traditional financing.'),
+          /*#__PURE__*/React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 16 } },
+            katapultPoints.map(function(p) {
+              return /*#__PURE__*/React.createElement('div', { key: p.title, style: { display: 'flex', gap: 12, alignItems: 'flex-start' } },
+                /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18, color: '#16a34a', flexShrink: 0, marginTop: 1 } }, p.icon),
+                /*#__PURE__*/React.createElement('div', null,
+                  /*#__PURE__*/React.createElement('div', { style: { fontWeight: 700, fontSize: 13, color: ink, marginBottom: 2 } }, p.title),
+                  /*#__PURE__*/React.createElement('div', { style: { fontSize: 13, lineHeight: 1.55, color: mute } }, p.body)
+                )
+              );
+            })
+          )
+        )
+      ),
+
+      /* ── How It Works ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '64px 0', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, color: ink, margin: '0 0 40px', textAlign: 'center' } }, 'How It Works'),
+        /*#__PURE__*/React.createElement('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 24 } },
+          steps.map(function(s) {
+            return /*#__PURE__*/React.createElement('div', { key: s.number, style: { textAlign: 'center', background: surfLow, borderRadius: 12, padding: '28px 20px' } },
+              /*#__PURE__*/React.createElement('div', { style: { width: 48, height: 48, borderRadius: '50%', background: primary, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 18, margin: '0 auto 14px' } }, s.number),
+              /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 16, color: ink, marginBottom: 8 } }, s.title),
+              /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.6, color: mute } }, s.body)
+            );
+          })
+        )
+      ),
+
+      /* ── FAQ ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '64px 0', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, color: ink, margin: '0 0 36px', textAlign: 'center' } }, 'Frequently Asked Questions'),
+        /*#__PURE__*/React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 760, margin: '0 auto' } },
+          faqs.map(function(f, i) {
+            return /*#__PURE__*/React.createElement('div', { key: i, style: { background: surfLow, borderRadius: 12, padding: '22px 22px' } },
+              /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 15, color: ink, marginBottom: 8 } }, f.q),
+              /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.65, color: mute } }, f.a)
+            );
+          })
+        )
+      ),
+
+      /* ── CTA ── */
+      /*#__PURE__*/React.createElement('div', { style: { textAlign: 'center', padding: '64px 24px 80px' } },
+        /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 700, color: ink, margin: '0 0 12px' } }, 'Ready to Get Started?'),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 16, color: mute, maxWidth: 460, margin: '0 auto 28px', lineHeight: 1.6 } }, "Don't compromise on your vehicle's safety. Find your tires, select your payment option at checkout, and hit the road with confidence."),
+        /*#__PURE__*/React.createElement('div', { style: { display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' } },
+          /*#__PURE__*/React.createElement('a', { href: '/tires/', style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: primary, color: '#fff', borderRadius: 8, fontWeight: 800, fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: 'none' } },
+            /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18 } }, 'tire_repair'),
+            'Shop Tires'
+          ),
+          /*#__PURE__*/React.createElement('a', { href: '/wheels/', style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: '#fff', color: ink, border: '1px solid ' + line, borderRadius: 8, fontWeight: 800, fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: 'none' } },
+            /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18 } }, 'album'),
+            'Shop Wheels'
+          )
+        )
+      )
+
+    )
+  );
+}
+
+function FinancingMount() {
+  return /*#__PURE__*/React.createElement(AppProvider, { defaults: window.TWEAK_DEFAULTS },
+    /*#__PURE__*/React.createElement(Header, null),
+    /*#__PURE__*/React.createElement('main', null, /*#__PURE__*/React.createElement(FinancingPage, null)),
+    /*#__PURE__*/React.createElement(Footer, null));
+}
+ReactDOM.createRoot(document.getElementById('app')).render(/*#__PURE__*/React.createElement(FinancingMount));
+</script>
+</body>
+</html>

@@ -1,0 +1,451 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tire & Wheel Brands | Custom Wheel Deal — Michigan</title>
+  <meta name="description" content="Shop tires and wheels from the top brands — Michelin, Goodyear, Bridgestone, Fuel, Method, Niche and more. Find your brand at Custom Wheel Deal in Michigan.">
+  <link rel="canonical" href="https://customwheeldeal.com/brands/">
+  <meta property="og:title" content="Tire & Wheel Brands | Custom Wheel Deal">
+  <meta property="og:description" content="Shop tires and wheels from the top brands. Find your brand at Custom Wheel Deal in Michigan.">
+  <meta property="og:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
+  <meta property="og:url" content="https://customwheeldeal.com/brands/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Custom Wheel Deal">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tire & Wheel Brands | Custom Wheel Deal">
+  <meta name="twitter:description" content="Shop tires and wheels from the top brands. Find your brand at Custom Wheel Deal in Michigan.">
+  <meta name="twitter:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Tire & Wheel Brands",
+    "description": "Shop tires and wheels from the top brands at Custom Wheel Deal in Michigan.",
+    "url": "https://customwheeldeal.com/brands/",
+    "hasPart": [
+      { "@type": "WebPage", "name": "Tire Brands", "url": "https://customwheeldeal.com/brands/tires/" },
+      { "@type": "WebPage", "name": "Wheel Brands", "url": "https://customwheeldeal.com/brands/wheels/" }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.autosyncstudio.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v9">
+  <style>@keyframes pulse { 0%,100%{opacity:.45} 50%{opacity:.9} }</style>
+</head>
+<body>
+<div id="app"></div>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="/js/setup.js?v9"></script>
+<script src="/js/data.js?v9"></script>
+<script src="/js/layout.js?v10"></script>
+<script src="/js/api.js?v9"></script>
+<script>
+function LocationsStrip() {
+  const {
+    locations
+  } = window.HOLBROOK_DATA;
+  return /*#__PURE__*/React.createElement("section", {
+    style: {
+      background: '#fff',
+      padding: '72px 32px 64px',
+      borderTop: `1px solid ${tokens.lineSoft}`
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1320,
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'center',
+      marginBottom: 40
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, {
+    color: tokens.primary,
+    style: {
+      marginBottom: 8
+    }
+  }, "Three Michigan locations"), /*#__PURE__*/React.createElement(Headline, {
+    size: "h2",
+    style: {
+      fontSize: 32,
+      margin: 0
+    }
+  }, "Installed by people who know your car.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      gap: 20
+    }
+  }, locations.map(l => /*#__PURE__*/React.createElement("div", {
+    key: l.id,
+    style: {
+      background: tokens.surfLow,
+      borderRadius: 14,
+      padding: '28px 28px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 14
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, {
+    color: tokens.primary
+  }, "Holbrook \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: 20,
+      fontWeight: 700,
+      letterSpacing: '-.01em',
+      color: tokens.ink,
+      lineHeight: 1.3
+    }
+  }, l.addr), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      color: tokens.taupe,
+      lineHeight: 1.6
+    }
+  }, l.city, ", MI ", l.zip, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: tokens.mute
+    }
+  }, l.hours)), /*#__PURE__*/React.createElement("a", {
+    href: `tel:${l.phoneTel}`,
+    style: {
+      color: tokens.primary,
+      fontSize: 17,
+      fontWeight: 700,
+      textDecoration: 'none',
+      fontFamily: 'Space Grotesk',
+      marginTop: 'auto',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "call",
+    size: 16
+  }), " ", l.phone))))));
+}
+function GlobalFitmentBar() {
+  const {
+    vehicle,
+    setVehicle,
+    navigate,
+    route
+  } = useApp();
+  const YEARS = useMemo(() => {
+    const y = [],
+      c = 2027;
+    for (let i = c; i >= 2000; i--) y.push(i);
+    return y;
+  }, []);
+  const [year, setYear] = useState('');
+  const [make, setMake] = useState('');
+  const [model, setModel] = useState('');
+  const [submodel, setSubmodel] = useState('');
+  const [makes, setMakes] = useState([]);
+  const [models, setModels] = useState([]);
+  const [submodels, setSubmodels] = useState([]);
+  const [fitments, setFitments] = useState([]);
+  const [selectedSize, setSelectedSize] = useState('');
+  const [makesLoading, setMakesLoading] = useState(false);
+  const [modelsLoading, setModelsLoading] = useState(false);
+  const [submodelsLoading, setSubmodelsLoading] = useState(false);
+  const [fitmentsLoading, setFitmentsLoading] = useState(false);
+  const staticMakes = window.HOLBROOK_DATA.vehicleMakes.map(function (m) {
+    return m.name;
+  });
+  useEffect(() => {
+    if (!year) { setMakes([]); setMake(''); return; }
+    setMakesLoading(true);
+    api.fetchVehicleMakes(year).then(data => {
+      const items = extractItems(data);
+      if (items) {
+        const names = items.map(function(m) { return m.Make || m.Name || extractName(m); }).filter(Boolean);
+        setMakes(names.length > 0 ? names : staticMakes);
+      } else { setMakes(staticMakes); }
+    }).catch(function() { setMakes(staticMakes); }).finally(() => setMakesLoading(false));
+    setMake(''); setModel(''); setSubmodel('');
+  }, [year]);
+  useEffect(() => {
+    if (!make) { setModels([]); setModel(''); return; }
+    setModelsLoading(true);
+    api.fetchVehicleModels(year, make).then(data => {
+      const items = extractItems(data);
+      if (items) {
+        const names = items.map(function(m) { return m.Model || m.Name || extractName(m); }).filter(Boolean);
+        setModels(names);
+      } else { setModels([]); }
+    }).catch(function() { setModels([]); }).finally(() => setModelsLoading(false));
+    setModel(''); setSubmodel('');
+  }, [make]);
+  useEffect(() => {
+    if (!model) { setSubmodels([]); setSubmodel(''); return; }
+    setSubmodelsLoading(true);
+    api.fetchVehicleSubmodels(year, make, model).then(data => {
+      const items = extractItems(data);
+      if (items) {
+        const names = items.map(function(m) { return m.Submodel || m.Name || extractName(m); }).filter(Boolean);
+        setSubmodels(names);
+      } else { setSubmodels([]); }
+    }).catch(function() { setSubmodels([]); }).finally(() => setSubmodelsLoading(false));
+    setSubmodel(''); setSelectedSize('');
+  }, [model]);
+  useEffect(() => {
+    if (!model) { setFitments([]); setSelectedSize(''); return; }
+    setFitmentsLoading(true);
+    api.fetchVehicleFitments(year, make, model).then(data => {
+      var vehicles = data.Vehicles || [];
+      var sizeMap = {};
+      vehicles.forEach(function(v) {
+        (v.Fitments || []).forEach(function(f) {
+          var tireSize = f.TireSize || '';
+          var wheelSpec = (f.RimDiameter || '') + 'x' + (f.RimWidth || '');
+          var key = tireSize + '|' + wheelSpec;
+          if (tireSize && !sizeMap[key]) {
+            sizeMap[key] = { tireSize: tireSize, tireSizeRear: f.TireSizeRear || null, rimDiameter: f.RimDiameter, rimWidth: f.RimWidth, offset: f.Offset, boltCircle: v.BoltCircle, bore: v.Bore, wheelSpec: wheelSpec, label: tireSize + ' · ' + wheelSpec + '" wheel', submodels: [] };
+          }
+          if (tireSize && sizeMap[key]) {
+            var sub = v.Submodel || '';
+            if (sub && sizeMap[key].submodels.indexOf(sub) === -1) sizeMap[key].submodels.push(sub);
+          }
+        });
+      });
+      var sizeList = Object.values(sizeMap).sort(function(a, b) { return a.rimDiameter - b.rimDiameter; });
+      setFitments(sizeList);
+    }).catch(function() { setFitments([]); }).finally(function() { setFitmentsLoading(false); });
+  }, [model]);
+  const go = () => {
+    if (year && make && model) {
+      var selectedFitment = fitments.find(function(f) { return f.label === selectedSize; });
+      setVehicle({ year, make, model, submodel: submodel || undefined, tireSize: selectedFitment ? selectedFitment.tireSize : undefined, rimDiameter: selectedFitment ? selectedFitment.rimDiameter : undefined, rimWidth: selectedFitment ? selectedFitment.rimWidth : undefined, boltCircle: selectedFitment ? selectedFitment.boltCircle : undefined, bore: selectedFitment ? selectedFitment.bore : undefined, fitment: selectedFitment || undefined });
+      navigate('/shop');
+    }
+  };
+  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #850824 100%)';
+  const barBorder = '1px solid rgba(255,255,255,.08)';
+  const barShadow = 'inset 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(232,52,78,.15)';
+  const fld = { background: 'rgba(255,255,255,.1)', border: '1px solid rgba(255,255,255,.18)', padding: '10px 32px 10px 14px', fontFamily: 'Inter', fontSize: 13, fontWeight: 600, color: '#fff', appearance: 'none', borderRadius: 6, minWidth: 130, cursor: 'pointer' };
+  if (vehicle) {
+    return /*#__PURE__*/React.createElement("div", { style: { background: barBg, borderBottom: barBorder, boxShadow: barShadow, position: 'relative', overflow: 'hidden' } },
+      /*#__PURE__*/React.createElement("div", { style: { position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 100% 50%, rgba(232,52,78,.25) 0%, transparent 55%)', pointerEvents: 'none' } }),
+      /*#__PURE__*/React.createElement("div", { style: { maxWidth: 1320, margin: '0 auto', padding: '18px 32px', display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap', position: 'relative' } },
+        /*#__PURE__*/React.createElement("div", { style: { width: 38, height: 38, background: 'rgba(255,255,255,.14)', border: '1px solid rgba(255,255,255,.2)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+          /*#__PURE__*/React.createElement(Icon, { name: "directions_car", size: 22, style: { color: '#fff' } })),
+        /*#__PURE__*/React.createElement("div", { style: { flex: 1, lineHeight: 1.2 } },
+          /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Inter', fontSize: 11, fontWeight: 700, letterSpacing: '.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,.7)' } }, "Showing packages that fit"),
+          /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontSize: 22, fontWeight: 700, letterSpacing: '-.01em', color: '#fff', marginTop: 2 } },
+            vehicle.year, " ", /*#__PURE__*/React.createElement("span", { style: { fontWeight: 500 } }, vehicle.make), " ", vehicle.model,
+            vehicle.tireSize ? /*#__PURE__*/React.createElement("span", { style: { fontSize: 14, fontWeight: 400, opacity: .8, marginLeft: 8 } }, "· ", vehicle.tireSize) : null)),
+        /*#__PURE__*/React.createElement("button", { onClick: () => navigate('/shop'), style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 18px', background: tokens.yellow, color: tokens.ink, border: 'none', borderRadius: 6, fontSize: 11, fontWeight: 800, letterSpacing: '.14em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' } },
+          /*#__PURE__*/React.createElement(Icon, { name: "storefront", size: 14 }), "Shop Now"),
+        /*#__PURE__*/React.createElement("button", { onClick: () => { setVehicle(null); }, style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 16px', background: 'rgba(255,255,255,.12)', color: '#fff', border: '1px solid rgba(255,255,255,.25)', borderRadius: 6, fontSize: 11, fontWeight: 800, letterSpacing: '.14em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit', transition: 'all .15s' }, onMouseOver: e => { e.currentTarget.style.background = 'rgba(255,255,255,.2)'; }, onMouseOut: e => { e.currentTarget.style.background = 'rgba(255,255,255,.12)'; } },
+          /*#__PURE__*/React.createElement(Icon, { name: "autorenew", size: 14 }), "Change vehicle")));
+  }
+  return /*#__PURE__*/React.createElement("div", { style: { background: barBg, borderBottom: barBorder, boxShadow: barShadow, position: 'relative', overflow: 'hidden' } },
+    /*#__PURE__*/React.createElement("div", { style: { position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 100% 50%, rgba(232,52,78,.22) 0%, transparent 55%)', pointerEvents: 'none' } }),
+    /*#__PURE__*/React.createElement("div", { style: { maxWidth: 1320, margin: '0 auto', padding: '12px 32px', display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', position: 'relative' } },
+      /*#__PURE__*/React.createElement("div", { style: { display: 'inline-flex', alignItems: 'center', gap: 10, paddingRight: 14, borderRight: '1px solid rgba(255,255,255,.18)' } },
+        /*#__PURE__*/React.createElement(Icon, { name: "tire_repair", size: 20, style: { color: '#fff' } }),
+        /*#__PURE__*/React.createElement("span", { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 13, color: '#fff', letterSpacing: '.06em', textTransform: 'uppercase' } }, "Find your fitment")),
+      /*#__PURE__*/React.createElement("div", { style: { flex: 1, minWidth: 320, display: 'flex', gap: 8, justifyContent: 'flex-end', flexWrap: 'wrap' } },
+        /*#__PURE__*/React.createElement("select", { value: year, onChange: e => setYear(e.target.value), style: fld },
+          /*#__PURE__*/React.createElement("option", { value: "", style: { color: '#000' } }, "Year"),
+          YEARS.map(y => /*#__PURE__*/React.createElement("option", { key: y, style: { color: '#000' } }, y))),
+        /*#__PURE__*/React.createElement("select", { value: make, onChange: e => setMake(e.target.value), disabled: !year || makesLoading, style: { ...fld, opacity: year ? 1 : .4 } },
+          /*#__PURE__*/React.createElement("option", { value: "", style: { color: '#000' } }, makesLoading ? 'Loading...' : 'Make'),
+          makes.map(m => /*#__PURE__*/React.createElement("option", { key: m, style: { color: '#000' } }, m))),
+        /*#__PURE__*/React.createElement("select", { value: model, onChange: e => setModel(e.target.value), disabled: !make || modelsLoading, style: { ...fld, opacity: make ? 1 : .4 } },
+          /*#__PURE__*/React.createElement("option", { value: "", style: { color: '#000' } }, modelsLoading ? 'Loading...' : 'Model'),
+          models.map(m => /*#__PURE__*/React.createElement("option", { key: m, style: { color: '#000' } }, m))),
+        submodels.length > 0 && /*#__PURE__*/React.createElement("select", { value: submodel, onChange: e => setSubmodel(e.target.value), disabled: submodelsLoading, style: { ...fld } },
+          /*#__PURE__*/React.createElement("option", { value: "", style: { color: '#000' } }, submodelsLoading ? 'Loading...' : 'Submodel'),
+          submodels.map(s => /*#__PURE__*/React.createElement("option", { key: s, style: { color: '#000' } }, s))),
+        fitments.length > 0 && /*#__PURE__*/React.createElement("select", { value: selectedSize, onChange: e => setSelectedSize(e.target.value), disabled: fitmentsLoading, style: { ...fld, minWidth: 200, borderColor: selectedSize ? tokens.yellow : 'rgba(255,255,255,.18)', background: selectedSize ? 'rgba(255,194,32,.15)' : 'rgba(255,255,255,.1)' } },
+          /*#__PURE__*/React.createElement("option", { value: "", style: { color: '#000' } }, fitmentsLoading ? 'Loading sizes...' : '⭐ OE Size'),
+          fitments.map(f => /*#__PURE__*/React.createElement("option", { key: f.label, value: f.label, style: { color: '#000' } }, f.label))),
+        fitmentsLoading && fitments.length === 0 && model && /*#__PURE__*/React.createElement("span", { style: { color: 'rgba(255,255,255,.5)', fontSize: 11, fontStyle: 'italic' } }, "Loading OE sizes..."),
+        /*#__PURE__*/React.createElement("button", { onClick: go, disabled: !year || !make || !model, style: { display: 'inline-flex', alignItems: 'center', gap: 6, padding: '10px 18px', background: !year || !make || !model ? 'rgba(255,255,255,.12)' : tokens.yellow, color: !year || !make || !model ? 'rgba(255,255,255,.6)' : tokens.ink, border: 'none', borderRadius: 6, fontSize: 11, fontWeight: 800, letterSpacing: '.14em', textTransform: 'uppercase', cursor: !year || !make || !model ? 'not-allowed' : 'pointer', fontFamily: 'inherit' } },
+          "Shop now ", /*#__PURE__*/React.createElement(Icon, { name: "arrow_forward", size: 15 })))));
+}
+
+var BRAND_CDN = 'https://storage.googleapis.com/autosync-brand-logos/logos/';
+
+function normalizeBrands(data) {
+  var items = data && (data.Brands || data.Items || data.brands || []);
+  return items.map(function(b) {
+    var name = b.Name || b.name || b.Brand || b.brand || '';
+    var logo = b.BrandLogosUrlBase && b.Logo
+      ? b.BrandLogosUrlBase + b.Logo
+      : BRAND_CDN + name.replace(/\s+/g, '_') + '.webp';
+    return { name: name, logo: logo };
+  }).filter(function(b) { return b.name; });
+}
+
+function brandUrlSlug(name) {
+  return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+}
+
+function BrandCard({ brand, href }) {
+  var [imgError, setImgError] = React.useState(false);
+  return /*#__PURE__*/React.createElement('a', {
+    href: href,
+    style: {
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      background: '#fff', border: '1px solid ' + tokens.line, borderRadius: 12,
+      padding: '20px 16px', textDecoration: 'none', color: tokens.ink,
+      gap: 10, transition: 'all .2s', minHeight: 110
+    },
+    onMouseOver: function(e) {
+      e.currentTarget.style.boxShadow = '0 10px 24px rgba(0,0,0,.09)';
+      e.currentTarget.style.borderColor = 'rgba(133,8,36,.3)';
+      e.currentTarget.style.transform = 'translateY(-2px)';
+    },
+    onMouseOut: function(e) {
+      e.currentTarget.style.boxShadow = 'none';
+      e.currentTarget.style.borderColor = tokens.line;
+      e.currentTarget.style.transform = 'none';
+    }
+  },
+  !imgError && brand.logo
+    ? /*#__PURE__*/React.createElement('img', {
+        src: brand.logo, alt: brand.name + ' logo',
+        style: { height: 48, maxWidth: 120, objectFit: 'contain', display: 'block' },
+        onError: function() { setImgError(true); }
+      })
+    : /*#__PURE__*/React.createElement('div', {
+        style: {
+          height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center',
+          background: tokens.surfLow, borderRadius: 8, padding: '0 12px', width: '100%'
+        }
+      }, /*#__PURE__*/React.createElement('span', { style: { fontWeight: 700, fontSize: 13, textAlign: 'center' } }, brand.name)),
+  /*#__PURE__*/React.createElement('div', {
+    style: { fontSize: 11, fontWeight: 600, color: tokens.graphite, textAlign: 'center', lineHeight: 1.3 }
+  }, brand.name));
+}
+
+function BrandSkeletonGrid({ cols }) {
+  return /*#__PURE__*/React.createElement('div', {
+    style: { display: 'grid', gridTemplateColumns: 'repeat(' + (cols || 6) + ', 1fr)', gap: 16 }
+  }, [0,1,2,3,4,5,6,7,8,9,10,11].map(function(i) {
+    return /*#__PURE__*/React.createElement('div', {
+      key: i,
+      style: { background: tokens.surfLow, borderRadius: 12, minHeight: 110, animation: 'pulse 1.4s ease-in-out infinite' }
+    });
+  }));
+}
+
+function BrandsPage() {
+  var [tireBrands, setTireBrands] = React.useState(window.HOLBROOK_DATA.brands || []);
+  var [wheelBrands, setWheelBrands] = React.useState(window.HOLBROOK_DATA.wheelBrandList || []);
+  var [loading, setLoading] = React.useState(true);
+
+  React.useEffect(function() {
+    Promise.allSettled([api.fetchTireBrands(), api.fetchWheelBrands()]).then(function(results) {
+      var tRes = results[0], wRes = results[1];
+      if (tRes.status === 'fulfilled') {
+        var brands = normalizeBrands(tRes.value);
+        if (brands.length > 0) setTireBrands(brands);
+      }
+      if (wRes.status === 'fulfilled') {
+        var wBrands = normalizeBrands(wRes.value);
+        if (wBrands.length > 0) setWheelBrands(wBrands);
+      }
+      setLoading(false);
+    });
+  }, []);
+
+  var displayTire = tireBrands.slice(0, 12);
+  var displayWheel = wheelBrands.slice(0, 12);
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null,
+    // Breadcrumb
+    /*#__PURE__*/React.createElement('div', { style: { borderBottom: '1px solid ' + tokens.line, background: '#fff' } },
+      /*#__PURE__*/React.createElement('div', { style: { maxWidth: 1320, margin: '0 auto', padding: '14px 32px', fontSize: 12, color: tokens.mute, display: 'flex', gap: 8, alignItems: 'center' } },
+        /*#__PURE__*/React.createElement('a', { href: '/', style: { color: tokens.mute, textDecoration: 'none' } }, 'Home'),
+        /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 14 } }, 'chevron_right'),
+        /*#__PURE__*/React.createElement('span', { style: { color: tokens.ink, fontWeight: 600 } }, 'Brands')
+      )
+    ),
+    // Hero
+    /*#__PURE__*/React.createElement('div', { style: { background: tokens.slate900, padding: '56px 32px', textAlign: 'center' } },
+      /*#__PURE__*/React.createElement('div', { style: { maxWidth: 1320, margin: '0 auto' } },
+        /*#__PURE__*/React.createElement('div', { style: { fontSize: 11, fontWeight: 700, letterSpacing: '.18em', textTransform: 'uppercase', color: tokens.primaryAccent, marginBottom: 12 } }, 'Shop by brand'),
+        /*#__PURE__*/React.createElement('h1', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 'clamp(32px,4vw,52px)', color: '#fff', margin: '0 0 16px', lineHeight: 1.05 } },
+          'Every brand you trust.'
+        ),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 15, color: '#94a3b8', maxWidth: 520, margin: '0 auto', lineHeight: 1.6 } },
+          'Holbrook carries hundreds of tire and wheel brands. Browse by category or search your favourite below.'
+        )
+      )
+    ),
+    // Main content
+    /*#__PURE__*/React.createElement('div', { style: { maxWidth: 1320, margin: '64px auto 96px', padding: '0 32px' } },
+      // Tire Brands section
+      /*#__PURE__*/React.createElement('div', { style: { marginBottom: 72 } },
+        /*#__PURE__*/React.createElement('div', { style: { display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 28, flexWrap: 'wrap', gap: 12 } },
+          /*#__PURE__*/React.createElement('div', null,
+            /*#__PURE__*/React.createElement('div', { style: { fontSize: 11, fontWeight: 700, letterSpacing: '.18em', textTransform: 'uppercase', color: tokens.primary, marginBottom: 6 } }, 'Tires'),
+            /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 32, margin: 0, letterSpacing: '-.02em' } }, 'Tire Brands')
+          ),
+          /*#__PURE__*/React.createElement('a', {
+            href: '/brands/tires/',
+            style: { display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, color: tokens.primary, textDecoration: 'none', letterSpacing: '.04em' }
+          }, 'View all tire brands',
+            /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 16 } }, 'arrow_forward')
+          )
+        ),
+        loading
+          ? /*#__PURE__*/React.createElement(BrandSkeletonGrid, { cols: 6 })
+          : /*#__PURE__*/React.createElement('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(155px, 1fr))', gap: 16 } },
+              displayTire.map(function(b) {
+                return /*#__PURE__*/React.createElement(BrandCard, { key: b.name, brand: b, href: '/tires/' + brandUrlSlug(b.name) + '/' });
+              })
+            )
+      ),
+      // Wheel Brands section
+      /*#__PURE__*/React.createElement('div', null,
+        /*#__PURE__*/React.createElement('div', { style: { display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 28, flexWrap: 'wrap', gap: 12 } },
+          /*#__PURE__*/React.createElement('div', null,
+            /*#__PURE__*/React.createElement('div', { style: { fontSize: 11, fontWeight: 700, letterSpacing: '.18em', textTransform: 'uppercase', color: tokens.primary, marginBottom: 6 } }, 'Wheels'),
+            /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 32, margin: 0, letterSpacing: '-.02em' } }, 'Wheel Brands')
+          ),
+          /*#__PURE__*/React.createElement('a', {
+            href: '/brands/wheels/',
+            style: { display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, color: tokens.primary, textDecoration: 'none', letterSpacing: '.04em' }
+          }, 'View all wheel brands',
+            /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 16 } }, 'arrow_forward')
+          )
+        ),
+        loading
+          ? /*#__PURE__*/React.createElement(BrandSkeletonGrid, { cols: 6 })
+          : /*#__PURE__*/React.createElement('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(155px, 1fr))', gap: 16 } },
+              displayWheel.map(function(b) {
+                return /*#__PURE__*/React.createElement(BrandCard, { key: b.name, brand: b, href: '/wheels/' + brandUrlSlug(b.name) + '/' });
+              })
+            )
+      )
+    )
+  );
+}
+
+function BrandsMount() {
+  return /*#__PURE__*/React.createElement(AppProvider, { defaults: window.TWEAK_DEFAULTS },
+    /*#__PURE__*/React.createElement(Header, null),
+    /*#__PURE__*/React.createElement(GlobalFitmentBar, null),
+    /*#__PURE__*/React.createElement('main', null, /*#__PURE__*/React.createElement(BrandsPage, null)),
+    /*#__PURE__*/React.createElement(LocationsStrip, null),
+    /*#__PURE__*/React.createElement(Footer, null)
+  );
+}
+ReactDOM.createRoot(document.getElementById('app')).render(/*#__PURE__*/React.createElement(BrandsMount));
+</script>
+</body>
+</html>

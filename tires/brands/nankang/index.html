@@ -1,0 +1,2279 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nankang Tires — All Models &amp; Styles | Custom Wheel Deal</title>
+  <meta name="description" content="Browse all Nankang tire models at Custom Wheel Deal. See styles, read reviews, and get same-day professional installation at our Detroit-area locations.">
+  <link rel="canonical" href="https://customwheeldeal.com/tires/brands/nankang/">
+  <meta property="og:title" content="Nankang Tires — All Models &amp; Styles | Custom Wheel Deal">
+  <meta property="og:description" content="Browse all Nankang tire models at Custom Wheel Deal. See styles, read reviews, and get same-day professional installation at our Detroit-area locations.">
+  <meta property="og:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
+  <meta property="og:url" content="https://customwheeldeal.com/tires/brands/nankang/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Custom Wheel Deal">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nankang Tires — All Models &amp; Styles | Custom Wheel Deal">
+  <meta name="twitter:description" content="Browse all Nankang tire models at Custom Wheel Deal. See styles, read reviews, and get same-day professional installation at our Detroit-area locations.">
+  <meta name="twitter:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"CollectionPage","name":"Nankang Tires","description":"Browse all Nankang tire models at Custom Wheel Deal. See styles, read reviews, and get same-day professional installation at our Detroit-area locations.","url":"https://customwheeldeal.com/tires/brands/nankang/",
+   "about":{"@type":"Brand","name":"Nankang"},
+   "isPartOf":{"@type":"WebSite","name":"Custom Wheel Deal","url":"https://customwheeldeal.com/"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://customwheeldeal.com/"},{"@type":"ListItem","position":2,"name":"Tires","item":"https://customwheeldeal.com/tires/"},{"@type":"ListItem","position":3,"name":"Nankang","item":"https://customwheeldeal.com/tires/brands/nankang/"}]}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.autosyncstudio.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v9">
+</head>
+<body>
+<div id="app"></div>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<!-- Babel removed: pre-compiled -->
+<script src="/js/setup.js?v9"></script>
+<script src="/js/data.js?v9"></script>
+<script src="/js/api.js?v9"></script>
+
+<script>// ─────────────── Shared Primitive / Utility Components
+// No imports — relies on globals from setup.js (React hooks, tokens, AppCtx, useApp)
+
+function Icon({
+  name,
+  size = 20,
+  style,
+  fill
+}) {
+  return /*#__PURE__*/React.createElement("span", {
+    className: "material-symbols-outlined",
+    style: {
+      fontSize: size,
+      fontVariationSettings: fill ? "'FILL' 1" : "'FILL' 0",
+      ...style
+    }
+  }, name);
+}
+function Btn({
+  children,
+  variant = 'primary',
+  onClick,
+  href,
+  size = 'md',
+  style,
+  icon,
+  iconRight,
+  type,
+  disabled,
+  full
+}) {
+  const pads = {
+    sm: '8px 14px',
+    md: '12px 22px',
+    lg: '16px 28px'
+  }[size];
+  const fs = {
+    sm: 12,
+    md: 13,
+    lg: 14
+  }[size];
+  const base = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    padding: pads,
+    fontSize: fs,
+    fontWeight: 700,
+    letterSpacing: '.12em',
+    textTransform: 'uppercase',
+    border: 'none',
+    cursor: disabled ? 'not-allowed' : 'pointer',
+    opacity: disabled ? .45 : 1,
+    fontFamily: 'Inter, system-ui, sans-serif',
+    borderRadius: 6,
+    textDecoration: 'none',
+    transition: 'all .15s ease-out',
+    width: full ? '100%' : 'auto'
+  };
+  const variants = {
+    primary: {
+      background: tokens.primary,
+      color: '#fff'
+    },
+    primaryGrad: {
+      background: 'linear-gradient(135deg,#850824 0%,#a62639 100%)',
+      color: '#fff'
+    },
+    dark: {
+      background: tokens.slate900,
+      color: '#fff'
+    },
+    outline: {
+      background: 'transparent',
+      color: tokens.ink,
+      boxShadow: `inset 0 0 0 1.5px ${tokens.ink}`
+    },
+    outlineLight: {
+      background: 'transparent',
+      color: '#fff',
+      boxShadow: 'inset 0 0 0 1.5px rgba(255,255,255,.5)'
+    },
+    ghost: {
+      background: 'transparent',
+      color: tokens.ink
+    },
+    light: {
+      background: '#fff',
+      color: tokens.ink,
+      boxShadow: `inset 0 0 0 1px ${tokens.line}`
+    },
+    accent: {
+      background: tokens.primaryAccent,
+      color: '#fff'
+    }
+  };
+  const Tag = href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(Tag, {
+    type: type,
+    href: href,
+    onClick: onClick,
+    disabled: disabled,
+    style: {
+      ...base,
+      ...variants[variant],
+      ...style
+    },
+    onMouseOver: e => !disabled && (e.currentTarget.style.transform = 'translateY(-1px)', e.currentTarget.style.filter = 'brightness(1.05)'),
+    onMouseOut: e => (e.currentTarget.style.transform = 'translateY(0)', e.currentTarget.style.filter = 'none')
+  }, icon && /*#__PURE__*/React.createElement(Icon, {
+    name: icon,
+    size: fs + 4
+  }), children, iconRight && /*#__PURE__*/React.createElement(Icon, {
+    name: iconRight,
+    size: fs + 4
+  }));
+}
+function Stars({
+  rating,
+  size = 14,
+  showNum
+}) {
+  const full = Math.floor(rating),
+    half = rating - full >= .5;
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 4
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      color: tokens.gold
+    }
+  }, [0, 1, 2, 3, 4].map(i => /*#__PURE__*/React.createElement(Icon, {
+    key: i,
+    size: size,
+    fill: true,
+    name: i < full ? 'star' : i === full && half ? 'star_half' : 'star',
+    style: {
+      color: i < full || i === full && half ? tokens.gold : '#e5e7eb'
+    }
+  }))), showNum && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: tokens.mute,
+      fontWeight: 600
+    }
+  }, rating.toFixed(1)));
+}
+function Eyebrow({
+  children,
+  color,
+  style
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Inter',
+      fontSize: 11,
+      fontWeight: 700,
+      letterSpacing: '.18em',
+      textTransform: 'uppercase',
+      color: color || tokens.primary,
+      ...style
+    }
+  }, children);
+}
+function Headline({
+  children,
+  size = 'h2',
+  style,
+  as
+}) {
+  const fs = {
+    display: 72,
+    h1: 56,
+    h2: 40,
+    h3: 28,
+    h4: 22
+  }[size] || 40;
+  const Tag = as || 'h2';
+  return /*#__PURE__*/React.createElement(Tag, {
+    style: {
+      fontFamily: 'Space Grotesk, sans-serif',
+      fontWeight: 700,
+      fontSize: fs,
+      letterSpacing: '-0.02em',
+      lineHeight: 1.05,
+      margin: 0,
+      textWrap: 'balance',
+      ...style
+    }
+  }, children);
+}
+function FilterGroup({
+  label,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 24
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: 11,
+      fontWeight: 700,
+      letterSpacing: '.16em',
+      textTransform: 'uppercase',
+      color: tokens.ink,
+      paddingBottom: 10,
+      marginBottom: 12,
+      borderBottom: `1px solid ${tokens.line}`
+    }
+  }, label), children);
+}
+function FilterCheck({
+  checked,
+  onChange,
+  label
+}) {
+  return /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      padding: '6px 0',
+      fontSize: 13,
+      color: tokens.graphite,
+      cursor: 'pointer'
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    checked: checked,
+    onChange: onChange,
+    style: {
+      accentColor: tokens.primary
+    }
+  }), label);
+}
+function TireSvg() {
+  return /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 120 90",
+    width: "80%",
+    height: "80%"
+  }, /*#__PURE__*/React.createElement("ellipse", {
+    cx: "60",
+    cy: "45",
+    rx: "45",
+    ry: "36",
+    fill: "#1a1c1e"
+  }), /*#__PURE__*/React.createElement("ellipse", {
+    cx: "60",
+    cy: "45",
+    rx: "22",
+    ry: "17",
+    fill: "#2a2c2e"
+  }), /*#__PURE__*/React.createElement("ellipse", {
+    cx: "60",
+    cy: "45",
+    rx: "18",
+    ry: "14",
+    fill: "#3a3c3e"
+  }), /*#__PURE__*/React.createElement("g", {
+    stroke: "#555",
+    strokeWidth: "1",
+    fill: "none"
+  }, Array.from({
+    length: 10
+  }).map((_, i) => {
+    const a = i * 36 * Math.PI / 180;
+    const x1 = 60 + Math.cos(a) * 26,
+      y1 = 45 + Math.sin(a) * 20;
+    const x2 = 60 + Math.cos(a) * 42,
+      y2 = 45 + Math.sin(a) * 33;
+    return /*#__PURE__*/React.createElement("line", {
+      key: i,
+      x1: x1,
+      y1: y1,
+      x2: x2,
+      y2: y2
+    });
+  })));
+}
+function WheelSvg() {
+  return /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 240 240",
+    style: {
+      width: '72%',
+      height: '72%'
+    }
+  }, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("radialGradient", {
+    id: "wg",
+    cx: "50%",
+    cy: "40%"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#475569"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: ".5",
+    stopColor: "#1e293b"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "#0b1120"
+  })), /*#__PURE__*/React.createElement("radialGradient", {
+    id: "wh",
+    cx: "50%",
+    cy: "40%"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#64748b"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "#0f172a"
+  }))), /*#__PURE__*/React.createElement("circle", {
+    cx: "120",
+    cy: "120",
+    r: "115",
+    fill: "url(#wg)"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "120",
+    cy: "120",
+    r: "92",
+    fill: "url(#wh)"
+  }), [0, 1, 2, 3, 4].map(i => {
+    const a = i / 5 * Math.PI * 2 - Math.PI / 2;
+    const x1 = 120 + Math.cos(a) * 30,
+      y1 = 120 + Math.sin(a) * 30;
+    const x2 = 120 + Math.cos(a) * 82,
+      y2 = 120 + Math.sin(a) * 82;
+    const nx = Math.cos(a + Math.PI / 2) * 10,
+      ny = Math.sin(a + Math.PI / 2) * 10;
+    return /*#__PURE__*/React.createElement("polygon", {
+      key: i,
+      fill: "#1a202c",
+      stroke: "#334155",
+      strokeWidth: "1",
+      points: `${x1 + nx},${y1 + ny} ${x1 - nx},${y1 - ny} ${x2 - nx * .4},${y2 - ny * .4} ${x2 + nx * .4},${y2 + ny * .4}`
+    });
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "120",
+    cy: "120",
+    r: "26",
+    fill: "#0b1120",
+    stroke: "#334155",
+    strokeWidth: "1.5"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "120",
+    cy: "120",
+    r: "8",
+    fill: "#1e293b"
+  }));
+}
+function SpecItem({
+  label,
+  value,
+  big
+}) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: tokens.mute,
+      fontWeight: 700,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase'
+    }
+  }, label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: big ? 26 : 16,
+      fontWeight: 800,
+      color: big ? tokens.primary : tokens.ink,
+      marginTop: 4
+    }
+  }, value));
+}
+function SectionHead({
+  eyebrow,
+  title,
+  cta
+}) {
+  const {
+    navigate
+  } = useApp();
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'flex-end',
+      justifyContent: 'space-between',
+      borderBottom: `1px solid ${tokens.line}`,
+      paddingBottom: 20
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Eyebrow, null, eyebrow), title && /*#__PURE__*/React.createElement(Headline, {
+    size: "h2",
+    style: {
+      marginTop: 8
+    }
+  }, title)), cta && /*#__PURE__*/React.createElement("a", {
+    onClick: cta.onClick,
+    style: {
+      fontSize: 12,
+      fontWeight: 800,
+      color: tokens.ink,
+      textDecoration: 'none',
+      cursor: 'pointer',
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6
+    }
+  }, cta.label, " ", /*#__PURE__*/React.createElement(Icon, {
+    name: "arrow_forward",
+    size: 16
+  })));
+}
+function FilterBlock({
+  title,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: '#fff',
+      border: `1px solid ${tokens.line}`,
+      padding: '16px 18px',
+      marginBottom: 12,
+      borderRadius: 8
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, {
+    color: tokens.ink,
+    style: {
+      marginBottom: 10
+    }
+  }, title), children);
+}
+
+// Register as globals for cross-file access
+Object.assign(window, {
+  Icon,
+  Btn,
+  Stars,
+  Eyebrow,
+  Headline,
+  FilterGroup,
+  FilterCheck,
+  TireSvg,
+  WheelSvg,
+  SpecItem,
+  SectionHead,
+  FilterBlock
+});
+
+// ─────────────── App Shell Components
+// No imports — relies on globals from setup.js (React hooks, tokens, AppCtx, useApp)
+// and components.jsx (Icon, Btn, Eyebrow, Headline, Stars)
+
+function AppProvider({
+  children,
+  defaults
+}) {
+  const [vehicle, setVehicleRaw] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('htm_vehicle') || 'null');
+    } catch {
+      return null;
+    }
+  });
+  const [garage, setGarage] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('htm_garage') || '[]');
+    } catch {
+      return [];
+    }
+  });
+  const [cart, setCart] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('htm_cart') || '[]');
+    } catch {
+      return [];
+    }
+  });
+  const [savedPackages, setSavedPackages] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('htm_saved_packages') || '[]');
+    } catch {
+      return [];
+    }
+  });
+  const [route, setRoute] = useState(() => {
+    const path = window.location.pathname;
+    const search = window.location.search;
+    return path + search;
+  });
+  const [lastOrder, setLastOrder] = useState(null);
+
+  // API-loaded brand lists
+  const [tireBrands, setTireBrands] = useState(window.HOLBROOK_DATA.brands);
+  const [wheelBrandsList, setWheelBrandsList] = useState(window.HOLBROOK_DATA.wheelBrandList);
+  const [apiReady, setApiReady] = useState(false);
+
+  // Load brand data from API on mount
+  useEffect(() => {
+    const BRAND_CDN = 'https://storage.googleapis.com/autosync-brand-logos/logos/';
+    Promise.allSettled([api.fetchTireBrands(), api.fetchWheelBrands()]).then(([tRes, wRes]) => {
+      if (tRes.status === 'fulfilled') {
+        const items = extractItems(tRes.value);
+        if (items) {
+          const apiBrands = items.map(function (b) {
+            const name = b.Name || b.name || b.Brand || b.brand || '';
+            const logo = b.BrandLogosUrlBase && b.Logo ? b.BrandLogosUrlBase + b.Logo : BRAND_CDN + name + '.webp';
+            return {
+              name: name,
+              slug: name,
+              logo: logo
+            };
+          }).filter(function (b) {
+            return b.name;
+          });
+          if (apiBrands.length > 0) {
+            console.log('[Holbrook] Loaded', apiBrands.length, 'tire brands from API');
+            setTireBrands(apiBrands);
+            window.HOLBROOK_DATA.brands = apiBrands;
+          }
+        } else {
+          console.warn('[Holbrook] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
+        }
+      } else {
+        console.warn('[Holbrook] Tire brands API failed:', tRes.reason);
+      }
+      if (wRes.status === 'fulfilled') {
+        const items = extractItems(wRes.value);
+        if (items) {
+          const apiWheelBrands = items.map(function (b) {
+            const name = b.Name || b.name || b.Brand || b.brand || '';
+            return {
+              name: name,
+              logo: b.BrandLogosUrlBase && b.Logo ? b.BrandLogosUrlBase + b.Logo : BRAND_CDN + name + '.webp'
+            };
+          }).filter(function (b) {
+            return b.name;
+          });
+          if (apiWheelBrands.length > 0) {
+            console.log('[Holbrook] Loaded', apiWheelBrands.length, 'wheel brands from API');
+            setWheelBrandsList(apiWheelBrands);
+            window.HOLBROOK_DATA.wheelBrandList = apiWheelBrands;
+            window.HOLBROOK_DATA.wheelBrands = apiWheelBrands.map(function (b) {
+              return b.name;
+            });
+          }
+        } else {
+          console.warn('[Holbrook] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
+        }
+      } else {
+        console.warn('[Holbrook] Wheel brands API failed:', wRes.reason);
+      }
+      setApiReady(true);
+    });
+  }, []);
+  const setVehicle = v => {
+    setVehicleRaw(v);
+    if (v && v.year && v.make && v.model) {
+      setGarage(prev => {
+        const key = `${v.year}|${v.make}|${v.model}`;
+        const filtered = prev.filter(p => `${p.year}|${p.make}|${p.model}` !== key);
+        return [{
+          ...v,
+          id: key,
+          addedAt: Date.now()
+        }, ...filtered].slice(0, 8);
+      });
+    }
+  };
+  const removeFromGarage = id => setGarage(prev => prev.filter(p => p.id !== id));
+  useEffect(() => {
+    localStorage.setItem('htm_vehicle', JSON.stringify(vehicle));
+  }, [vehicle]);
+  useEffect(() => {
+    localStorage.setItem('htm_garage', JSON.stringify(garage));
+  }, [garage]);
+  useEffect(() => {
+    localStorage.setItem('htm_cart', JSON.stringify(cart));
+  }, [cart]);
+  useEffect(() => {
+    localStorage.setItem('htm_saved_packages', JSON.stringify(savedPackages));
+  }, [savedPackages]);
+  useEffect(() => {
+    const h = () => {
+      try {
+        setSavedPackages(JSON.parse(localStorage.getItem('htm_saved_packages') || '[]'));
+      } catch {}
+    };
+    window.addEventListener('storage', h);
+    return () => window.removeEventListener('storage', h);
+  }, []);
+  const removeSavedPackage = id => setSavedPackages(prev => prev.filter(p => p.id !== id));
+  const refreshSavedPackages = () => {
+    try {
+      setSavedPackages(JSON.parse(localStorage.getItem('htm_saved_packages') || '[]'));
+    } catch {}
+  };
+  const addToCart = (pkg, qty = 1) => setCart(prev => {
+    const hit = prev.find(p => p.id === pkg.id);
+    if (hit) return prev.map(p => p.id === pkg.id ? {
+      ...p,
+      qty: p.qty + qty
+    } : p);
+    return [...prev, {
+      ...pkg,
+      qty
+    }];
+  });
+  const updateQty = (id, qty) => setCart(prev => prev.map(p => p.id === id ? {
+    ...p,
+    qty
+  } : p).filter(p => p.qty > 0));
+  const removeItem = id => setCart(prev => prev.filter(p => p.id !== id));
+  const clearCart = () => setCart([]);
+  const navigate = r => {
+    // Map routes to real page URLs
+    const routeMap = {
+      '/': '/index.html',
+      '/shop': '/shop/',
+      '/tires': '/tires/',
+      '/wheels': '/wheels/',
+      '/packages': '/packages/',
+      '/rebates': '/rebates/',
+      '/cart': '/cart/',
+      '/checkout': '/checkout/'
+    };
+    // Check for product detail routes
+    if (r.startsWith('/tire/')) {
+      window.location.href = '/tires/' + '?product=' + r.split('/')[2];
+      return;
+    }
+    if (r.startsWith('/wheel/')) {
+      window.location.href = '/wheels/' + '?product=' + r.split('/')[2];
+      return;
+    }
+    if (r.startsWith('/package/')) {
+      window.location.href = '/packages/' + '?product=' + r.split('/')[2];
+      return;
+    }
+    if (r.startsWith('/rebate/')) {
+      window.location.href = '/rebates/' + '?rebate=' + r.split('/')[2];
+      return;
+    }
+    if (r === '/vvs') {
+      window.location.href = '/shop/?vvs=1';
+      return;
+    }
+    const dest = routeMap[r] || r;
+    window.location.href = dest;
+  };
+  return /*#__PURE__*/React.createElement(AppCtx.Provider, {
+    value: {
+      vehicle,
+      setVehicle,
+      garage,
+      removeFromGarage,
+      savedPackages,
+      removeSavedPackage,
+      refreshSavedPackages,
+      cart,
+      addToCart,
+      updateQty,
+      removeItem,
+      clearCart,
+      route,
+      navigate,
+      lastOrder,
+      setLastOrder,
+      defaults,
+      tireBrands,
+      wheelBrandsList,
+      apiReady
+    }
+  }, children);
+}
+
+// ─────────────── Header
+function Header() {
+  const {
+    cart,
+    vehicle,
+    setVehicle,
+    garage,
+    removeFromGarage,
+    savedPackages,
+    removeSavedPackage,
+    addToCart,
+    navigate,
+    route
+  } = useApp();
+  const count = cart.reduce((s, p) => s + p.qty, 0);
+  const [scrolled, setScrolled] = useState(false);
+  const [garageOpen, setGarageOpen] = useState(false);
+  const garageRef = useRef(null);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  useEffect(() => {
+    const onClick = e => {
+      if (garageRef.current && !garageRef.current.contains(e.target)) setGarageOpen(false);
+    };
+    document.addEventListener('mousedown', onClick);
+    return () => document.removeEventListener('mousedown', onClick);
+  }, []);
+  const navItems = [['Tires', '/tires/'], ['Wheels', '/wheels/'], ['Packages', '/packages/'], ['Rebates', '/rebates/']];
+  const iconBtn = {
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 36,
+    height: 36,
+    borderRadius: 8,
+    background: 'transparent',
+    border: 'none',
+    color: tokens.ink,
+    cursor: 'pointer',
+    textDecoration: 'none',
+    fontFamily: 'inherit'
+  };
+  return /*#__PURE__*/React.createElement("header", {
+    style: {
+      background: scrolled ? 'rgba(249,249,252,.96)' : 'rgba(249,249,252,.85)',
+      backdropFilter: 'blur(14px)',
+      WebkitBackdropFilter: 'blur(14px)',
+      borderBottom: `1px solid ${scrolled ? 'rgba(0,0,0,.08)' : 'rgba(0,0,0,.04)'}`,
+      position: 'sticky',
+      top: 0,
+      zIndex: 50
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1320,
+      margin: '0 auto',
+      padding: '8px 32px',
+      display: 'flex',
+      gap: 32,
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "/",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      textDecoration: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "/assets/logo-light-bg.png",
+    alt: "Custom Wheel Deal",
+    style: {
+      height: 44,
+      display: 'block'
+    }
+  })), /*#__PURE__*/React.createElement("nav", {
+    style: {
+      display: 'flex',
+      gap: 26,
+      fontSize: 12,
+      fontWeight: 700,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase'
+    }
+  }, navItems.map(([l, p]) => /*#__PURE__*/React.createElement("a", {
+    key: p,
+    href: p,
+    style: {
+      color: tokens.ink,
+      textDecoration: 'none',
+      paddingBottom: 2,
+      borderBottom: route.startsWith(p) ? `2px solid ${tokens.primary}` : '2px solid transparent'
+    }
+  }, l))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    ref: garageRef,
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setGarageOpen(o => !o),
+    title: "My Garage",
+    style: iconBtn
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "garage",
+    size: 22,
+    style: {
+      color: tokens.ink
+    }
+  }), garage.length > 0 && /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      top: -2,
+      right: -4,
+      background: tokens.primary,
+      color: '#fff',
+      borderRadius: 999,
+      padding: '1px 5px',
+      fontSize: 9,
+      fontWeight: 800
+    }
+  }, garage.length)), garageOpen && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      right: 0,
+      top: 'calc(100% + 8px)',
+      background: '#fff',
+      border: `1px solid ${tokens.line}`,
+      borderRadius: 10,
+      boxShadow: '0 20px 50px rgba(0,0,0,.18)',
+      width: 340,
+      zIndex: 60,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '14px 18px',
+      borderBottom: `1px solid ${tokens.lineSoft}`,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, null, "My Garage"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: tokens.mute,
+      fontWeight: 600
+    }
+  }, garage.length, "/8 vehicles")), garage.length === 0 && savedPackages.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '28px 18px',
+      textAlign: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "no_crash",
+    size: 28,
+    style: {
+      color: tokens.mute
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: tokens.graphite,
+      marginTop: 8,
+      lineHeight: 1.5
+    }
+  }, "No vehicles or saved builds yet.")) : /*#__PURE__*/React.createElement(React.Fragment, null, garage.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxHeight: 260,
+      overflowY: 'auto'
+    }
+  }, garage.map(v => {
+    const active = vehicle && vehicle.year === v.year && vehicle.make === v.make && vehicle.model === v.model;
+    return /*#__PURE__*/React.createElement("div", {
+      key: v.id,
+      style: {
+        padding: '12px 18px',
+        borderBottom: `1px solid ${tokens.lineSoft}`,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 12,
+        background: active ? 'rgba(133,8,36,.04)' : '#fff'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 36,
+        height: 36,
+        background: active ? tokens.primary : tokens.slate900,
+        borderRadius: 6,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexShrink: 0
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "directions_car",
+      size: 18,
+      style: {
+        color: '#fff'
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        cursor: 'pointer',
+        minWidth: 0
+      },
+      onClick: () => {
+        setVehicle({
+          year: v.year,
+          make: v.make,
+          model: v.model
+        });
+        setGarageOpen(false);
+        navigate('/shop');
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: 'Space Grotesk',
+        fontWeight: 700,
+        fontSize: 14,
+        color: tokens.ink,
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+      }
+    }, v.year, " ", v.make, " ", v.model), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: active ? tokens.primary : tokens.mute,
+        fontWeight: 600,
+        textTransform: 'uppercase',
+        letterSpacing: '.1em',
+        marginTop: 2
+      }
+    }, active ? 'Active · Shop packages' : 'Shop packages')), /*#__PURE__*/React.createElement("button", {
+      onClick: e => {
+        e.stopPropagation();
+        removeFromGarage(v.id);
+      },
+      style: {
+        border: 'none',
+        background: 'transparent',
+        cursor: 'pointer',
+        padding: 4,
+        color: tokens.mute,
+        display: 'flex'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "close",
+      size: 16
+    })));
+  })), savedPackages.length > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '10px 18px 6px',
+      borderTop: `1px solid ${tokens.line}`,
+      background: tokens.surfLow
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, null, "Saved builds")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxHeight: 220,
+      overflowY: 'auto'
+    }
+  }, savedPackages.map(sp => {
+    const it = sp.item;
+    const payload = sp.type === 'tire' ? {
+      id: it.id,
+      type: 'tire',
+      qty: 4,
+      name: `${it.brand} ${it.model}`,
+      subtitle: `${it.size} · ${it.season}`,
+      price: it.priceEach,
+      rawBrand: it.brand,
+      rawModel: it.model,
+      size: it.size
+    } : {
+      id: it.id,
+      type: 'wheel',
+      qty: 4,
+      name: `${it.brand} ${it.model}`,
+      subtitle: `${it.size} · ${it.finish}`,
+      price: it.priceEach,
+      rawBrand: it.brand,
+      rawModel: it.model,
+      size: it.size
+    };
+    return /*#__PURE__*/React.createElement("div", {
+      key: sp.id,
+      style: {
+        padding: '10px 18px',
+        borderBottom: `1px solid ${tokens.lineSoft}`,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 30,
+        height: 30,
+        borderRadius: 6,
+        background: tokens.ink,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexShrink: 0
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: sp.type === 'tire' ? 'trip' : 'album',
+      size: 14,
+      style: {
+        color: '#fff'
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        cursor: 'pointer',
+        minWidth: 0
+      },
+      onClick: () => {
+        addToCart(payload, 4);
+        setGarageOpen(false);
+        navigate('/cart');
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: 'Space Grotesk',
+        fontWeight: 700,
+        fontSize: 13,
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+      }
+    }, sp.name), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: tokens.mute,
+        fontWeight: 600,
+        letterSpacing: '.1em',
+        textTransform: 'uppercase',
+        marginTop: 2
+      }
+    }, sp.type, " \xB7 Add to cart")), /*#__PURE__*/React.createElement("button", {
+      onClick: e => {
+        e.stopPropagation();
+        removeSavedPackage(sp.id);
+      },
+      style: {
+        border: 'none',
+        background: 'transparent',
+        cursor: 'pointer',
+        padding: 4,
+        color: tokens.mute,
+        display: 'flex'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "close",
+      size: 14
+    })));
+  })))))), /*#__PURE__*/React.createElement("a", {
+    href: "/cart/",
+    title: "Cart",
+    style: iconBtn
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "shopping_bag",
+    size: 22,
+    style: {
+      color: tokens.ink
+    }
+  }), count > 0 && /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      top: -2,
+      right: -4,
+      background: tokens.primary,
+      color: '#fff',
+      borderRadius: 999,
+      padding: '1px 5px',
+      fontSize: 9,
+      fontWeight: 800
+    }
+  }, count))));
+}
+
+// ─────────────── VVS Banner
+function VVSBanner() {
+  const {
+    navigate,
+    route
+  } = useApp();
+  if (route === '/' || route === '' || route === '/vvs') return null;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #850824 100%)',
+      color: '#fff'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1320,
+      margin: '0 auto',
+      padding: '12px 32px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 16,
+      justifyContent: 'space-between'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 14
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontWeight: 700,
+      fontSize: 15,
+      letterSpacing: '-.01em'
+    }
+  }, "See it on your vehicle first."), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: '#cbd5e1'
+    }
+  }, "Preview any wheel + tire combo in the Visual Vehicle Studio.")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => navigate('/vvs'),
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 8,
+      padding: '8px 16px',
+      background: tokens.primary,
+      color: '#fff',
+      border: 'none',
+      borderRadius: 6,
+      fontSize: 11,
+      fontWeight: 800,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      cursor: 'pointer',
+      fontFamily: 'inherit',
+      whiteSpace: 'nowrap'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "view_in_ar",
+    size: 15
+  }), "Launch Studio")));
+}
+
+// ─────────────── Locations strip
+function LocationsStrip() {
+  const {
+    locations
+  } = window.HOLBROOK_DATA;
+  return /*#__PURE__*/React.createElement("section", {
+    style: {
+      background: '#fff',
+      padding: '72px 32px 64px',
+      borderTop: `1px solid ${tokens.lineSoft}`
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1320,
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'center',
+      marginBottom: 40
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, {
+    color: tokens.primary,
+    style: {
+      marginBottom: 8
+    }
+  }, "Three Michigan locations"), /*#__PURE__*/React.createElement(Headline, {
+    size: "h2",
+    style: {
+      fontSize: 32,
+      margin: 0
+    }
+  }, "Installed by people who know your car.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      gap: 20
+    }
+  }, locations.map(l => /*#__PURE__*/React.createElement("div", {
+    key: l.id,
+    style: {
+      background: tokens.surfLow,
+      borderRadius: 14,
+      padding: '28px 28px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 14
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, {
+    color: tokens.primary
+  }, "Holbrook \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: 20,
+      fontWeight: 700,
+      letterSpacing: '-.01em',
+      color: tokens.ink,
+      lineHeight: 1.3
+    }
+  }, l.addr), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      color: tokens.taupe,
+      lineHeight: 1.6
+    }
+  }, l.city, ", MI ", l.zip, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: tokens.mute
+    }
+  }, l.hours)), /*#__PURE__*/React.createElement("a", {
+    href: `tel:${l.phoneTel}`,
+    style: {
+      color: tokens.primary,
+      fontSize: 17,
+      fontWeight: 700,
+      textDecoration: 'none',
+      fontFamily: 'Space Grotesk',
+      marginTop: 'auto',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "call",
+    size: 16
+  }), " ", l.phone))))));
+}
+
+// ─────────────── Footer
+function Footer() {
+  return /*#__PURE__*/React.createElement("footer", {
+    style: {
+      background: tokens.slate900,
+      color: '#cbd5e1'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1320,
+      margin: '0 auto',
+      padding: '64px 32px 32px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr',
+      gap: 40
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: tokens.slate900,
+      display: 'inline-block',
+      marginBottom: 18
+    }
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "/assets/logo-dark-bg.png",
+    alt: "Custom Wheel Deal",
+    style: {
+      height: 52
+    }
+  })), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 13,
+      lineHeight: 1.65,
+      maxWidth: 320,
+      color: '#94a3b8'
+    }
+  }, "Michigan-owned since 1978. Precision wheel + tire packages for Detroit-area enthusiasts \u2014 installed at one of our three locations, or drop-shipped to your door.")), [['Shop', ['All Packages', 'By Vehicle', 'By Wheel Brand', 'By Tire Brand', 'Winter Packages', 'Clearance']], ['Services', ['Install & Balance', 'Road Force Balance', 'Alignment', 'TPMS Reset', 'Wheel Repair']], ['Checkout', ['25% Deposit Plan', 'Drop-Ship to Home', 'Affirm Financing', 'Klarna', 'Synchrony Car Care']], ['Company', ['About Holbrook', 'Visual Vehicle Studio', 'Locations', 'Contact']]].map(([h, links]) => /*#__PURE__*/React.createElement("div", {
+    key: h
+  }, /*#__PURE__*/React.createElement(Eyebrow, {
+    color: "#fff",
+    style: {
+      marginBottom: 14
+    }
+  }, h), links.map(l => /*#__PURE__*/React.createElement("div", {
+    key: l,
+    style: {
+      fontSize: 13,
+      marginBottom: 8,
+      color: '#94a3b8',
+      cursor: 'pointer'
+    }
+  }, l)))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderTop: '1px solid rgba(255,255,255,.08)',
+      padding: '18px 32px',
+      fontSize: 11,
+      color: '#64748b',
+      textAlign: 'center',
+      letterSpacing: '.14em',
+      textTransform: 'uppercase'
+    }
+  }, "\xA9 2026 Custom Wheel Deal \xB7 Michigan \xB7 Powered by AutoSync"));
+}
+
+// ─────────────── Global Fitment Bar
+function GlobalFitmentBar() {
+  const {
+    vehicle,
+    setVehicle,
+    navigate,
+    route
+  } = useApp();
+  const YEARS = useMemo(() => {
+    const y = [],
+      c = 2027;
+    for (let i = c; i >= 2000; i--) y.push(i);
+    return y;
+  }, []);
+  const [year, setYear] = useState('');
+  const [make, setMake] = useState('');
+  const [model, setModel] = useState('');
+  const [submodel, setSubmodel] = useState('');
+  const [makes, setMakes] = useState([]);
+  const [models, setModels] = useState([]);
+  const [submodels, setSubmodels] = useState([]);
+  const [fitments, setFitments] = useState([]);
+  const [selectedSize, setSelectedSize] = useState('');
+  const [makesLoading, setMakesLoading] = useState(false);
+  const [modelsLoading, setModelsLoading] = useState(false);
+  const [submodelsLoading, setSubmodelsLoading] = useState(false);
+  const [fitmentsLoading, setFitmentsLoading] = useState(false);
+
+  // Static fallback makes (always available)
+  const staticMakes = window.HOLBROOK_DATA.vehicleMakes.map(function (m) {
+    return m.name;
+  });
+  useEffect(() => {
+    if (!year) {
+      setMakes([]);
+      setMake('');
+      return;
+    }
+    setMakesLoading(true);
+    api.fetchVehicleMakes(year).then(data => {
+      const items = extractItems(data);
+      if (items) {
+        const names = items.map(function(m) { return m.Make || m.Name || extractName(m); }).filter(Boolean);
+        console.log('[Fitment] Makes from API:', names.length, names.slice(0, 5));
+        setMakes(names.length > 0 ? names : staticMakes);
+      } else {
+        console.warn('[Fitment] No makes items in response, using static. Response keys:', data ? Object.keys(data) : 'null');
+        setMakes(staticMakes);
+      }
+    }).catch(function (err) {
+      console.warn('[Fitment] Makes API failed, using static fallback:', err.message || err);
+      setMakes(staticMakes);
+    }).finally(() => setMakesLoading(false));
+    setMake('');
+    setModel('');
+    setSubmodel('');
+  }, [year]);
+  useEffect(() => {
+    if (!make) {
+      setModels([]);
+      setModel('');
+      return;
+    }
+    setModelsLoading(true);
+    api.fetchVehicleModels(year, make).then(data => {
+      const items = extractItems(data);
+      if (items) {
+        const names = items.map(function(m) { return m.Model || m.Name || extractName(m); }).filter(Boolean);
+        console.log('[Fitment] Models from API:', names.length, names.slice(0, 5));
+        setModels(names);
+      } else {
+        console.warn('[Fitment] No model items in response. Response keys:', data ? Object.keys(data) : 'null');
+        setModels([]);
+      }
+    }).catch(function (err) {
+      console.warn('[Fitment] Models API failed:', err.message || err);
+      setModels([]);
+    }).finally(() => setModelsLoading(false));
+    setModel('');
+    setSubmodel('');
+  }, [make]);
+  useEffect(() => {
+    if (!model) {
+      setSubmodels([]);
+      setSubmodel('');
+      return;
+    }
+    setSubmodelsLoading(true);
+    api.fetchVehicleSubmodels(year, make, model).then(data => {
+      const items = extractItems(data);
+      if (items) {
+        const names = items.map(function(m) { return m.Submodel || m.Name || extractName(m); }).filter(Boolean);
+        console.log('[Fitment] Submodels from API:', names.length, names);
+        setSubmodels(names);
+      } else {
+        console.warn('[Fitment] No submodel items in response. Response keys:', data ? Object.keys(data) : 'null');
+        setSubmodels([]);
+      }
+    }).catch(function (err) {
+      console.warn('[Fitment] Submodels API failed:', err.message || err);
+      setSubmodels([]);
+    }).finally(() => setSubmodelsLoading(false));
+    setSubmodel('');
+    setSelectedSize('');
+  }, [model]);
+
+  // Fetch OE fitments when model is selected
+  useEffect(() => {
+    if (!model) { setFitments([]); setSelectedSize(''); return; }
+    setFitmentsLoading(true);
+    api.fetchVehicleFitments(year, make, model).then(data => {
+      var vehicles = data.Vehicles || [];
+      // Extract unique OE tire/wheel size combos across all submodels
+      var sizeMap = {};
+      vehicles.forEach(function(v) {
+        (v.Fitments || []).forEach(function(f) {
+          var tireSize = f.TireSize || '';
+          var wheelSpec = (f.RimDiameter || '') + 'x' + (f.RimWidth || '');
+          var key = tireSize + '|' + wheelSpec;
+          if (tireSize && !sizeMap[key]) {
+            sizeMap[key] = {
+              tireSize: tireSize,
+              tireSizeRear: f.TireSizeRear || null,
+              rimDiameter: f.RimDiameter,
+              rimWidth: f.RimWidth,
+              offset: f.Offset,
+              boltCircle: v.BoltCircle,
+              bore: v.Bore,
+              wheelSpec: wheelSpec,
+              label: tireSize + ' \u00B7 ' + wheelSpec + '" wheel',
+              submodels: []
+            };
+          }
+          if (tireSize && sizeMap[key]) {
+            var sub = v.Submodel || '';
+            if (sub && sizeMap[key].submodels.indexOf(sub) === -1) sizeMap[key].submodels.push(sub);
+          }
+        });
+      });
+      var sizeList = Object.values(sizeMap).sort(function(a, b) { return a.rimDiameter - b.rimDiameter; });
+      console.log('[Fitment] OE sizes:', sizeList.length, sizeList.map(function(s) { return s.label; }));
+      setFitments(sizeList);
+    }).catch(function(err) {
+      console.warn('[Fitment] Fitments API failed:', err.message || err);
+      setFitments([]);
+    }).finally(function() { setFitmentsLoading(false); });
+  }, [model]);
+
+  const go = () => {
+    if (year && make && model) {
+      var selectedFitment = fitments.find(function(f) { return f.label === selectedSize; });
+      setVehicle({
+        year,
+        make,
+        model,
+        submodel: submodel || undefined,
+        tireSize: selectedFitment ? selectedFitment.tireSize : undefined,
+        rimDiameter: selectedFitment ? selectedFitment.rimDiameter : undefined,
+        rimWidth: selectedFitment ? selectedFitment.rimWidth : undefined,
+        boltCircle: selectedFitment ? selectedFitment.boltCircle : undefined,
+        bore: selectedFitment ? selectedFitment.bore : undefined,
+        fitment: selectedFitment || undefined
+      });
+      navigate('/shop');
+    }
+  };
+  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #850824 100%)';
+  const barBorder = '1px solid rgba(255,255,255,.08)';
+  const barShadow = 'inset 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(232,52,78,.15)';
+  const fld = {
+    background: 'rgba(255,255,255,.1)',
+    border: '1px solid rgba(255,255,255,.18)',
+    padding: '10px 32px 10px 14px',
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: 600,
+    color: '#fff',
+    appearance: 'none',
+    borderRadius: 6,
+    minWidth: 130,
+    cursor: 'pointer'
+  };
+  if (vehicle) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: barBg,
+        borderBottom: barBorder,
+        boxShadow: barShadow,
+        position: 'relative',
+        overflow: 'hidden'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        inset: 0,
+        background: 'radial-gradient(ellipse at 100% 50%, rgba(232,52,78,.25) 0%, transparent 55%)',
+        pointerEvents: 'none'
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        maxWidth: 1320,
+        margin: '0 auto',
+        padding: '18px 32px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 20,
+        flexWrap: 'wrap',
+        position: 'relative'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 38,
+        height: 38,
+        background: 'rgba(255,255,255,.14)',
+        border: '1px solid rgba(255,255,255,.2)',
+        borderRadius: 8,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "directions_car",
+      size: 22,
+      style: {
+        color: '#fff'
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        lineHeight: 1.2
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: 'Inter',
+        fontSize: 11,
+        fontWeight: 700,
+        letterSpacing: '.18em',
+        textTransform: 'uppercase',
+        color: 'rgba(255,255,255,.7)'
+      }
+    }, "Showing packages that fit"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: 'Space Grotesk',
+        fontSize: 22,
+        fontWeight: 700,
+        letterSpacing: '-.01em',
+        color: '#fff',
+        marginTop: 2
+      }
+    }, vehicle.year, " ", /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 500
+      }
+    }, vehicle.make), " ", vehicle.model, vehicle.tireSize ? /*#__PURE__*/React.createElement("span", {
+      style: { fontSize: 14, fontWeight: 400, opacity: .8, marginLeft: 8 }
+    }, "\u00B7 ", vehicle.tireSize) : null)), /*#__PURE__*/React.createElement("button", {
+      onClick: () => navigate('/shop'),
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 8,
+        padding: '9px 18px',
+        background: tokens.yellow,
+        color: tokens.ink,
+        border: 'none',
+        borderRadius: 6,
+        fontSize: 11,
+        fontWeight: 800,
+        letterSpacing: '.14em',
+        textTransform: 'uppercase',
+        cursor: 'pointer',
+        fontFamily: 'inherit'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "storefront",
+      size: 14
+    }), "Shop Now"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => {
+        setVehicle(null);
+      },
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 8,
+        padding: '9px 16px',
+        background: 'rgba(255,255,255,.12)',
+        color: '#fff',
+        border: '1px solid rgba(255,255,255,.25)',
+        borderRadius: 6,
+        fontSize: 11,
+        fontWeight: 800,
+        letterSpacing: '.14em',
+        textTransform: 'uppercase',
+        cursor: 'pointer',
+        fontFamily: 'inherit',
+        transition: 'all .15s'
+      },
+      onMouseOver: e => {
+        e.currentTarget.style.background = 'rgba(255,255,255,.2)';
+      },
+      onMouseOut: e => {
+        e.currentTarget.style.background = 'rgba(255,255,255,.12)';
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "autorenew",
+      size: 14
+    }), "Change vehicle")));
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: barBg,
+      borderBottom: barBorder,
+      boxShadow: barShadow,
+      position: 'relative',
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      background: 'radial-gradient(ellipse at 100% 50%, rgba(232,52,78,.22) 0%, transparent 55%)',
+      pointerEvents: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1320,
+      margin: '0 auto',
+      padding: '12px 32px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 14,
+      flexWrap: 'wrap',
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 10,
+      paddingRight: 14,
+      borderRight: '1px solid rgba(255,255,255,.18)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "tire_repair",
+    size: 20,
+    style: {
+      color: '#fff'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontWeight: 700,
+      fontSize: 13,
+      color: '#fff',
+      letterSpacing: '.06em',
+      textTransform: 'uppercase'
+    }
+  }, "Find your fitment")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 320,
+      display: 'flex',
+      gap: 8,
+      justifyContent: 'flex-end',
+      flexWrap: 'wrap'
+    }
+  }, /*#__PURE__*/React.createElement("select", {
+    value: year,
+    onChange: e => setYear(e.target.value),
+    style: fld
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    style: {
+      color: '#000'
+    }
+  }, "Year"), YEARS.map(y => /*#__PURE__*/React.createElement("option", {
+    key: y,
+    style: {
+      color: '#000'
+    }
+  }, y))), /*#__PURE__*/React.createElement("select", {
+    value: make,
+    onChange: e => setMake(e.target.value),
+    disabled: !year || makesLoading,
+    style: {
+      ...fld,
+      opacity: year ? 1 : .4
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    style: {
+      color: '#000'
+    }
+  }, makesLoading ? 'Loading...' : 'Make'), makes.map(m => /*#__PURE__*/React.createElement("option", {
+    key: m,
+    style: {
+      color: '#000'
+    }
+  }, m))), /*#__PURE__*/React.createElement("select", {
+    value: model,
+    onChange: e => setModel(e.target.value),
+    disabled: !make || modelsLoading,
+    style: {
+      ...fld,
+      opacity: make ? 1 : .4
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    style: {
+      color: '#000'
+    }
+  }, modelsLoading ? 'Loading...' : 'Model'), models.map(m => /*#__PURE__*/React.createElement("option", {
+    key: m,
+    style: {
+      color: '#000'
+    }
+  }, m))), submodels.length > 0 && /*#__PURE__*/React.createElement("select", {
+    value: submodel,
+    onChange: e => setSubmodel(e.target.value),
+    disabled: submodelsLoading,
+    style: {
+      ...fld
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    style: {
+      color: '#000'
+    }
+  }, submodelsLoading ? 'Loading...' : 'Submodel'), submodels.map(s => /*#__PURE__*/React.createElement("option", {
+    key: s,
+    style: {
+      color: '#000'
+    }
+  }, s))), fitments.length > 0 && /*#__PURE__*/React.createElement("select", {
+    value: selectedSize,
+    onChange: e => setSelectedSize(e.target.value),
+    disabled: fitmentsLoading,
+    style: {
+      ...fld,
+      minWidth: 200,
+      borderColor: selectedSize ? tokens.yellow : 'rgba(255,255,255,.18)',
+      background: selectedSize ? 'rgba(255,194,32,.15)' : 'rgba(255,255,255,.1)'
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    style: {
+      color: '#000'
+    }
+  }, fitmentsLoading ? 'Loading sizes...' : '\u2B50 OE Size'), fitments.map(f => /*#__PURE__*/React.createElement("option", {
+    key: f.label,
+    value: f.label,
+    style: {
+      color: '#000'
+    }
+  }, f.label))), fitmentsLoading && fitments.length === 0 && model && /*#__PURE__*/React.createElement("span", {
+    style: { color: 'rgba(255,255,255,.5)', fontSize: 11, fontStyle: 'italic' }
+  }, "Loading OE sizes..."), /*#__PURE__*/React.createElement("button", {
+    onClick: go,
+    disabled: !year || !make || !model,
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      padding: '10px 18px',
+      background: !year || !make || !model ? 'rgba(255,255,255,.12)' : tokens.yellow,
+      color: !year || !make || !model ? 'rgba(255,255,255,.6)' : tokens.ink,
+      border: 'none',
+      borderRadius: 6,
+      fontSize: 11,
+      fontWeight: 800,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      cursor: !year || !make || !model ? 'not-allowed' : 'pointer',
+      fontFamily: 'inherit'
+    }
+  }, "Shop now ", /*#__PURE__*/React.createElement(Icon, {
+    name: "arrow_forward",
+    size: 15
+  })))));
+}
+Object.assign(window, {
+  AppProvider,
+  Header,
+  VVSBanner,
+  LocationsStrip,
+  Footer,
+  GlobalFitmentBar
+});
+
+// ─── Nankang Tire Brand – Style Page ───
+
+function ModelCard({
+  model,
+  imgBase
+}) {
+  var imgUrl = imgBase && model.ImgAngle ? imgBase + model.ImgAngle : imgBase && model.ImgThumb ? imgBase + model.ImgThumb : null;
+  return /*#__PURE__*/React.createElement("a", {
+    href: window.location.pathname + "?model=" + model.Id,
+    style: {
+      display: "block",
+      background: "#fff",
+      borderRadius: 10,
+      overflow: "hidden",
+      boxShadow: "0 1px 4px rgba(0,0,0,.06)",
+      textDecoration: "none",
+      color: tokens.ink,
+      transition: "transform .15s, box-shadow .15s"
+    },
+    onMouseOver: function (e) {
+      e.currentTarget.style.transform = "translateY(-3px)";
+      e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,.12)";
+    },
+    onMouseOut: function (e) {
+      e.currentTarget.style.transform = "none";
+      e.currentTarget.style.boxShadow = "0 1px 4px rgba(0,0,0,.06)";
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      aspectRatio: "4/3",
+      background: tokens.surface,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 20
+    }
+  }, imgUrl ? /*#__PURE__*/React.createElement("img", {
+    src: imgUrl,
+    alt: "Nankang " + model.Model,
+    style: {
+      maxWidth: "85%",
+      maxHeight: "85%",
+      objectFit: "contain"
+    }
+  }) : /*#__PURE__*/React.createElement(TireSvg, null)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "16px 18px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      fontWeight: 700,
+      color: tokens.primary,
+      textTransform: "uppercase",
+      letterSpacing: ".1em"
+    }
+  }, "Nankang"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 16,
+      fontWeight: 700,
+      fontFamily: "Space Grotesk",
+      marginTop: 4
+    }
+  }, model.Model), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: tokens.mute,
+      marginTop: 8,
+      display: "flex",
+      alignItems: "center",
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "chevron_right",
+    size: 14
+  }), " View all sizes")));
+}
+function ModelDetail({
+  modelId
+}) {
+  var [tires, setTires] = useState([]);
+  var [loading, setLoading] = useState(true);
+  var [modelName, setModelName] = useState("");
+  useEffect(function () {
+    api.fetchTires({
+      "f-brand": "Nankang",
+      "f-modelid": modelId
+    }).then(function (data) {
+      var items = extractItems(data) || [];
+      // Normalize
+      var normalized = items.map(function (t) {
+        return {
+          id: t.Id || t.PartNumber,
+          displayName: t.DisplayName || t.Model || "",
+          brand: t.Brand || "Nankang",
+          model: t.Model || "",
+          size: t.Size || "",
+          partNumber: t.PartNumber || "",
+          price: t.Price || 0,
+          imgUrl: data.ImgUrlBase && (t.ImgThumb || t.ImgAngle) ? data.ImgUrlBase + (t.ImgThumb || t.ImgAngle) : (t.ImgAngle ? window.AUTOSYNC_CDN.tires + t.ImgAngle : null)
+        };
+      });
+      if (normalized.length > 0) setModelName(normalized[0].model);
+      setTires(normalized);
+      setLoading(false);
+    }).catch(function () {
+      setLoading(false);
+    });
+  }, [modelId]);
+  if (loading) return /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center",
+      padding: 60
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "spinner"
+  }), /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: 16,
+      color: tokens.mute
+    }
+  }, "Loading sizes..."));
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("a", {
+    href: window.location.pathname,
+    style: {
+      fontSize: 12,
+      fontWeight: 700,
+      color: tokens.primary,
+      textDecoration: "none",
+      letterSpacing: ".1em",
+      textTransform: "uppercase",
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 4,
+      marginBottom: 20
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "arrow_back",
+    size: 14
+  }), " Back to Nankang models"), /*#__PURE__*/React.createElement(Headline, {
+    size: "h2",
+    style: {
+      marginBottom: 24
+    }
+  }, "Nankang ", modelName), tires.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 40,
+      textAlign: "center",
+      color: tokens.mute
+    }
+  }, /*#__PURE__*/React.createElement("p", null, "Contact us for available sizes and pricing on this model."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 12,
+      justifyContent: "center",
+      marginTop: 16
+    }
+  }, /*#__PURE__*/React.createElement(Btn, {
+    href: "tel:5862262424",
+    icon: "phone",
+    size: "sm"
+  }, "Call Holbrook"), /*#__PURE__*/React.createElement(Btn, {
+    href: "tel:5862262626",
+    icon: "phone",
+    size: "sm",
+    variant: "outline"
+  }, "Call Chesterfield"))) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gap: 12
+    }
+  }, tires.map(function (t) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: t.id,
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 16,
+        padding: "16px 20px",
+        background: "#fff",
+        border: "1px solid " + tokens.line,
+        borderRadius: 8
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 60,
+        height: 60,
+        background: tokens.surface,
+        borderRadius: 6,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0
+      }
+    }, t.imgUrl ? /*#__PURE__*/React.createElement("img", {
+      src: t.imgUrl,
+      alt: t.displayName,
+      style: {
+        maxWidth: "90%",
+        maxHeight: "90%",
+        objectFit: "contain"
+      }
+    }) : /*#__PURE__*/React.createElement(TireSvg, null)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        minWidth: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "Space Grotesk",
+        fontSize: 15,
+        fontWeight: 700
+      }
+    }, t.displayName), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: tokens.mute,
+        fontFamily: "JetBrains Mono",
+        marginTop: 2
+      }
+    }, "PN: ", t.partNumber)), t.price > 0 && /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "right"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "Space Grotesk",
+        fontSize: 20,
+        fontWeight: 800,
+        color: tokens.primary
+      }
+    }, "$", t.price.toFixed(2)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: tokens.mute,
+        textTransform: "uppercase"
+      }
+    }, "per tire")), /*#__PURE__*/React.createElement(Btn, {
+      size: "sm",
+      href: "/tires/?product=" + t.id
+    }, "View"));
+  })));
+}
+function StyleGrid() {
+  var [models, setModels] = useState([]);
+  var [imgBase, setImgBase] = useState("");
+  var [loading, setLoading] = useState(true);
+  useEffect(function () {
+    // Fetch tire models (style-level, not individual SKUs)
+    fetch("https://api.autosyncstudio.com/tires/models?key=holbrooktire&p-size=200&i-img=true&f-brand=Nankang").then(function (r) {
+      return r.json();
+    }).then(function (data) {
+      var items = data.TireModels || extractItems(data) || [];
+      setModels(items);
+      setImgBase(data.ImgUrlBase || "https://storage.googleapis.com/autosync_tires/");
+      setLoading(false);
+    }).catch(function () {
+      setLoading(false);
+    });
+  }, []);
+  if (loading) return /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center",
+      padding: 60
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "spinner"
+  }), /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: 16,
+      color: tokens.mute
+    }
+  }, "Loading Nankang tire models..."));
+  if (models.length === 0) return /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center",
+      padding: 60,
+      color: tokens.mute
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "search_off",
+    size: 48,
+    style: {
+      color: tokens.line,
+      marginBottom: 12
+    }
+  }), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 16
+    }
+  }, "No Nankang tire models currently available."), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 14,
+      marginTop: 8
+    }
+  }, "Call any location for availability and pricing."));
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+      gap: 20
+    }
+  }, models.map(function (m) {
+    return /*#__PURE__*/React.createElement(ModelCard, {
+      key: m.Id,
+      model: m,
+      imgBase: imgBase
+    });
+  }));
+}
+function BrandPage() {
+  var params = new URLSearchParams(window.location.search);
+  var modelId = params.get("model");
+  return /*#__PURE__*/React.createElement(AppProvider, null, /*#__PURE__*/React.createElement(Header, null), /*#__PURE__*/React.createElement(GlobalFitmentBar, null), /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+      padding: "60px 0 50px",
+      color: "#fff"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1200,
+      margin: "0 auto",
+      padding: "0 24px"
+    }
+  }, /*#__PURE__*/React.createElement("nav", {
+    style: {
+      fontFamily: "Inter",
+      fontSize: 13,
+      padding: "14px 0",
+      color: "rgba(255,255,255,.5)"
+    }
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "/",
+    style: {
+      color: tokens.primaryAccent,
+      textDecoration: "none"
+    }
+  }, "Home"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      margin: "0 6px"
+    }
+  }, "/"), /*#__PURE__*/React.createElement("a", {
+    href: "/tires/",
+    style: {
+      color: tokens.primaryAccent,
+      textDecoration: "none"
+    }
+  }, "Tires"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      margin: "0 6px"
+    }
+  }, "/"), /*#__PURE__*/React.createElement("a", {
+    href: "/tires/brands/",
+    style: {
+      color: tokens.primaryAccent,
+      textDecoration: "none"
+    }
+  }, "Brands"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      margin: "0 6px"
+    }
+  }, "/"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: "#fff",
+      fontWeight: 600
+    }
+  }, "Nankang")), /*#__PURE__*/React.createElement(Eyebrow, {
+    color: "#ffc220"
+  }, "Tire Brand"), /*#__PURE__*/React.createElement(Headline, {
+    size: "h1",
+    style: {
+      color: "#fff",
+      marginTop: 8
+    }
+  }, "Nankang Tires"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontFamily: "Inter",
+      fontSize: 16,
+      color: "rgba(255,255,255,.7)",
+      maxWidth: 600,
+      marginTop: 12,
+      lineHeight: 1.6
+    }
+  }, "Browse all Nankang tire models. Select a style to view available sizes and pricing."))), /*#__PURE__*/React.createElement("section", {
+    style: {
+      maxWidth: 1200,
+      margin: "0 auto",
+      padding: "40px 24px 80px"
+    }
+  }, modelId ? /*#__PURE__*/React.createElement(ModelDetail, {
+    modelId: modelId
+  }) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SectionHead, {
+    eyebrow: "All Models",
+    title: "Nankang Tire Styles"
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 24
+    }
+  }, /*#__PURE__*/React.createElement(StyleGrid, null))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 60,
+      padding: 32,
+      background: "#fff",
+      borderRadius: 10,
+      border: "1px solid " + tokens.line
+    }
+  }, /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontFamily: "Space Grotesk",
+      fontSize: 22,
+      fontWeight: 700,
+      margin: "0 0 12px"
+    }
+  }, "About Nankang Tires"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 15,
+      lineHeight: 1.7,
+      color: tokens.graphite,
+      margin: 0
+    }
+  }, "Nankang is a trusted name in the tire industry, offering a wide range of models for every driving condition and vehicle type. Visit any Custom Wheel Deal location for expert recommendations and same-day installation of your new Nankang tires.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 40
+    }
+  }, /*#__PURE__*/React.createElement("h3", {
+    style: {
+      fontFamily: "Space Grotesk",
+      fontSize: 18,
+      fontWeight: 700,
+      marginBottom: 16
+    }
+  }, "More Tire Brands"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 8
+    }
+  }, ["Bridgestone", "Firestone", "Goodyear", "Accelera", "Achilles", "Americus", "Argus Advanta", "Arroyo", "Atlas", "Atturo", "Bfgoodrich", "Blackhawk", "Continental", "Cooper", "Cosmo", "Deestone", "Delinte", "Double Coin", "Dunlop", "Durun"].map(function (b) {
+    return React.createElement("a", {
+      key: b,
+      href: "/tires/brands/" + b.toLowerCase().replace(/[^a-z0-9]+/g, "-") + "/",
+      style: {
+        padding: "6px 14px",
+        fontSize: 12,
+        fontWeight: 600,
+        background: tokens.surface,
+        borderRadius: 20,
+        color: tokens.graphite,
+        textDecoration: "none"
+      }
+    }, b);
+  })))), /*#__PURE__*/React.createElement(LocationsStrip, null)), /*#__PURE__*/React.createElement(Footer, null));
+}
+ReactDOM.createRoot(document.getElementById("app")).render(/*#__PURE__*/React.createElement(BrandPage, null));</script>
+</body>
+</html>

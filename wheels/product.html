@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Wheel Details - Custom Wheel Deal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'sans': ['Inter', 'sans-serif'], 'display': ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        'primary': '#850824', 'primary-container': '#a62639',
+                        'on-surface': '#1a1c1e', 'on-surface-variant': '#584141',
+                        'surface': '#f9f9fc', 'surface-container-low': '#f3f3f6',
+                        'surface-container-lowest': '#ffffff',
+                        'outline-variant': '#e0bfbf'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .signature-gradient { background: linear-gradient(135deg, #850824 0%, #a62639 100%); }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .img-thumb { cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s; }
+        .img-thumb.active, .img-thumb:hover { border-color: #850824; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+
+    <div id="headerMount"></div>
+
+    <div id="breadcrumbMount"></div>
+
+    <div id="vehicleReinforcementBar" class="bg-surface-container-low border-b border-outline-variant/20 hidden"></div>
+
+    <!-- Loading -->
+    <div id="loadingState" class="max-w-7xl mx-auto px-4 py-24 text-center">
+        <div class="inline-flex items-center gap-3 text-on-surface-variant">
+            <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#850824" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+            <span>Loading wheel details...</span>
+        </div>
+    </div>
+
+    <!-- Product Detail -->
+    <main id="productDetail" class="max-w-7xl mx-auto px-4 py-8 hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Left: Images -->
+            <div>
+                <div id="mainImageWrap" class="bg-surface-container-low rounded-2xl flex items-center justify-center p-8 aspect-square mb-4">
+                    <img id="mainImage" src="" alt="" class="max-w-full max-h-full object-contain">
+                </div>
+                <div id="thumbnailRow" class="flex gap-3 justify-center"></div>
+            </div>
+
+            <!-- Right: Info -->
+            <div class="space-y-6">
+                <div class="flex items-center gap-3">
+                    <div id="brandLogoWrap" class="w-12 h-12 bg-surface-container-low rounded-lg flex items-center justify-center p-1 hidden">
+                        <img id="brandLogo" src="" alt="" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <span id="brandName" class="text-[10px] font-bold tracking-widest text-primary uppercase"></span>
+                </div>
+
+                <h1 id="wheelStyle" class="font-display font-bold text-3xl md:text-4xl tracking-tight"></h1>
+                <p id="wheelDisplayName" class="text-on-surface-variant text-lg"></p>
+
+                <div id="priceBlock" class="flex items-end gap-2">
+                    <span id="wheelPrice" class="text-4xl font-bold"></span>
+                    <span class="text-on-surface-variant text-sm mb-1">/each</span>
+                </div>
+
+                <div id="stockBadge" class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold tracking-wider"></div>
+
+                <div class="flex gap-3 items-center">
+                    <button id="addToCartBtn" class="signature-gradient text-white px-8 py-4 rounded-lg text-sm font-bold tracking-widest uppercase hover:opacity-90 transition-all active:scale-95 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-lg">shopping_cart</span>
+                        ADD SET OF 4 TO CART
+                    </button>
+                </div>
+
+                <div class="border-t border-outline-variant/20 pt-6">
+                    <h3 class="font-display font-bold text-lg mb-4">Specifications</h3>
+                    <div id="specsGrid" class="grid grid-cols-2 gap-3"></div>
+                </div>
+
+                <div id="partNumberBlock" class="text-xs text-on-surface-variant/60 border-t border-outline-variant/20 pt-4">
+                    Part Number: <span id="partNumber" class="font-mono"></span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Error -->
+    <div id="errorState" class="max-w-7xl mx-auto px-4 py-24 text-center hidden">
+        <span class="material-symbols-outlined text-6xl text-on-surface-variant/20 mb-4 block">error_outline</span>
+        <p class="text-on-surface-variant text-lg mb-2">Wheel not found</p>
+        <a href="index.html" class="text-primary font-bold text-sm hover:underline">Browse all wheel brands</a>
+    </div>
+
+    <div id="footerMount"></div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/components.js"></script>
+    <script>
+    const params = new URLSearchParams(window.location.search);
+    const BRAND_PARAM = params.get('brand') || '';
+    const WHEEL_ID = params.get('id') || '';
+
+    function specRow(label, value) {
+        if (!value && value !== 0) return '';
+        return `<div class="bg-surface-container-low rounded-lg px-4 py-3">
+            <div class="text-[10px] font-bold tracking-widest text-on-surface-variant/60 uppercase mb-1">${label}</div>
+            <div class="font-bold text-sm">${value}</div>
+        </div>`;
+    }
+
+    function setMainImage(src) {
+        document.getElementById('mainImage').src = src;
+        document.querySelectorAll('.img-thumb').forEach(el => {
+            el.classList.toggle('active', el.dataset.src === src);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Render shared components
+        document.getElementById('headerMount').innerHTML = HolbrookUI.renderHeader('wheels');
+        document.getElementById('footerMount').innerHTML = HolbrookUI.renderFooter();
+        HolbrookUI.updateGarageCount();
+        HolbrookUI.renderVehicleBar();
+
+        if (typeof HolbrookCart !== 'undefined') HolbrookCart.init();
+
+        if (!BRAND_PARAM) {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('errorState').classList.remove('hidden');
+            return;
+        }
+
+        try {
+            let wheel = null;
+
+            if (WHEEL_ID) {
+                // Direct lookup by ID using API filter — avoids pagination issues
+                const params = { key: 'holbrooktire', 'f-brand': BRAND_PARAM, 'f-id': WHEEL_ID, 'p-size': 1, 'i-img': true, 'i-price': true, 'i-specs': true, 'i-tags': true };
+                const qs = new URLSearchParams(params).toString();
+                const res = await fetch(`https://api.autosyncstudio.com/wheels?${qs}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    const imgBase = data.ImgUrlBase || '';
+                    if (data.Wheels && data.Wheels.length) {
+                        const w = data.Wheels[0];
+                        wheel = {
+                            id: w.Id, brand: w.Brand, style: w.Model || w.Style || '',
+                            displayName: w.DisplayName || '',
+                            size: w.Size || `${w.Diameter || ''}x${w.Width || ''}`,
+                            finish: w.ShortFinish || w.ShortColor || '',
+                            price: w.Price || 0,
+                            image: w.ImgThumb ? imgBase + w.ImgThumb : '',
+                            partNumber: w.PartNumber || '', boltCircle: w.BoltCircle || '',
+                            lugCount: w.LugCount || 0, offset: w.Offset || '',
+                            bore: w.Bore || '', diameter: w.Diameter || '',
+                            width: w.Width || '', backspace: w.Backspace || '',
+                            inStock: w.InStock !== false,
+                        };
+                    }
+                }
+            } else {
+                // Fall back to brand search
+                const result = await HolbrookAPI.getWheelsByBrand(BRAND_PARAM);
+                wheel = (result.wheels || []).find(w => String(w.id) === String(WHEEL_ID));
+            }
+
+            if (!wheel) {
+                document.getElementById('loadingState').classList.add('hidden');
+                document.getElementById('errorState').classList.remove('hidden');
+                return;
+            }
+
+            let brandLogo = '';
+            let brandSlug = BRAND_PARAM.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            try {
+                const brands = await HolbrookAPI.getWheelBrands();
+                const match = brands.find(b => b.name === BRAND_PARAM);
+                if (match) { brandLogo = match.logo; brandSlug = match.slug; }
+            } catch (e) {}
+
+            document.title = `${wheel.style || wheel.displayName} - Custom Wheel Deal`;
+            document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb([
+                { text: 'Wheels', href: 'index.html' },
+                { text: BRAND_PARAM, href: `brand.html?brand=${brandSlug}` },
+                { text: wheel.style, href: '#' }
+            ]);
+            document.getElementById('brandName').textContent = wheel.brand;
+            document.getElementById('wheelStyle').textContent = wheel.style;
+            document.getElementById('wheelDisplayName').textContent = `${wheel.size}${wheel.finish ? ' · ' + wheel.finish : ''}`;
+
+            if (brandLogo) {
+                document.getElementById('brandLogo').src = brandLogo;
+                document.getElementById('brandLogoWrap').classList.remove('hidden');
+            }
+
+            if (wheel.price) {
+                document.getElementById('wheelPrice').textContent = `$${Number(wheel.price).toFixed(2)}`;
+            } else {
+                document.getElementById('priceBlock').innerHTML = '<span class="text-xl text-on-surface-variant">Call for pricing</span>';
+            }
+
+            const stockEl = document.getElementById('stockBadge');
+            if (wheel.inStock) {
+                stockEl.textContent = 'IN STOCK';
+                stockEl.classList.add('bg-green-100', 'text-green-700');
+            } else {
+                stockEl.textContent = 'CALL FOR AVAILABILITY';
+                stockEl.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+            }
+
+            if (wheel.image) {
+                document.getElementById('mainImage').src = wheel.image;
+                document.getElementById('mainImage').alt = wheel.style;
+            } else {
+                document.getElementById('mainImageWrap').innerHTML = '<span class="material-symbols-outlined text-8xl text-on-surface-variant/20">circle</span>';
+            }
+
+            const specsHTML = [
+                specRow('Size', wheel.size),
+                specRow('Bolt Pattern', wheel.boltCircle),
+                specRow('Lug Count', wheel.lugCount),
+                specRow('Offset', wheel.offset ? wheel.offset + 'mm' : ''),
+                specRow('Finish', wheel.finish),
+                specRow('Diameter', wheel.diameter ? wheel.diameter + '"' : ''),
+                specRow('Width', wheel.width ? wheel.width + '"' : ''),
+                specRow('Backspace', wheel.backspace ? wheel.backspace + '"' : ''),
+            ].filter(Boolean).join('');
+            document.getElementById('specsGrid').innerHTML = specsHTML;
+
+            if (wheel.partNumber) {
+                document.getElementById('partNumber').textContent = wheel.partNumber;
+            } else {
+                document.getElementById('partNumberBlock').classList.add('hidden');
+            }
+
+            document.getElementById('addToCartBtn').addEventListener('click', () => {
+                if (typeof HolbrookCart !== 'undefined') {
+                    HolbrookCart.addItem({
+                        id: wheel.id, type: 'wheel',
+                        name: wheel.style || wheel.displayName,
+                        brand: wheel.brand, size: wheel.size,
+                        price: wheel.price, image: wheel.image, qty: 4
+                    });
+                    const toast = document.createElement('div');
+                    toast.className = 'fixed bottom-6 right-6 z-[999] bg-on-surface text-white px-6 py-3 rounded-md shadow-xl text-sm font-bold tracking-wider';
+                    toast.textContent = 'Set of 4 added to cart!';
+                    document.body.appendChild(toast);
+                    setTimeout(() => toast.remove(), 2500);
+                }
+            });
+
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('productDetail').classList.remove('hidden');
+
+        } catch (err) {
+            console.error('Error loading wheel:', err);
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('errorState').classList.remove('hidden');
+        }
+    });
+    </script>
+<!-- holbrook-filters: installed -->
+<script src="/js/holbrook-filters-core.js" defer></script>
+<script src="/js/wheel-filters.js" defer></script>
+<!-- /holbrook-filters -->
+</body>
+</html>

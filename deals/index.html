@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.webp">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deals & Rebates | Custom Wheel Deal</title>
+    <meta name="description" content="Save big with tire rebates and promotions at Custom Wheel Deal. Current offers from Bridgestone, Goodyear, Michelin, Cooper, and more.">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'sans': ['Inter', 'sans-serif'], 'display': ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        'primary': '#850824', 'primary-container': '#a62639',
+                        'on-surface': '#1a1c1e', 'on-surface-variant': '#584141',
+                        'surface': '#f9f9fc', 'surface-container-low': '#f3f3f6',
+                        'surface-container-lowest': '#ffffff',
+                        'outline-variant': '#e0bfbf'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .signature-gradient { background: linear-gradient(135deg, #850824 0%, #a62639 100%); }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .deal-card { transition: transform 0.2s, box-shadow 0.2s; }
+        .deal-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+        .brand-chip { transition: all 0.15s; }
+        .brand-chip.active { background: #850824; color: white; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+
+    <!-- Header -->
+    <header class="signature-gradient text-white sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="../index.html" class="bg-slate-900 rounded-lg px-3 py-1 inline-flex items-center">
+                <img src="/images/Holbrook-tirecenter-logo-dark_BG.png" alt="Custom Wheel Deal" class="h-14 object-contain">
+            </a>
+            <div class="hidden md:flex gap-8 items-center font-bold text-sm tracking-wider">
+                <a href="../index.html" class="hover:opacity-80 transition">HOME</a>
+                <a href="../tires/index.html" class="hover:opacity-80 transition">TIRES</a>
+                <a href="../wheels/index.html" class="hover:opacity-80 transition">WHEELS</a>
+                <a href="../vehicles/index.html" class="hover:opacity-80 transition">VEHICLES</a>
+                <a href="../visualizer/" class="hover:opacity-80 transition">VISUALIZER</a>
+                <a href="index.html" class="text-white border-b-2 border-white pb-1">DEALS</a>
+            </div>
+            <div class="flex gap-4 items-center">
+                <a href="../cart/index.html" class="relative hover:opacity-80 transition">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                </a>
+                <a href="../admin/index.html" class="hover:opacity-80 transition">
+                    <span class="material-symbols-outlined">person</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="max-w-7xl mx-auto px-4 py-3 text-sm text-on-surface-variant">
+        <a href="../index.html" class="hover:text-primary">Home</a> &rsaquo; <span class="text-primary font-semibold">Deals & Rebates</span>
+    </div>
+
+    <!-- Hero -->
+    <section class="signature-gradient text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="font-display font-bold text-4xl mb-4">DEALS & REBATES</h1>
+            <p class="text-lg opacity-90">Save big on top tire brands with manufacturer rebates</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-12">
+
+        <!-- Brand Filter -->
+        <div class="mb-8">
+            <div class="flex flex-wrap gap-2" id="brandFilters">
+                <button class="brand-chip active px-4 py-2 rounded-full text-sm font-bold tracking-wider border border-outline-variant/30 bg-surface-container-lowest" data-brand="all">ALL BRANDS</button>
+            </div>
+        </div>
+
+        <!-- Loading state -->
+        <div id="loadingState" class="text-center py-16">
+            <div class="inline-flex items-center gap-3 text-on-surface-variant">
+                <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#850824" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+                <span>Loading deals...</span>
+            </div>
+        </div>
+
+        <!-- Active Deals Section -->
+        <div id="activeSection" class="hidden">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="inline-flex items-center gap-1.5 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold tracking-wider">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> ACTIVE NOW
+                </span>
+                <h2 class="font-display font-bold text-2xl">Current Rebates</h2>
+            </div>
+            <div id="activeDeals" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"></div>
+        </div>
+
+        <!-- Upcoming Deals Section -->
+        <div id="upcomingSection" class="hidden">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="inline-flex items-center gap-1.5 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold tracking-wider">
+                    <span class="material-symbols-outlined text-sm">schedule</span> COMING SOON
+                </span>
+                <h2 class="font-display font-bold text-2xl">Upcoming Rebates</h2>
+            </div>
+            <div id="upcomingDeals" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"></div>
+        </div>
+
+        <!-- Expired Deals Section -->
+        <div id="expiredSection" class="hidden">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-xs font-bold tracking-wider">EXPIRED</span>
+                <h2 class="font-display font-bold text-2xl text-on-surface-variant/60">Past Rebates</h2>
+            </div>
+            <div id="expiredDeals" class="grid grid-cols-1 md:grid-cols-2 gap-6 opacity-50"></div>
+        </div>
+
+        <!-- No results -->
+        <div id="noResults" class="text-center py-16 hidden">
+            <span class="material-symbols-outlined text-5xl text-on-surface-variant/20 block mb-4">search_off</span>
+            <p class="text-lg text-on-surface-variant">No deals found for this brand.</p>
+        </div>
+
+        <!-- Deal count -->
+        <div id="dealCount" class="mt-8 text-center text-sm text-on-surface-variant hidden"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white mt-16 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="mb-8">
+                <img src="/images/Holbrook_tire_logo_for_dark_bck.png" alt="Custom Wheel Deal" class="h-20 object-contain mb-4">
+            </div>
+            <div class="grid grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="font-display font-bold mb-4 text-white/60 text-xs tracking-widest uppercase">Products</h3>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="../tires/index.html" class="hover:text-white transition">Tires</a></li>
+                        <li><a href="../wheels/index.html" class="hover:text-white transition">Wheels</a></li>
+                        <li><a href="../vehicles/index.html" class="hover:text-white transition">Vehicles</a></li>
+                        <li><a href="../visualizer/" class="hover:text-white transition">Visual Vehicle Studio</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-display font-bold mb-4 text-white/60 text-xs tracking-widest uppercase">Support</h3>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Shipping</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-display font-bold mb-4 text-white/60 text-xs tracking-widest uppercase">Company</h3>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-white transition">About</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-6 text-center">
+                <span class="text-[10px] text-slate-500 tracking-widest uppercase">&copy; 2026 Holbrook Performance Tires. Precision Engineered.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // Rebate data embedded from rebates.csv — auto-generated
+    const REBATE_DATA = [{"b":"KUMHO","d":"Receive an $80 Prepaid Mastercard when you buy a set of 4 new qualifying tires.","f":"https://www.r2cthemes.com/Rebates/2026/pdf/2026-consumer-rebate-flyer.pdf","sd":"2/1/2026","ed":"3/31/2026","a1":80,"r1":"Buy 4 and qualify for a $80 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/kumho-feb2026-750.webp","pats":["CRUGEN HP71","ECSTA SPORT A/S PA71","ROAD VENTURE RT51","SOLUS 4S HA32"]},{"b":"MILESTAR","d":"Get a $50 consumer rebate when you buy one set of four new INTERCEPTOR AS810, WEATHERGUARD AS710 SPORT, OR PATAGONIA A/T PRO tires.","f":"https://milestarrebates.com/Home.aspx","sd":"2/1/2026","ed":"3/31/2026","a1":50,"r1":"Buy 4 and qualify for a $50 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/milestar-feb2026-750.webp","pats":["INTERCEPTOR AS810","PATAGONIA A/T PRO","WEATHERGUARD AS710 SPORT"]},{"b":"MICKEY THOMPSON","d":"Earn a $50 rebate on every two (2) tires for up to six (6) total tires.","f":"https://www.mickeythompsontires.com/offer","sd":"2/15/2026","ed":"3/31/2026","a1":50,"r1":"Buy 2 and qualify for a $50 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/mickey-feb2026-750.webp","pats":["ET DRAG","ET STREET R","ET STREET S/S","SPORTSMAN S/R","+10 more"]},{"b":"BRIDGESTONE","d":"Receive a $180 Bridgestone Prepaid Mastercard\u00ae with a qualifying purchase of select Bridgestone tires using your CFNA Credit Card account.","f":"https://www.bridgestonerewards.com/","sd":"3/1/2026","ed":"3/31/2026","a1":80,"r1":"Buy 4 and qualify for a $80 Rebate","a2":100,"r2":"Use your CFNA Credit Card and get a bonus rebate of $100 Prepaid Card","img":"https://www.r2cthemes.com/Rebates/2026/bridgestone-mar2026-750.webp","pats":["ALENZA AS ULTRA","DUELER A/T ASCENT","DUELER APT IV","POTENZA SPORT AS","TURANZA QUIETTRACK","+133 more"]},{"b":"BRIDGESTONE","d":"Receive a $80 Bridgestone Prepaid Mastercard\u00ae with a qualifying purchase of select Bridgestone tires.","f":"https://www.bridgestonerewards.com/","sd":"3/1/2026","ed":"3/31/2026","a1":80,"r1":"Buy 4 and qualify for a $80 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/bridgestone-mar2026-80-750.webp","pats":["ALENZA AS ULTRA","DUELER A/T ASCENT","DUELER APT IV","POTENZA SPORT AS","WEATHERPEAK","+133 more"]},{"b":"COOPER","d":"Get $70 back on a qualifying purchase of a set of 4 select Cooper tires; plus get an added $70 more with the Goodyear Credit Card.","f":"https://www.r2cthemes.com/Rebates/2026/pdf/2026_npp1_gycc_ct_base-cc_rebate_form_final.pdf","sd":"3/1/2026","ed":"6/30/2026","a1":70,"r1":"Buy 4 and qualify for a $70 Rebate","a2":70,"r2":"Use your Goodyear Credit Card and get a bonus rebate of $70 Prepaid Card","img":"https://www.r2cthemes.com/Rebates/2026/cooper-mar2026-750.webp","pats":["DISCOVERER ROAD + TRAIL AT","DISCOVERER STRONGHOLD AT","PROCONTROL"]},{"b":"COOPER","d":"Get $70 back on a set of 4 select Cooper tires by online or mail-in rebate.","f":"https://www.r2cthemes.com/Rebates/2026/pdf/npp1-2026-cooper-base-rebate-form_mar-jun_final.pdf","sd":"3/1/2026","ed":"6/30/2026","a1":70,"r1":"Buy 4 and qualify for a $70 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/cooper-mar2026-70-750.webp","pats":["DISCOVERER ROAD + TRAIL AT","DISCOVERER STRONGHOLD AT","PROCONTROL"]},{"b":"FIRESTONE","d":"Receive up to a $70 Firestone Prepaid Mastercard\u00ae with purchase of four (4) select Firestone tires.","f":"https://www.firestonerewards.com/","sd":"3/1/2026","ed":"3/31/2026","a1":70,"r1":"Buy 4 and qualify for a $70 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/firestone-mar2026-70-750.webp","pats":["DESTINATION X/T","FIREHAWK AS V2","FIREHAWK INDY 500","FIREHAWK PURSUIT AWT","WEATHERGRIP","+32 more"]},{"b":"GENERAL","d":"Get up to $160 via prepaid card when you buy any 4 qualifying General Tire brand tires.","f":"https://www.r2cthemes.com/Rebates/2026/pdf/plt-gt-dd-mar26-pad-syf.pdf","sd":"3/1/2026","ed":"4/30/2026","a1":80,"r1":"Buy 4 and qualify for a $80 Rebate","a2":80,"r2":"Use your General Tire Credit Card and get a bonus rebate of $80 Prepaid Card","img":"https://www.r2cthemes.com/Rebates/2026/general-mar2026-750.webp","pats":["ALTIMAX RT45","G-MAX AS-07","G-MAX RS","RELIATREK"]},{"b":"GENERAL","d":"Get up to $80 via prepaid card when you buy any 4 qualifying General Tire brand tires.","f":"https://generaltire.com/promotion","sd":"3/1/2026","ed":"4/30/2026","a1":80,"r1":"Buy 4 and qualify for a $80 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/general-mar2026-80-750.webp","pats":["ALTIMAX RT45","G-MAX AS-07","G-MAX RS","RELIATREK"]},{"b":"GOODYEAR","d":"Get up to $180 back on a set of 4 select Goodyear tires when you use the Goodyear Credit Card.","f":"https://www.r2cthemes.com/Rebates/2026/pdf/2026_npp1_gycc_gy_base-cc_rebate_form_final.pdf","sd":"3/1/2026","ed":"6/30/2026","a1":80,"r1":"Buy 4 and qualify for a $80 Rebate","a2":100,"r2":"Use your Goodyear Credit Card and get a bonus rebate of $100 Prepaid Card","img":"https://www.r2cthemes.com/Rebates/2026/goodyear-mar2026-750.webp","pats":["ASSURANCE COMFORTDRIVE","ASSURANCE MAXLIFE 2","ASSURANCE WEATHERREADY 2","WRANGLER DURATRAC RT","WRANGLER STEADFAST HT"]},{"b":"GOODYEAR","d":"Get up to $80 back on a set of 4 select Goodyear tires by online or mail-in rebate.","f":"https://www.r2cthemes.com/Rebates/2026/pdf/npp1-2026-goodyear-base-rebate-form_mar-jun_final.pdf","sd":"3/1/2026","ed":"6/30/2026","a1":80,"r1":"Buy 4 and qualify for a $80 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/goodyear-mar2026-80-750 copy.webp","pats":["ASSURANCE COMFORTDRIVE","ASSURANCE MAXLIFE 2","ASSURANCE WEATHERREADY 2","WRANGLER DURATRAC RT","WRANGLER STEADFAST HT"]},{"b":"PIRELLI","d":"Purchase a set of 4 qualifying Pirelli tires and get a $100 Pirelli Mastercard\u00ae prepaid card.","f":"https://www.pirelli.com/tires/en-us/car/tire-deals","sd":"3/1/2026","ed":"3/31/2026","a1":100,"r1":"Buy 4 and qualify for a $100 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/pirelli-mar2026-750.webp","pats":["P7 AS PLUS 3"]},{"b":"MICKEY THOMPSON","d":"Receive a $100 rebate when you purchase a set of 4 qualifying Mickey Thompson tires.","f":"https://www.mickeythompsontires.com/offer/spring-rebate-2026","sd":"3/15/2026","ed":"4/30/2026","a1":100,"r1":"Buy 4 and qualify for a $100 rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/mickey-mar2026-750.webp","pats":["BAJA BOSS A/T","BAJA BOSS M/T","BAJA LEGEND EXP","BAJA LEGEND MTZ"]},{"b":"BFGOODRICH","d":"Get $80 via Visa\u00ae Reward Card or Visa\u00ae Virtual Account after online submission on purchases of four (4) new BFGoodrich passenger or light truck tires.","f":"https://www.r2cthemes.com/Rebates/2026/pdf/bfgoodrich-mar2026-promo-online-redemption-instructions.JPEG","sd":"3/26/2026","ed":"5/23/2026","a1":80,"r1":"Buy 4 and qualify for an $80 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/bfgoodrich-mar2026-750.webp","pats":["ADVANTAGE CONTROL","ADVANTAGE T/A SPORT","G-FORCE PHENOM T/A","PREMIER TOURING","+13 more"]},{"b":"MICHELIN","d":"Get $80 via Visa\u00ae Reward Card or Visa\u00ae Virtual Prepaid Card after online submission on purchases of four (4) new Michelin passenger or light truck tires.","f":"https://www.r2cthemes.com/Rebates/2026/pdf/michelin-spring-mar2026-promo-online-redemption-instructions.PDF","sd":"3/26/2026","ed":"5/23/2026","a1":80,"r1":"Buy 4 and qualify for an $80 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/michelin-mar2026-750.webp","pats":["CROSSCLIMATE 2","DEFENDER 2","DEFENDER LTX PLATINUM","PILOT SPORT ALL SEASON 4","PRIMACY TOUR A/S","+80 more"]},{"b":"TOYO","d":"Receive $100 Toyo Tires Prepaid Mastercard\u00ae when you purchase a set of four (4) eligible Toyo Tires.","f":"https://www.r2cthemes.com/Rebates/2026/pdf/toyo-apr2026-consumerflyer-2.12.26_final.pdf","sd":"4/1/2026","ed":"4/30/2026","a1":100,"r1":"Buy 4 and qualify for a $100 rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/toyo-apr2026-750.webp","pats":["CELSIUS II","OPEN COUNTRY A/T III","OPEN COUNTRY R/T TRAIL","PROXES SPORT A/S+","+11 more"]},{"b":"HANKOOK","d":"Get a $100 rebate when you buy a set of 4 select Hankook Tires.","f":"https://hankookrebates.com/","sd":"4/20/2026","ed":"5/31/2026","a1":100,"r1":"Buy 4 and qualify for a $100 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/hankook-apr2026-750.webp","pats":["DYNAPRO AT2 XTREME RF12","DYNAPRO XT RC10","ION EVO AS (IH01)","VENTUS S1 AS (H125)","+30 more"]},{"b":"LAUFENN","d":"Get up to a $70 rebate when you purchase 4 select Laufenn Tires.","f":"https://hankookrebates.com/","sd":"4/20/2026","ed":"5/31/2026","a1":70,"r1":"Buy 4 and qualify for a $70 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/laufenn-apr2026-750.webp","pats":["G FIT 4S (LH71)","X FIT AT2","X FIT HP (LA41)","+11 more"]},{"b":"BFGOODRICH","d":"Get $80 via Visa\u00ae Reward Card or Visa\u00ae Virtual Account after online submission on purchases of four (4) new BFGoodrich passenger or light truck tires.","f":"https://www.r2cthemes.com/Rebates/2026/pdf/bfgoodrich-may2026-promo-online-redemption-instructions.pdf","sd":"5/24/2026","ed":"5/31/2026","a1":80,"r1":"Buy 4 and qualify for an $80 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/bfgoodrich-may2026-750.webp","pats":["ADVANTAGE CONTROL","ADVANTAGE T/A SPORT","G-FORCE PHENOM T/A","PREMIER TOURING","+13 more"]},{"b":"MICHELIN","d":"Get $80 via Visa\u00ae Reward Card or Visa\u00ae Virtual Prepaid Card after online submission on purchases of four (4) new Michelin passenger or light truck tires.","f":"https://www.r2cthemes.com/Rebates/2026/pdf/michelin-spring-may2026-promo-online-redemption-instructions.pdf","sd":"5/24/2026","ed":"5/31/2026","a1":80,"r1":"Buy 4 and qualify for an $80 Rebate","a2":0,"r2":"","img":"https://www.r2cthemes.com/Rebates/2026/michelin-may2026-750.webp","pats":["CROSSCLIMATE 2","DEFENDER 2","DEFENDER LTX PLATINUM","PILOT SPORT ALL SEASON 4","PRIMACY TOUR A/S","+80 more"]}];
+
+    let allDeals = [];
+    let activeBrand = 'all';
+
+    function parseDate(str) {
+        if (!str) return new Date();
+        const parts = str.split('/');
+        return new Date(parseInt(parts[2]), parseInt(parts[0]) - 1, parseInt(parts[1]));
+    }
+
+    function formatDate(str) {
+        const d = parseDate(str);
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function daysRemaining(endStr) {
+        const end = parseDate(endStr);
+        const now = new Date();
+        now.setHours(0,0,0,0);
+        return Math.ceil((end - now) / (1000 * 60 * 60 * 24));
+    }
+
+    function renderDealCard(deal, isExpired) {
+        const maxAmount = deal.a1 + deal.a2;
+        const days = daysRemaining(deal.ed);
+        const urgencyClass = days <= 7 ? 'text-red-600' : days <= 14 ? 'text-amber-600' : 'text-on-surface-variant';
+
+        return `
+        <div class="deal-card bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/10 ${isExpired ? 'pointer-events-none' : ''}">
+            <div class="relative">
+                <img src="${deal.img}" alt="${deal.b} Rebate"
+                     class="w-full aspect-[5/2] object-cover"
+                     onerror="this.parentElement.innerHTML='<div class=\\'signature-gradient w-full aspect-[5/2] flex items-center justify-center\\'><span class=\\'text-white font-display font-bold text-3xl\\'>${deal.b}</span></div>'">
+                ${!isExpired && days >= 0 ? `
+                <div class="absolute top-3 right-3 ${days <= 7 ? 'bg-red-600' : 'bg-on-surface/80'} text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full">
+                    ${days === 0 ? 'ENDS TODAY' : days === 1 ? '1 DAY LEFT' : days + ' DAYS LEFT'}
+                </div>` : ''}
+            </div>
+
+            <div class="p-6 space-y-4">
+                <div class="flex items-start justify-between gap-4">
+                    <div>
+                        <div class="text-[10px] font-bold tracking-widest text-primary uppercase mb-1">${deal.b}</div>
+                        <div class="text-sm text-on-surface-variant">${deal.d}</div>
+                    </div>
+                    ${maxAmount > 0 ? `
+                    <div class="text-right shrink-0">
+                        <div class="text-xs text-on-surface-variant/60 uppercase tracking-wider">Save up to</div>
+                        <div class="text-3xl font-bold text-primary">$${maxAmount.toFixed(0)}</div>
+                    </div>` : ''}
+                </div>
+
+                <div class="space-y-2">
+                    ${deal.a1 > 0 ? `
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>
+                        <span class="text-sm">${deal.r1}</span>
+                    </div>` : deal.r1 ? `
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>
+                        <span class="text-sm">${deal.r1}</span>
+                    </div>` : ''}
+                    ${deal.a2 > 0 ? `
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-blue-600 text-lg">credit_card</span>
+                        <span class="text-sm">${deal.r2}</span>
+                    </div>` : ''}
+                </div>
+
+                ${deal.pats && deal.pats.length ? `
+                <div class="flex flex-wrap gap-1.5">
+                    ${deal.pats.map(p => `<span class="text-[10px] bg-surface-container-low px-2 py-1 rounded text-on-surface-variant tracking-wide">${p}</span>`).join('')}
+                </div>` : ''}
+
+                <div class="flex items-center justify-between pt-3 border-t border-outline-variant/10">
+                    <div class="text-xs ${urgencyClass}">
+                        <span class="material-symbols-outlined text-sm align-middle mr-1">calendar_today</span>
+                        ${formatDate(deal.sd)} &ndash; ${formatDate(deal.ed)}
+                    </div>
+                    ${deal.f ? `
+                    <a href="${deal.f}" target="_blank" rel="noopener"
+                       class="inline-flex items-center gap-1 signature-gradient text-white px-4 py-2 rounded-lg text-xs font-bold tracking-wider hover:opacity-90 transition">
+                        <span class="material-symbols-outlined text-sm">download</span>
+                        REBATE FORM
+                    </a>` : ''}
+                </div>
+            </div>
+        </div>`;
+    }
+
+    function renderDeals(deals) {
+        const now = new Date();
+        now.setHours(0,0,0,0);
+
+        const filtered = activeBrand === 'all' ? deals : deals.filter(d => d.b === activeBrand);
+
+        const active = [], upcoming = [], expired = [];
+        filtered.forEach(d => {
+            const start = parseDate(d.sd);
+            const end = parseDate(d.ed);
+            end.setHours(23,59,59);
+            if (now > end) expired.push(d);
+            else if (now < start) upcoming.push(d);
+            else active.push(d);
+        });
+
+        const show = (id, arr, isSec) => {
+            const sec = document.getElementById(id + 'Section');
+            if (arr.length) {
+                document.getElementById(id + 'Deals').innerHTML = arr.map(d => renderDealCard(d, id === 'expired')).join('');
+                sec.classList.remove('hidden');
+            } else sec.classList.add('hidden');
+        };
+        show('active', active); show('upcoming', upcoming); show('expired', expired);
+
+        const total = active.length + upcoming.length + expired.length;
+        document.getElementById('noResults').classList.toggle('hidden', total > 0);
+
+        const countEl = document.getElementById('dealCount');
+        countEl.textContent = `${active.length} active deal${active.length !== 1 ? 's' : ''}${upcoming.length ? ` · ${upcoming.length} upcoming` : ''}${expired.length ? ` · ${expired.length} expired` : ''}`;
+        countEl.classList.remove('hidden');
+    }
+
+    function setupBrandFilters(deals) {
+        const brands = [...new Set(deals.map(d => d.b))].sort();
+        const container = document.getElementById('brandFilters');
+        brands.forEach(brand => {
+            const btn = document.createElement('button');
+            btn.className = 'brand-chip px-4 py-2 rounded-full text-sm font-bold tracking-wider border border-outline-variant/30 bg-surface-container-lowest text-on-surface-variant hover:border-primary/40';
+            btn.dataset.brand = brand;
+            btn.textContent = brand;
+            container.appendChild(btn);
+        });
+
+        container.addEventListener('click', (e) => {
+            const btn = e.target.closest('.brand-chip');
+            if (!btn) return;
+            container.querySelectorAll('.brand-chip').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeBrand = btn.dataset.brand;
+            renderDeals(allDeals);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        allDeals = REBATE_DATA;
+        document.getElementById('loadingState').classList.add('hidden');
+        setupBrandFilters(allDeals);
+        renderDeals(allDeals);
+    });
+    </script>
+</body>
+</html>

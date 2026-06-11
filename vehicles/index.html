@@ -1,0 +1,422 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.webp">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse by Vehicle - Custom Wheel Deal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'sans': ['Inter', 'sans-serif'], 'display': ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        'primary': '#850824', 'primary-container': '#a62639',
+                        'on-surface': '#1a1c1e', 'on-surface-variant': '#584141',
+                        'surface': '#f9f9fc', 'surface-container-low': '#f3f3f6',
+                        'surface-container-lowest': '#ffffff',
+                        'outline': '#8c7071', 'outline-variant': '#e0bfbf'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .signature-gradient { background: linear-gradient(135deg, #850824 0%, #a62639 100%); }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+
+    <div id="headerMount"></div>
+
+    <div id="breadcrumbMount"></div>
+
+    <!-- Hero -->
+    <section class="signature-gradient text-white py-12 md:py-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="font-display font-bold text-3xl md:text-4xl tracking-tight mb-3">SHOP BY VEHICLE</h1>
+            <p class="text-white/80">Find the perfect tires and wheels for your ride</p>
+        </div>
+    </section>
+
+    <!-- Year Selector + Steps Indicator -->
+    <div class="max-w-7xl mx-auto px-4 py-6">
+        <div class="flex items-center gap-4 mb-4">
+            <label class="text-sm font-semibold text-on-surface-variant whitespace-nowrap">Model Year</label>
+            <select id="yearSelect" class="px-3 py-1.5 border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary bg-surface-container-lowest"></select>
+        </div>
+        <div id="stepsBar" class="flex items-center gap-2 text-sm text-on-surface-variant overflow-x-auto">
+            <span id="stepMake" class="font-bold text-primary">Select a Make</span>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 pb-16">
+        <!-- Search / Filter -->
+        <div id="searchWrap" class="mb-8">
+            <div class="relative">
+                <span class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant/40">search</span>
+                <input type="text" id="searchInput" placeholder="Search vehicle makes..."
+                    class="w-full pl-10 pr-4 py-3 border border-outline-variant rounded-xl bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary text-sm">
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="text-center py-16">
+            <div class="inline-flex items-center gap-3 text-on-surface-variant">
+                <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#850824" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+                <span>Loading vehicle makes...</span>
+            </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div id="contentGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 hidden"></div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="text-center py-16 hidden">
+            <span class="material-symbols-outlined text-6xl text-on-surface-variant/20 mb-4 block">search_off</span>
+            <p id="emptyMessage" class="text-on-surface-variant">No results found</p>
+        </div>
+
+        <!-- Vehicle Fitment Result -->
+        <div id="fitmentResult" class="hidden animate-fade-in">
+            <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/20 overflow-hidden shadow-sm">
+                <!-- Vehicle Image + Info -->
+                <div class="md:flex">
+                    <div id="vehicleImageWrap" class="md:w-1/2 bg-surface-container-low flex items-center justify-center p-8 min-h-[240px]">
+                        <span class="material-symbols-outlined text-8xl text-on-surface-variant/10">directions_car</span>
+                    </div>
+                    <div class="md:w-1/2 p-8">
+                        <h2 id="vehicleTitle" class="font-display font-bold text-2xl mb-2"></h2>
+                        <p id="vehicleSubtitle" class="text-on-surface-variant mb-6"></p>
+
+                        <h3 class="font-bold text-sm tracking-wider text-on-surface-variant/60 uppercase mb-4">Factory Fitments</h3>
+                        <div id="fitmentCards" class="space-y-3 mb-8"></div>
+
+                        <div id="shopButtons" class="flex gap-3 hidden">
+                            <a id="shopTiresBtn" href="#" class="flex-1 signature-gradient text-white px-6 py-4 rounded-xl text-sm font-bold tracking-widest uppercase text-center hover:opacity-90 transition">SHOP TIRES</a>
+                            <a id="shopWheelsBtn" href="#" class="flex-1 bg-on-surface text-white px-6 py-4 rounded-xl text-sm font-bold tracking-widest uppercase text-center hover:opacity-90 transition">SHOP WHEELS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footerMount"></div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/components.js"></script>
+    <script>
+    // ── State ────────────────────────────────────────────────────
+    const state = {
+        year: new Date().getFullYear(),
+        make: null,
+        model: null,
+        submodel: null,
+        allMakes: [],
+        selectedFitment: null,
+        vehicle: null,
+    };
+
+    const grid = document.getElementById('contentGrid');
+    const loading = document.getElementById('loadingState');
+    const empty = document.getElementById('emptyState');
+    const searchWrap = document.getElementById('searchWrap');
+    const searchInput = document.getElementById('searchInput');
+    const fitmentResult = document.getElementById('fitmentResult');
+
+    function showLoading() { loading.classList.remove('hidden'); grid.classList.add('hidden'); empty.classList.add('hidden'); fitmentResult.classList.add('hidden'); }
+    function showGrid() { loading.classList.add('hidden'); grid.classList.remove('hidden'); empty.classList.add('hidden'); fitmentResult.classList.add('hidden'); }
+    function showEmpty(msg) { document.getElementById('emptyMessage').textContent = msg || 'No results found'; loading.classList.add('hidden'); grid.classList.add('hidden'); empty.classList.remove('hidden'); fitmentResult.classList.add('hidden'); }
+    function showFitment() { loading.classList.add('hidden'); grid.classList.add('hidden'); empty.classList.add('hidden'); fitmentResult.classList.remove('hidden'); searchWrap.classList.add('hidden'); }
+
+    // ── Breadcrumb / Steps ──────────────────────────────────────
+    function updateSteps() {
+        const parts = [];
+        parts.push(`<button onclick="goToMakes()" class="hover:text-primary transition ${!state.make ? 'font-bold text-primary' : ''}">Select a Make</button>`);
+        if (state.make) {
+            parts.push(`<span class="text-on-surface-variant/30">&rsaquo;</span>`);
+            parts.push(`<button onclick="goToModels()" class="hover:text-primary transition ${state.make && !state.model ? 'font-bold text-primary' : ''}">${state.make}</button>`);
+        }
+        if (state.model) {
+            parts.push(`<span class="text-on-surface-variant/30">&rsaquo;</span>`);
+            parts.push(`<button onclick="goToSubmodels()" class="hover:text-primary transition ${state.model && !state.submodel ? 'font-bold text-primary' : ''}">${state.model}</button>`);
+        }
+        if (state.submodel) {
+            parts.push(`<span class="text-on-surface-variant/30">&rsaquo;</span>`);
+            parts.push(`<span class="font-bold text-primary">${state.submodel}</span>`);
+        }
+        document.getElementById('stepsBar').innerHTML = parts.join('');
+
+        // Update breadcrumb via shared component
+        const crumbs = [{ text: 'Vehicles', href: 'index.html' }];
+        if (state.make) {
+            crumbs.push({ text: state.make, href: '#' });
+        }
+        if (state.model) {
+            crumbs.push({ text: state.model, href: '#' });
+        }
+        if (state.submodel) {
+            crumbs.push({ text: state.submodel, href: '#' });
+        }
+        document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb(crumbs);
+    }
+
+    // ── Card builder ────────────────────────────────────────────
+    function makeCard(label, subtitle, logoUrl, onclick) {
+        const logoHtml = logoUrl
+            ? `<img src="${logoUrl}" alt="${label}" class="w-10 h-10 object-contain">`
+            : `<span class="text-white font-bold text-lg">${label.charAt(0).toUpperCase()}</span>`;
+        const logoBg = logoUrl ? 'bg-surface-container-low p-1' : 'bg-primary';
+
+        return `<button onclick="${onclick}" class="text-left block w-full p-5 bg-surface-container-lowest rounded-xl border-2 border-outline-variant/30 hover:border-primary hover:shadow-md transition group">
+            <div class="w-12 h-12 ${logoBg} rounded-lg flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                ${logoHtml}
+            </div>
+            <h3 class="font-bold text-sm text-on-surface">${label}</h3>
+            ${subtitle ? `<p class="text-xs text-on-surface-variant mt-1">${subtitle}</p>` : ''}
+        </button>`;
+    }
+
+    // ── Step 1: Makes ───────────────────────────────────────────
+    async function loadMakes() {
+        state.make = null; state.model = null; state.submodel = null; state.vehicle = null; state.selectedFitment = null;
+        searchWrap.classList.remove('hidden');
+        searchInput.value = '';
+        searchInput.placeholder = 'Search vehicle makes...';
+        updateSteps();
+        showLoading();
+
+        try {
+            if (!state.allMakes.length) {
+                state.allMakes = await HolbrookAPI.getVehicleMakes(state.year);
+            }
+            renderMakes(state.allMakes);
+        } catch (err) {
+            showEmpty('Unable to load vehicle makes. Please check your connection and try again.');
+        }
+    }
+
+    function renderMakes(makes) {
+        if (!makes.length) { showEmpty(); return; }
+        grid.innerHTML = makes.map(m =>
+            makeCard(m.name, 'Browse tires & wheels', m.logo, `selectMake('${m.name.replace(/'/g, "\\'")}')`)
+        ).join('');
+        showGrid();
+    }
+
+    function goToMakes() { loadMakes(); }
+
+    // ── Step 2: Models ──────────────────────────────────────────
+    async function selectMake(makeName) {
+        state.make = makeName;
+        state.model = null; state.submodel = null; state.vehicle = null; state.selectedFitment = null;
+        searchInput.value = '';
+        searchInput.placeholder = `Search ${makeName} models...`;
+        updateSteps();
+        showLoading();
+
+        try {
+            const models = await HolbrookAPI.getVehicleModels(state.year, makeName);
+            if (!models.length) { showEmpty(); return; }
+            grid.innerHTML = models.map(m =>
+                makeCard(m, `${state.year} ${makeName}`, '', `selectModel('${m.replace(/'/g, "\\'")}')`)
+            ).join('');
+            showGrid();
+        } catch (err) {
+            showEmpty('Unable to load models. Please try again.');
+        }
+    }
+
+    function goToModels() { if (state.make) selectMake(state.make); }
+
+    // ── Step 3: Submodels ───────────────────────────────────────
+    async function selectModel(modelName) {
+        state.model = modelName;
+        state.submodel = null; state.vehicle = null; state.selectedFitment = null;
+        searchInput.value = '';
+        searchInput.placeholder = `Search ${modelName} trims...`;
+        updateSteps();
+        showLoading();
+
+        try {
+            const submodels = await HolbrookAPI.getVehicleSubmodels(state.year, state.make, modelName);
+            if (!submodels.length) {
+                // No submodels — go directly to fitment
+                loadFitment(null);
+                return;
+            }
+            grid.innerHTML = submodels.map(s =>
+                makeCard(s, `${state.year} ${state.make} ${modelName}`, '', `selectSubmodel('${s.replace(/'/g, "\\'")}')`)
+            ).join('');
+            showGrid();
+        } catch (err) {
+            showEmpty('Unable to load trims. Please try again.');
+        }
+    }
+
+    function goToSubmodels() { if (state.model) selectModel(state.model); }
+
+    // ── Step 4: Fitment Result ──────────────────────────────────
+    async function selectSubmodel(submodelName) {
+        state.submodel = submodelName;
+        state.selectedFitment = null;
+        updateSteps();
+        loadFitment(submodelName);
+    }
+
+    async function loadFitment(submodel) {
+        showLoading();
+        try {
+            const vehicle = await HolbrookAPI.getVehicle(state.year, state.make, state.model, submodel || undefined);
+            state.vehicle = vehicle;
+
+            if (!vehicle) {
+                showEmpty();
+                return;
+            }
+
+            const title = `${vehicle.year} ${vehicle.make} ${vehicle.model}`;
+            const subtitle = vehicle.submodel ? vehicle.submodel : '';
+            document.getElementById('vehicleTitle').textContent = title;
+            document.getElementById('vehicleSubtitle').textContent = subtitle;
+
+            // Vehicle image
+            const imgWrap = document.getElementById('vehicleImageWrap');
+            if (vehicle.image) {
+                imgWrap.innerHTML = `<img src="${vehicle.image}" alt="${title}" class="max-w-full max-h-[300px] object-contain">`;
+            }
+
+            // Fitment cards
+            const fitments = vehicle.fitments || [];
+            const cardsEl = document.getElementById('fitmentCards');
+            if (fitments.length === 0) {
+                cardsEl.innerHTML = '<p class="text-on-surface-variant text-sm">No fitment data available for this vehicle.</p>';
+                document.getElementById('shopButtons').classList.add('hidden');
+            } else {
+                cardsEl.innerHTML = fitments.map((f, i) => `
+                    <button onclick="selectFitment(${i})" data-fitment="${i}"
+                        class="fitment-card w-full text-left flex items-center gap-4 p-4 rounded-xl border-2 border-outline-variant/20 hover:border-primary transition">
+                        <div class="w-10 h-10 bg-surface-container-low rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-outlined text-primary text-xl">tire_repair</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-bold">${f.tireSize || 'Unknown size'}</div>
+                            <div class="text-xs text-on-surface-variant">${f.rimDiameter ? f.rimDiameter + '" wheel' : ''}${f.boltCircle ? ' · ' + f.boltCircle : ''}${f.lugCount ? ' · ' + f.lugCount + ' lug' : ''}</div>
+                        </div>
+                        <span class="material-symbols-outlined text-on-surface-variant/30">chevron_right</span>
+                    </button>
+                `).join('');
+
+                // Auto-select first fitment if only one
+                if (fitments.length === 1) {
+                    selectFitment(0);
+                }
+            }
+
+            showFitment();
+        } catch (err) {
+            showEmpty('Unable to load fitment data. Please try again.');
+        }
+    }
+
+    function selectFitment(index) {
+        const fitments = state.vehicle.fitments;
+        if (!fitments[index]) return;
+        state.selectedFitment = fitments[index];
+
+        // Highlight selected card
+        document.querySelectorAll('.fitment-card').forEach((el, i) => {
+            if (i === index) {
+                el.classList.add('border-primary', 'bg-primary/5');
+                el.classList.remove('border-outline-variant/20');
+            } else {
+                el.classList.remove('border-primary', 'bg-primary/5');
+                el.classList.add('border-outline-variant/20');
+            }
+        });
+
+        // Show shop buttons
+        document.getElementById('shopButtons').classList.remove('hidden');
+
+        const f = state.selectedFitment;
+        const vehicleName = `${state.year} ${state.make} ${state.model}`;
+
+        // Shop Tires → clean URL with fitment data in sessionStorage
+        const vehicleSlug = vehicleName.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+        sessionStorage.setItem('holbrook.pendingFitment', JSON.stringify({
+            sizes: [f.tireSize], vehicleName, slug: vehicleSlug,
+            year: state.year, make: state.make, model: state.model
+        }));
+        document.getElementById('shopTiresBtn').href = '../tires/';
+
+        // Shop Wheels → send to wheels page with bolt pattern (no diameter restriction per Dave's requirement)
+        let wheelUrl = `../wheels/?vehicle=${encodeURIComponent(vehicleName)}&year=${state.year}&make=${encodeURIComponent(state.make)}&model=${encodeURIComponent(state.model)}&trim=${encodeURIComponent(state.submodel || '')}`;
+        if (f.boltCircle) wheelUrl += `&boltCircle=${encodeURIComponent(f.boltCircle)}`;
+        if (f.lugCount) wheelUrl += `&lugCount=${f.lugCount}`;
+        document.getElementById('shopWheelsBtn').href = wheelUrl;
+    }
+
+    // ── Search filter ───────────────────────────────────────────
+    searchInput.addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase();
+        if (!state.make) {
+            // Filter makes
+            const filtered = state.allMakes.filter(m => m.name.toLowerCase().includes(q));
+            renderMakes(filtered);
+        }
+        // For models/submodels, the cards are already in DOM — filter visually
+        else {
+            const cards = grid.querySelectorAll('button');
+            let visible = 0;
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(q)) { card.classList.remove('hidden'); visible++; }
+                else { card.classList.add('hidden'); }
+            });
+            if (visible === 0) showEmpty();
+            else { empty.classList.add('hidden'); grid.classList.remove('hidden'); }
+        }
+    });
+
+    // ── Init ────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+        // Render shared components
+        document.getElementById('headerMount').innerHTML = HolbrookUI.renderHeader('vehicles');
+        document.getElementById('footerMount').innerHTML = HolbrookUI.renderFooter();
+        document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb([
+            { text: 'Vehicles', href: '#' }
+        ]);
+        HolbrookUI.updateGarageCount();
+
+        if (typeof HolbrookCart !== 'undefined') HolbrookCart.init();
+
+        // Populate year selector
+        const yearSel = document.getElementById('yearSelect');
+        HolbrookAPI.getVehicleYears().forEach(y => {
+            const o = document.createElement('option');
+            o.value = y; o.textContent = y;
+            if (y === state.year) o.selected = true;
+            yearSel.appendChild(o);
+        });
+        yearSel.addEventListener('change', () => {
+            state.year = parseInt(yearSel.value);
+            state.allMakes = [];
+            loadMakes();
+        });
+
+        loadMakes();
+    });
+    </script>
+</body>
+</html>

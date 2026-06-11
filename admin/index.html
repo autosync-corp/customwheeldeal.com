@@ -1,0 +1,610 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.webp">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Custom Wheel Deal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#850824",
+                        "primary-container": "#a62639",
+                        secondary: "#5a5b84",
+                        "secondary-container": "#cecdfd",
+                        tertiary: "#543e00",
+                        "tertiary-container": "#715400",
+                        "on-surface": "#1a1c1e",
+                        "on-surface-variant": "#584141",
+                        surface: "#f9f9fc",
+                        "surface-container-low": "#f3f3f6",
+                        "surface-container-high": "#e8e8ea",
+                        "surface-container-highest": "#e2e2e5",
+                        "surface-container-lowest": "#ffffff",
+                        outline: "#8c7071",
+                        "outline-variant": "#e0bfbf"
+                    },
+                    fontFamily: {
+                        sans: "Inter, sans-serif",
+                        display: "Space Grotesk, sans-serif"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .signature-gradient {
+            background: linear-gradient(135deg, #850824 0%, #a62639 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            @apply bg-primary text-white;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+    <!-- Header -->
+    <header class="bg-surface-container-lowest shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="../index.html" class="bg-slate-900 rounded-lg px-3 py-1 font-display font-bold text-2xl text-primary">
+                    <img src="/images/Holbrook-tirecenter-logo-dark_BG.png" alt="Custom Wheel Deal" class="h-14 object-contain"></a>
+                <nav class="hidden md:flex gap-6">
+                    <a href="../tires/index.html" class="text-on-surface hover:text-primary transition">TIRES</a>
+                    <a href="../wheels/index.html" class="text-on-surface hover:text-primary transition">WHEELS</a>
+                    <a href="../vehicles/index.html" class="text-on-surface hover:text-primary transition">VEHICLES</a>
+                    <a href="#" class="text-on-surface hover:text-primary transition">DEALS</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="../cart/index.html" class="hover:text-primary transition">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                </a>
+                <button class="hover:text-primary transition">
+                    <span class="material-symbols-outlined filled text-primary">person</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="max-w-7xl mx-auto px-4 py-4 text-sm text-on-surface-variant">
+        <a href="../index.html" class="hover:text-primary transition">Home</a>
+        <span class="mx-2">/</span>
+        <span>Admin Panel</span>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="flex h-screen bg-surface">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-900 text-white p-6 overflow-y-auto">
+            <h2 class="font-display font-bold text-xl mb-8">Admin Menu</h2>
+            <nav class="space-y-2">
+                <button onclick="showSection('dashboard')" class="admin-nav w-full text-left px-4 py-3 rounded-md hover:bg-slate-800 transition flex items-center gap-3" data-section="dashboard">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </button>
+                <button onclick="showSection('orders')" class="admin-nav w-full text-left px-4 py-3 rounded-md hover:bg-slate-800 transition flex items-center gap-3" data-section="orders">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <span>Orders/Quotes</span>
+                </button>
+                <button onclick="showSection('products')" class="admin-nav w-full text-left px-4 py-3 rounded-md hover:bg-slate-800 transition flex items-center gap-3" data-section="products">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span>Products</span>
+                </button>
+                <button onclick="showSection('promotions')" class="admin-nav w-full text-left px-4 py-3 rounded-md hover:bg-slate-800 transition flex items-center gap-3" data-section="promotions">
+                    <span class="material-symbols-outlined">local_offer</span>
+                    <span>Promotions</span>
+                </button>
+                <button onclick="showSection('pages')" class="admin-nav w-full text-left px-4 py-3 rounded-md hover:bg-slate-800 transition flex items-center gap-3" data-section="pages">
+                    <span class="material-symbols-outlined">article</span>
+                    <span>Pages</span>
+                </button>
+                <button onclick="showSection('settings')" class="admin-nav w-full text-left px-4 py-3 rounded-md hover:bg-slate-800 transition flex items-center gap-3" data-section="settings">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span>Settings</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-auto">
+            <div class="max-w-6xl mx-auto px-8 py-8">
+
+                <!-- Dashboard Section -->
+                <div id="dashboard-section" class="section">
+                    <h1 class="font-display text-4xl font-bold mb-8">Dashboard</h1>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-surface-container-highest rounded-md p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-on-surface-variant">Total Orders</h3>
+                                <span class="material-symbols-outlined text-primary text-3xl">shopping_cart</span>
+                            </div>
+                            <p class="font-display text-3xl font-bold">142</p>
+                            <p class="text-sm text-on-surface-variant mt-2">+12 this month</p>
+                        </div>
+
+                        <div class="bg-surface-container-highest rounded-md p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-on-surface-variant">Revenue</h3>
+                                <span class="material-symbols-outlined text-primary text-3xl">payments</span>
+                            </div>
+                            <p class="font-display text-3xl font-bold">$45,230</p>
+                            <p class="text-sm text-on-surface-variant mt-2">+8% vs last month</p>
+                        </div>
+
+                        <div class="bg-surface-container-highest rounded-md p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-on-surface-variant">Products</h3>
+                                <span class="material-symbols-outlined text-primary text-3xl">inventory_2</span>
+                            </div>
+                            <p class="font-display text-3xl font-bold">287</p>
+                            <p class="text-sm text-on-surface-variant mt-2">Active listings</p>
+                        </div>
+
+                        <div class="bg-surface-container-highest rounded-md p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-on-surface-variant">Customers</h3>
+                                <span class="material-symbols-outlined text-primary text-3xl">people</span>
+                            </div>
+                            <p class="font-display text-3xl font-bold">1,284</p>
+                            <p class="text-sm text-on-surface-variant mt-2">+89 new this month</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-surface-container-highest rounded-md overflow-hidden">
+                        <div class="border-b border-outline-variant p-6">
+                            <h2 class="font-display text-xl font-bold">Recent Orders</h2>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead class="bg-surface-container-low border-b border-outline-variant">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left font-semibold">Order ID</th>
+                                        <th class="px-6 py-3 text-left font-semibold">Customer</th>
+                                        <th class="px-6 py-3 text-left font-semibold">Date</th>
+                                        <th class="px-6 py-3 text-right font-semibold">Total</th>
+                                        <th class="px-6 py-3 text-left font-semibold">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-outline-variant hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">#ORD-001284</td>
+                                        <td class="px-6 py-4">John Smith</td>
+                                        <td class="px-6 py-4">2026-03-24</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$1,245.00</td>
+                                        <td class="px-6 py-4"><span class="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-md text-xs font-semibold">Completed</span></td>
+                                    </tr>
+                                    <tr class="border-b border-outline-variant hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">#ORD-001283</td>
+                                        <td class="px-6 py-4">Sarah Johnson</td>
+                                        <td class="px-6 py-4">2026-03-23</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$892.50</td>
+                                        <td class="px-6 py-4"><span class="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-md text-xs font-semibold">Processing</span></td>
+                                    </tr>
+                                    <tr class="border-b border-outline-variant hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">#ORD-001282</td>
+                                        <td class="px-6 py-4">Michael Brown</td>
+                                        <td class="px-6 py-4">2026-03-22</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$2,150.00</td>
+                                        <td class="px-6 py-4"><span class="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-md text-xs font-semibold">Completed</span></td>
+                                    </tr>
+                                    <tr class="border-b border-outline-variant hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">#ORD-001281</td>
+                                        <td class="px-6 py-4">Emma Davis</td>
+                                        <td class="px-6 py-4">2026-03-21</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$567.75</td>
+                                        <td class="px-6 py-4"><span class="inline-block bg-yellow-100 text-yellow-700 px-3 py-1 rounded-md text-xs font-semibold">Pending</span></td>
+                                    </tr>
+                                    <tr class="hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">#ORD-001280</td>
+                                        <td class="px-6 py-4">Robert Wilson</td>
+                                        <td class="px-6 py-4">2026-03-20</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$1,895.25</td>
+                                        <td class="px-6 py-4"><span class="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-md text-xs font-semibold">Completed</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders/Quotes Section -->
+                <div id="orders-section" class="section hidden">
+                    <h1 class="font-display text-4xl font-bold mb-8">Orders & Quotes</h1>
+
+                    <div class="bg-surface-container-highest rounded-md overflow-hidden">
+                        <div class="border-b border-outline-variant p-6 flex justify-between items-center">
+                            <h2 class="font-display text-xl font-bold">All Orders & Quotes</h2>
+                            <button class="signature-gradient text-white px-4 py-2 rounded-md hover:opacity-90 transition text-sm font-semibold">
+                                + New Order
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead class="bg-surface-container-low border-b border-outline-variant">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left font-semibold">ID</th>
+                                        <th class="px-6 py-3 text-left font-semibold">Customer</th>
+                                        <th class="px-6 py-3 text-left font-semibold">Date</th>
+                                        <th class="px-6 py-3 text-right font-semibold">Total</th>
+                                        <th class="px-6 py-3 text-left font-semibold">Status</th>
+                                        <th class="px-6 py-3 text-left font-semibold">Type</th>
+                                        <th class="px-6 py-3 text-center font-semibold">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-outline-variant hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">#ORD-001284</td>
+                                        <td class="px-6 py-4">John Smith</td>
+                                        <td class="px-6 py-4">2026-03-24</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$1,245.00</td>
+                                        <td class="px-6 py-4"><span class="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-md text-xs font-semibold">Completed</span></td>
+                                        <td class="px-6 py-4"><span class="text-xs bg-primary bg-opacity-10 text-primary px-2 py-1 rounded">Order</span></td>
+                                        <td class="px-6 py-4 text-center">
+                                            <button class="text-primary hover:text-primary-container transition text-sm font-semibold">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-outline-variant hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">#QUOTE-1089</td>
+                                        <td class="px-6 py-4">Sarah Johnson</td>
+                                        <td class="px-6 py-4">2026-03-23</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$892.50</td>
+                                        <td class="px-6 py-4"><span class="inline-block bg-yellow-100 text-yellow-700 px-3 py-1 rounded-md text-xs font-semibold">Pending</span></td>
+                                        <td class="px-6 py-4"><span class="text-xs bg-secondary bg-opacity-10 text-secondary px-2 py-1 rounded">Quote</span></td>
+                                        <td class="px-6 py-4 text-center">
+                                            <button class="text-primary hover:text-primary-container transition text-sm font-semibold">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-outline-variant hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">#ORD-001282</td>
+                                        <td class="px-6 py-4">Michael Brown</td>
+                                        <td class="px-6 py-4">2026-03-22</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$2,150.00</td>
+                                        <td class="px-6 py-4"><span class="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-md text-xs font-semibold">Completed</span></td>
+                                        <td class="px-6 py-4"><span class="text-xs bg-primary bg-opacity-10 text-primary px-2 py-1 rounded">Order</span></td>
+                                        <td class="px-6 py-4 text-center">
+                                            <button class="text-primary hover:text-primary-container transition text-sm font-semibold">View</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div id="products-section" class="section hidden">
+                    <h1 class="font-display text-4xl font-bold mb-8">Products</h1>
+
+                    <div class="mb-6">
+                        <button class="signature-gradient text-white px-6 py-2 rounded-md hover:opacity-90 transition font-semibold">
+                            + Add Product
+                        </button>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="flex gap-2 mb-6 border-b border-outline-variant">
+                        <button onclick="switchProductTab('tires')" class="product-tab px-4 py-3 border-b-2 border-transparent hover:border-primary transition font-semibold" data-tab="tires">
+                            Tires (156)
+                        </button>
+                        <button onclick="switchProductTab('wheels')" class="product-tab px-4 py-3 border-b-2 border-transparent hover:border-primary transition font-semibold" data-tab="wheels">
+                            Wheels (131)
+                        </button>
+                    </div>
+
+                    <div id="tires-tab" class="product-tab-content bg-surface-container-highest rounded-md overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead class="bg-surface-container-low border-b border-outline-variant">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left font-semibold">Product</th>
+                                        <th class="px-6 py-3 text-left font-semibold">Brand</th>
+                                        <th class="px-6 py-3 text-left font-semibold">Size</th>
+                                        <th class="px-6 py-3 text-right font-semibold">Price</th>
+                                        <th class="px-6 py-3 text-right font-semibold">Stock</th>
+                                        <th class="px-6 py-3 text-center font-semibold">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-outline-variant hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">All-Season Pro</td>
+                                        <td class="px-6 py-4">Michelin</td>
+                                        <td class="px-6 py-4">205/55R16</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$145.99</td>
+                                        <td class="px-6 py-4 text-right">124</td>
+                                        <td class="px-6 py-4 text-center flex justify-center gap-2">
+                                            <button class="text-primary hover:text-primary-container transition" title="Edit">
+                                                <span class="material-symbols-outlined text-sm">edit</span>
+                                            </button>
+                                            <button class="text-on-surface-variant hover:text-primary transition" title="Delete">
+                                                <span class="material-symbols-outlined text-sm">delete</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-outline-variant hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">Winter Max</td>
+                                        <td class="px-6 py-4">Bridgestone</td>
+                                        <td class="px-6 py-4">225/60R18</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$198.50</td>
+                                        <td class="px-6 py-4 text-right">89</td>
+                                        <td class="px-6 py-4 text-center flex justify-center gap-2">
+                                            <button class="text-primary hover:text-primary-container transition" title="Edit">
+                                                <span class="material-symbols-outlined text-sm">edit</span>
+                                            </button>
+                                            <button class="text-on-surface-variant hover:text-primary transition" title="Delete">
+                                                <span class="material-symbols-outlined text-sm">delete</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-outline-variant hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">Summer Sport</td>
+                                        <td class="px-6 py-4">Goodyear</td>
+                                        <td class="px-6 py-4">215/45R17</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$175.00</td>
+                                        <td class="px-6 py-4 text-right">156</td>
+                                        <td class="px-6 py-4 text-center flex justify-center gap-2">
+                                            <button class="text-primary hover:text-primary-container transition" title="Edit">
+                                                <span class="material-symbols-outlined text-sm">edit</span>
+                                            </button>
+                                            <button class="text-on-surface-variant hover:text-primary transition" title="Delete">
+                                                <span class="material-symbols-outlined text-sm">delete</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="wheels-tab" class="product-tab-content hidden bg-surface-container-highest rounded-md overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead class="bg-surface-container-low border-b border-outline-variant">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left font-semibold">Product</th>
+                                        <th class="px-6 py-3 text-left font-semibold">Brand</th>
+                                        <th class="px-6 py-3 text-left font-semibold">Size</th>
+                                        <th class="px-6 py-3 text-right font-semibold">Price</th>
+                                        <th class="px-6 py-3 text-right font-semibold">Stock</th>
+                                        <th class="px-6 py-3 text-center font-semibold">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-outline-variant hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">Chrome Sport</td>
+                                        <td class="px-6 py-4">OZ Racing</td>
+                                        <td class="px-6 py-4">18"</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$285.00</td>
+                                        <td class="px-6 py-4 text-right">42</td>
+                                        <td class="px-6 py-4 text-center flex justify-center gap-2">
+                                            <button class="text-primary hover:text-primary-container transition" title="Edit">
+                                                <span class="material-symbols-outlined text-sm">edit</span>
+                                            </button>
+                                            <button class="text-on-surface-variant hover:text-primary transition" title="Delete">
+                                                <span class="material-symbols-outlined text-sm">delete</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-outline-variant hover:bg-surface-container-low transition">
+                                        <td class="px-6 py-4 font-semibold">Classic Black</td>
+                                        <td class="px-6 py-4">Rotiform</td>
+                                        <td class="px-6 py-4">17"</td>
+                                        <td class="px-6 py-4 text-right font-semibold">$245.00</td>
+                                        <td class="px-6 py-4 text-right">67</td>
+                                        <td class="px-6 py-4 text-center flex justify-center gap-2">
+                                            <button class="text-primary hover:text-primary-container transition" title="Edit">
+                                                <span class="material-symbols-outlined text-sm">edit</span>
+                                            </button>
+                                            <button class="text-on-surface-variant hover:text-primary transition" title="Delete">
+                                                <span class="material-symbols-outlined text-sm">delete</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promotions Section -->
+                <div id="promotions-section" class="section hidden">
+                    <h1 class="font-display text-4xl font-bold mb-8">Promotions & Deals</h1>
+
+                    <div class="mb-6">
+                        <button onclick="openPromotionForm()" class="signature-gradient text-white px-6 py-2 rounded-md hover:opacity-90 transition font-semibold">
+                            + Create Promotion
+                        </button>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-surface-container-highest rounded-md p-6 flex items-center justify-between">
+                            <div>
+                                <h3 class="font-display font-bold text-lg">Spring Sale 2026</h3>
+                                <p class="text-on-surface-variant text-sm mb-2">20% off all winter tires</p>
+                                <div class="flex gap-4 text-sm">
+                                    <span class="text-on-surface-variant">Start: 2026-03-20</span>
+                                    <span class="text-on-surface-variant">End: 2026-04-15</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-md text-xs font-semibold">Active</span>
+                                <button class="text-primary hover:text-primary-container transition">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                                <button class="text-on-surface-variant hover:text-primary transition">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-surface-container-highest rounded-md p-6 flex items-center justify-between">
+                            <div>
+                                <h3 class="font-display font-bold text-lg">Wheel Bundle Deal</h3>
+                                <p class="text-on-surface-variant text-sm mb-2">Buy 4 wheels, get free installation</p>
+                                <div class="flex gap-4 text-sm">
+                                    <span class="text-on-surface-variant">Start: 2026-04-01</span>
+                                    <span class="text-on-surface-variant">End: 2026-05-01</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="inline-block bg-yellow-100 text-yellow-700 px-3 py-1 rounded-md text-xs font-semibold">Scheduled</span>
+                                <button class="text-primary hover:text-primary-container transition">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                                <button class="text-on-surface-variant hover:text-primary transition">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pages Section -->
+                <div id="pages-section" class="section hidden">
+                    <h1 class="font-display text-4xl font-bold mb-8">Pages</h1>
+
+                    <div class="space-y-4">
+                        <div class="bg-surface-container-highest rounded-md p-6 flex items-center justify-between">
+                            <div>
+                                <h3 class="font-display font-bold text-lg">Home Page</h3>
+                                <p class="text-on-surface-variant text-sm">Hero text, banner images, featured products</p>
+                            </div>
+                            <button onclick="editPageContent('home')" class="signature-gradient text-white px-4 py-2 rounded-md hover:opacity-90 transition text-sm font-semibold">
+                                Edit Content
+                            </button>
+                        </div>
+
+                        <div class="bg-surface-container-highest rounded-md p-6 flex items-center justify-between">
+                            <div>
+                                <h3 class="font-display font-bold text-lg">Tires Page</h3>
+                                <p class="text-on-surface-variant text-sm">Category description and featured tires</p>
+                            </div>
+                            <button onclick="editPageContent('tires')" class="signature-gradient text-white px-4 py-2 rounded-md hover:opacity-90 transition text-sm font-semibold">
+                                Edit Content
+                            </button>
+                        </div>
+
+                        <div class="bg-surface-container-highest rounded-md p-6 flex items-center justify-between">
+                            <div>
+                                <h3 class="font-display font-bold text-lg">About Us</h3>
+                                <p class="text-on-surface-variant text-sm">Company story and mission statement</p>
+                            </div>
+                            <button onclick="editPageContent('about')" class="signature-gradient text-white px-4 py-2 rounded-md hover:opacity-90 transition text-sm font-semibold">
+                                Edit Content
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div id="settings-section" class="section hidden">
+                    <h1 class="font-display text-4xl font-bold mb-8">Settings</h1>
+
+                    <div class="bg-surface-container-highest rounded-md p-6 max-w-2xl">
+                        <h2 class="font-display font-bold text-xl mb-6">Store Information</h2>
+
+                        <form class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Store Name</label>
+                                <input type="text" value="Custom Wheel Deal" class="w-full px-4 py-2 border border-outline-variant rounded-md bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Phone Number</label>
+                                <input type="tel" value="(555) 123-4567" class="w-full px-4 py-2 border border-outline-variant rounded-md bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Email Address</label>
+                                <input type="email" value="support@customwheeldeal.com" class="w-full px-4 py-2 border border-outline-variant rounded-md bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Street Address</label>
+                                <input type="text" value="123 Tire Boulevard, Wheel City, WC 12345" class="w-full px-4 py-2 border border-outline-variant rounded-md bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary">
+                            </div>
+
+                            <button type="submit" class="signature-gradient text-white px-6 py-2 rounded-md hover:opacity-90 transition font-semibold">
+                                Save Changes
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/api.js" defer></script>
+    <script src="../js/cart.js" defer></script>
+    <script src="../js/components.js" defer></script>
+
+    <script>
+        // Section navigation
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show selected section
+            const sectionId = sectionName + '-section';
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.remove('hidden');
+            }
+
+            // Update nav button styles
+            document.querySelectorAll('.admin-nav').forEach(btn => {
+                btn.classList.remove('sidebar-active');
+            });
+            const activeBtn = document.querySelector(`[data-section="${sectionName}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('sidebar-active');
+            }
+        }
+
+        // Product tabs
+        function switchProductTab(tabName) {
+            document.querySelectorAll('.product-tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+
+            document.querySelectorAll('.product-tab').forEach(tab => {
+                tab.classList.remove('border-primary');
+            });
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('border-primary');
+        }
+
+        // Promotion form
+        function openPromotionForm() {
+            alert('Promotion form would open here with fields for:\n- Title\n- Description\n- Discount (%)\n- Start Date\n- End Date\n- Status Toggle');
+        }
+
+        // Page editing
+        function editPageContent(pageName) {
+            alert('Content editor would open for the ' + pageName + ' page');
+        }
+
+        // Initialize dashboard view
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('dashboard');
+        });
+    </script>
+</body>
+</html>

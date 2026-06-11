@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle - Custom Wheel Deal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#850824',
+                        'primary-container': '#a62639',
+                        'secondary': '#5a5b84',
+                        'secondary-container': '#cecdfd',
+                        'tertiary': '#543e00',
+                        'tertiary-container': '#715400',
+                        'tertiary-fixed-dim': '#f9bd14',
+                        'on-surface': '#1a1c1e',
+                        'on-surface-variant': '#584141',
+                        'surface': '#f9f9fc',
+                        'surface-container-low': '#f3f3f6',
+                        'surface-container-high': '#e8e8ea',
+                        'surface-container-highest': '#e2e2e5',
+                        'surface-container-lowest': '#ffffff',
+                        'outline': '#8c7071',
+                        'outline-variant': '#e0bfbf'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #850824 0%, #a62639 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface">
+    <div id="headerMount"></div>
+
+    <div id="breadcrumbMount"></div>
+
+    <!-- Hero Banner -->
+    <section class="hero-gradient text-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 id="heroTitle" class="text-4xl md:text-5xl font-bold mb-4">Loading...</h1>
+            <p id="heroSubtitle" class="text-lg md:text-xl opacity-90"></p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <!-- Model Selector Section -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-8 text-on-surface">Select Your Model</h2>
+            <div id="modelsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="text-center py-8 text-on-surface-variant">Loading vehicle models...</div>
+            </div>
+        </section>
+
+        <!-- Compatible Tires Section -->
+        <section class="mb-16">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold text-on-surface">Compatible Tires</h2>
+                <a href="../tires/index.html" class="text-primary font-semibold hover:underline">View All Tires</a>
+            </div>
+            <div id="tiresGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center py-8 text-on-surface-variant">Loading tires...</div>
+            </div>
+        </section>
+
+        <!-- Compatible Wheels Section -->
+        <section class="mb-16">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold text-on-surface">Compatible Wheels</h2>
+                <a href="../wheels/index.html" class="text-primary font-semibold hover:underline">View All Wheels</a>
+            </div>
+            <div id="wheelsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center py-8 text-on-surface-variant">Loading wheels...</div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footerMount"></div>
+
+    <!-- Scripts -->
+    <script src="../js/api.js" defer></script>
+    <script src="../js/cart.js" defer></script>
+    <script src="../js/components.js" defer></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        // Render shared components
+        document.getElementById('headerMount').innerHTML = HolbrookUI.renderHeader('vehicles');
+        document.getElementById('footerMount').innerHTML = HolbrookUI.renderFooter();
+        document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb([
+            { text: 'Vehicles', href: 'index.html' },
+            { text: 'Loading...', href: '#' }
+        ]);
+        HolbrookUI.updateGarageCount();
+
+        let currentMakeName = '';
+
+        async function init() {
+            // Get make from URL
+            const params = new URLSearchParams(window.location.search);
+            const makeSlug = params.get('make');
+
+            if (!makeSlug) {
+                document.getElementById('modelsGrid').innerHTML = '<div class="text-center py-8 text-red-600">No vehicle make specified</div>';
+                return;
+            }
+
+            try {
+                // Load vehicle makes to find the display name
+                const makes = await HolbrookAPI.getVehicleMakes();
+                const make = makes.find(m => m.slug === makeSlug);
+
+                if (!make) {
+                    document.getElementById('modelsGrid').innerHTML = '<div class="text-center py-8 text-red-600">Vehicle make not found</div>';
+                    return;
+                }
+
+                currentMakeName = make.name;
+                updatePageContent(make);
+                await loadModels(make.name);
+                await loadCompatibleProducts(make.name);
+            } catch (error) {
+                console.error('Error initializing page:', error);
+                document.getElementById('modelsGrid').innerHTML = '<div class="text-center py-8 text-red-600">Error loading vehicle data</div>';
+            }
+        }
+
+        function updatePageContent(make) {
+            document.title = `${make.name} - Custom Wheel Deal`;
+            document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb([
+                { text: 'Vehicles', href: 'index.html' },
+                { text: make.name, href: '#' }
+            ]);
+            document.getElementById('heroTitle').textContent = make.name;
+            document.getElementById('heroSubtitle').textContent = `Find the perfect tires and wheels for your ${make.name}`;
+        }
+
+        async function loadModels(makeName) {
+            try {
+                const models = await HolbrookAPI.getVehicleModels(makeName);
+                renderModels(models);
+            } catch (error) {
+                console.error('Error loading models:', error);
+                document.getElementById('modelsGrid').innerHTML = '<div class="text-center py-8 text-red-600">Error loading vehicle models</div>';
+            }
+        }
+
+        function renderModels(models) {
+            const grid = document.getElementById('modelsGrid');
+            if (!models || models.length === 0) {
+                grid.innerHTML = '<div class="text-center py-8 text-on-surface-variant">No models available</div>';
+                return;
+            }
+
+            grid.innerHTML = models.map(model => `
+                <div class="p-6 bg-surface-container-lowest rounded-lg border border-outline-variant hover:shadow-lg transition">
+                    <h3 class="font-bold text-lg text-on-surface mb-4">${model.name}</h3>
+                    <p class="text-sm text-on-surface-variant mb-6">${model.year || 'Various years'}</p>
+                    <div class="flex gap-3">
+                        <a href="../tires/index.html?model=${model.slug}" class="flex-1 py-2 px-4 bg-primary text-white rounded-lg font-semibold text-center hover:bg-primary-container transition">
+                            Shop Tires
+                        </a>
+                        <a href="../wheels/index.html?model=${model.slug}" class="flex-1 py-2 px-4 border-2 border-primary text-primary rounded-lg font-semibold text-center hover:bg-primary hover:text-white transition">
+                            Shop Wheels
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function loadCompatibleProducts(makeName) {
+            try {
+                // Load some sample tires and wheels - using popular brands as featured products
+                const tires = await HolbrookAPI.getTiresByBrand('michelin');
+                const wheels = await HolbrookAPI.getWheelsByBrand('fuel');
+
+                renderTires(tires);
+                renderWheels(wheels);
+            } catch (error) {
+                console.error('Error loading products:', error);
+                document.getElementById('tiresGrid').innerHTML = '<div class="text-center py-8 text-on-surface-variant">No compatible tires found</div>';
+                document.getElementById('wheelsGrid').innerHTML = '<div class="text-center py-8 text-on-surface-variant">No compatible wheels found</div>';
+            }
+        }
+
+        function renderTires(tires) {
+            const grid = document.getElementById('tiresGrid');
+            if (!tires || tires.length === 0) {
+                grid.innerHTML = '<div class="text-center py-8 text-on-surface-variant">No compatible tires found</div>';
+                return;
+            }
+
+            grid.innerHTML = tires.map(tire => `
+                <a href="../tires/index.html?id=${tire.id}" class="block p-4 bg-surface-container-lowest rounded-lg border border-outline-variant hover:border-primary hover:shadow-lg transition">
+                    <div class="w-full h-40 bg-surface-container-high rounded flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-on-surface-variant text-5xl">tire_repair</span>
+                    </div>
+                    <h3 class="font-bold text-on-surface">${tire.model || tire.name}</h3>
+                    <p class="text-sm text-on-surface-variant mt-1">${tire.size || 'Standard size'}</p>
+                    <p class="text-primary font-bold mt-2">$${parseFloat(tire.price || 0).toFixed(2)}</p>
+                </a>
+            `).join('');
+        }
+
+        function renderWheels(wheels) {
+            const grid = document.getElementById('wheelsGrid');
+            if (!wheels || wheels.length === 0) {
+                grid.innerHTML = '<div class="text-center py-8 text-on-surface-variant">No compatible wheels found</div>';
+                return;
+            }
+
+            grid.innerHTML = wheels.map(wheel => `
+                <a href="../wheels/index.html?id=${wheel.id}" class="block p-4 bg-surface-container-lowest rounded-lg border border-outline-variant hover:border-primary hover:shadow-lg transition">
+                    <div class="w-full h-40 bg-surface-container-high rounded flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-on-surface-variant text-5xl">settings</span>
+                    </div>
+                    <h3 class="font-bold text-on-surface">${wheel.name}</h3>
+                    <p class="text-sm text-on-surface-variant mt-1">${wheel.size || 'Standard size'}</p>
+                    <p class="text-primary font-bold mt-2">$${wheel.price || '0.00'}</p>
+                </a>
+            `).join('');
+        }
+
+        // Initialize on page load
+        init();
+        });
+    </script>
+</body>
+</html>

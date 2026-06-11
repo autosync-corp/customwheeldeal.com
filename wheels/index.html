@@ -1,0 +1,3779 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wheels — Premium Aftermarket | Custom Wheel Deal — Michigan</title>
+  <meta name="description" content="Shop aftermarket wheels from Vossen, HRE, Enkei, BBS, Rotiform and more. Flow-formed, forged, and cast options. Professional install at our Michigan locations.">
+  <link rel="canonical" href="https://customwheeldeal.com/wheels/">
+  <meta property="og:title" content="Wheels — Premium Aftermarket | Custom Wheel Deal">
+  <meta property="og:description" content="Shop aftermarket wheels from Vossen, HRE, Enkei, BBS, Rotiform and more. Flow-formed, forged, and cast options. Professional install at our Michigan locations.">
+  <meta property="og:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
+  <meta property="og:url" content="https://customwheeldeal.com/wheels/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Custom Wheel Deal">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wheels — Premium Aftermarket | Custom Wheel Deal">
+  <meta name="twitter:description" content="Shop aftermarket wheels from Vossen, HRE, Enkei, BBS, Rotiform and more. Flow-formed, forged, and cast options. Professional install at our Michigan locations.">
+  <meta name="twitter:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Aftermarket Wheels",
+    "description": "Shop aftermarket wheels from Vossen, HRE, Enkei, BBS, Rotiform and more. Flow-formed, forged, and cast options. Professional install at our Michigan locations.",
+    "url": "https://customwheeldeal.com/wheels/",
+    "mainEntity": {
+      "@type": "OfferCatalog",
+      "name": "Aftermarket Wheels",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Forged Wheels"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Flow-Formed Wheels"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Cast Wheels"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Replica Wheels"
+        }
+      ]
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Custom Wheel Deal",
+      "url": "https://customwheeldeal.com"
+    },
+    "provider": {
+      "@type": "AutoRepair",
+      "name": "Custom Wheel Deal",
+      "areaServed": {
+        "@type": "State",
+        "name": "Michigan"
+      }
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.autosyncstudio.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v9">
+</head>
+<body>
+<div id="app"></div>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<!-- Babel removed: pre-compiled -->
+<script src="/js/setup.js?v9"></script>
+<script src="/js/data.js?v9"></script>
+<script src="/js/layout.js?v10"></script>
+<script src="/js/api.js?v9"></script>
+<script src="/js/fitment.js?v1"></script>
+<script src="/js/vehicle-preview.js?v9"></script>
+<script src="/js/cart.js"></script>
+<script>// ─────────────── Shared Primitive / Utility Components
+// No imports — relies on globals from setup.js (React hooks, tokens, AppCtx, useApp)
+
+function Icon({
+  name,
+  size = 20,
+  style,
+  fill
+}) {
+  return /*#__PURE__*/React.createElement("span", {
+    className: "material-symbols-outlined",
+    style: {
+      fontSize: size,
+      fontVariationSettings: fill ? "'FILL' 1" : "'FILL' 0",
+      ...style
+    }
+  }, name);
+}
+function Btn({
+  children,
+  variant = 'primary',
+  onClick,
+  href,
+  size = 'md',
+  style,
+  icon,
+  iconRight,
+  type,
+  disabled,
+  full
+}) {
+  const pads = {
+    sm: '8px 14px',
+    md: '12px 22px',
+    lg: '16px 28px'
+  }[size];
+  const fs = {
+    sm: 12,
+    md: 13,
+    lg: 14
+  }[size];
+  const base = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    padding: pads,
+    fontSize: fs,
+    fontWeight: 700,
+    letterSpacing: '.12em',
+    textTransform: 'uppercase',
+    border: 'none',
+    cursor: disabled ? 'not-allowed' : 'pointer',
+    opacity: disabled ? .45 : 1,
+    fontFamily: 'Inter, system-ui, sans-serif',
+    borderRadius: 6,
+    textDecoration: 'none',
+    transition: 'all .15s ease-out',
+    width: full ? '100%' : 'auto'
+  };
+  const variants = {
+    primary: {
+      background: tokens.primary,
+      color: '#fff'
+    },
+    primaryGrad: {
+      background: 'linear-gradient(135deg,#850824 0%,#a62639 100%)',
+      color: '#fff'
+    },
+    dark: {
+      background: tokens.slate900,
+      color: '#fff'
+    },
+    outline: {
+      background: 'transparent',
+      color: tokens.ink,
+      boxShadow: `inset 0 0 0 1.5px ${tokens.ink}`
+    },
+    outlineLight: {
+      background: 'transparent',
+      color: '#fff',
+      boxShadow: 'inset 0 0 0 1.5px rgba(255,255,255,.5)'
+    },
+    ghost: {
+      background: 'transparent',
+      color: tokens.ink
+    },
+    light: {
+      background: '#fff',
+      color: tokens.ink,
+      boxShadow: `inset 0 0 0 1px ${tokens.line}`
+    },
+    accent: {
+      background: tokens.primaryAccent,
+      color: '#fff'
+    }
+  };
+  const Tag = href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(Tag, {
+    type: type,
+    href: href,
+    onClick: onClick,
+    disabled: disabled,
+    style: {
+      ...base,
+      ...variants[variant],
+      ...style
+    },
+    onMouseOver: e => !disabled && (e.currentTarget.style.transform = 'translateY(-1px)', e.currentTarget.style.filter = 'brightness(1.05)'),
+    onMouseOut: e => (e.currentTarget.style.transform = 'translateY(0)', e.currentTarget.style.filter = 'none')
+  }, icon && /*#__PURE__*/React.createElement(Icon, {
+    name: icon,
+    size: fs + 4
+  }), children, iconRight && /*#__PURE__*/React.createElement(Icon, {
+    name: iconRight,
+    size: fs + 4
+  }));
+}
+function Stars({
+  rating,
+  size = 14,
+  showNum
+}) {
+  const full = Math.floor(rating),
+    half = rating - full >= .5;
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 4
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      color: tokens.gold
+    }
+  }, [0, 1, 2, 3, 4].map(i => /*#__PURE__*/React.createElement(Icon, {
+    key: i,
+    size: size,
+    fill: true,
+    name: i < full ? 'star' : i === full && half ? 'star_half' : 'star',
+    style: {
+      color: i < full || i === full && half ? tokens.gold : '#e5e7eb'
+    }
+  }))), showNum && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: tokens.mute,
+      fontWeight: 600
+    }
+  }, rating.toFixed(1)));
+}
+function Eyebrow({
+  children,
+  color,
+  style
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Inter',
+      fontSize: 11,
+      fontWeight: 700,
+      letterSpacing: '.18em',
+      textTransform: 'uppercase',
+      color: color || tokens.primary,
+      ...style
+    }
+  }, children);
+}
+function Headline({
+  children,
+  size = 'h2',
+  style,
+  as
+}) {
+  const fs = {
+    display: 72,
+    h1: 56,
+    h2: 40,
+    h3: 28,
+    h4: 22
+  }[size] || 40;
+  const Tag = as || 'h2';
+  return /*#__PURE__*/React.createElement(Tag, {
+    style: {
+      fontFamily: 'Space Grotesk, sans-serif',
+      fontWeight: 700,
+      fontSize: fs,
+      letterSpacing: '-0.02em',
+      lineHeight: 1.05,
+      margin: 0,
+      textWrap: 'balance',
+      ...style
+    }
+  }, children);
+}
+function FilterGroup({
+  label,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 24
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: 11,
+      fontWeight: 700,
+      letterSpacing: '.16em',
+      textTransform: 'uppercase',
+      color: tokens.ink,
+      paddingBottom: 10,
+      marginBottom: 12,
+      borderBottom: `1px solid ${tokens.line}`
+    }
+  }, label), children);
+}
+function FilterCheck({
+  checked,
+  onChange,
+  label,
+  type
+}) {
+  return /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      padding: '6px 0',
+      fontSize: 13,
+      color: tokens.graphite,
+      cursor: 'pointer'
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    type: type || "checkbox",
+    checked: checked,
+    onChange: onChange,
+    style: {
+      accentColor: tokens.primary
+    }
+  }), label);
+}
+function TireSvg() {
+  return /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 120 90",
+    width: "80%",
+    height: "80%"
+  }, /*#__PURE__*/React.createElement("ellipse", {
+    cx: "60",
+    cy: "45",
+    rx: "45",
+    ry: "36",
+    fill: "#1a1c1e"
+  }), /*#__PURE__*/React.createElement("ellipse", {
+    cx: "60",
+    cy: "45",
+    rx: "22",
+    ry: "17",
+    fill: "#2a2c2e"
+  }), /*#__PURE__*/React.createElement("ellipse", {
+    cx: "60",
+    cy: "45",
+    rx: "18",
+    ry: "14",
+    fill: "#3a3c3e"
+  }), /*#__PURE__*/React.createElement("g", {
+    stroke: "#555",
+    strokeWidth: "1",
+    fill: "none"
+  }, Array.from({
+    length: 10
+  }).map((_, i) => {
+    const a = i * 36 * Math.PI / 180;
+    const x1 = 60 + Math.cos(a) * 26,
+      y1 = 45 + Math.sin(a) * 20;
+    const x2 = 60 + Math.cos(a) * 42,
+      y2 = 45 + Math.sin(a) * 33;
+    return /*#__PURE__*/React.createElement("line", {
+      key: i,
+      x1: x1,
+      y1: y1,
+      x2: x2,
+      y2: y2
+    });
+  })));
+}
+function WheelSvg() {
+  return /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 240 240",
+    style: {
+      width: '72%',
+      height: '72%'
+    }
+  }, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("radialGradient", {
+    id: "wg",
+    cx: "50%",
+    cy: "40%"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#475569"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: ".5",
+    stopColor: "#1e293b"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "#0b1120"
+  })), /*#__PURE__*/React.createElement("radialGradient", {
+    id: "wh",
+    cx: "50%",
+    cy: "40%"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#64748b"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "#0f172a"
+  }))), /*#__PURE__*/React.createElement("circle", {
+    cx: "120",
+    cy: "120",
+    r: "115",
+    fill: "url(#wg)"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "120",
+    cy: "120",
+    r: "92",
+    fill: "url(#wh)"
+  }), [0, 1, 2, 3, 4].map(i => {
+    const a = i / 5 * Math.PI * 2 - Math.PI / 2;
+    const x1 = 120 + Math.cos(a) * 30,
+      y1 = 120 + Math.sin(a) * 30;
+    const x2 = 120 + Math.cos(a) * 82,
+      y2 = 120 + Math.sin(a) * 82;
+    const nx = Math.cos(a + Math.PI / 2) * 10,
+      ny = Math.sin(a + Math.PI / 2) * 10;
+    return /*#__PURE__*/React.createElement("polygon", {
+      key: i,
+      fill: "#1a202c",
+      stroke: "#334155",
+      strokeWidth: "1",
+      points: `${x1 + nx},${y1 + ny} ${x1 - nx},${y1 - ny} ${x2 - nx * .4},${y2 - ny * .4} ${x2 + nx * .4},${y2 + ny * .4}`
+    });
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "120",
+    cy: "120",
+    r: "26",
+    fill: "#0b1120",
+    stroke: "#334155",
+    strokeWidth: "1.5"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "120",
+    cy: "120",
+    r: "8",
+    fill: "#1e293b"
+  }));
+}
+function SpecItem({
+  label,
+  value,
+  big
+}) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: tokens.mute,
+      fontWeight: 700,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase'
+    }
+  }, label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: big ? 26 : 16,
+      fontWeight: 800,
+      color: big ? tokens.primary : tokens.ink,
+      marginTop: 4
+    }
+  }, value));
+}
+function SectionHead({
+  eyebrow,
+  title,
+  cta
+}) {
+  const {
+    navigate
+  } = useApp();
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'flex-end',
+      justifyContent: 'space-between',
+      borderBottom: `1px solid ${tokens.line}`,
+      paddingBottom: 20
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Eyebrow, null, eyebrow), title && /*#__PURE__*/React.createElement(Headline, {
+    size: "h2",
+    style: {
+      marginTop: 8
+    }
+  }, title)), cta && /*#__PURE__*/React.createElement("a", {
+    onClick: cta.onClick,
+    style: {
+      fontSize: 12,
+      fontWeight: 800,
+      color: tokens.ink,
+      textDecoration: 'none',
+      cursor: 'pointer',
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6
+    }
+  }, cta.label, " ", /*#__PURE__*/React.createElement(Icon, {
+    name: "arrow_forward",
+    size: 16
+  })));
+}
+function FilterBlock({
+  title,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: '#fff',
+      border: `1px solid ${tokens.line}`,
+      padding: '16px 18px',
+      marginBottom: 12,
+      borderRadius: 8
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, {
+    color: tokens.ink,
+    style: {
+      marginBottom: 10
+    }
+  }, title), children);
+}
+
+// ─────────────── App Shell Components
+
+function AppProvider({
+  children,
+  defaults
+}) {
+  const [vehicle, setVehicleRaw] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('htm_vehicle') || 'null');
+    } catch {
+      return null;
+    }
+  });
+  const [garage, setGarage] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('htm_garage') || '[]');
+    } catch {
+      return [];
+    }
+  });
+  const [cart, setCart] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('htm_cart') || '[]');
+    } catch {
+      return [];
+    }
+  });
+  const [savedPackages, setSavedPackages] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('htm_saved_packages') || '[]');
+    } catch {
+      return [];
+    }
+  });
+  const [route, setRoute] = useState(() => {
+    const path = window.location.pathname;
+    const search = window.location.search;
+    return path + search;
+  });
+  const [lastOrder, setLastOrder] = useState(null);
+  const [tireBrands, setTireBrands] = useState(window.HOLBROOK_DATA.brands);
+  const [wheelBrandsList, setWheelBrandsList] = useState(window.HOLBROOK_DATA.wheelBrandList);
+  const [apiReady, setApiReady] = useState(false);
+  useEffect(() => {
+    const BRAND_CDN = 'https://storage.googleapis.com/autosync-brand-logos/logos/';
+    Promise.allSettled([api.fetchTireBrands(), api.fetchWheelBrands()]).then(([tRes, wRes]) => {
+      if (tRes.status === 'fulfilled') {
+        const items = extractItems(tRes.value);
+        if (items) {
+          const apiBrands = items.map(function (b) {
+            const name = b.Name || b.name || b.Brand || b.brand || '';
+            const logo = b.BrandLogosUrlBase && b.Logo ? b.BrandLogosUrlBase + b.Logo : BRAND_CDN + name.replace(/\s+/g, '_') + '.webp';
+            return {
+              name: name,
+              slug: name,
+              logo: logo
+            };
+          }).filter(function (b) {
+            return b.name;
+          });
+          if (apiBrands.length > 0) {
+            console.log('[Holbrook] Loaded', apiBrands.length, 'tire brands from API');
+            setTireBrands(apiBrands);
+            window.HOLBROOK_DATA.brands = apiBrands;
+          }
+        } else {
+          console.warn('[Holbrook] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
+        }
+      } else {
+        console.warn('[Holbrook] Tire brands API failed:', tRes.reason);
+      }
+      if (wRes.status === 'fulfilled') {
+        const items = extractItems(wRes.value);
+        if (items) {
+          const apiWheelBrands = items.map(function (b) {
+            const name = b.Name || b.name || b.Brand || b.brand || '';
+            return {
+              name: name,
+              logo: b.BrandLogosUrlBase && b.Logo ? b.BrandLogosUrlBase + b.Logo : BRAND_CDN + name.replace(/\s+/g, '_') + '.webp'
+            };
+          }).filter(function (b) {
+            return b.name;
+          });
+          if (apiWheelBrands.length > 0) {
+            console.log('[Holbrook] Loaded', apiWheelBrands.length, 'wheel brands from API');
+            setWheelBrandsList(apiWheelBrands);
+            window.HOLBROOK_DATA.wheelBrandList = apiWheelBrands;
+            window.HOLBROOK_DATA.wheelBrands = apiWheelBrands.map(function (b) {
+              return b.name;
+            });
+          }
+        } else {
+          console.warn('[Holbrook] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
+        }
+      } else {
+        console.warn('[Holbrook] Wheel brands API failed:', wRes.reason);
+      }
+      setApiReady(true);
+    });
+  }, []);
+  const setVehicle = v => {
+    setVehicleRaw(v);
+    if (v && v.year && v.make && v.model) {
+      setGarage(prev => {
+        const key = `${v.year}|${v.make}|${v.model}`;
+        const filtered = prev.filter(p => `${p.year}|${p.make}|${p.model}` !== key);
+        return [{
+          ...v,
+          id: key,
+          addedAt: Date.now()
+        }, ...filtered].slice(0, 8);
+      });
+    }
+  };
+  const removeFromGarage = id => setGarage(prev => prev.filter(p => p.id !== id));
+  useEffect(() => {
+    localStorage.setItem('htm_vehicle', JSON.stringify(vehicle));
+  }, [vehicle]);
+  useEffect(() => {
+    localStorage.setItem('htm_garage', JSON.stringify(garage));
+  }, [garage]);
+  useEffect(() => {
+    localStorage.setItem('htm_cart', JSON.stringify(cart));
+  }, [cart]);
+  useEffect(() => {
+    localStorage.setItem('htm_saved_packages', JSON.stringify(savedPackages));
+  }, [savedPackages]);
+  useEffect(() => {
+    const h = () => {
+      try {
+        setSavedPackages(JSON.parse(localStorage.getItem('htm_saved_packages') || '[]'));
+      } catch {}
+    };
+    window.addEventListener('storage', h);
+    return () => window.removeEventListener('storage', h);
+  }, []);
+  const removeSavedPackage = id => setSavedPackages(prev => prev.filter(p => p.id !== id));
+  const refreshSavedPackages = () => {
+    try {
+      setSavedPackages(JSON.parse(localStorage.getItem('htm_saved_packages') || '[]'));
+    } catch {}
+  };
+  // Sync Medusa lineItemIds on mount so remove/update can reference them
+  useEffect(function() {
+    if (!window.HolbrookCart) return;
+    HolbrookCart.getItems().then(function(medusaItems) {
+      if (!medusaItems || !medusaItems.length) return;
+      setCart(function(prev) {
+        if (!prev.length) return medusaItems;
+        return prev.map(function(p) {
+          var mi = medusaItems.find(function(m) { return m.id === p.id; });
+          return mi ? Object.assign({}, p, { lineItemId: mi.lineItemId, brand: mi.brand || p.brand, partNumber: mi.partNumber || p.partNumber, vehicle: mi.vehicle || p.vehicle }) : p;
+        });
+      });
+    }).catch(function() {});
+  }, []);
+
+  const addToCart = async (pkg, qty = 1) => {
+    setCart(prev => {
+      const hit = prev.find(p => p.id === pkg.id);
+      if (hit) return prev.map(p => p.id === pkg.id ? { ...p, qty: p.qty + qty } : p);
+      return [...prev, { ...pkg, qty }];
+    });
+    if (window.HolbrookCart) {
+      try {
+        await HolbrookCart.addItem({ ...pkg, qty });
+        const medusaItems = await HolbrookCart.getItems();
+        if (medusaItems) {
+          setCart(prev => prev.map(p => {
+            const mi = medusaItems.find(m => m.id === p.id);
+            return mi ? { ...p, lineItemId: mi.lineItemId } : p;
+          }));
+        }
+      } catch(e) { console.warn('[Cart] Medusa sync failed:', e); }
+    }
+  };
+  const updateQty = async (id, qty) => {
+    const item = cart.find(p => p.id === id);
+    if (qty <= 0) {
+      setCart(prev => prev.filter(p => p.id !== id));
+      if (window.HolbrookCart && item && item.lineItemId) {
+        HolbrookCart.removeItem(item.lineItemId).catch(function() {});
+      }
+      return;
+    }
+    setCart(prev => prev.map(p => p.id === id ? { ...p, qty } : p));
+    if (window.HolbrookCart && item && item.lineItemId) {
+      try { await HolbrookCart.updateQty(item.lineItemId, qty); } catch(e) { console.warn('[Cart] Medusa update failed:', e); }
+    }
+  };
+  const removeItem = id => {
+    const item = cart.find(p => p.id === id);
+    setCart(prev => prev.filter(p => p.id !== id));
+    if (window.HolbrookCart && item && item.lineItemId) {
+      HolbrookCart.removeItem(item.lineItemId).catch(function(e) { console.warn('[Cart] Medusa remove failed:', e); });
+    }
+  };
+  const clearCart = () => {
+    setCart([]);
+    if (window.HolbrookCart) HolbrookCart.clear().catch(function() {});
+  };
+  const navigate = r => {
+    const routeMap = {
+      '/': '/index.html',
+      '/shop': '/shop/',
+      '/tires': '/tires/',
+      '/wheels': '/wheels/',
+      '/packages': '/packages/',
+      '/rebates': '/rebates/',
+      '/cart': '/cart/',
+      '/checkout': '/checkout/'
+    };
+    if (r.startsWith('/tire/')) {
+      window.location.href = '/tires/' + '?product=' + r.split('/')[2];
+      return;
+    }
+    if (r.startsWith('/wheel/')) {
+      window.location.href = '/wheels/';
+      return;
+    }
+    if (r.startsWith('/package/')) {
+      window.location.href = '/packages/' + '?product=' + r.split('/')[2];
+      return;
+    }
+    if (r.startsWith('/rebate/')) {
+      window.location.href = '/rebates/' + '?rebate=' + r.split('/')[2];
+      return;
+    }
+    if (r === '/vvs') {
+      window.location.href = '/shop/?vvs=1';
+      return;
+    }
+    const dest = routeMap[r] || r;
+    window.location.href = dest;
+  };
+  return /*#__PURE__*/React.createElement(AppCtx.Provider, {
+    value: {
+      vehicle,
+      setVehicle,
+      garage,
+      removeFromGarage,
+      savedPackages,
+      removeSavedPackage,
+      refreshSavedPackages,
+      cart,
+      addToCart,
+      updateQty,
+      removeItem,
+      clearCart,
+      route,
+      navigate,
+      lastOrder,
+      setLastOrder,
+      defaults,
+      tireBrands,
+      wheelBrandsList,
+      apiReady
+    }
+  }, children);
+}
+// ─────────────── VVS Banner
+function VVSBanner() {
+  const {
+    navigate,
+    route
+  } = useApp();
+  if (route === '/' || route === '' || route === '/vvs') return null;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #850824 100%)',
+      color: '#fff'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1320,
+      margin: '0 auto',
+      padding: '12px 32px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 16,
+      justifyContent: 'space-between'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 14
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontWeight: 700,
+      fontSize: 15,
+      letterSpacing: '-.01em'
+    }
+  }, "See it on your vehicle first."), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: '#cbd5e1'
+    }
+  }, "Preview any wheel + tire combo in the Visual Vehicle Studio.")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => navigate('/vvs'),
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 8,
+      padding: '8px 16px',
+      background: tokens.primary,
+      color: '#fff',
+      border: 'none',
+      borderRadius: 6,
+      fontSize: 11,
+      fontWeight: 800,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      cursor: 'pointer',
+      fontFamily: 'inherit',
+      whiteSpace: 'nowrap'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "view_in_ar",
+    size: 15
+  }), "Launch Studio")));
+}
+
+// ─────────────── Locations strip
+function LocationsStrip() {
+  const {
+    locations
+  } = window.HOLBROOK_DATA;
+  return /*#__PURE__*/React.createElement("section", {
+    style: {
+      background: '#fff',
+      padding: '72px 32px 64px',
+      borderTop: `1px solid ${tokens.lineSoft}`
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1320,
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'center',
+      marginBottom: 40
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, {
+    color: tokens.primary,
+    style: {
+      marginBottom: 8
+    }
+  }, "Three Michigan locations"), /*#__PURE__*/React.createElement(Headline, {
+    size: "h2",
+    style: {
+      fontSize: 32,
+      margin: 0
+    }
+  }, "Installed by people who know your car.")), /*#__PURE__*/React.createElement("div", {
+    className: "resp-locs-grid",
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      gap: 20
+    }
+  }, locations.map(l => /*#__PURE__*/React.createElement("div", {
+    key: l.id,
+    style: {
+      background: tokens.surfLow,
+      borderRadius: 14,
+      padding: '28px 28px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 14
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, {
+    color: tokens.primary
+  }, "Holbrook \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: 20,
+      fontWeight: 700,
+      letterSpacing: '-.01em',
+      color: tokens.ink,
+      lineHeight: 1.3
+    }
+  }, l.addr), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      color: tokens.taupe,
+      lineHeight: 1.6
+    }
+  }, l.city, ", MI ", l.zip, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: tokens.mute
+    }
+  }, l.hours)), /*#__PURE__*/React.createElement("a", {
+    href: `tel:${l.phoneTel}`,
+    style: {
+      color: tokens.primary,
+      fontSize: 17,
+      fontWeight: 700,
+      textDecoration: 'none',
+      fontFamily: 'Space Grotesk',
+      marginTop: 'auto',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "call",
+    size: 16
+  }), " ", l.phone))))));
+}
+// ─────────────── Global Fitment Bar
+function GlobalFitmentBar() {
+  const {
+    vehicle,
+    setVehicle,
+    navigate,
+    route
+  } = useApp();
+  const YEARS = useMemo(() => {
+    const y = [],
+      c = 2027;
+    for (let i = c; i >= 2000; i--) y.push(i);
+    return y;
+  }, []);
+  const [year, setYear] = useState('');
+  const [make, setMake] = useState('');
+  const [model, setModel] = useState('');
+  const [submodel, setSubmodel] = useState('');
+  const [makes, setMakes] = useState([]);
+  const [models, setModels] = useState([]);
+  const [submodels, setSubmodels] = useState([]);
+  const [fitments, setFitments] = useState([]);
+  const [vehicleData, setVehicleData] = useState(null);
+  const [selectedSize, setSelectedSize] = useState('');
+  const [makesLoading, setMakesLoading] = useState(false);
+  const [modelsLoading, setModelsLoading] = useState(false);
+  const [submodelsLoading, setSubmodelsLoading] = useState(false);
+  const [fitmentsLoading, setFitmentsLoading] = useState(false);
+
+  // Static fallback makes (always available)
+  const staticMakes = window.HOLBROOK_DATA.vehicleMakes.map(function (m) {
+    return m.name;
+  });
+  useEffect(() => {
+    if (!year) {
+      setMakes([]);
+      setMake('');
+      return;
+    }
+    setMakesLoading(true);
+    api.fetchVehicleMakes(year).then(data => {
+      const items = extractItems(data);
+      if (items) {
+        const names = items.map(function(m) { return m.Make || m.Name || extractName(m); }).filter(Boolean);
+        console.log('[Fitment] Makes from API:', names.length, names.slice(0, 5));
+        setMakes(names.length > 0 ? names : staticMakes);
+      } else {
+        console.warn('[Fitment] No makes items in response, using static. Response keys:', data ? Object.keys(data) : 'null');
+        setMakes(staticMakes);
+      }
+    }).catch(function (err) {
+      console.warn('[Fitment] Makes API failed, using static fallback:', err.message || err);
+      setMakes(staticMakes);
+    }).finally(() => setMakesLoading(false));
+    setMake('');
+    setModel('');
+    setSubmodel('');
+  }, [year]);
+  useEffect(() => {
+    if (!make) {
+      setModels([]);
+      setModel('');
+      return;
+    }
+    setModelsLoading(true);
+    api.fetchVehicleModels(year, make).then(data => {
+      const items = extractItems(data);
+      if (items) {
+        const names = items.map(function(m) { return m.Model || m.Name || extractName(m); }).filter(Boolean);
+        console.log('[Fitment] Models from API:', names.length, names.slice(0, 5));
+        setModels(names);
+      } else {
+        console.warn('[Fitment] No model items in response. Response keys:', data ? Object.keys(data) : 'null');
+        setModels([]);
+      }
+    }).catch(function (err) {
+      console.warn('[Fitment] Models API failed:', err.message || err);
+      setModels([]);
+    }).finally(() => setModelsLoading(false));
+    setModel('');
+    setSubmodel('');
+  }, [make]);
+  useEffect(() => {
+    if (!model) {
+      setSubmodels([]);
+      setSubmodel('');
+      return;
+    }
+    setSubmodelsLoading(true);
+    api.fetchVehicleSubmodels(year, make, model).then(data => {
+      const items = extractItems(data);
+      if (items) {
+        const names = items.map(function(m) { return m.Submodel || m.Name || extractName(m); }).filter(Boolean);
+        console.log('[Fitment] Submodels from API:', names.length, names);
+        setSubmodels(names);
+      } else {
+        console.warn('[Fitment] No submodel items in response. Response keys:', data ? Object.keys(data) : 'null');
+        setSubmodels([]);
+      }
+    }).catch(function (err) {
+      console.warn('[Fitment] Submodels API failed:', err.message || err);
+      setSubmodels([]);
+    }).finally(() => setSubmodelsLoading(false));
+    setSubmodel('');
+    setSelectedSize('');
+  }, [model]);
+
+  // Fetch OE fitments when model or submodel is selected
+  useEffect(() => {
+    if (!model) { setFitments([]); setVehicleData(null); setSelectedSize(''); return; }
+    setFitmentsLoading(true);
+    api.fetchVehicleFitments(year, make, model, submodel || undefined).then(function(data) {
+      var vd = (data.Fitments && data.Fitments.length) ? data : ((data.Vehicles || [])[0] || data);
+      setVehicleData(vd);
+      var sizes = getAllLabeledWheelSizes(vd);
+      console.log('[Fitment] All wheel sizes:', sizes.length, sizes.map(function(s) { return s.label; }));
+      setFitments(sizes);
+      if (!hasStaggeredFitment(vd)) {
+        var firstOE = sizes.find(function(s) { return s.source === 'oe'; }) || sizes[0];
+        if (firstOE) setSelectedSize(firstOE.label);
+      } else {
+        setSelectedSize('');
+      }
+    }).catch(function(err) {
+      console.warn('[Fitment] Fitments API failed:', err.message || err);
+      setFitments([]);
+      setVehicleData(null);
+    }).finally(function() { setFitmentsLoading(false); });
+  }, [model, submodel]);
+
+  const go = () => {
+    if (year && make && model) {
+      var selectedFitment = fitments.find(function(f) { return f.label === selectedSize; });
+      setVehicle({
+        year,
+        make,
+        model,
+        submodel: submodel || undefined,
+        selectedSize: selectedFitment ? selectedFitment.label : undefined,
+        sizeSource: selectedFitment ? selectedFitment.source : undefined,
+        vehicleData: vehicleData || undefined,
+        fitment: selectedFitment || undefined
+      });
+      var makeSlug = make.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+      var modelSlug = model.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+      var submodelSlug = submodel ? submodel.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '') : '';
+      var vehicleSlug = year + '-' + makeSlug + '-' + modelSlug + (submodelSlug ? '-' + submodelSlug : '');
+      try {
+        sessionStorage.setItem('holbrook.vehicleSlug', JSON.stringify({
+          year: year, make: make, model: model, submodel: submodel || undefined, slug: vehicleSlug,
+          sizeSource: selectedFitment ? selectedFitment.source : undefined,
+          rimDiameter: selectedFitment ? Number(selectedFitment.diameter) : undefined
+        }));
+      } catch(e) {}
+      var isOnPLP = window.location.pathname.split('/').filter(Boolean).length <= 1;
+      if (isOnPLP) window.location.href = '/wheels/?v=' + vehicleSlug;
+    }
+  };
+  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #850824 100%)';
+  const barBorder = '1px solid rgba(255,255,255,.08)';
+  const barShadow = 'inset 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(232,52,78,.15)';
+  const fld = {
+    background: 'rgba(255,255,255,.1)',
+    border: '1px solid rgba(255,255,255,.18)',
+    padding: '10px 32px 10px 14px',
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: 600,
+    color: '#fff',
+    appearance: 'none',
+    borderRadius: 6,
+    minWidth: 130,
+    cursor: 'pointer'
+  };
+  if (vehicle) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: barBg,
+        borderBottom: barBorder,
+        boxShadow: barShadow,
+        position: 'relative',
+        overflow: 'hidden'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        inset: 0,
+        background: 'radial-gradient(ellipse at 100% 50%, rgba(232,52,78,.25) 0%, transparent 55%)',
+        pointerEvents: 'none'
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        maxWidth: 1320,
+        margin: '0 auto',
+        padding: '18px 32px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 20,
+        flexWrap: 'wrap',
+        position: 'relative'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 38,
+        height: 38,
+        background: 'rgba(255,255,255,.14)',
+        border: '1px solid rgba(255,255,255,.2)',
+        borderRadius: 8,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "directions_car",
+      size: 22,
+      style: {
+        color: '#fff'
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        lineHeight: 1.2
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: 'Inter',
+        fontSize: 11,
+        fontWeight: 700,
+        letterSpacing: '.18em',
+        textTransform: 'uppercase',
+        color: 'rgba(255,255,255,.7)'
+      }
+    }, "Showing wheels that fit"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: 'Space Grotesk',
+        fontSize: 22,
+        fontWeight: 700,
+        letterSpacing: '-.01em',
+        color: '#fff',
+        marginTop: 2
+      }
+    }, vehicle.year, " ", /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 500
+      }
+    }, vehicle.make), " ", vehicle.model, vehicle.tireSize ? /*#__PURE__*/React.createElement("span", {
+      style: { fontSize: 14, fontWeight: 400, opacity: .8, marginLeft: 8 }
+    }, "\u00B7 ", vehicle.tireSize) : null)), /*#__PURE__*/React.createElement("button", {
+      onClick: () => navigate('/shop'),
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 8,
+        padding: '9px 18px',
+        background: tokens.yellow,
+        color: tokens.ink,
+        border: 'none',
+        borderRadius: 6,
+        fontSize: 11,
+        fontWeight: 800,
+        letterSpacing: '.14em',
+        textTransform: 'uppercase',
+        cursor: 'pointer',
+        fontFamily: 'inherit'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "storefront",
+      size: 14
+    }), "Shop Now"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => {
+        setVehicle(null);
+      },
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 8,
+        padding: '9px 16px',
+        background: 'rgba(255,255,255,.12)',
+        color: '#fff',
+        border: '1px solid rgba(255,255,255,.25)',
+        borderRadius: 6,
+        fontSize: 11,
+        fontWeight: 800,
+        letterSpacing: '.14em',
+        textTransform: 'uppercase',
+        cursor: 'pointer',
+        fontFamily: 'inherit',
+        transition: 'all .15s'
+      },
+      onMouseOver: e => {
+        e.currentTarget.style.background = 'rgba(255,255,255,.2)';
+      },
+      onMouseOut: e => {
+        e.currentTarget.style.background = 'rgba(255,255,255,.12)';
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "autorenew",
+      size: 14
+    }), "Change vehicle")));
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: barBg,
+      borderBottom: barBorder,
+      boxShadow: barShadow,
+      position: 'relative',
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      background: 'radial-gradient(ellipse at 100% 50%, rgba(232,52,78,.22) 0%, transparent 55%)',
+      pointerEvents: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "resp-fitbar-inner",
+    style: {
+      maxWidth: 1320,
+      margin: '0 auto',
+      padding: '12px 32px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 14,
+      flexWrap: 'wrap',
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 10,
+      paddingRight: 14,
+      borderRight: '1px solid rgba(255,255,255,.18)'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "tire_repair",
+    size: 20,
+    style: {
+      color: '#fff'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontWeight: 700,
+      fontSize: 13,
+      color: '#fff',
+      letterSpacing: '.06em',
+      textTransform: 'uppercase'
+    }
+  }, "Find your fitment")), /*#__PURE__*/React.createElement("div", {
+    className: "resp-fitbar-selects",
+    style: {
+      flex: 1,
+      minWidth: 320,
+      display: 'flex',
+      gap: 8,
+      justifyContent: 'flex-end',
+      flexWrap: 'wrap'
+    }
+  }, /*#__PURE__*/React.createElement("select", {
+    className: "resp-fitbar-select",
+    value: year,
+    onChange: e => setYear(e.target.value),
+    style: fld
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    style: {
+      color: '#000'
+    }
+  }, "Year"), YEARS.map(y => /*#__PURE__*/React.createElement("option", {
+    key: y,
+    style: {
+      color: '#000'
+    }
+  }, y))), /*#__PURE__*/React.createElement("select", {
+    value: make,
+    onChange: e => setMake(e.target.value),
+    disabled: !year || makesLoading,
+    style: {
+      ...fld,
+      opacity: year ? 1 : .4
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    style: {
+      color: '#000'
+    }
+  }, makesLoading ? 'Loading...' : 'Make'), makes.map(m => /*#__PURE__*/React.createElement("option", {
+    key: m,
+    style: {
+      color: '#000'
+    }
+  }, m))), /*#__PURE__*/React.createElement("select", {
+    value: model,
+    onChange: e => setModel(e.target.value),
+    disabled: !make || modelsLoading,
+    style: {
+      ...fld,
+      opacity: make ? 1 : .4
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    style: {
+      color: '#000'
+    }
+  }, modelsLoading ? 'Loading...' : 'Model'), models.map(m => /*#__PURE__*/React.createElement("option", {
+    key: m,
+    style: {
+      color: '#000'
+    }
+  }, m))), submodels.length > 0 && /*#__PURE__*/React.createElement("select", {
+    value: submodel,
+    onChange: e => setSubmodel(e.target.value),
+    disabled: submodelsLoading,
+    style: {
+      ...fld
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    style: {
+      color: '#000'
+    }
+  }, submodelsLoading ? 'Loading...' : 'Submodel'), submodels.map(s => /*#__PURE__*/React.createElement("option", {
+    key: s,
+    style: {
+      color: '#000'
+    }
+  }, s))), fitments.length > 0 && !hasStaggeredFitment(vehicleData) && /*#__PURE__*/React.createElement("select", {
+    value: selectedSize,
+    onChange: e => setSelectedSize(e.target.value),
+    disabled: fitmentsLoading,
+    style: {
+      ...fld,
+      minWidth: 200,
+      borderColor: selectedSize ? tokens.yellow : 'rgba(255,255,255,.18)',
+      background: selectedSize ? 'rgba(255,194,32,.15)' : 'rgba(255,255,255,.1)'
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    style: {
+      color: '#000'
+    }
+  }, fitmentsLoading ? 'Loading sizes...' : 'Size'), (function() {
+    var groups = [
+      { source: 'oe', label: 'OE Fitment' },
+      { source: 'optional', label: 'Optional' },
+      { source: 'plus', label: 'Plus Sizes' }
+    ];
+    return groups.map(function(g) {
+      var items = fitments.filter(function(f) { return f.source === g.source; });
+      if (items.length === 0) return null;
+      return /*#__PURE__*/React.createElement('optgroup', { key: g.source, label: g.label, style: { color: '#000' } },
+        items.map(function(f) {
+          return /*#__PURE__*/React.createElement('option', { key: f.label, value: f.label, style: { color: '#000' } }, f.staggered ? f.label : f.diameter + '"');
+        })
+      );
+    }).filter(Boolean);
+  })()), fitmentsLoading && fitments.length === 0 && model && /*#__PURE__*/React.createElement("span", {
+    style: { color: 'rgba(255,255,255,.5)', fontSize: 11, fontStyle: 'italic' }
+  }, "Loading sizes..."), /*#__PURE__*/React.createElement("button", {
+    onClick: go,
+    disabled: !year || !make || !model,
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      padding: '10px 18px',
+      background: !year || !make || !model ? 'rgba(255,255,255,.12)' : tokens.yellow,
+      color: !year || !make || !model ? 'rgba(255,255,255,.6)' : tokens.ink,
+      border: 'none',
+      borderRadius: 6,
+      fontSize: 11,
+      fontWeight: 800,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      cursor: !year || !make || !model ? 'not-allowed' : 'pointer',
+      fontFamily: 'inherit'
+    }
+  }, "Shop now ", /*#__PURE__*/React.createElement(Icon, {
+    name: "arrow_forward",
+    size: 15
+  })))));
+}
+
+// ─────────────── PageWheels
+
+function normalizeWheelItem(w, data) {
+  var imgBase = (data && data.ImgUrlBase) || window.AUTOSYNC_CDN.wheels;
+  var allImgFiles = [w.Img0001, w.Img0002, w.Img0003, w.Img0100, w.Img0200].filter(Boolean);
+  var images = allImgFiles.map(function(f) { return imgBase + f; });
+  var rawLugs = Number(w.LugCount || w.lugCount) || null;
+  var rawBC1 = Number(w.BoltCircle1 || w.boltCircle1) || null;
+  var rawBC2 = Number(w.BoltCircle2 || w.boltCircle2) || null;
+  var rawDiam = Number(w.Diameter) || null;
+  var rawWidth = Number(w.Width) || null;
+  return {
+    id: w.Id || w.Pn || ('w-' + (w.Brand || '') + '-' + (w.Model || w.SubModel || 'Unknown')).replace(/\s/g, '-').toLowerCase(),
+    styleId: w.StyleId != null ? w.StyleId : null,
+    partNumber: w.Pn || '',
+    brand: w.Brand || w.brand || '',
+    model: w.Model || w.model || w.SubModel || 'Unknown',
+    size: w.Size || w.size || (w.Diameter || '') + 'x' + (w.Width || ''),
+    offset: w.Offset != null && w.Offset !== '' ? (Number(w.Offset) > 0 ? '+' + w.Offset : '' + w.Offset) : '',
+    bolt: (function() {
+      if (rawLugs && rawBC1) return rawLugs + 'x' + rawBC1 + (rawBC2 && rawBC2 !== rawBC1 ? '/' + rawBC2 : '');
+      return w.BoltPattern || w.boltPattern || '';
+    })(),
+    finish: [w.Finish, w.Color, w.Accent].filter(Boolean).join(' ').trim() || w.ShortFinish || w.finish || '',
+    type: w.Construction || w.construction || 'Cast',
+    bore: w.Bore || w.bore || '',
+    loadRating: w.LoadRating || w.loadRating || '',
+    priceEach: w.Price || w.price || 0,
+    rating: w.Rating || 4.5 + Math.random() * 0.4,
+    reviews: w.Reviews || Math.floor(100 + Math.random() * 400),
+    imgUrl: images.length > 0 ? images[0] : null,
+    images: images,
+    lugCount: rawLugs,
+    boltCircle1: rawBC1,
+    boltCircle2: rawBC2,
+    boreRaw: Number(w.Bore || w.bore) || null,
+    loadRatingRaw: Number(w.LoadRating || w.loadRating) || null,
+    diameter: rawDiam,
+    width: rawWidth,
+    offsetRaw: Number(w.Offset) || null,
+    vehicleTypeTags: w.VehicleTypeTags || w.vehicleTypeTags || []
+  };
+}
+
+function makeWheelSlug(w) {
+  var clean = function(s) { return String(s || '').replace(/\s+/g, '_').replace(/[^A-Za-z0-9_.-]/g, ''); };
+  return clean(w.brand) + '__' + clean(w.model) + '_pn-' + clean(w.partNumber || w.id) + '_' + clean(w.size);
+}
+function findWheelBySlug(wheels, slug) {
+  if (!slug || !wheels || !wheels.length) return null;
+  var bySlug = wheels.find(function(w) { return makeWheelSlug(w) === slug; });
+  if (bySlug) return bySlug;
+  // Fallback: match by PN extracted from slug
+  var pnMatch = slug.match(/_pn-([^_]+)/);
+  if (pnMatch) return wheels.find(function(w) { return w.partNumber === pnMatch[1]; }) || null;
+  return null;
+}
+
+// Normalizes a /wheels/styles API response item into the shape WheelCard expects
+function normalizeWheelStyleItem(s, data) {
+  var imgBase = (data && data.ImgUrlBase) || window.AUTOSYNC_CDN.wheels;
+  var imgFile = s.Img0001 || s.Img0002 || s.Img0003 || null;
+  var specs = s.Specs || {};
+  return {
+    styleId: s.Id,
+    brand: s.Brand || '',
+    model: s.Model || s.SubModel || '',
+    type: specs.Structure || s.Structure || (Array.isArray(s.Tags) && s.Tags.find(function(t) { return ['Cast','Forged','Flow-Formed','Replica'].includes(t); })) || '',
+    imgUrl: imgFile ? imgBase + imgFile : null,
+    priceMin: s.MinPrice || 0,
+    priceMax: s.MaxPrice || 0,
+    finish: [s.ImgFinish || (Array.isArray(s.ShortFinishes) && s.ShortFinishes[0]) || '', s.ImgColor || (Array.isArray(s.ShortColors) && s.ShortColors[0]) || '', s.ImgAccent || ''].filter(Boolean).join(' ').trim(),
+    finishes: Array.isArray(s.ShortFinishes) ? s.ShortFinishes : (Array.isArray(s.ShortColors) ? s.ShortColors : []),
+    diameters: Array.isArray(s.Diameters) ? s.Diameters.map(Number).filter(Boolean) : [],
+    sizes: Array.isArray(s.Sizes) ? s.Sizes : [],
+    offsets: Array.isArray(s.Offsets) ? s.Offsets : [],
+    boltPatterns: [], bores: [], loadRatings: [],
+    variants: [],
+    variantCount: s.WheelCount || 0
+  };
+}
+
+function makeWheelStyleSlug(style) {
+  var clean = function(s) { return String(s || '').replace(/\s+/g, '_').replace(/[^A-Za-z0-9_.-]/g, ''); };
+  return clean(style.brand) + '__' + clean(style.model) + '_style-' + style.styleId;
+}
+
+function groupWheelsByStyle(variants) {
+  var map = {};
+  variants.forEach(function(w) {
+    var sid = w.styleId != null ? w.styleId : w.id;
+    if (!map[sid]) {
+      map[sid] = {
+        styleId: sid,
+        brand: w.brand,
+        model: w.model,
+        type: w.type,
+        imgUrl: w.imgUrl || null,
+        priceMin: 0,
+        priceMax: 0,
+        finishes: [],
+        diameters: [],
+        boltPatterns: [],
+        bores: [],
+        offsets: [],
+        loadRatings: [],
+        variants: [],
+        variantCount: 0
+      };
+    }
+    if (!map[sid].imgUrl && w.imgUrl) map[sid].imgUrl = w.imgUrl;
+    var s = map[sid];
+    if (w.priceEach > 0) {
+      if (s.priceMin === 0 || w.priceEach < s.priceMin) s.priceMin = w.priceEach;
+      if (w.priceEach > s.priceMax) s.priceMax = w.priceEach;
+    }
+    if (w.finish && !s.finishes.includes(w.finish)) s.finishes.push(w.finish);
+    var dia = parseInt(w.size);
+    if (!isNaN(dia) && !s.diameters.includes(dia)) s.diameters.push(dia);
+    if (w.lugCount && w.boltCircle1) {
+      var bp1 = w.lugCount + 'x' + w.boltCircle1;
+      if (!s.boltPatterns.includes(bp1)) s.boltPatterns.push(bp1);
+      if (w.boltCircle2 && w.boltCircle2 !== w.boltCircle1) {
+        var bp2 = w.lugCount + 'x' + w.boltCircle2;
+        if (!s.boltPatterns.includes(bp2)) s.boltPatterns.push(bp2);
+      }
+    }
+    if (w.boreRaw) { var boreStr = String(w.boreRaw); if (!s.bores.includes(boreStr)) s.bores.push(boreStr); }
+    if (w.offsetRaw != null) { var offStr = String(w.offsetRaw); if (!s.offsets.includes(offStr)) s.offsets.push(offStr); }
+    if (w.loadRatingRaw) { var lrStr = String(w.loadRatingRaw); if (!s.loadRatings.includes(lrStr)) s.loadRatings.push(lrStr); }
+    s.variants.push(w);
+    s.variantCount++;
+  });
+  var result = Object.values(map);
+  result.forEach(function(s) { s.diameters.sort(function(a, b) { return a - b; }); });
+  return result;
+}
+
+var WHEEL_CACHE_KEY = 'htmc_wheels_v6';
+var WHEEL_CACHE_TTL = 86400000;
+function loadCachedWheels() {
+  try {
+    var c = JSON.parse(localStorage.getItem(WHEEL_CACHE_KEY) || 'null');
+    if (c && Array.isArray(c.data) && c.data.length > 0 && (Date.now() - c.ts) < WHEEL_CACHE_TTL) return c.data;
+  } catch(e) {}
+  return null;
+}
+function loadCachedWheelsHasMore() {
+  try {
+    var c = JSON.parse(localStorage.getItem(WHEEL_CACHE_KEY) || 'null');
+    return !!(c && c.hasMore);
+  } catch(e) {}
+  return false;
+}
+function saveWheelsToCache(wheels, hasMore) {
+  if (!wheels || !wheels.length) return;
+  try { localStorage.setItem(WHEEL_CACHE_KEY, JSON.stringify({ data: wheels, ts: Date.now(), hasMore: !!hasMore })); } catch(e) {}
+}
+
+function WheelsPLP() {
+  const {
+    route,
+    vehicle,
+    setVehicle,
+    navigate,
+    wheelBrandsList
+  } = useApp();
+
+  const cachedWheels = useRef(loadCachedWheels());
+  const allWheels = useRef(cachedWheels.current ? cachedWheels.current.slice() : []);
+  const allVehicleWheels = useRef(null);
+  const vehicleRef = useRef(vehicle);
+  useEffect(function() { vehicleRef.current = vehicle; });
+
+  const [wheels, setWheels] = useState(function() {
+    if (cachedWheels.current) { window.HOLBROOK_DATA.wheels = cachedWheels.current; return cachedWheels.current; }
+    return window.HOLBROOK_DATA.wheels;
+  });
+  const [loading, setLoading] = useState(!cachedWheels.current);
+
+  const wheelBrands = useMemo(() => wheelBrandsList.map(function(b) { return b.name; }), [wheelBrandsList]);
+
+  // Filter state — declared before useEffect so fetchKey can reference brandF
+  const params = useMemo(() => new URLSearchParams(window.location.search), []);
+  const initType = params.get('type') || '';
+  const [typeF, setTypeF] = useState(initType ? [initType] : []);
+  const [brandF, setBrandF] = useState([]);
+  const [finishF, setFinishF] = useState([]);
+  const [diaF, setDiaF] = useState([]);
+  const [sizeF, setSizeF] = useState('');
+  const [boltF, setBoltF] = useState([]);
+  const [boreF, setBoreF] = useState([]);
+  const [offsetF, setOffsetF] = useState([]);
+  const [loadF, setLoadF] = useState([]);
+  const [sort, setSort] = useState('featured');
+  const [page, setPage] = useState(1);
+  const PAGE_SIZE = 30;
+  const [showAllBrands, setShowAllBrands] = useState(false);
+  const [showAllFinishes, setShowAllFinishes] = useState(false);
+  const [showAllDiameters, setShowAllDiameters] = useState(false);
+  const [showAllBolts, setShowAllBolts] = useState(false);
+  const [showAllBores, setShowAllBores] = useState(false);
+  const [showAllOffsets, setShowAllOffsets] = useState(false);
+  const [showAllLoads, setShowAllLoads] = useState(false);
+  const [vehicleWheels, setVehicleWheels] = useState(null);
+  const [vehicleStyles, setVehicleStyles] = useState(null);      // VVSE styles — no brand
+  const [brandVehicleStyles, setBrandVehicleStyles] = useState(null); // VVSE styles — brand active
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [brandHasMore, setBrandHasMore] = useState(false);
+  const brandLastFilters = useRef({});
+  const brandNextPage = useRef(2);
+  const [showFilters, setShowFilters] = useState(false);
+  const [fitmentFilter, setFitmentFilter] = useState(true);
+  const isMobile = useIsMobile();
+
+  // Pre-select the diameter when vehicleSizes changes (new vehicle loaded). Uses vehicleRef to avoid
+  // re-running when vehicle.selectedSize is updated by a manual sidebar click.
+  // Checks v.fitment.staggered (not hasStaggeredFitment) so vehicles that only have *some* optional
+  // staggered sizes (e.g. F-150 King Ranch) still get an auto-selected diameter.
+  useEffect(function() {
+    var v = vehicleRef.current;
+    var vd = v && v.vehicleData;
+    if (!v || !vd) { setSizeF(''); return; }
+    // Staggered vehicles have no size selector — never set sizeF
+    if (hasStaggeredFitment(vd)) { setSizeF(''); return; }
+    // Explicit non-staggered fitment from fitment bar
+    if (v.fitment && v.fitment.diameter != null && !v.fitment.staggered) {
+      setSizeF(String(v.fitment.diameter));
+      return;
+    }
+    // Cross-page or fallback: pick from non-staggered vehicleSizes
+    var nonStaggered = vehicleSizes.filter(function(s) { return !s.staggered; });
+    if (nonStaggered.length > 0) {
+      var sel = String(v.selectedSize || '').trim();
+      var autoDiam = null;
+      if (sel) {
+        var tireN = normalizeTireSize(sel);
+        if (tireN && tireN.rim) {
+          var rimStr = String(tireN.rim);
+          if (nonStaggered.some(function(s) { return s.diameter === rimStr; })) autoDiam = rimStr;
+        } else if (/^\d+$/.test(sel) && nonStaggered.some(function(s) { return s.diameter === sel; })) {
+          autoDiam = sel;
+        }
+      }
+      if (!autoDiam) {
+        var targetSrc = v.sizeSource || 'oe';
+        var preferred = nonStaggered.find(function(s) { return s.source === targetSrc; }) || nonStaggered.find(function(s) { return s.source === 'oe'; }) || nonStaggered[0];
+        autoDiam = preferred.diameter;
+      }
+      if (autoDiam) { setSizeF(autoDiam); return; }
+    }
+    setSizeF('');
+  }, [vehicleSizes]);
+
+  // When vehicle changes, fetch matching wheels using VVSE-matched approach
+  useEffect(function() {
+    if (!vehicle || !vehicle.year || !vehicle.make || !vehicle.model) {
+      setVehicleWheels(null); setVehicleStyles(null);
+      return;
+    }
+    var vd = vehicle.vehicleData || {};
+    var isStaggered = hasStaggeredFitment(vd);
+    var cancelled = false;
+    setLoading(true);
+
+    if (isStaggered) {
+      // Staggered: keep original approach — requires front+rear variant matching
+      api.fetchWheelsByVehicle(vd)
+        .then(function(data) {
+          if (cancelled) return;
+          var items = extractItems(data);
+          if (items && items.length > 0) {
+            var normalized = items.map(function(w) { return normalizeWheelItem(w, data); });
+            var fitted = filterWheelsByVehicle(normalized, vd);
+            var frontSizesSet = new Set(buildStaggeredSizes(vd, 'front').split(',').filter(Boolean));
+            var rearSizesSet  = new Set(buildStaggeredSizes(vd, 'rear').split(',').filter(Boolean));
+            var staggeredStyles = groupWheelsByStyle(fitted);
+            var qualifyingStyles = staggeredStyles.filter(function(style) {
+              var hasFront = style.variants.some(function(v) { return frontSizesSet.has(v.diameter + 'x' + v.width) && checkWheelFitmentStaggered(v, vd).frontFits; });
+              var hasRear  = style.variants.some(function(v) { return rearSizesSet.has(v.diameter + 'x' + v.width)  && checkWheelFitmentStaggered(v, vd).rearFits;  });
+              return hasFront && hasRear;
+            });
+            fitted = [];
+            qualifyingStyles.forEach(function(style) { fitted = fitted.concat(style.variants); });
+            var vehicleResult = fitted.length > 0 ? fitted : null;
+            allVehicleWheels.current = vehicleResult;
+            setVehicleWheels(vehicleResult);
+          } else {
+            allVehicleWheels.current = null; setVehicleWheels(null);
+          }
+          setLoading(false);
+        })
+        .catch(function() { if (!cancelled) { allVehicleWheels.current = null; setVehicleWheels(null); setLoading(false); } });
+    } else {
+      // Non-staggered: VVSE approach — /wheels/styles with f-sizes
+      // Derive initial diameter from vehicle.selectedSize (set by FitmentBar before page load)
+      var _vSel = vehicle && vehicle.selectedSize ? String(vehicle.selectedSize) : '';
+      var _initDiam = null;
+      if (_vSel) {
+        var _tN = typeof normalizeTireSize === 'function' ? normalizeTireSize(_vSel) : null;
+        if (_tN && _tN.rim) _initDiam = String(_tN.rim);
+        else if (/^\d+$/.test(_vSel)) _initDiam = _vSel;
+      }
+      api.fetchWheelStylesByFitment(vd, _initDiam, null, 1)
+        .then(function(data) {
+          if (cancelled) return;
+          var styleItems = (data.WheelStyles || []).map(function(s) { return normalizeWheelStyleItem(s, data); });
+          var hasMore = !!data.MoreItems;
+          setVehicleStyles(styleItems.length > 0 ? styleItems : null);
+          allVehicleWheels.current = null;
+          setVehicleWheels(null);
+          // Handle pagination: load all pages so the full fitting set is available
+          if (hasMore) {
+            var allStyles = styleItems.slice();
+            function fetchNextPage(pg) {
+              if (cancelled) return;
+              api.fetchWheelStylesByFitment(vd, _initDiam, null, pg).then(function(d) {
+                var more = (d.WheelStyles || []).map(function(s) { return normalizeWheelStyleItem(s, d); });
+                allStyles = allStyles.concat(more);
+                if (d.MoreItems && pg < 10) { fetchNextPage(pg + 1); }
+                else { if (!cancelled) setVehicleStyles(allStyles); }
+              }).catch(function() {});
+            }
+            fetchNextPage(2);
+          }
+          setLoading(false);
+        })
+        .catch(function() { if (!cancelled) { setVehicleStyles(null); setLoading(false); } });
+    }
+    return function() { cancelled = true; };
+  }, [vehicle]);
+
+  // Re-fetch when brand filter changes — same pattern as tires
+  var fetchKey = brandF.join(',');
+
+  useEffect(function() {
+    var cancelled = false;
+    setLoadingMore(false);
+
+    if (brandF.length > 0) {
+      var vd = vehicle && vehicle.vehicleData ? vehicle.vehicleData : null;
+      var isStaggeredVehicle = vd && hasStaggeredFitment(vd);
+      setLoading(true);
+
+      if (isStaggeredVehicle) {
+        // Staggered + brand: re-fetch using vehicle-aware params (f-sizes + f-brand) so only
+        // fitting sizes are returned, then apply the same fitment + AND filter as the main fetch.
+        Promise.all(brandF.map(function(brand) {
+          return api.fetchWheelsByVehicle(vd, null, brand)
+            .then(function(data) {
+              var items = extractItems(data);
+              if (!items) return [];
+              return items.map(function(w) { return normalizeWheelItem(w, data); });
+            }).catch(function() { return []; });
+        })).then(function(results) {
+          if (cancelled) return;
+          var combined = [].concat.apply([], results);
+          console.log('[Brand+Staggered Debug] E5 from API:', combined.filter(function(w){return (w.brand||'').toLowerCase()==='e5';}).length, 'total:', combined.length);
+          var fitted = filterWheelsByVehicle(combined, vd);
+          var frontSizesSet2 = new Set(buildStaggeredSizes(vd, 'front').split(',').filter(Boolean));
+          var rearSizesSet2  = new Set(buildStaggeredSizes(vd, 'rear').split(',').filter(Boolean));
+          var staggeredStyles = groupWheelsByStyle(fitted);
+          var qualifyingStyles = staggeredStyles.filter(function(style) {
+            var hasFront = style.variants.some(function(v) { return frontSizesSet2.has(v.diameter + 'x' + v.width) && checkWheelFitmentStaggered(v, vd).frontFits; });
+            var hasRear  = style.variants.some(function(v) { return rearSizesSet2.has(v.diameter + 'x' + v.width)  && checkWheelFitmentStaggered(v, vd).rearFits;  });
+            if ((style.brand||'').toLowerCase() === 'e5') {
+              console.log('[Brand+Staggered Debug] E5 style', style.styleId, style.model, '| hasFront:', hasFront, '| hasRear:', hasRear);
+            }
+            return hasFront && hasRear;
+          });
+          var qualifyingWheels = [];
+          qualifyingStyles.forEach(function(style) { qualifyingWheels = qualifyingWheels.concat(style.variants); });
+          setVehicleWheels(qualifyingWheels.length > 0 ? qualifyingWheels : null);
+          setLoading(false);
+        }).catch(function() { if (!cancelled) setLoading(false); });
+
+      } else {
+        // Non-staggered: VVSE approach when vehicle set, plain brand fetch otherwise
+        setBrandHasMore(false); brandNextPage.current = 2;
+        setBrandVehicleStyles(null);
+        if (vd) {
+          Promise.all(brandF.map(function(brand) {
+            brandLastFilters.current = { vd: vd, diam: sizeF || null, brand: brand };
+            return api.fetchWheelStylesByFitment(vd, sizeF || null, brand, 1)
+              .then(function(d) {
+                if (!cancelled) setBrandHasMore(!!d.MoreItems);
+                return (d.WheelStyles || []).map(function(s) { return normalizeWheelStyleItem(s, d); });
+              })
+              .catch(function() { return []; });
+          })).then(function(results) {
+            if (cancelled) return;
+            var combined = [].concat.apply([], results);
+            setBrandVehicleStyles(combined.length > 0 ? combined : null);
+            setVehicleWheels(null);
+            setLoading(false);
+          }).catch(function() { if (!cancelled) setLoading(false); });
+        } else {
+          Promise.all(brandF.map(function(brand) {
+            brandLastFilters.current = { 'f-brand': brand };
+            return api.fetchWheels({ 'f-brand': brand })
+              .then(function(d) {
+                if (!cancelled) setBrandHasMore(!!d.MoreItems);
+                return (extractItems(d) || []).map(function(w) { return normalizeWheelItem(w, d); });
+              })
+              .catch(function() { return []; });
+          })).then(function(results) {
+            if (cancelled) return;
+            var combined = [].concat.apply([], results);
+            setWheels(combined);
+            setLoading(false);
+          }).catch(function() { if (!cancelled) setLoading(false); });
+        }
+      }
+
+    } else {
+      // No brand filter: clear brand styles, restore full list or do initial load
+      setBrandVehicleStyles(null);
+      if (allWheels.current.length > 0) {
+        setWheels(allWheels.current.slice());
+        setBrandHasMore(loadCachedWheelsHasMore());
+        brandNextPage.current = 2;
+        // Restore original vehicle-wide wheels (cleared by brand filter branch)
+        if (vehicle && vehicle.vehicleData) {
+          setVehicleWheels(allVehicleWheels.current);
+        }
+        setLoading(false);
+        return function() { cancelled = true; };
+      }
+      // First visit — no cache: fetch initial 400 then background-fill brand by brand
+      setLoading(true); setBrandHasMore(false);
+      api.fetchWheels({}).then(function(data) {
+        if (cancelled) return;
+        var items = extractItems(data);
+        if (!items) { setLoading(false); return; }
+        var normalized = items.map(function(w) { return normalizeWheelItem(w, data); });
+        allWheels.current = normalized.slice();
+        setWheels(normalized);
+        window.HOLBROOK_DATA.wheels = normalized;
+        var initialHasMore = !!data.MoreItems;
+        brandLastFilters.current = {};
+        brandNextPage.current = 2;
+        setBrandHasMore(initialHasMore);
+        setLoading(false);
+        // Background: fill to 600 brand by brand
+        api.fetchWheelBrands().then(function(brandData) {
+          if (cancelled) return;
+          var brandNames = (extractItems(brandData) || [])
+            .map(function(b) { return b.Name || b.name || b.Brand || b.brand || ''; })
+            .filter(Boolean);
+          if (!brandNames.length) { saveWheelsToCache(allWheels.current, initialHasMore); return; }
+          var existingIds = new Set(normalized.map(function(w) { return w.id; }));
+          var totalLoaded = normalized.length;
+          var idx = 0;
+          setLoadingMore(true);
+          function runNextBatch() {
+            if (cancelled || idx >= brandNames.length || totalLoaded >= 600) {
+              if (!cancelled) {
+                setLoadingMore(false);
+                saveWheelsToCache(allWheels.current, initialHasMore);
+              }
+              return;
+            }
+            var batch = brandNames.slice(idx, idx + 5);
+            idx += 5;
+            Promise.all(batch.map(function(brand) {
+              return api.fetchWheels({ 'f-brand': brand, 'p-size': 30 })
+                .then(function(d) { return (extractItems(d) || []).map(function(w) { return normalizeWheelItem(w, d); }); })
+                .catch(function() { return []; });
+            })).then(function(results) {
+              if (cancelled) return;
+              var newItems = [];
+              results.forEach(function(brandWheels) {
+                brandWheels.forEach(function(w) {
+                  if (!existingIds.has(w.id) && totalLoaded + newItems.length < 600) {
+                    existingIds.add(w.id);
+                    newItems.push(w);
+                  }
+                });
+              });
+              totalLoaded += newItems.length;
+              if (newItems.length > 0) {
+                allWheels.current = allWheels.current.concat(newItems);
+                setWheels(function(prev) { return prev.concat(newItems).slice(0, 600); });
+              }
+              runNextBatch();
+            });
+          }
+          runNextBatch();
+        }).catch(function() { saveWheelsToCache(allWheels.current, initialHasMore); });
+      }).catch(function(err) {
+        if (!cancelled) { console.warn('[Holbrook] Wheels API failed:', err); setLoading(false); }
+      });
+    }
+
+    return function() { cancelled = true; setLoadingMore(false); };
+  }, [fetchKey]);
+
+  // Vehicle URL: /wheels/?v=2020-Ford-F-150 — parse on mount, fetch fitments, and set vehicle
+  useEffect(function() {
+    var slug = new URLSearchParams(window.location.search).get('v');
+    if (!slug) return;
+    var yearMatch = slug.match(/^(\d{4})-(.+)$/);
+    if (!yearMatch) return;
+    var year = yearMatch[1];
+    var vehicleRest = yearMatch[2];
+    // If vehicle from localStorage already matches this slug and has full data, trust it
+    if (vehicle && vehicle.year && vehicle.vehicleData) {
+      var _ls = vehicle.year + '-' + vehicle.make.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '') + '-' + vehicle.model.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '') + (vehicle.submodel ? '-' + vehicle.submodel.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '') : '');
+      if (_ls === slug) return;
+    }
+
+    function applyFitments(yr, mk, mdl, submdl, sizeSource, selectedSize) {
+      api.fetchVehicleFitments(yr, mk, mdl, submdl).then(function(fitData) {
+        var vd = (fitData.Fitments && fitData.Fitments.length) ? fitData : ((fitData.Vehicles || [])[0] || fitData);
+        var _wSel = selectedSize;
+        var _wSrc = sizeSource;
+        if (!_wSel && vd && vd.Fitments && vd.Fitments.length > 0) { _wSel = String(vd.Fitments[0].RimDiameter); _wSrc = _wSrc || 'oe'; }
+        setVehicle({ year: yr, make: mk, model: mdl, submodel: submdl || undefined, vehicleData: vd, sizeSource: _wSrc || undefined, selectedSize: _wSel || undefined });
+      }).catch(function() {
+        setVehicle({ year: yr, make: mk, model: mdl });
+      });
+    }
+
+    // Check sessionStorage first (set by fitment bar navigation — has exact data)
+    try {
+      var raw = sessionStorage.getItem('holbrook.vehicleSlug');
+      if (raw) {
+        var saved = JSON.parse(raw);
+        sessionStorage.removeItem('holbrook.vehicleSlug');
+        if (saved && saved.slug === slug) {
+          var savedSelectedSize = saved.rimDiameter ? String(saved.rimDiameter) : undefined;
+          applyFitments(saved.year, saved.make, saved.model, saved.submodel, saved.sizeSource, savedSelectedSize);
+          return;
+        }
+      }
+    } catch(e) {}
+    // Fallback for direct/bookmarked URLs: match make/model via API
+    api.fetchVehicleMakes(year).then(function(data) {
+      var makes = extractItems(data);
+      if (!makes) return;
+      var makeMatch = makes.find(function(m) {
+        var name = extractName(m);
+        var mkSlug = name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '').toLowerCase();
+        return vehicleRest.toLowerCase().startsWith(mkSlug + '-') || vehicleRest.toLowerCase() === mkSlug;
+      });
+      if (!makeMatch) return;
+      var makeName = extractName(makeMatch);
+      var mkSlug = makeName.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+      var modelRest = vehicleRest.slice(mkSlug.length + 1);
+      api.fetchVehicleModels(year, makeName).then(function(modelData) {
+        var models = extractItems(modelData);
+        if (!models) return;
+        var modelMatch = models.find(function(mod) {
+          var name = mod.Model || mod.model || extractName(mod);
+          var modSlug = name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '').toLowerCase();
+          return modelRest.toLowerCase() === modSlug || modelRest.toLowerCase().startsWith(modSlug + '-');
+        });
+        if (!modelMatch) return;
+        var modelName2 = modelMatch.Model || modelMatch.model || extractName(modelMatch);
+        var mdSlug2 = modelName2.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+        var subRest2 = modelRest.length > mdSlug2.length ? modelRest.slice(mdSlug2.length + 1) : '';
+        if (subRest2) {
+          api.fetchVehicleSubmodels(year, makeName, modelName2).then(function(smData) {
+            var sms = extractItems(smData);
+            var smMatch = sms && sms.find(function(sm) {
+              var smN = sm.Submodel || sm.submodel || extractName(sm);
+              return smN.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '').toLowerCase() === subRest2.toLowerCase();
+            });
+            var smN2 = smMatch ? (smMatch.Submodel || smMatch.submodel || extractName(smMatch)) : null;
+            applyFitments(year, makeName, modelName2, smN2);
+          }).catch(function() { applyFitments(year, makeName, modelName2, null); });
+          return;
+        }
+        applyFitments(year, makeName, modelName2, null);
+      });
+    }).catch(function() {});
+  }, []);
+
+  const types = ['Forged', 'Flow-Formed', 'Cast', 'Replica'];
+  var activeWheels = vehicleWheels !== null ? vehicleWheels : wheels;
+  var styles = useMemo(function() {
+    if (brandVehicleStyles !== null) return brandVehicleStyles; // brand + vehicle VVSE
+    if (vehicleStyles !== null) return vehicleStyles;           // vehicle only VVSE
+    return groupWheelsByStyle(activeWheels);
+  }, [activeWheels, vehicleStyles, brandVehicleStyles]);
+  var finishes = useMemo(function() { return [...new Set(styles.flatMap(function(s) { return s.finishes; }))].sort(); }, [styles]);
+  var diameters = useMemo(function() { return [...new Set(styles.flatMap(function(s) { return s.diameters; }))].sort(function(a, b) { return a - b; }); }, [styles]);
+  var boltPatternOptions = useMemo(function() {
+    var all = new Set();
+    styles.forEach(function(s) { s.boltPatterns.forEach(function(bp) { all.add(bp); }); });
+    return [...all].sort(function(a, b) {
+      var aP = a.split('x'); var bP = b.split('x');
+      var ld = Number(aP[0]) - Number(bP[0]);
+      return ld !== 0 ? ld : Number(aP[1]) - Number(bP[1]);
+    });
+  }, [styles]);
+  var boreOptions = useMemo(function() {
+    var all = new Set();
+    styles.forEach(function(s) { s.bores.forEach(function(b) { all.add(b); }); });
+    return [...all].sort(function(a, b) { return Number(a) - Number(b); });
+  }, [styles]);
+  var offsetOptions = useMemo(function() {
+    var all = new Set();
+    styles.forEach(function(s) { s.offsets.forEach(function(o) { all.add(o); }); });
+    return [...all].sort(function(a, b) { return Number(a) - Number(b); });
+  }, [styles]);
+  var loadOptions = useMemo(function() {
+    var all = new Set();
+    styles.forEach(function(s) { s.loadRatings.forEach(function(l) { all.add(l); }); });
+    return [...all].sort(function(a, b) { return Number(a) - Number(b); });
+  }, [styles]);
+  const fittingStyleIds = useMemo(function() {
+    if (!vehicle) return null;
+    // VVSE styles: API already filtered — all returned styles fit
+    if (brandVehicleStyles !== null) {
+      var ids = new Set();
+      brandVehicleStyles.forEach(function(s) { ids.add(s.styleId); });
+      return ids;
+    }
+    if (vehicleStyles !== null) {
+      var ids = new Set();
+      vehicleStyles.forEach(function(s) { ids.add(s.styleId); });
+      return ids;
+    }
+    if (vehicleWheels !== null) {
+      var ids = new Set();
+      vehicleWheels.forEach(function(w) { ids.add(w.styleId != null ? w.styleId : w.id); });
+      return ids;
+    }
+    if (!vehicle.vehicleData) return null;
+    var fittingWheels = filterWheelsByVehicle(wheels, vehicle.vehicleData);
+    var ids = new Set();
+    fittingWheels.forEach(function(w) { ids.add(w.styleId != null ? w.styleId : w.id); });
+    return ids;
+  }, [wheels, vehicle, vehicleWheels, vehicleStyles, brandVehicleStyles]);
+
+  var vehicleSizes = useMemo(function() {
+    if (!vehicle || !vehicle.vehicleData) return [];
+    return getAllLabeledWheelSizes(vehicle.vehicleData);
+  }, [vehicle && vehicle.vehicleData]);
+
+  var filteredVehicleSizes = useMemo(function() {
+    if (!vehicle || !vehicle.sizeSource) return vehicleSizes;
+    return vehicleSizes.filter(function(s) { return s.source === vehicle.sizeSource; });
+  }, [vehicleSizes, vehicle && vehicle.sizeSource]);
+
+  const filtered = useMemo(() => {
+    let L = styles;
+    if (vehicleWheels === null && fitmentFilter && fittingStyleIds && fittingStyleIds.size > 0) {
+      L = L.filter(s => fittingStyleIds.has(s.styleId));
+    }
+    if (typeF.length) L = L.filter(s => typeF.includes(s.type));
+    if (brandF.length) L = L.filter(s => brandF.includes(s.brand));
+    if (finishF.length) L = L.filter(s => s.finishes.some(f => finishF.includes(f)));
+    if (diaF.length) L = L.filter(s => s.diameters.some(d => diaF.includes(String(d))));
+    if (sizeF) {
+      L = L.filter(function(s) { return s.diameters.some(function(d) { return String(d) === sizeF; }); });
+    }
+    if (boltF.length) L = L.filter(function(s) { return s.boltPatterns.some(function(bp) { return boltF.includes(bp); }); });
+    if (boreF.length) L = L.filter(function(s) { return s.bores.some(function(b) { return boreF.includes(b); }); });
+    if (offsetF.length) L = L.filter(function(s) { return s.offsets.some(function(o) { return offsetF.includes(o); }); });
+    if (loadF.length) L = L.filter(function(s) { return s.loadRatings.some(function(l) { return loadF.includes(l); }); });
+    if (sort === 'price-low') L = [...L].sort((a, b) => a.priceMin - b.priceMin);
+    if (sort === 'price-high') L = [...L].sort((a, b) => b.priceMax - a.priceMax);
+    return L;
+  }, [styles, typeF, brandF, finishF, diaF, sizeF, boltF, boreF, offsetF, loadF, sort, fitmentFilter, fittingStyleIds, vehicleSizes, vehicleWheels]);
+  const toggle = (arr, setArr, v) => { setArr(arr.includes(v) ? arr.filter(x => x !== v) : [...arr, v]); setPage(1); };
+  function clearFilters() { setTypeF([]); setBrandF([]); setFinishF([]); setDiaF([]); setSizeF(''); setBoltF([]); setBoreF([]); setOffsetF([]); setLoadF([]); setPage(1); }
+  var totalPages = 1;
+  var displayedStyles = filtered;
+  var activeChips = [].concat(
+    typeF.map(function(t) { return { key: 'ty:'+t, label: t, remove: function() { toggle(typeF, setTypeF, t); } }; }),
+    brandF.map(function(b) { return { key: 'b:'+b, label: b, remove: function() { toggle(brandF, setBrandF, b); } }; }),
+    finishF.map(function(f) { return { key: 'fi:'+f, label: f, remove: function() { toggle(finishF, setFinishF, f); } }; }),
+    diaF.map(function(d) { return { key: 'd:'+d, label: d+'"', remove: function() { toggle(diaF, setDiaF, d); } }; }),
+    ...(sizeF ? [{ key: 'sz:'+sizeF, label: sizeF+'"', remove: function() { setSizeF(''); } }] : []),
+    boltF.map(function(b) { return { key: 'bp:'+b, label: b, remove: function() { toggle(boltF, setBoltF, b); } }; }),
+    boreF.map(function(b) { return { key: 'br:'+b, label: b+'mm', remove: function() { toggle(boreF, setBoreF, b); } }; }),
+    offsetF.map(function(o) { return { key: 'of:'+o, label: (Number(o) > 0 ? '+' : '') + o, remove: function() { toggle(offsetF, setOffsetF, o); } }; }),
+    loadF.map(function(l) { return { key: 'lr:'+l, label: l+' lbs', remove: function() { toggle(loadF, setLoadF, l); } }; })
+  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "resp-plp-outer",
+    style: {
+      width: '100%',
+      maxWidth: 1320,
+      margin: '0 auto',
+      padding: '40px 32px',
+      boxSizing: 'border-box'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderBottom: `1px solid ${tokens.line}`,
+      paddingBottom: 24,
+      marginBottom: 28
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, null, "Shop wheels"), /*#__PURE__*/React.createElement(Headline, {
+    size: "h1",
+    style: {
+      fontSize: 56,
+      marginTop: 6
+    }
+  }, vehicle ? `Wheels that fit your ${vehicle.year} ${vehicle.make} ${vehicle.model}` : 'Aftermarket, replica & winter wheels'), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 15,
+      color: tokens.taupe,
+      marginTop: 10,
+      maxWidth: 720
+    }
+  }, "Vossen, HRE, BBS, Enkei, Method, and more. Sold as singles or sets of four \u2014 pair with tires to save on mount & balance.")), isMobile && showFilters && /*#__PURE__*/React.createElement("div", { onClick: function() { setShowFilters(false); }, style: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,.4)', zIndex: 199 } }),
+  /*#__PURE__*/React.createElement("div", {
+    className: "resp-plp-grid",
+    style: {
+      display: 'grid',
+      gridTemplateColumns: '260px 1fr',
+      gap: 40,
+      width: '100%'
+    }
+  }, /*#__PURE__*/React.createElement("aside", {
+    style: isMobile ? { position: 'fixed', top: 0, left: 0, bottom: 0, width: '85%', maxWidth: 320, background: '#fff', zIndex: 200, overflowY: 'auto', padding: '60px 16px 24px', boxShadow: '4px 0 30px rgba(0,0,0,.2)', display: showFilters ? 'block' : 'none' } : {}
+  },
+    isMobile && /*#__PURE__*/React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, paddingBottom: 12, borderBottom: "1px solid " + tokens.line } },
+      /*#__PURE__*/React.createElement("span", { style: { fontWeight: 700, fontSize: 16, fontFamily: "Space Grotesk" } }, "Filters"),
+      /*#__PURE__*/React.createElement("button", { onClick: function() { setShowFilters(false); }, style: { background: "none", border: "none", cursor: "pointer", padding: 4 } }, /*#__PURE__*/React.createElement(Icon, { name: "close", size: 22 }))
+    ),
+    vehicle && vehicle.vehicleData && /*#__PURE__*/React.createElement("div", {
+      style: { marginBottom: 20, padding: '12px 14px', background: fitmentFilter ? '#fef3f5' : tokens.surface, border: '1px solid ' + (fitmentFilter ? tokens.primary : tokens.line), borderRadius: 8 }
+    },
+      /*#__PURE__*/React.createElement("label", {
+        style: { display: 'flex', alignItems: 'flex-start', gap: 10, cursor: 'pointer' }
+      },
+        /*#__PURE__*/React.createElement("input", {
+          type: "checkbox", checked: fitmentFilter,
+          onChange: function(e) { setFitmentFilter(e.target.checked); setPage(1); },
+          style: { marginTop: 2, accentColor: tokens.primary, width: 15, height: 15, flexShrink: 0 }
+        }),
+        /*#__PURE__*/React.createElement("div", null,
+          /*#__PURE__*/React.createElement("div", { style: { fontSize: 12, fontWeight: 700, color: fitmentFilter ? tokens.primary : tokens.ink } },
+            fitmentFilter ? 'Filtered for your vehicle' : 'Fit filter off'
+          ),
+          /*#__PURE__*/React.createElement("div", { style: { fontSize: 11, color: tokens.mute, marginTop: 2 } },
+            vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model,
+            /*#__PURE__*/React.createElement("span", null, ' · ' + filtered.length + ' styles fit')
+          )
+        )
+      )
+    ),
+    vehicle && vehicle.vehicleData && /*#__PURE__*/React.createElement("div", {
+      style: { marginBottom: 20, padding: '10px 14px', background: tokens.surface, border: '1px solid ' + tokens.line, borderRadius: 8, fontSize: 12 }
+    },
+      /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', color: tokens.ink, marginBottom: 8 } }, "Vehicle Specs"),
+      [
+        ['Bolt Pattern', vehicle.vehicleData.LugCount && vehicle.vehicleData.BoltCircle ? vehicle.vehicleData.LugCount + '×' + vehicle.vehicleData.BoltCircle : '—'],
+        ['Bore',         vehicle.vehicleData.Bore ? vehicle.vehicleData.Bore + 'mm' : '—'],
+        ['Max Wheel Load', vehicle.vehicleData.MaxWheelLoad ? vehicle.vehicleData.MaxWheelLoad + ' lbs' : '—'],
+        ['Type',         vehicle.vehicleData.Type || '—']
+      ].map(function(row) {
+        return /*#__PURE__*/React.createElement("div", { key: row[0], style: { display: 'flex', justifyContent: 'space-between', padding: '3px 0', borderBottom: '1px solid ' + tokens.line } },
+          /*#__PURE__*/React.createElement("span", { style: { color: tokens.mute } }, row[0]),
+          /*#__PURE__*/React.createElement("span", { style: { fontWeight: 600, color: tokens.ink } }, row[1])
+        );
+      })
+    ),
+    vehicleSizes.length > 0 && !(vehicle && vehicle.vehicleData && hasStaggeredFitment(vehicle.vehicleData)) && /*#__PURE__*/React.createElement(FilterGroup, { label: "Size" },
+      vehicleSizes.map(function(sz) {
+        var badgeStyle = {
+          fontSize: 10, fontWeight: 700, padding: '1px 5px', borderRadius: 3, lineHeight: 1.4,
+          background: sz.source === 'oe' ? '#dcfce7' : sz.source === 'optional' ? '#dbeafe' : '#fef3c7',
+          color: sz.source === 'oe' ? '#166534' : sz.source === 'optional' ? '#1e40af' : '#92400e'
+        };
+        var badge = sz.source === 'oe' ? 'OE' : sz.source === 'optional' ? 'Optional' : 'Plus';
+        return /*#__PURE__*/React.createElement(FilterCheck, {
+          key: sz.label,
+          type: "radio",
+          checked: !sz.staggered && sizeF === sz.diameter,
+          onChange: sz.staggered ? function() {} : function() { setSizeF(sz.diameter); setPage(1); if (vehicle) { setVehicle(Object.assign({}, vehicle, { selectedSize: sz.diameter, sizeSource: sz.source })); try { var stored = JSON.parse(sessionStorage.getItem('holbrook.vehicleSlug') || '{}'); stored.sizeSource = sz.source; stored.rimDiameter = Number(sz.diameter); sessionStorage.setItem('holbrook.vehicleSlug', JSON.stringify(stored)); } catch(e) {} } },
+          label: /*#__PURE__*/React.createElement("span", { style: { display: 'flex', alignItems: 'center', gap: 6 } },
+            sz.staggered ? sz.label : sz.diameter + '"',
+            /*#__PURE__*/React.createElement("span", { style: badgeStyle }, badge)
+          )
+        });
+      })
+    ),
+    /*#__PURE__*/React.createElement(FilterGroup, { label: "Brand" },
+      (showAllBrands ? wheelBrands : wheelBrands.slice(0, 5)).map(b => /*#__PURE__*/React.createElement(FilterCheck, { key: b, checked: brandF.includes(b), onChange: () => toggle(brandF, setBrandF, b), label: b })),
+      wheelBrands.length > 5 && /*#__PURE__*/React.createElement("button", { onClick: function() { setShowAllBrands(function(v) { return !v; }); }, style: { display: 'block', background: 'none', border: 'none', color: tokens.primary, fontWeight: 700, fontSize: 12, cursor: 'pointer', padding: '8px 0 2px', textDecoration: 'underline' } }, showAllBrands ? 'Show less' : '+' + (wheelBrands.length - 5) + ' more brands')
+    ),
+    boltPatternOptions.length > 0 && /*#__PURE__*/React.createElement(FilterGroup, { label: "Bolt Pattern" },
+      (showAllBolts ? boltPatternOptions : boltPatternOptions.slice(0, 5)).map(function(bp) {
+        return /*#__PURE__*/React.createElement(FilterCheck, { key: bp, checked: boltF.includes(bp), onChange: function() { toggle(boltF, setBoltF, bp); }, label: bp });
+      }),
+      boltPatternOptions.length > 5 && /*#__PURE__*/React.createElement("button", { onClick: function() { setShowAllBolts(function(v) { return !v; }); }, style: { display: 'block', background: 'none', border: 'none', color: tokens.primary, fontWeight: 700, fontSize: 12, cursor: 'pointer', padding: '8px 0 2px', textDecoration: 'underline' } }, showAllBolts ? 'Show less' : '+' + (boltPatternOptions.length - 5) + ' more')
+    ),
+    boreOptions.length > 0 && /*#__PURE__*/React.createElement(FilterGroup, { label: "Bore" },
+      (showAllBores ? boreOptions : boreOptions.slice(0, 5)).map(function(b) {
+        return /*#__PURE__*/React.createElement(FilterCheck, { key: b, checked: boreF.includes(b), onChange: function() { toggle(boreF, setBoreF, b); }, label: b + 'mm' });
+      }),
+      boreOptions.length > 5 && /*#__PURE__*/React.createElement("button", { onClick: function() { setShowAllBores(function(v) { return !v; }); }, style: { display: 'block', background: 'none', border: 'none', color: tokens.primary, fontWeight: 700, fontSize: 12, cursor: 'pointer', padding: '8px 0 2px', textDecoration: 'underline' } }, showAllBores ? 'Show less' : '+' + (boreOptions.length - 5) + ' more')
+    ),
+    offsetOptions.length > 0 && /*#__PURE__*/React.createElement(FilterGroup, { label: "Offset" },
+      (showAllOffsets ? offsetOptions : offsetOptions.slice(0, 5)).map(function(o) {
+        var label = Number(o) > 0 ? '+' + o : '' + o;
+        return /*#__PURE__*/React.createElement(FilterCheck, { key: o, checked: offsetF.includes(o), onChange: function() { toggle(offsetF, setOffsetF, o); }, label: label });
+      }),
+      offsetOptions.length > 5 && /*#__PURE__*/React.createElement("button", { onClick: function() { setShowAllOffsets(function(v) { return !v; }); }, style: { display: 'block', background: 'none', border: 'none', color: tokens.primary, fontWeight: 700, fontSize: 12, cursor: 'pointer', padding: '8px 0 2px', textDecoration: 'underline' } }, showAllOffsets ? 'Show less' : '+' + (offsetOptions.length - 5) + ' more')
+    ),
+    loadOptions.length > 0 && /*#__PURE__*/React.createElement(FilterGroup, { label: "Load Rating" },
+      (showAllLoads ? loadOptions : loadOptions.slice(0, 5)).map(function(l) {
+        return /*#__PURE__*/React.createElement(FilterCheck, { key: l, checked: loadF.includes(l), onChange: function() { toggle(loadF, setLoadF, l); }, label: l + ' lbs' });
+      }),
+      loadOptions.length > 5 && /*#__PURE__*/React.createElement("button", { onClick: function() { setShowAllLoads(function(v) { return !v; }); }, style: { display: 'block', background: 'none', border: 'none', color: tokens.primary, fontWeight: 700, fontSize: 12, cursor: 'pointer', padding: '8px 0 2px', textDecoration: 'underline' } }, showAllLoads ? 'Show less' : '+' + (loadOptions.length - 5) + ' more')
+    ),
+    /*#__PURE__*/React.createElement(FilterGroup, { label: "Type" },
+      types.map(t => /*#__PURE__*/React.createElement(FilterCheck, { key: t, checked: typeF.includes(t), onChange: () => toggle(typeF, setTypeF, t), label: t }))
+    ),
+    /*#__PURE__*/React.createElement(FilterGroup, { label: "Finish" },
+      (showAllFinishes ? finishes : finishes.slice(0, 5)).map(f => /*#__PURE__*/React.createElement(FilterCheck, { key: f, checked: finishF.includes(f), onChange: () => toggle(finishF, setFinishF, f), label: f })),
+      finishes.length > 5 && /*#__PURE__*/React.createElement("button", { onClick: function() { setShowAllFinishes(function(v) { return !v; }); }, style: { display: 'block', background: 'none', border: 'none', color: tokens.primary, fontWeight: 700, fontSize: 12, cursor: 'pointer', padding: '8px 0 2px', textDecoration: 'underline' } }, showAllFinishes ? 'Show less' : '+' + (finishes.length - 5) + ' more')
+    ),
+    vehicleSizes.length === 0 && /*#__PURE__*/React.createElement(FilterGroup, { label: "Diameter" },
+      (showAllDiameters ? diameters : diameters.slice(0, 5)).map(function(d) { return /*#__PURE__*/React.createElement(FilterCheck, { key: d, checked: diaF.includes(String(d)), onChange: function() { toggle(diaF, setDiaF, String(d)); }, label: d + '"' }); }),
+      diameters.length > 5 && /*#__PURE__*/React.createElement("button", { onClick: function() { setShowAllDiameters(function(v) { return !v; }); }, style: { display: 'block', background: 'none', border: 'none', color: tokens.primary, fontWeight: 700, fontSize: 12, cursor: 'pointer', padding: '8px 0 2px', textDecoration: 'underline' } }, showAllDiameters ? 'Show less' : '+' + (diameters.length - 5) + ' more')
+    ),
+    activeChips.length > 0 || typeF.length || brandF.length || finishF.length || diaF.length || sizeF || boltF.length || boreF.length || offsetF.length || loadF.length ? /*#__PURE__*/React.createElement("button", {
+      onClick: clearFilters,
+      style: { marginTop: 8, background: 'none', border: `1px solid ${tokens.line}`, padding: '10px 14px', fontSize: 11, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', cursor: 'pointer', width: '100%', borderRadius: 6 }
+    }, "Clear filters") : null,
+    isMobile && /*#__PURE__*/React.createElement("button", {
+      onClick: function() { setShowFilters(false); },
+      style: { marginTop: 16, width: '100%', padding: '14px', background: tokens.primary, color: '#fff', border: 'none', borderRadius: 6, fontWeight: 700, fontSize: 14, cursor: 'pointer' }
+    }, "Show results")
+  ), /*#__PURE__*/React.createElement("div", null,
+    isMobile && /*#__PURE__*/React.createElement("button", {
+      onClick: function() { setShowFilters(true); },
+      style: { display: 'flex', alignItems: 'center', gap: 8, padding: '10px 18px', background: tokens.ink, color: '#fff', border: 'none', borderRadius: 6, fontWeight: 700, fontSize: 13, cursor: 'pointer', marginBottom: 16 }
+    }, /*#__PURE__*/React.createElement(Icon, { name: 'tune', size: 18 }), "Filters"),
+    /*#__PURE__*/React.createElement("div", {
+      style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }
+    },
+      /*#__PURE__*/React.createElement("div", { style: { fontSize: 13, color: tokens.taupe, fontWeight: 600 } },
+        filtered.length, " styles · page ", page, " of ", totalPages
+      ),
+      /*#__PURE__*/React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 10 } },
+        /*#__PURE__*/React.createElement("span", { style: { fontSize: 11, color: tokens.mute, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase' } }, "Sort"),
+        /*#__PURE__*/React.createElement("select", {
+          value: sort, onChange: e => setSort(e.target.value),
+          style: { padding: '8px 12px', fontSize: 13, fontWeight: 600, border: `1px solid ${tokens.line}`, borderRadius: 6, background: '#fff' }
+        },
+          /*#__PURE__*/React.createElement("option", { value: "featured" }, "Featured"),
+          /*#__PURE__*/React.createElement("option", { value: "price-low" }, "Price, low to high"),
+          /*#__PURE__*/React.createElement("option", { value: "price-high" }, "Price, high to low"),
+          /*#__PURE__*/React.createElement("option", { value: "rating" }, "Top-rated")
+        )
+      )
+    ),
+    activeChips.length > 0 && /*#__PURE__*/React.createElement("div", {
+      style: { display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }
+    }, activeChips.map(function(chip) {
+      return /*#__PURE__*/React.createElement("button", {
+        key: chip.key, onClick: chip.remove,
+        style: { display: 'inline-flex', alignItems: 'center', gap: 6, padding: '5px 12px', background: tokens.primary, color: '#fff', border: 'none', borderRadius: 20, fontSize: 12, fontWeight: 700, cursor: 'pointer' }
+      }, chip.label, " ×");
+    })),
+    loading && /*#__PURE__*/React.createElement("div", { style: { padding: 60, textAlign: 'center' } },
+      /*#__PURE__*/React.createElement("div", { style: { display: 'inline-block', width: 36, height: 36, border: '3px solid ' + tokens.line, borderTopColor: tokens.primary, borderRadius: '50%', animation: 'htmSpin 0.8s linear infinite' } }),
+      /*#__PURE__*/React.createElement("div", { style: { marginTop: 14, fontSize: 13, color: tokens.mute, fontWeight: 600 } }, "Loading wheels from inventory…")
+    ),
+    !loading && /*#__PURE__*/React.createElement("div", {
+      style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 18, minHeight: 400 }
+    }, displayedStyles.map(function(s) { return /*#__PURE__*/React.createElement(WheelCard, { key: s.styleId, style: s, sizeF: sizeF }); })),
+    loadingMore && /*#__PURE__*/React.createElement("div", {
+      style: { textAlign: 'center', padding: '10px 0', fontSize: 12, color: tokens.mute, fontWeight: 600, letterSpacing: '.06em' }
+    }, "Loading more wheels… (" + wheels.length + " variants, " + styles.length + " styles)"),
+    !loading && filtered.length === 0 && /*#__PURE__*/React.createElement("div", {
+      style: { padding: 40, textAlign: 'center', color: tokens.taupe }
+    }, "No wheels match those filters. ", /*#__PURE__*/React.createElement("button", {
+      onClick: clearFilters,
+      style: { background: 'none', border: 'none', color: tokens.primary, fontWeight: 700, cursor: 'pointer', textDecoration: 'underline' }
+    }, "Clear filters")),
+    !loading && false && totalPages > 1 && /*#__PURE__*/React.createElement("div", {
+      style: { display: 'flex', justifyContent: 'center', gap: 8, marginTop: 32, flexWrap: 'wrap' }
+    },
+      page > 1 && /*#__PURE__*/React.createElement("button", {
+        onClick: function() { setPage(function(p) { return p - 1; }); window.scrollTo(0, 0); },
+        style: { padding: '8px 16px', border: `1px solid ${tokens.line}`, borderRadius: 6, background: '#fff', cursor: 'pointer', fontSize: 13, fontWeight: 600 }
+      }, "← Prev"),
+      Array.from({ length: Math.min(totalPages, 7) }, function(_, i) {
+        var pg = totalPages <= 7 ? i + 1 : (page <= 4 ? i + 1 : (page >= totalPages - 3 ? totalPages - 6 + i : page - 3 + i));
+        return /*#__PURE__*/React.createElement("button", {
+          key: pg, onClick: function() { setPage(pg); window.scrollTo(0, 0); },
+          style: { padding: '8px 14px', border: `1px solid ${pg === page ? tokens.primary : tokens.line}`, borderRadius: 6, background: pg === page ? tokens.primary : '#fff', color: pg === page ? '#fff' : 'inherit', cursor: 'pointer', fontSize: 13, fontWeight: 600 }
+        }, pg);
+      }),
+      page < totalPages && /*#__PURE__*/React.createElement("button", {
+        onClick: function() { setPage(function(p) { return p + 1; }); window.scrollTo(0, 0); },
+        style: { padding: '8px 16px', border: `1px solid ${tokens.line}`, borderRadius: 6, background: '#fff', cursor: 'pointer', fontSize: 13, fontWeight: 600 }
+      }, "Next →")
+    ),
+  !loading && brandHasMore && /*#__PURE__*/React.createElement("div", { style: { display: 'flex', justifyContent: 'center', marginTop: 32 } },
+    /*#__PURE__*/React.createElement("button", {
+      onClick: function() {
+        setLoadingMore(true);
+        var pg = brandNextPage.current;
+        var f = brandLastFilters.current;
+        var vdLoad = f.vd || (vehicle && vehicle.vehicleData ? vehicle.vehicleData : null);
+        var loadPromise = (f.vd && f.brand)
+          ? api.fetchWheelStylesByFitment(f.vd, f.diam, f.brand, pg)
+          : api.fetchWheels(Object.assign({}, f, { 'p-number': pg }));
+        loadPromise.then(function(d) {
+          if (f.vd && f.brand) {
+            // VVSE style load more — append to brandVehicleStyles
+            var newItems = (d.WheelStyles || []).map(function(s) { return normalizeWheelStyleItem(s, d); });
+            setBrandVehicleStyles(function(prev) {
+              var seen = new Set((prev || []).map(function(s) { return s.styleId; }));
+              var deduped = newItems.filter(function(s) { return !seen.has(s.styleId); });
+              return (prev || []).concat(deduped);
+            });
+          } else {
+            var newItems = (extractItems(d) || []).map(function(w) { return normalizeWheelItem(w, d); });
+            setWheels(function(prev) {
+              var existingIds = new Set(prev.map(function(w) { return w.id; }));
+              var deduped = newItems.filter(function(w) { return !existingIds.has(w.id); });
+              var combined = prev.concat(deduped);
+              allWheels.current = combined.slice();
+              if (vdLoad) {
+                allVehicleWheels.current = filterWheelsByVehicle(combined, vdLoad);
+                setVehicleWheels(allVehicleWheels.current.length > 0 ? allVehicleWheels.current : null);
+              }
+              return combined;
+            });
+          }
+          setBrandHasMore(!!d.MoreItems);
+          brandNextPage.current = pg + 1;
+          setLoadingMore(false);
+        }).catch(function() { setLoadingMore(false); });
+      },
+      disabled: loadingMore,
+      style: { padding: '12px 32px', background: tokens.primary, color: '#fff', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 800, letterSpacing: '.1em', textTransform: 'uppercase', cursor: loadingMore ? 'not-allowed' : 'pointer', opacity: loadingMore ? .6 : 1 }
+    }, loadingMore ? 'Loading…' : 'Load more')
+  )
+  )));
+}
+function WheelCard({ style: s, sizeF }) {
+  const { navigate, vehicle } = useApp();
+  const [imgErr, setImgErr] = useState(false);
+  const [selectedCardVariant, setSelectedCardVariant] = useState(null);
+  const [cardShowPreview, setCardShowPreview] = useState(false);
+  var styleSlug = makeWheelStyleSlug(s);
+  var priceLabel = s.priceMin > 0
+    ? (s.priceMin === s.priceMax ? '$' + s.priceMin : 'From $' + s.priceMin)
+    : 'Call for price';
+  var diaLabel = s.diameters.length > 0
+    ? (s.diameters[0] === s.diameters[s.diameters.length - 1]
+        ? s.diameters[0] + '"'
+        : s.diameters[0] + '"–' + s.diameters[s.diameters.length - 1] + '"')
+    : '';
+  // When vehicle is selected, show fitting sizes.
+  // VVSE styles: use s.sizes (already vehicle-filtered by API).
+  // Variant-based: deduplicate from s.variants as before.
+  var sizeOptions = useMemo(function() {
+    if (!vehicle) return [];
+    // VVSE style — use sizes list filtered by selected diameter (sizeF)
+    if (!s.variants || !s.variants.length) {
+      if (!s.sizes || !s.sizes.length) return [];
+      var diam = sizeF ? String(sizeF) : null;
+      return s.sizes
+        .filter(function(sz) { return !diam || sz.startsWith(diam + 'x'); })
+        .map(function(sz) { var parts = sz.split('x'); return { size: sz, diameter: Number(parts[0]), width: Number(parts[1]) }; })
+        .sort(function(a, b) { return (a.diameter - b.diameter) || (a.width - b.width); });
+    }
+    var seen = {};
+    return s.variants
+      .filter(function(v) {
+        var key = v.size;
+        if (seen[key]) return false;
+        seen[key] = true;
+        return true;
+      })
+      .sort(function(a, b) { return (a.diameter - b.diameter) || (a.width - b.width); });
+  }, [s.variants, vehicle]);
+  // Keep selectedCardVariant in sync with the available options
+  useEffect(function() { setSelectedCardVariant(sizeOptions[0] || null); }, [sizeOptions]);
+  var isStaggered = vehicle && vehicle.vehicleData ? hasStaggeredFitment(vehicle.vehicleData) : false;
+  var destSlug = styleSlug;
+  var previewVariant = selectedCardVariant || (s.variants && s.variants[0]) || null;
+  return /*#__PURE__*/React.createElement(React.Fragment, null,
+    cardShowPreview && vehicle && previewVariant && /*#__PURE__*/React.createElement(window.VehiclePreviewModal, {
+      vehicle: vehicle,
+      wheel: { partNumber: previewVariant.partNumber, asId: previewVariant.id, brand: previewVariant.brand || s.brand, model: previewVariant.model || s.model, size: previewVariant.size, diameter: previewVariant.diameter, imgUrl: previewVariant.imgUrl || s.imgUrl },
+      onClose: function() { setCardShowPreview(false); }
+    }),
+  /*#__PURE__*/React.createElement("a", {
+    href: '/wheels/' + destSlug,
+    onClick: function(e) { e.preventDefault(); if (sizeF) { try { sessionStorage.setItem('htmc_wstyle_prediam', sizeF); } catch(_){} } navigate('/wheels/' + destSlug); },
+    style: { display: 'block', background: '#fff', border: '1px solid ' + tokens.line, padding: 18, textDecoration: 'none', color: 'inherit', borderRadius: 6, transition: 'all .15s' },
+    onMouseOver: function(e) { e.currentTarget.style.borderColor = tokens.primary; e.currentTarget.style.transform = 'translateY(-2px)'; },
+    onMouseOut: function(e) { e.currentTarget.style.borderColor = tokens.line; e.currentTarget.style.transform = 'none'; }
+  },
+  /*#__PURE__*/React.createElement("div", {
+    style: { aspectRatio: '1/1', background: tokens.surfLow, borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14 }
+  }, s.imgUrl && !imgErr
+    ? /*#__PURE__*/React.createElement("img", {
+        src: s.imgUrl,
+        alt: s.brand + ' ' + s.model,
+        loading: 'lazy',
+        onError: function() { setImgErr(true); },
+        style: { maxWidth: '85%', maxHeight: '85%', objectFit: 'contain' }
+      })
+    : /*#__PURE__*/React.createElement(WheelSvg, null)
+  ),
+  /*#__PURE__*/React.createElement("div", {
+    style: { fontSize: 11, color: tokens.mute, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase' }
+  }, s.brand, ' \xB7 ', s.type),
+  /*#__PURE__*/React.createElement("div", {
+    style: { fontFamily: 'Space Grotesk', fontSize: 17, fontWeight: 700, marginTop: 4 }
+  }, s.model),
+  (s.finish || s.finishes.length > 0) && /*#__PURE__*/React.createElement("div", {
+    style: { fontSize: 11, color: tokens.taupe, marginTop: 5, lineHeight: 1.6 }
+  }, s.finish || s.finishes.join(' \xB7 ')),
+  isStaggered && vehicle
+    ? /*#__PURE__*/React.createElement("div", {
+        onClick: function(e) { e.preventDefault(); e.stopPropagation(); },
+        style: { marginTop: 10, padding: '5px 10px', background: '#fff3cd', border: '1px solid #ffc107', borderRadius: 4, fontSize: 11, fontWeight: 700, color: '#856404', display: 'inline-flex', alignItems: 'center', gap: 4 }
+      }, /*#__PURE__*/React.createElement(Icon, { name: 'compare_arrows', size: 13 }), 'Staggered fitment')
+    : sizeOptions.length === 1
+      ? /*#__PURE__*/React.createElement("div", {
+          onClick: function(e) { e.preventDefault(); e.stopPropagation(); },
+          style: { marginTop: 10, padding: '6px 10px', background: tokens.surfLow, borderRadius: 4, fontSize: 12, fontWeight: 600, color: tokens.ink, display: 'inline-block' }
+        }, sizeOptions[0].size)
+      : sizeOptions.length > 1
+        ? /*#__PURE__*/React.createElement("div", {
+            onClick: function(e) { e.preventDefault(); e.stopPropagation(); },
+            style: { marginTop: 10, padding: '6px 10px', background: tokens.surfLow, borderRadius: 4, fontSize: 12, fontWeight: 600, color: tokens.ink, display: 'inline-block' }
+          }, diaLabel)
+        : null,
+  vehicle && previewVariant && /*#__PURE__*/React.createElement("button", {
+    onClick: function(e) { e.preventDefault(); e.stopPropagation(); setCardShowPreview(true); },
+    title: 'View on Vehicle',
+    style: { width: '100%', marginTop: 12, height: 34, padding: '0 14px', borderRadius: 6, background: '#fff', border: '1px solid ' + tokens.primary, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6, color: tokens.primary, fontSize: 11, fontWeight: 800, letterSpacing: '.14em', textTransform: 'uppercase', fontFamily: 'inherit', transition: 'all .15s' },
+    onMouseOver: function(e) { e.currentTarget.style.background = tokens.primary; e.currentTarget.style.color = '#fff'; },
+    onMouseOut:  function(e) { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = tokens.primary; }
+  }, /*#__PURE__*/React.createElement(Icon, { name: 'visibility', size: 14 }), 'View on Vehicle'),
+  /*#__PURE__*/React.createElement("div", {
+    style: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 12, paddingTop: 12, borderTop: '1px solid ' + tokens.lineSoft }
+  },
+    /*#__PURE__*/React.createElement("div", null,
+      /*#__PURE__*/React.createElement("div", {
+        style: { fontSize: 10, color: tokens.mute, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase' }
+      }, s.priceMin === s.priceMax ? 'Per wheel' : 'Starting at'),
+      /*#__PURE__*/React.createElement("div", {
+        style: { fontFamily: 'Space Grotesk', fontSize: 22, fontWeight: 800, color: tokens.primary, marginTop: 2 }
+      }, priceLabel)
+    ),
+    vehicle && sizeOptions.length > 0
+      ? /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'JetBrains Mono', fontSize: 11, color: '#16a34a', fontWeight: 700 } },
+          sizeOptions.length + ' size' + (sizeOptions.length !== 1 ? 's' : '') + ' fit')
+      : diaLabel && /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'JetBrains Mono', fontSize: 12, color: tokens.graphite, fontWeight: 600 } }, diaLabel)
+  )));
+}
+function WheelPDP() {
+  const {
+    navigate,
+    addToCart,
+    vehicle
+  } = useApp();
+
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const wheelSlug = pathParts.length > 1 ? pathParts[pathParts.length - 1] : null;
+  const sessionKey = 'htmc_wpdp_' + wheelSlug;
+
+  function getInitialWheels() {
+    try {
+      var raw = sessionStorage.getItem(sessionKey);
+      if (raw) { var w = JSON.parse(raw); if (w && w.id && Array.isArray(w.images)) return { data: [w], fromCache: true }; }
+    } catch(_) {}
+    var allCached = loadCachedWheels();
+    if (allCached) {
+      window.HOLBROOK_DATA.wheels = allCached;
+      // Only skip API if this specific wheel is actually in the cache
+      var found = findWheelBySlug(allCached, wheelSlug);
+      return { data: allCached, fromCache: !!found };
+    }
+    return { data: window.HOLBROOK_DATA.wheels, fromCache: false };
+  }
+  const initial = useRef(null);
+  if (!initial.current) initial.current = getInitialWheels();
+
+  const [wheels, setWheels] = useState(initial.current.data);
+  const [loading, setLoading] = useState(!initial.current.fromCache);
+
+  useEffect(function() {
+    if (initial.current && initial.current.fromCache) return;
+    var brand = wheelSlug ? wheelSlug.split('__')[0].replace(/_/g, ' ') : null;
+    var pnMatch = wheelSlug ? wheelSlug.match(/_pn-([^_]+)/) : null;
+    var pn = pnMatch ? pnMatch[1] : null;
+    var fetchFilters = { 'p-size': 10 };
+    if (brand) fetchFilters['f-brand'] = brand;
+    if (pn) fetchFilters['f-pn'] = pn;
+    api.fetchWheels(fetchFilters).then(function(data) {
+      var items = extractItems(data);
+      if (items) {
+        var normalized = items.map(function(w) { return normalizeWheelItem(w, data); });
+        var found = findWheelBySlug(normalized, wheelSlug);
+        if (found) {
+          setWheels([found]);
+          try { sessionStorage.setItem(sessionKey, JSON.stringify(found)); } catch(_) {}
+        }
+      }
+    }).catch(function(err) {
+      console.warn('[Holbrook WheelPDP] API failed:', err.message || err);
+    }).finally(function() {
+      setLoading(false);
+    });
+  }, []);
+
+  // ALL hooks before any conditional return
+  const [qty, setQty] = useState(4);
+  const [showPkgPrompt, setShowPkgPrompt] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+  const [selectedImgIdx, setSelectedImgIdx] = useState(0);
+  const [imgErr, setImgErr] = useState(false);
+  var wheel = findWheelBySlug(wheels, wheelSlug);
+  var wheelImages = (wheel && wheel.images && wheel.images.length > 0) ? wheel.images : (wheel && wheel.imgUrl ? [wheel.imgUrl] : []);
+  var displayImg = wheelImages.length > 0 && !imgErr ? wheelImages[selectedImgIdx] : null;
+
+  useEffect(function() {
+    if (wheel) {
+      document.title = wheel.brand + ' ' + wheel.model + ' ' + wheel.size + ' | Custom Wheel Deal';
+    }
+  }, [wheel]);
+
+  if (!wheel) {
+    if (loading) {
+      return /*#__PURE__*/React.createElement("div", {
+        style: { padding: 60, textAlign: 'center' }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          width: 40, height: 40, border: '4px solid #e2ded7',
+          borderTopColor: tokens.primary, borderRadius: '50%',
+          animation: 'htmSpin 0.8s linear infinite', margin: '0 auto 16px'
+        }
+      }), /*#__PURE__*/React.createElement("div", { style: { fontSize: 14, color: '#888' } }, "Loading wheel details..."),
+      /*#__PURE__*/React.createElement("style", null, '@keyframes htmSpin { to { transform: rotate(360deg); } }'));
+    }
+    return /*#__PURE__*/React.createElement("div", { style: { padding: 60, textAlign: 'center', color: tokens.taupe } },
+      /*#__PURE__*/React.createElement("span", { className: 'material-symbols-outlined', style: { fontSize: 48, display: 'block', marginBottom: 16, color: tokens.mute } }, 'search_off'),
+      /*#__PURE__*/React.createElement("div", { style: { fontSize: 18, fontWeight: 700, marginBottom: 8, fontFamily: 'Space Grotesk', color: tokens.ink } }, 'Wheel not found'),
+      /*#__PURE__*/React.createElement("div", { style: { fontSize: 14, marginBottom: 24 } }, 'This wheel may no longer be available.'),
+      /*#__PURE__*/React.createElement("a", { href: '/wheels/', style: { color: tokens.primary, fontWeight: 700, fontSize: 14 } }, '← Browse all wheels')
+    );
+  }
+  // Specs data for grid
+  var specsData = [
+    { label: 'Part Number',  value: wheel.partNumber || '-' },
+    { label: 'Size',         value: wheel.size || '-' },
+    { label: 'Diameter',     value: wheel.diameter ? wheel.diameter + '"' : '-' },
+    { label: 'Width',        value: wheel.width ? wheel.width + '"' : '-' },
+    { label: 'Offset',       value: wheel.offset || '-' },
+    { label: 'Bolt Pattern', value: wheel.bolt || '-' },
+    { label: 'Bore',         value: wheel.bore ? wheel.bore + ' mm' : '-' },
+    { label: 'Construction', value: wheel.type || '-' },
+    { label: 'Finish',       value: wheel.finish || '-' },
+    { label: 'Load Rating',  value: wheel.loadRating || '-' },
+  ];
+
+  const handleAdd = () => {
+    var vehicleStr = vehicle && vehicle.year ? [vehicle.year, vehicle.make, vehicle.model].filter(Boolean).join(' ') : '';
+    const item = {
+      id: wheel.id,
+      type: 'wheel',
+      qty,
+      name: wheel.brand + ' ' + wheel.model,
+      subtitle: wheel.size + ' \xB7 ' + wheel.finish,
+      price: wheel.priceEach,
+      rawBrand: wheel.brand,
+      brand: wheel.brand,
+      rawModel: wheel.model,
+      partNumber: wheel.partNumber || String(wheel.id || ''),
+      size: wheel.size,
+      image: wheel.imgUrl || null,
+      vehicle: vehicleStr,
+    };
+    addToCart(item, qty);
+    setShowPkgPrompt(true);
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "resp-pdp-outer",
+    style: {
+      maxWidth: 1320,
+      margin: '0 auto',
+      padding: '40px 32px'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => navigate('/wheels'),
+    style: {
+      background: 'none',
+      border: 'none',
+      color: tokens.taupe,
+      fontSize: 12,
+      fontWeight: 700,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      cursor: 'pointer',
+      padding: 0,
+      marginBottom: 20
+    }
+  }, "\u2190 Back to wheels"), /*#__PURE__*/React.createElement("div", {
+    className: "resp-pdp-grid",
+    style: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: 48
+    }
+  }, /*#__PURE__*/React.createElement("div", null,
+    /*#__PURE__*/React.createElement("div", {
+      style: { background: tokens.surfLow, borderRadius: 8, aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center' }
+    }, displayImg
+      ? /*#__PURE__*/React.createElement("img", { src: displayImg, alt: wheel.brand + ' ' + wheel.model, onError: function() { setImgErr(true); }, style: { maxWidth: '85%', maxHeight: '85%', objectFit: 'contain' } })
+      : /*#__PURE__*/React.createElement("div", { style: { width: '70%' } }, /*#__PURE__*/React.createElement(WheelSvg, null))
+    ),
+    wheelImages.length > 1 && /*#__PURE__*/React.createElement("div", { style: { display: 'flex', gap: 10, marginTop: 12 } },
+      wheelImages.map(function(img, i) {
+        var isActive = i === selectedImgIdx;
+        return /*#__PURE__*/React.createElement("button", {
+          key: i, onClick: function() { setSelectedImgIdx(i); setImgErr(false); },
+          style: { width: 72, height: 72, padding: 4, border: '2px solid ' + (isActive ? tokens.primary : tokens.line), borderRadius: 6, background: tokens.surfLow, cursor: 'pointer', flexShrink: 0 }
+        }, /*#__PURE__*/React.createElement("img", { src: img, alt: '', style: { width: '100%', height: '100%', objectFit: 'contain' } }));
+      })
+    )
+  ), /*#__PURE__*/React.createElement("div", null,
+  /*#__PURE__*/React.createElement("img", {
+    src: window.AUTOSYNC_CDN.brandLogos + wheel.brand.replace(/\s+/g, '_') + '.webp',
+    alt: wheel.brand + ' logo',
+    style: { height: 40, objectFit: 'contain', marginBottom: 12 },
+    onError: function(e) { e.target.style.display = 'none'; }
+  }),
+  /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: tokens.mute,
+      fontWeight: 700,
+      letterSpacing: '.18em',
+      textTransform: 'uppercase'
+    }
+  }, wheel.brand, " \xB7 ", wheel.type), /*#__PURE__*/React.createElement(Headline, {
+    size: "h1",
+    className: "resp-h1-md",
+    style: {
+      fontSize: 44,
+      marginTop: 6
+    }
+  }, wheel.model), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'JetBrains Mono',
+      fontSize: 16,
+      color: tokens.graphite,
+      marginTop: 8
+    }
+  }, wheel.size, " \xB7 ", wheel.offset, " \xB7 ", wheel.bolt), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      color: tokens.taupe,
+      marginTop: 6
+    }
+  }, wheel.finish), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 14
+    }
+  }, /*#__PURE__*/React.createElement(Stars, {
+    rating: wheel.rating,
+    reviews: wheel.reviews
+  })), (function() {
+    if (!wheel || !vehicle) return null;
+    var badge;
+    if (vehicle.vehicleData) {
+      var vd = vehicle.vehicleData;
+      var isStag = hasStaggeredFitment(vd);
+      if (isStag) {
+        var fr = checkWheelFitment(wheel, extractFrontFitments(vd));
+        var rr = checkWheelFitment(wheel, extractRearFitments(vd));
+        if (fr.fits && rr.fits) badge = { color: '#2e7d32', bg: '#e8f5e9', border: '#a5d6a7', icon: 'check_circle', text: 'Fits front & rear — ' + vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model };
+        else if (fr.fits) badge = { color: '#e65100', bg: '#fff3e0', border: '#ffcc80', icon: 'warning', text: 'Fits front only — ' + vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model };
+        else if (rr.fits) badge = { color: '#e65100', bg: '#fff3e0', border: '#ffcc80', icon: 'warning', text: 'Fits rear only — ' + vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model };
+        else badge = { color: tokens.primary, bg: '#fff5f5', border: '#f5c6cb', icon: 'cancel', text: 'Does not fit — ' + vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model, noFit: true };
+      } else {
+        var frontRows = extractFrontFitments(vd);
+        var r2 = checkWheelFitment(wheel, frontRows);
+        if (r2.fits) badge = { color: '#2e7d32', bg: '#e8f5e9', border: '#a5d6a7', icon: 'check_circle', text: 'Fits your ' + vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model };
+        else badge = { color: tokens.primary, bg: '#fff5f5', border: '#f5c6cb', icon: 'cancel', text: 'Does not fit — ' + vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model, noFit: true };
+      }
+    } else if (vehicle.boltCircle) {
+      var boltOk = !!(wheel.lugCount && wheel.boltCircle1 && (wheel.lugCount + 'x' + wheel.boltCircle1 === vehicle.boltCircle));
+      var diaOk = !vehicle.rimDiameter || wheel.diameter === Number(vehicle.rimDiameter);
+      if (boltOk && diaOk) badge = { color: '#2e7d32', bg: '#e8f5e9', border: '#a5d6a7', icon: 'check_circle', text: 'Fits your ' + vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model };
+      else badge = { color: tokens.primary, bg: '#fff5f5', border: '#f5c6cb', icon: 'cancel', text: 'Does not fit — ' + vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model, noFit: true };
+    } else {
+      return null;
+    }
+    return /*#__PURE__*/React.createElement("div", { style: { marginTop: 14, padding: '10px 14px', background: badge.bg, border: '1px solid ' + badge.border, borderRadius: 8, display: 'flex', alignItems: 'center', gap: 10 } },
+      /*#__PURE__*/React.createElement(Icon, { name: badge.icon, size: 16, style: { color: badge.color, flexShrink: 0 } }),
+      /*#__PURE__*/React.createElement("span", { style: { fontSize: 12, fontWeight: 700, color: badge.color } }, badge.text),
+      badge.noFit && /*#__PURE__*/React.createElement("button", {
+        onClick: function() { navigate('/wheels'); },
+        style: { marginLeft: 'auto', background: 'none', border: 'none', color: tokens.primary, fontSize: 11, fontWeight: 700, cursor: 'pointer', textDecoration: 'underline', whiteSpace: 'nowrap' }
+      }, 'See what fits')
+    );
+  })(), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 24,
+      marginTop: 24,
+      padding: '18px 0',
+      borderTop: `1px solid ${tokens.line}`,
+      borderBottom: `1px solid ${tokens.line}`
+    }
+  }, /*#__PURE__*/React.createElement(SpecItem, {
+    label: "Per wheel",
+    value: `$${wheel.priceEach}`,
+    big: true
+  }), /*#__PURE__*/React.createElement(SpecItem, {
+    label: "Set of 4",
+    value: `$${wheel.priceEach * 4}`,
+    big: true
+  }), /*#__PURE__*/React.createElement(SpecItem, {
+    label: "Construction",
+    value: wheel.type
+  }), /*#__PURE__*/React.createElement(SpecItem, {
+    label: "Part number",
+    value: wheel.partNumber || '—'
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 24
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: 12,
+      fontWeight: 700,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      color: tokens.ink,
+      marginBottom: 10
+    }
+  }, "Quantity"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 8
+    }
+  }, [1, 2, 4, 5].map(n => /*#__PURE__*/React.createElement("button", {
+    key: n,
+    onClick: () => setQty(n),
+    style: {
+      padding: '12px 20px',
+      fontFamily: 'Space Grotesk',
+      fontWeight: 700,
+      fontSize: 14,
+      background: qty === n ? tokens.ink : '#fff',
+      color: qty === n ? '#fff' : tokens.ink,
+      border: `1px solid ${qty === n ? tokens.ink : tokens.line}`,
+      borderRadius: 6,
+      cursor: 'pointer'
+    }
+  }, n === 4 ? '4 (set)' : n === 5 ? '5 (+spare)' : n)))), /*#__PURE__*/React.createElement(Btn, {
+    variant: "primary",
+    size: "lg",
+    icon: "shopping_bag",
+    onClick: handleAdd,
+    style: {
+      width: '100%',
+      marginTop: 24
+    }
+  }, "Add to cart \xB7 $", (wheel.priceEach * qty).toLocaleString()), vehicle && /*#__PURE__*/React.createElement("div", {
+    style: { marginTop: 20, background: tokens.slate900, color: '#fff', padding: 18, borderRadius: 10, display: 'flex', gap: 14, alignItems: 'center' }
+  },
+    /*#__PURE__*/React.createElement(Icon, { name: 'view_in_ar', size: 32, style: { color: tokens.primaryAccent || '#e3183d' } }),
+    /*#__PURE__*/React.createElement("div", { style: { flex: 1, minWidth: 0 } },
+      /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 15 } }, 'See it on your vehicle'),
+      /*#__PURE__*/React.createElement("div", { style: { fontSize: 12, color: '#94a3b8', marginTop: 2 } }, 'Preview this wheel on your ', vehicle.year, ' ', vehicle.make, '.')
+    ),
+    /*#__PURE__*/React.createElement(Btn, { variant: 'accent', size: 'sm', onClick: function() { setShowPreview(true); } }, 'View on Vehicle')
+  ), showPreview && vehicle && /*#__PURE__*/React.createElement(window.VehiclePreviewModal, {
+    vehicle: vehicle,
+    wheel: { partNumber: wheel.partNumber, asId: wheel.id, brand: wheel.brand, model: wheel.model, size: wheel.size, diameter: wheel.diameter, imgUrl: wheel.imgUrl },
+    onClose: function() { setShowPreview(false); }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 20,
+      padding: 18,
+      background: tokens.surfLow,
+      borderRadius: 6,
+      display: 'flex',
+      gap: 12,
+      alignItems: 'flex-start'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "percent",
+    size: 22,
+    style: {
+      color: tokens.primary
+    }
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: 14,
+      fontWeight: 700,
+      color: tokens.ink
+    }
+  }, "Pay 25% today, rest at pickup"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: tokens.taupe,
+      marginTop: 2,
+      lineHeight: 1.45
+    }
+  }, "Schedule mount & balance at any Holbrook location \u2014 or drop-ship wheels to your door.")))))
+
+  // Specifications grid
+  , /*#__PURE__*/React.createElement("div", {
+    style: { marginTop: 48, paddingTop: 32, borderTop: '1px solid ' + tokens.line }
+  },
+  /*#__PURE__*/React.createElement(Headline, { size: "h2", style: { fontSize: 28, marginBottom: 20 } }, "Specifications"),
+  /*#__PURE__*/React.createElement("div", {
+    style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, border: '1px solid ' + tokens.line, borderRadius: 8, overflow: 'hidden' }
+  }, specsData.map(function(spec, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        display: 'flex', justifyContent: 'space-between', padding: '12px 18px',
+        background: i % 2 === 0 ? tokens.surfLow : tokens.white,
+        borderBottom: i < specsData.length - 2 ? '1px solid ' + tokens.lineSoft : 'none'
+      }
+    },
+    /*#__PURE__*/React.createElement("span", { style: { fontSize: 13, fontWeight: 600, color: tokens.ink } }, spec.label),
+    /*#__PURE__*/React.createElement("span", { style: { fontSize: 13, color: tokens.graphite, fontFamily: 'JetBrains Mono' } }, spec.value));
+  })))
+
+  , showPkgPrompt && /*#__PURE__*/React.createElement(BuildPackagePrompt, {
+    type: "wheel",
+    item: wheel,
+    onClose: () => {
+      setShowPkgPrompt(false);
+      navigate('/cart');
+    }
+  }));
+}
+
+// ─────────────── Build-a-Package prompt modal
+function BuildPackagePrompt({
+  type,
+  item,
+  onClose
+}) {
+  const {
+    tires,
+    wheels
+  } = window.HOLBROOK_DATA;
+  const {
+    addToCart,
+    vehicle
+  } = useApp();
+  const [saveName, setSaveName] = useState('');
+  const [phase, setPhase] = useState('offer');
+  const [apiCompanions, setApiCompanions] = useState(null);
+  const [loadingApi, setLoadingApi] = useState(true);
+  useEffect(function() {
+    if (type !== 'wheel') { setLoadingApi(false); return; }
+    var wDia = item.size ? Number(item.size.split('x')[0]) : null;
+    if (!wDia) { setLoadingApi(false); return; }
+    var vd = vehicle && vehicle.vehicleData ? vehicle.vehicleData : null;
+    var tireSizes = vd ? getTireSizesForWheelDiameter(vd, wDia) : [];
+    if (!tireSizes.length) { setLoadingApi(false); return; }
+    api.fetchTires({ 'f-sizes': tireSizes.join(','), 'p-size': 6 })
+      .then(function(data) {
+        var items = (data && data.Tires) || [];
+        var imgBase = (data && data.ImgUrlBase) || window.AUTOSYNC_CDN.tires;
+        var normalized = items.slice(0, 3).map(function(t) {
+          return { id: t.Id || t.Pn || String(Math.random()), brand: t.Brand || '', model: t.Model || '', size: t.Size || '', season: t.Season || '', priceEach: t.Price || 0, imgUrl: t.ImgThumb ? imgBase + t.ImgThumb : (t.ImgAngle ? imgBase + t.ImgAngle : null) };
+        });
+        setApiCompanions(normalized.length > 0 ? normalized : []);
+        setLoadingApi(false);
+      })
+      .catch(function() { setLoadingApi(false); });
+  }, []);
+  const companions = useMemo(function() {
+    if (type === 'tire') {
+      var rimDia = getRimDiameterFromTireSize(item.size);
+      if (!rimDia) return [];
+      var candidates = wheels.filter(function(w) { return Number(w.diameter) === Number(rimDia); });
+      if (vehicle && vehicle.vehicleData) {
+        var fitting = filterWheelsByVehicle(candidates, vehicle.vehicleData);
+        if (fitting.length > 0) return fitting.slice(0, 3);
+      }
+      return candidates.slice(0, 3);
+    } else {
+      var wDia = item.size.split('x')[0];
+      if (vehicle && vehicle.vehicleData) {
+        var tireSizes = getTireSizesForWheelDiameter(vehicle.vehicleData, Number(wDia));
+        if (tireSizes.length > 0) {
+          var matching = tires.filter(function(t) {
+            return tireSizes.some(function(sz) { return tireSizesMatch(t.size, sz); });
+          });
+          if (matching.length > 0) return matching.slice(0, 3);
+        }
+      }
+      return tires.filter(function(t) { return t.size.includes('R' + wDia); }).slice(0, 3);
+    }
+  }, [type, item, tires, wheels, vehicle]);
+  const saveToGarage = () => {
+    const saved = JSON.parse(localStorage.getItem('htm_saved_packages') || '[]');
+    const entry = {
+      id: `sp-${Date.now()}`,
+      name: saveName || `${item.brand} ${item.model} build`,
+      type,
+      item: {
+        ...item
+      },
+      vehicle: vehicle || null,
+      created: new Date().toISOString()
+    };
+    saved.unshift(entry);
+    localStorage.setItem('htm_saved_packages', JSON.stringify(saved.slice(0, 20)));
+    setPhase('saved');
+  };
+  const addCompanion = comp => {
+    const isTire = 'season' in comp;
+    const cItem = isTire ? {
+      id: comp.id,
+      type: 'tire',
+      qty: 4,
+      name: `${comp.brand} ${comp.model}`,
+      subtitle: `${comp.size} · ${comp.season}`,
+      price: comp.priceEach,
+      rawBrand: comp.brand,
+      rawModel: comp.model,
+      size: comp.size,
+      image: comp.imgUrl || null
+    } : {
+      id: comp.id,
+      type: 'wheel',
+      qty: 4,
+      name: `${comp.brand} ${comp.model}`,
+      subtitle: `${comp.size} · ${comp.finish}`,
+      price: comp.priceEach,
+      rawBrand: comp.brand,
+      rawModel: comp.model,
+      size: comp.size,
+      image: comp.imgUrl || null
+    };
+    addToCart(cItem, 4);
+    setPhase('pair-added');
+  };
+  const otherNoun = type === 'tire' ? 'wheels' : 'tires';
+  const bundleSave = 120;
+  var displayCompanions = apiCompanions !== null ? apiCompanions : companions;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'fixed',
+      inset: 0,
+      background: 'rgba(10,12,14,.65)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 100,
+      padding: 24
+    },
+    onClick: onClose
+  }, /*#__PURE__*/React.createElement("div", {
+    onClick: e => e.stopPropagation(),
+    style: {
+      background: '#fff',
+      borderRadius: 10,
+      maxWidth: 680,
+      width: '100%',
+      padding: 0,
+      boxShadow: '0 30px 80px rgba(0,0,0,.3)',
+      overflow: 'hidden',
+      maxHeight: '90vh',
+      overflowY: 'auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: 'linear-gradient(135deg, #850824 0%, #5e0519 100%)',
+      padding: '28px 32px',
+      color: '#fff'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check_circle",
+    size: 22
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: 12,
+      fontWeight: 700,
+      letterSpacing: '.16em',
+      textTransform: 'uppercase'
+    }
+  }, "Added to cart")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: 26,
+      fontWeight: 700,
+      marginTop: 8,
+      lineHeight: 1.2
+    }
+  }, item.brand, " ", item.model), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      opacity: .85,
+      marginTop: 4
+    }
+  }, item.size, type === 'tire' && ` · ${item.season}`, type === 'wheel' && ` · ${item.finish}`)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 32
+    }
+  }, phase === 'offer' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Headline, {
+    size: "h2",
+    style: {
+      fontSize: 26,
+      lineHeight: 1.2
+    }
+  }, "Build a package \u2014 save $", bundleSave, " on ", type === 'tire' ? 'mount & balance' : 'mounting'), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: tokens.taupe,
+      marginTop: 10,
+      lineHeight: 1.5
+    }
+  }, "Pair your ", item.brand, " ", item.model, " with ", otherNoun, " and we'll mount, balance, and torque them as a single package \u2014 no extra fitting fee."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 20
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: 11,
+      fontWeight: 700,
+      letterSpacing: '.16em',
+      textTransform: 'uppercase',
+      color: tokens.ink,
+      marginBottom: 12
+    }
+  }, "Suggested ", otherNoun, " ", vehicle ? `for your ${vehicle.year} ${vehicle.make} ${vehicle.model}` : `(matching ${item.size})`), loadingApi ? /*#__PURE__*/React.createElement("div", {
+    style: { padding: 24, textAlign: 'center', color: tokens.taupe, fontSize: 13 }
+  }, "Finding matching ", otherNoun, "\u2026") : displayCompanions.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 24,
+      background: tokens.surfLow,
+      borderRadius: 6,
+      textAlign: 'center',
+      color: tokens.taupe,
+      fontSize: 13
+    }
+  }, "No matching ", otherNoun, " in stock for this size \u2014 browse the full catalog instead.") : /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gap: 10
+    }
+  }, displayCompanions.map(c => /*#__PURE__*/React.createElement("div", {
+    key: c.id,
+    style: {
+      display: 'flex',
+      gap: 14,
+      padding: 14,
+      border: `1px solid ${tokens.line}`,
+      borderRadius: 6,
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 52,
+      height: 52,
+      background: tokens.surfLow,
+      borderRadius: 4,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexShrink: 0
+    }
+  }, c.imgUrl ? /*#__PURE__*/React.createElement("img", { src: c.imgUrl, alt: c.brand + ' ' + c.model, loading: 'lazy', style: { maxWidth: '85%', maxHeight: '85%', objectFit: 'contain' } }) : (type === 'tire' ? /*#__PURE__*/React.createElement(WheelSvg, null) : /*#__PURE__*/React.createElement(TireSvg, null))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontWeight: 700,
+      fontSize: 14
+    }
+  }, c.brand, " ", c.model), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: tokens.taupe,
+      fontFamily: 'JetBrains Mono'
+    }
+  }, c.size), (c.finish || c.bolt) && /*#__PURE__*/React.createElement("div", {
+    style: { fontSize: 11, color: tokens.mute, marginTop: 2 }
+  }, [c.finish, c.bolt].filter(Boolean).join(' · '))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'right'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: 16,
+      fontWeight: 800,
+      color: tokens.primary
+    }
+  }, "$", c.priceEach * 4), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: tokens.mute,
+      textTransform: 'uppercase',
+      letterSpacing: '.1em'
+    }
+  }, "set of 4")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => addCompanion(c),
+    style: {
+      padding: '8px 14px',
+      background: tokens.ink,
+      color: '#fff',
+      border: 'none',
+      borderRadius: 6,
+      fontSize: 11,
+      fontWeight: 800,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      cursor: 'pointer'
+    }
+  }, "Add set"))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: 10,
+      marginTop: 24
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setPhase('save'),
+    style: {
+      padding: '14px',
+      background: '#fff',
+      color: tokens.ink,
+      border: `1px solid ${tokens.line}`,
+      borderRadius: 6,
+      fontFamily: 'Space Grotesk',
+      fontSize: 12,
+      fontWeight: 800,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      cursor: 'pointer',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "bookmark",
+    size: 16
+  }), " Save build"), /*#__PURE__*/React.createElement("button", {
+    onClick: onClose,
+    style: {
+      padding: '14px',
+      background: tokens.ink,
+      color: '#fff',
+      border: 'none',
+      borderRadius: 6,
+      fontFamily: 'Space Grotesk',
+      fontSize: 12,
+      fontWeight: 800,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      cursor: 'pointer'
+    }
+  }, "Go to cart \u2192"))), phase === 'save' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Headline, {
+    size: "h2",
+    style: {
+      fontSize: 24
+    }
+  }, "Save this build to your garage"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: tokens.taupe,
+      marginTop: 8,
+      lineHeight: 1.5
+    }
+  }, "Come back anytime and add it to cart in one click."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 18
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    style: {
+      fontFamily: 'Space Grotesk',
+      fontSize: 11,
+      fontWeight: 700,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      color: tokens.ink
+    }
+  }, "Build name"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: saveName,
+    onChange: e => setSaveName(e.target.value),
+    placeholder: `${item.brand} ${item.model} — ${vehicle ? `${vehicle.year} ${vehicle.model}` : 'my build'}`,
+    style: {
+      width: '100%',
+      padding: '12px 14px',
+      marginTop: 8,
+      fontSize: 14,
+      border: `1px solid ${tokens.line}`,
+      borderRadius: 6
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: 10,
+      marginTop: 24
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setPhase('offer'),
+    style: {
+      padding: '14px',
+      background: '#fff',
+      color: tokens.ink,
+      border: `1px solid ${tokens.line}`,
+      borderRadius: 6,
+      fontFamily: 'Space Grotesk',
+      fontSize: 12,
+      fontWeight: 800,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      cursor: 'pointer'
+    }
+  }, "\u2190 Back"), /*#__PURE__*/React.createElement("button", {
+    onClick: saveToGarage,
+    style: {
+      padding: '14px',
+      background: tokens.primary,
+      color: '#fff',
+      border: 'none',
+      borderRadius: 6,
+      fontFamily: 'Space Grotesk',
+      fontSize: 12,
+      fontWeight: 800,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      cursor: 'pointer'
+    }
+  }, "Save build"))), phase === 'saved' && /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'center',
+      padding: '20px 0'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check_circle",
+    size: 48,
+    style: {
+      color: '#2e7d32'
+    }
+  }), /*#__PURE__*/React.createElement(Headline, {
+    size: "h2",
+    style: {
+      fontSize: 24,
+      marginTop: 14
+    }
+  }, "Saved to your garage"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: tokens.taupe,
+      marginTop: 8
+    }
+  }, "Find it under Garage \u2192 Saved builds."), /*#__PURE__*/React.createElement("button", {
+    onClick: onClose,
+    style: {
+      marginTop: 24,
+      padding: '14px 32px',
+      background: tokens.ink,
+      color: '#fff',
+      border: 'none',
+      borderRadius: 6,
+      fontFamily: 'Space Grotesk',
+      fontSize: 12,
+      fontWeight: 800,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      cursor: 'pointer'
+    }
+  }, "Go to cart \u2192")), phase === 'pair-added' && /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'center',
+      padding: '20px 0'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check_circle",
+    size: 48,
+    style: {
+      color: '#2e7d32'
+    }
+  }), /*#__PURE__*/React.createElement(Headline, {
+    size: "h2",
+    style: {
+      fontSize: 24,
+      marginTop: 14
+    }
+  }, "Package built!"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: tokens.taupe,
+      marginTop: 8,
+      maxWidth: 360,
+      margin: '8px auto 0'
+    }
+  }, "Your tires and wheels will ship mounted & balanced \u2014 ready to install."), /*#__PURE__*/React.createElement("button", {
+    onClick: onClose,
+    style: {
+      marginTop: 24,
+      padding: '14px 32px',
+      background: tokens.primary,
+      color: '#fff',
+      border: 'none',
+      borderRadius: 6,
+      fontFamily: 'Space Grotesk',
+      fontSize: 12,
+      fontWeight: 800,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      cursor: 'pointer'
+    }
+  }, "Go to cart \u2192")))));
+}
+
+// ─────────────── WheelStylePDP — parent style page, loads all variants
+function WheelStylePDP() {
+  const { navigate, addToCart, vehicle, wheelBrandsList } = useApp();
+  var pathParts = window.location.pathname.split('/').filter(Boolean);
+  var wheelSlug = pathParts.length > 1 ? pathParts[pathParts.length - 1] : null;
+  var styleMatch = wheelSlug ? wheelSlug.match(/_style-(\d+)/) : null;
+  var styleId = styleMatch ? styleMatch[1] : null;
+  var brandFromSlug = wheelSlug ? wheelSlug.split('__')[0].replace(/_/g, ' ') : '';
+
+  const [variants, setVariants] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedVariant, setSelectedVariant] = useState(null);
+  const [selectedFrontVariant, setSelectedFrontVariant] = useState(null);
+  const [selectedRearVariant, setSelectedRearVariant] = useState(null);
+  const [qty, setQty] = useState(4);
+  const [showPkgPrompt, setShowPkgPrompt] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+  const [imgErr, setImgErr] = useState(false);
+  const [selectedImgIdx, setSelectedImgIdx] = useState(0);
+
+  useEffect(function() {
+    if (!styleId) { setLoading(false); return; }
+    var cancelled = false;
+    var allVariants = [];
+    var vdStyle = vehicle && vehicle.vehicleData ? vehicle.vehicleData : null;
+    var baseFilters = { 'f-styleId': styleId, 'p-size': 200 };
+    if (brandFromSlug) baseFilters['f-brand'] = brandFromSlug;
+    if (vdStyle) {
+      if (vdStyle.LugCount)     baseFilters['f-lugCount']       = vdStyle.LugCount;
+      if (vdStyle.BoltCircle)   baseFilters['f-boltCircle']     = vdStyle.BoltCircle;
+      if (vdStyle.Bore)         baseFilters['f-minBore']        = vdStyle.Bore;
+      if (vdStyle.MaxWheelLoad) baseFilters['f-minLoadRating']  = vdStyle.MaxWheelLoad;
+      var _allRows = (vdStyle.Fitments || []).concat(vdStyle.OptionalFitments || []).concat(vdStyle.PlusSizes || []);
+      var _offMins = _allRows.map(function(f) { return f.MinOffset; }).filter(function(v) { return v != null; });
+      var _offMaxs = _allRows.map(function(f) { return f.MaxOffset; }).filter(function(v) { return v != null; });
+      if (_offMins.length) baseFilters['f-minOffset'] = Math.min.apply(null, _offMins);
+      if (_offMaxs.length) baseFilters['f-maxOffset'] = Math.max.apply(null, _offMaxs);
+    }
+    function fetchPage(pageNum) {
+      var filters = Object.assign({}, baseFilters, { 'p-number': pageNum });
+      api.fetchWheels(filters).then(function(data) {
+        if (cancelled) return;
+        var items = extractItems(data);
+        if (items) {
+          var normalized = items.map(function(w) { return normalizeWheelItem(w, data); });
+          allVariants = allVariants.concat(normalized);
+        }
+        if (data && data.MoreItems && items && items.length > 0) {
+          fetchPage(pageNum + 1);
+        } else {
+          if (!cancelled) {
+            setVariants(allVariants);
+            if (allVariants.length > 0) setSelectedVariant(allVariants[0]);
+            setLoading(false);
+          }
+        }
+      }).catch(function() {
+        if (!cancelled) {
+          setVariants(allVariants);
+          if (allVariants.length > 0) setSelectedVariant(allVariants[0]);
+          setLoading(false);
+        }
+      });
+    }
+    fetchPage(1);
+    return function() { cancelled = true; };
+  }, []);
+
+  useEffect(function() {
+    if (variants.length > 0) {
+      document.title = variants[0].brand + ' ' + variants[0].model + ' | Custom Wheel Deal';
+    }
+  }, [variants]);
+
+  // Reset gallery when selected variant changes
+  useEffect(function() { setImgErr(false); setSelectedImgIdx(0); }, [selectedVariant]);
+
+  var variantImages = (selectedVariant && selectedVariant.images) || [];
+  var displayImg = variantImages.length > 0 ? variantImages[selectedImgIdx] : null;
+  var brand = variants.length > 0 ? variants[0].brand : brandFromSlug;
+  var brandObj = wheelBrandsList && wheelBrandsList.find(function(b) { return b.name.toLowerCase() === brand.toLowerCase(); });
+  var brandLogo = brandObj ? brandObj.logo : null;
+  var model = variants.length > 0 ? variants[0].model : '';
+  var type = variants.length > 0 ? variants[0].type : '';
+  var prices = variants.filter(function(v) { return v.priceEach > 0; }).map(function(v) { return v.priceEach; });
+  var priceMin = prices.length > 0 ? Math.min.apply(null, prices) : 0;
+  var priceMax = prices.length > 0 ? Math.max.apply(null, prices) : 0;
+
+  useEffect(function() {
+    if (!variants.length) return;
+    var vd2 = vehicle ? vehicle.vehicleData : null;
+    if (vd2 && hasStaggeredFitment(vd2)) {
+      var ff = variants.filter(function(v) { return checkWheelFitment(v, extractFrontFitments(vd2)).fits; });
+      var rf = variants.filter(function(v) { return checkWheelFitment(v, extractRearFitments(vd2)).fits; });
+      setSelectedFrontVariant(ff[0] || null);
+      setSelectedRearVariant(rf[0] || null);
+    } else {
+      // API already filtered to fitting variants — just pick by selected diameter
+      var prediam = null;
+      try { prediam = sessionStorage.getItem('htmc_wstyle_prediam'); } catch(_) {}
+      if (!prediam && vehicle && vehicle.selectedSize) {
+        var _sel = String(vehicle.selectedSize);
+        var _tp = typeof normalizeTireSize === 'function' ? normalizeTireSize(_sel) : null;
+        if (_tp && _tp.rim) prediam = String(_tp.rim);
+        else if (/^\d+$/.test(_sel)) prediam = _sel;
+      }
+      if (prediam) {
+        var atDiam = variants.filter(function(v) { return String(v.diameter) === prediam; });
+        if (atDiam.length > 0) { setSelectedVariant(atDiam[0]); return; }
+      }
+      setSelectedVariant(variants[0]);
+    }
+  }, [variants.length, vehicle]);
+
+  var vd = vehicle ? vehicle.vehicleData : null;
+  var isStaggered = vd ? hasStaggeredFitment(vd) : false;
+  var fitFrontRows = vd ? extractFrontFitments(vd) : [];
+  var fitRearRows = isStaggered ? extractRearFitments(vd) : [];
+  var pdpFrontSizesSet = isStaggered ? new Set(buildStaggeredSizes(vd, 'front').split(',').filter(Boolean)) : null;
+  var pdpRearSizesSet  = isStaggered ? new Set(buildStaggeredSizes(vd, 'rear').split(',').filter(Boolean)) : null;
+  var frontFittingVariants = isStaggered ? variants.filter(function(v) { return pdpFrontSizesSet.has(v.diameter + 'x' + v.width) && checkWheelFitment(v, fitFrontRows, true).fits; }) : [];
+  var rearFittingVariants = isStaggered ? variants.filter(function(v) { return pdpRearSizesSet.has(v.diameter + 'x' + v.width) && checkWheelFitment(v, fitRearRows, true).fits; }) : [];
+  var nonStagFitting = !isStaggered && vd ? variants : null; // API already filtered to fitting variants
+  var nonStagFittingSet = nonStagFitting ? new Set(nonStagFitting.map(function(v) { return v.id; })) : null;
+  var noFit = vd && !loading
+    ? (isStaggered ? (frontFittingVariants.length === 0 && rearFittingVariants.length === 0)
+                   : variants.length === 0)
+    : false;
+  var partialFit = isStaggered && !noFit && vd
+    && (frontFittingVariants.length === 0 || rearFittingVariants.length === 0);
+
+  var handleAdd = function() {
+    if (!selectedVariant) return;
+    var vehicleStr = vehicle && vehicle.year ? [vehicle.year, vehicle.make, vehicle.model].filter(Boolean).join(' ') : '';
+    addToCart({ id: selectedVariant.id, type: 'wheel', qty: qty, name: selectedVariant.brand + ' ' + selectedVariant.model, subtitle: selectedVariant.size + ' \xB7 ' + selectedVariant.finish, price: selectedVariant.priceEach, rawBrand: selectedVariant.brand, brand: selectedVariant.brand, partNumber: selectedVariant.partNumber || '', rawModel: selectedVariant.model, size: selectedVariant.size, image: selectedVariant.imgUrl || null, vehicle: vehicleStr }, qty);
+    setShowPkgPrompt(true);
+  };
+  var handleAddFront = function() {
+    if (!selectedFrontVariant) return;
+    var vehicleStr = vehicle && vehicle.year ? [vehicle.year, vehicle.make, vehicle.model].filter(Boolean).join(' ') : '';
+    addToCart({ id: selectedFrontVariant.id, type: 'wheel', qty: qty, name: selectedFrontVariant.brand + ' ' + selectedFrontVariant.model + ' (Front)', subtitle: selectedFrontVariant.size + ' \xB7 ' + selectedFrontVariant.finish, price: selectedFrontVariant.priceEach, rawBrand: selectedFrontVariant.brand, brand: selectedFrontVariant.brand, partNumber: selectedFrontVariant.partNumber || '', rawModel: selectedFrontVariant.model, size: selectedFrontVariant.size, image: selectedFrontVariant.imgUrl || null, vehicle: vehicleStr }, qty);
+    setShowPkgPrompt(true);
+  };
+  var handleAddRear = function() {
+    if (!selectedRearVariant) return;
+    var vehicleStr = vehicle && vehicle.year ? [vehicle.year, vehicle.make, vehicle.model].filter(Boolean).join(' ') : '';
+    addToCart({ id: selectedRearVariant.id + '_rear', type: 'wheel', qty: qty, name: selectedRearVariant.brand + ' ' + selectedRearVariant.model + ' (Rear)', subtitle: selectedRearVariant.size + ' \xB7 ' + selectedRearVariant.finish, price: selectedRearVariant.priceEach, rawBrand: selectedRearVariant.brand, brand: selectedRearVariant.brand, partNumber: selectedRearVariant.partNumber || '', rawModel: selectedRearVariant.model, size: selectedRearVariant.size, image: selectedRearVariant.imgUrl || null, vehicle: vehicleStr }, qty);
+    setShowPkgPrompt(true);
+  };
+  var handleAddSet = function() {
+    if (!selectedFrontVariant || !selectedRearVariant) return;
+    var vehicleStr = vehicle && vehicle.year ? [vehicle.year, vehicle.make, vehicle.model].filter(Boolean).join(' ') : '';
+    addToCart({ id: selectedFrontVariant.id, type: 'wheel', qty: 2, name: selectedFrontVariant.brand + ' ' + selectedFrontVariant.model + ' (Front)', subtitle: selectedFrontVariant.size + ' \xB7 ' + selectedFrontVariant.finish, price: selectedFrontVariant.priceEach, rawBrand: selectedFrontVariant.brand, brand: selectedFrontVariant.brand, partNumber: selectedFrontVariant.partNumber || '', rawModel: selectedFrontVariant.model, size: selectedFrontVariant.size, image: selectedFrontVariant.imgUrl || null, vehicle: vehicleStr }, 2);
+    addToCart({ id: selectedRearVariant.id + '_rear', type: 'wheel', qty: 2, name: selectedRearVariant.brand + ' ' + selectedRearVariant.model + ' (Rear)', subtitle: selectedRearVariant.size + ' \xB7 ' + selectedRearVariant.finish, price: selectedRearVariant.priceEach, rawBrand: selectedRearVariant.brand, brand: selectedRearVariant.brand, partNumber: selectedRearVariant.partNumber || '', rawModel: selectedRearVariant.model, size: selectedRearVariant.size, image: selectedRearVariant.imgUrl || null, vehicle: vehicleStr }, 2);
+    setShowPkgPrompt(true);
+  };
+
+  if (loading) {
+    return /*#__PURE__*/React.createElement("div", { style: { padding: 80, textAlign: 'center' } },
+      /*#__PURE__*/React.createElement("div", { style: { width: 40, height: 40, border: '4px solid ' + tokens.line, borderTopColor: tokens.primary, borderRadius: '50%', animation: 'htmSpin 0.8s linear infinite', margin: '0 auto 16px' } }),
+      /*#__PURE__*/React.createElement("style", null, '@keyframes htmSpin { to { transform: rotate(360deg); } }'),
+      /*#__PURE__*/React.createElement("div", { style: { fontSize: 14, color: tokens.mute, fontWeight: 600 } }, 'Loading wheel details...')
+    );
+  }
+
+  return /*#__PURE__*/React.createElement("div", { className: "resp-pdp-outer", style: { maxWidth: 1320, margin: '0 auto', padding: '40px 32px' } },
+    /*#__PURE__*/React.createElement("button", {
+      onClick: function() { navigate('/wheels'); },
+      style: { background: 'none', border: 'none', color: tokens.taupe, fontSize: 12, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', cursor: 'pointer', padding: 0, marginBottom: 20 }
+    }, '← Back to wheels'),
+
+    // ── Top grid: image + controls
+    /*#__PURE__*/React.createElement("div", { className: "resp-pdp-grid", style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 } },
+      // Image gallery
+      /*#__PURE__*/React.createElement("div", null,
+        /*#__PURE__*/React.createElement("div", {
+          style: { background: tokens.surfLow, borderRadius: 8, aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center' }
+        }, displayImg && !imgErr
+          ? /*#__PURE__*/React.createElement("img", { src: displayImg, alt: brand + ' ' + model, onError: function() { setImgErr(true); }, style: { maxWidth: '85%', maxHeight: '85%', objectFit: 'contain' } })
+          : /*#__PURE__*/React.createElement("div", { style: { width: '70%' } }, /*#__PURE__*/React.createElement(WheelSvg, null))
+        ),
+        variantImages.length > 1 && /*#__PURE__*/React.createElement("div", {
+          style: { display: 'flex', gap: 10, marginTop: 12 }
+        }, variantImages.map(function(img, i) {
+          var isActive = i === selectedImgIdx;
+          return /*#__PURE__*/React.createElement("button", {
+            key: i,
+            onClick: function() { setSelectedImgIdx(i); setImgErr(false); },
+            style: {
+              flex: '0 0 auto',
+              width: 80, height: 80,
+              padding: 6,
+              border: '2px solid ' + (isActive ? tokens.primary : tokens.line),
+              borderRadius: 6,
+              background: tokens.surfLow,
+              cursor: 'pointer',
+              transition: 'border-color .15s',
+              opacity: isActive ? 1 : 0.6
+            }
+          }, /*#__PURE__*/React.createElement("img", {
+            src: img,
+            alt: brand + ' ' + model + ' view ' + (i + 1),
+            style: { width: '100%', height: '100%', objectFit: 'contain' }
+          }));
+        }))
+      ),
+
+      // Right panel
+      /*#__PURE__*/React.createElement("div", null,
+        brandLogo && /*#__PURE__*/React.createElement("img", {
+          src: brandLogo,
+          alt: brand,
+          style: { height: 48, maxWidth: 160, objectFit: 'contain', marginBottom: 12, display: 'block' }
+        }),
+        /*#__PURE__*/React.createElement("div", { style: { fontSize: 11, color: tokens.mute, fontWeight: 700, letterSpacing: '.18em', textTransform: 'uppercase' } }, brand, ' \xB7 ', type),
+        /*#__PURE__*/React.createElement(Headline, { size: 'h1', className: "resp-h1-md", style: { fontSize: 44, marginTop: 6 } }, model),
+
+        priceMin > 0 && /*#__PURE__*/React.createElement("div", {
+          style: { display: 'flex', gap: 24, marginTop: 16, padding: '16px 0', borderTop: '1px solid ' + tokens.line, borderBottom: '1px solid ' + tokens.line }
+        },
+          /*#__PURE__*/React.createElement(SpecItem, { label: 'Starting at', value: '$' + priceMin, big: true }),
+          priceMax > priceMin && /*#__PURE__*/React.createElement(SpecItem, { label: 'Up to', value: '$' + priceMax, big: true }),
+          /*#__PURE__*/React.createElement(SpecItem, { label: 'Construction', value: type || '—' })
+        ),
+
+        // Variant selector (fitment-aware)
+        loading
+          ? /*#__PURE__*/React.createElement("div", { style: { display: 'flex', alignItems: 'center', gap: 10, marginTop: 24, fontSize: 13, color: tokens.taupe } },
+              /*#__PURE__*/React.createElement("div", { style: { width: 16, height: 16, border: '2px solid ' + tokens.line, borderTopColor: tokens.primary, borderRadius: '50%', animation: 'htmSpin 0.8s linear infinite', flexShrink: 0 } }),
+              /*#__PURE__*/React.createElement("style", null, '@keyframes htmSpin { to { transform: rotate(360deg); } }'),
+              'Loading variants…'
+            )
+          : noFit
+            ? /*#__PURE__*/React.createElement("div", { style: { marginTop: 24, padding: '16px 18px', background: '#fff5f5', border: '1px solid #f5c6cb', borderRadius: 8 } },
+                /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 14, color: tokens.primary } }, 'This style doesn’t fit your ' + vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model),
+                /*#__PURE__*/React.createElement("div", { style: { fontSize: 13, color: tokens.taupe, marginTop: 4 } }, 'None of the available sizes are compatible with your vehicle’s fitment specs.'),
+                /*#__PURE__*/React.createElement(Btn, { variant: 'secondary', size: 'sm', style: { marginTop: 12 }, onClick: function() { navigate('/wheels'); } }, '← See wheels that fit')
+              )
+            : isStaggered && vd
+              ? /*#__PURE__*/React.createElement("div", { style: { marginTop: 24 } },
+                  /*#__PURE__*/React.createElement("div", { style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '5px 12px', background: '#fff3cd', border: '1px solid #ffc107', borderRadius: 6, fontSize: 12, fontWeight: 700, marginBottom: 16 } },
+                    /*#__PURE__*/React.createElement(Icon, { name: 'compare_arrows', size: 14 }), 'Staggered fitment — select front & rear sizes separately'
+                  ),
+                  partialFit && /*#__PURE__*/React.createElement("div", { style: { marginBottom: 12, padding: '8px 12px', background: '#fff8e1', border: '1px solid #ffe082', borderRadius: 6, fontSize: 12, color: '#7a5c00' } },
+                    frontFittingVariants.length === 0 ? 'No front-axle sizes available for your vehicle.' : 'No rear-axle sizes available for your vehicle.'
+                  ),
+                  /*#__PURE__*/React.createElement("div", { style: { marginBottom: 14 } },
+                    /*#__PURE__*/React.createElement("div", { style: { fontSize: 11, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: tokens.primary, marginBottom: 6 } }, 'Front (' + frontFittingVariants.length + ' sizes fit)'),
+                    frontFittingVariants.length > 0
+                      ? /*#__PURE__*/React.createElement("select", {
+                          value: selectedFrontVariant ? selectedFrontVariant.id : '',
+                          onChange: function(e) { var f = frontFittingVariants.find(function(v) { return String(v.id) === e.target.value; }); if (f) setSelectedFrontVariant(f); },
+                          style: { width: '100%', padding: '11px 14px', fontSize: 13, fontFamily: 'Space Grotesk', fontWeight: 600, border: '1px solid ' + tokens.line, borderRadius: 6, background: '#fff' }
+                        }, frontFittingVariants.map(function(v) {
+                          return /*#__PURE__*/React.createElement("option", { key: v.id, value: v.id }, v.size + ' — ' + v.finish + (v.priceEach > 0 ? ' · $' + v.priceEach : ''));
+                        }))
+                      : /*#__PURE__*/React.createElement("div", { style: { fontSize: 13, color: tokens.mute, padding: '10px 0' } }, 'No fitting front sizes')
+                  ),
+                  /*#__PURE__*/React.createElement("div", null,
+                    /*#__PURE__*/React.createElement("div", { style: { fontSize: 11, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: '#1565c0', marginBottom: 6 } }, 'Rear (' + rearFittingVariants.length + ' sizes fit)'),
+                    rearFittingVariants.length > 0
+                      ? /*#__PURE__*/React.createElement("select", {
+                          value: selectedRearVariant ? selectedRearVariant.id : '',
+                          onChange: function(e) { var r = rearFittingVariants.find(function(v) { return String(v.id) === e.target.value; }); if (r) setSelectedRearVariant(r); },
+                          style: { width: '100%', padding: '11px 14px', fontSize: 13, fontFamily: 'Space Grotesk', fontWeight: 600, border: '1px solid ' + tokens.line, borderRadius: 6, background: '#f0f4ff' }
+                        }, rearFittingVariants.map(function(v) {
+                          return /*#__PURE__*/React.createElement("option", { key: v.id, value: v.id }, v.size + ' — ' + v.finish + (v.priceEach > 0 ? ' · $' + v.priceEach : ''));
+                        }))
+                      : /*#__PURE__*/React.createElement("div", { style: { fontSize: 13, color: tokens.mute, padding: '10px 0' } }, 'No fitting rear sizes')
+                  )
+                )
+              : /*#__PURE__*/React.createElement("div", { style: { marginTop: 24 } },
+                  vd && nonStagFitting && nonStagFitting.length > 0 && /*#__PURE__*/React.createElement("div", { style: { display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', background: '#e8f5e9', border: '1px solid #a5d6a7', borderRadius: 6, fontSize: 11, fontWeight: 700, color: '#2e7d32', marginBottom: 10 } },
+                    /*#__PURE__*/React.createElement(Icon, { name: 'check_circle', size: 13 }), nonStagFitting.length + ' size' + (nonStagFitting.length > 1 ? 's' : '') + ' fit your ' + vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model
+                  ),
+                  /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontSize: 12, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: tokens.ink, marginBottom: 8 } },
+                    vd && nonStagFitting
+                      ? 'Select a size — ' + nonStagFitting.length + ' fit' + (nonStagFitting.length !== 1 ? 's' : '')
+                      : 'Select a size — ' + variants.length + ' available'
+                  ),
+                  /*#__PURE__*/React.createElement("select", {
+                    value: selectedVariant ? selectedVariant.id : '',
+                    onChange: function(e) {
+                      var pool = (vd && nonStagFitting && nonStagFitting.length > 0) ? nonStagFitting : variants;
+                      var found = pool.find(function(v) { return String(v.id) === e.target.value; });
+                      if (found) setSelectedVariant(found);
+                    },
+                    style: { width: '100%', padding: '12px 14px', fontSize: 14, fontFamily: 'Space Grotesk', fontWeight: 600, border: '1px solid ' + tokens.line, borderRadius: 6, background: '#fff', cursor: 'pointer', appearance: 'auto' }
+                  },
+                    (vd && nonStagFitting && nonStagFitting.length > 0 ? nonStagFitting : variants).map(function(v) {
+                      var label = v.size + ' — ' + v.finish + (v.bolt ? ' \xB7 ' + v.bolt : '') + (v.priceEach > 0 ? ' — $' + v.priceEach : '');
+                      return /*#__PURE__*/React.createElement("option", { key: v.id, value: v.id }, label);
+                    })
+                  )
+                ),
+
+        // Selected variant summary (non-staggered)
+        !isStaggered && selectedVariant && !loading && /*#__PURE__*/React.createElement("div", {
+          style: { marginTop: 12, padding: '10px 14px', background: tokens.surfLow, borderRadius: 6, fontSize: 13, color: tokens.taupe }
+        }, selectedVariant.size, ' \xB7 ', selectedVariant.finish, selectedVariant.bolt ? ' \xB7 ' + selectedVariant.bolt : '', selectedVariant.offset ? ' \xB7 ' + selectedVariant.offset : '', selectedVariant.partNumber ? ' \xB7 PN ' + selectedVariant.partNumber : ''),
+
+        // Qty + Add to Cart
+        isStaggered && vd
+          ? (selectedFrontVariant && selectedRearVariant) && /*#__PURE__*/React.createElement("div", { style: { marginTop: 24 } },
+              /*#__PURE__*/React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 } },
+                /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontSize: 12, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: tokens.ink } }, '2 wheels per axle (2F + 2R)'),
+                /*#__PURE__*/React.createElement("div", { style: { fontSize: 14, fontWeight: 700, color: tokens.ink } },
+                  '$' + ((selectedFrontVariant.priceEach + selectedRearVariant.priceEach) * 2).toLocaleString()
+                )
+              ),
+              /*#__PURE__*/React.createElement(Btn, { variant: 'primary', size: 'lg', icon: 'shopping_bag', onClick: handleAddSet, style: { width: '100%' } },
+                'Add Set \xB7 2 Front + 2 Rear'
+              ),
+              /*#__PURE__*/React.createElement("div", { style: { marginTop: 20, padding: 18, background: tokens.surfLow, borderRadius: 6, display: 'flex', gap: 12, alignItems: 'flex-start' } },
+                /*#__PURE__*/React.createElement(Icon, { name: 'percent', size: 22, style: { color: tokens.primary } }),
+                /*#__PURE__*/React.createElement("div", null,
+                  /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontSize: 14, fontWeight: 700, color: tokens.ink } }, 'Pay 25% today, rest at pickup'),
+                  /*#__PURE__*/React.createElement("div", { style: { fontSize: 13, color: tokens.taupe, marginTop: 2, lineHeight: 1.45 } }, 'Schedule mount & balance at any Holbrook location — or drop-ship wheels to your door.')
+                )
+              )
+            )
+          : selectedVariant && /*#__PURE__*/React.createElement("div", { style: { marginTop: 24 } },
+              /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontSize: 12, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: tokens.ink, marginBottom: 10 } }, 'Quantity'),
+              /*#__PURE__*/React.createElement("div", { style: { display: 'flex', gap: 8 } },
+                [1, 2, 4, 5].map(function(n) {
+                  return /*#__PURE__*/React.createElement("button", {
+                    key: n, onClick: function() { setQty(n); },
+                    style: { padding: '12px 20px', fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 14, background: qty === n ? tokens.ink : '#fff', color: qty === n ? '#fff' : tokens.ink, border: '1px solid ' + (qty === n ? tokens.ink : tokens.line), borderRadius: 6, cursor: 'pointer' }
+                  }, n === 4 ? '4 (set)' : n === 5 ? '5 (+spare)' : n);
+                })
+              ),
+              /*#__PURE__*/React.createElement(Btn, { variant: 'primary', size: 'lg', icon: 'shopping_bag', onClick: handleAdd, style: { width: '100%', marginTop: 24 } },
+                'Add to cart \xB7 $' + (selectedVariant.priceEach * qty).toLocaleString()
+              ),
+              vehicle && /*#__PURE__*/React.createElement("div", {
+                style: { marginTop: 20, background: tokens.slate900, color: '#fff', padding: 18, borderRadius: 10, display: 'flex', gap: 14, alignItems: 'center' }
+              },
+                /*#__PURE__*/React.createElement(Icon, { name: 'view_in_ar', size: 32, style: { color: tokens.primaryAccent || '#e3183d' } }),
+                /*#__PURE__*/React.createElement("div", { style: { flex: 1, minWidth: 0 } },
+                  /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 15 } }, 'See it on your vehicle'),
+                  /*#__PURE__*/React.createElement("div", { style: { fontSize: 12, color: '#94a3b8', marginTop: 2 } }, 'Preview this wheel on your ', vehicle.year, ' ', vehicle.make, '.')
+                ),
+                /*#__PURE__*/React.createElement(Btn, { variant: 'accent', size: 'sm', onClick: function() { setShowPreview(true); } }, 'View on Vehicle')
+              ),
+              showPreview && vehicle && /*#__PURE__*/React.createElement(window.VehiclePreviewModal, {
+                vehicle: vehicle,
+                wheel: { partNumber: selectedVariant.partNumber, asId: selectedVariant.id, brand: selectedVariant.brand, model: selectedVariant.model, size: selectedVariant.size, diameter: selectedVariant.diameter, imgUrl: selectedVariant.imgUrl },
+                onClose: function() { setShowPreview(false); }
+              }),
+              /*#__PURE__*/React.createElement("div", { style: { marginTop: 20, padding: 18, background: tokens.surfLow, borderRadius: 6, display: 'flex', gap: 12, alignItems: 'flex-start' } },
+                /*#__PURE__*/React.createElement(Icon, { name: 'percent', size: 22, style: { color: tokens.primary } }),
+                /*#__PURE__*/React.createElement("div", null,
+                  /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontSize: 14, fontWeight: 700, color: tokens.ink } }, 'Pay 25% today, rest at pickup'),
+                  /*#__PURE__*/React.createElement("div", { style: { fontSize: 13, color: tokens.taupe, marginTop: 2, lineHeight: 1.45 } }, 'Schedule mount & balance at any Holbrook location — or drop-ship wheels to your door.')
+                )
+              )
+            ),
+
+        showPkgPrompt && (selectedVariant || selectedFrontVariant) && /*#__PURE__*/React.createElement(BuildPackagePrompt, {
+          type: 'wheel', item: selectedFrontVariant || selectedVariant,
+          onClose: function() { setShowPkgPrompt(false); navigate('/cart'); }
+        })
+      )
+    ),
+
+    // ── Variants table
+    !loading && variants.length > 0 && /*#__PURE__*/React.createElement("div", { style: { marginTop: 56 } },
+      /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontSize: 18, fontWeight: 700, marginBottom: 16 } }, 'All ' + brand + ' ' + model + ' variants'),
+      /*#__PURE__*/React.createElement("div", { style: { overflowX: 'auto' } },
+        /*#__PURE__*/React.createElement("table", { style: { width: '100%', borderCollapse: 'collapse', fontSize: 13 } },
+          /*#__PURE__*/React.createElement("thead", null,
+            /*#__PURE__*/React.createElement("tr", { style: { borderBottom: '2px solid ' + tokens.line } },
+              ['Part Number', 'Size', 'Finish', 'Bolt Pattern', 'Bore', 'Load Rating', 'Offset', 'Price'].map(function(h) {
+                return /*#__PURE__*/React.createElement("th", { key: h, style: { padding: '8px 12px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: tokens.mute, whiteSpace: 'nowrap' } }, h);
+              })
+            )
+          ),
+          /*#__PURE__*/React.createElement("tbody", null,
+            variants.map(function(v, i) {
+              var variantSlug = makeWheelSlug(v);
+              return /*#__PURE__*/React.createElement("tr", {
+                key: v.id,
+                style: { borderBottom: '1px solid ' + tokens.lineSoft, background: i % 2 === 0 ? '#fff' : tokens.surfLow }
+              },
+                /*#__PURE__*/React.createElement("td", { style: { padding: '10px 12px', whiteSpace: 'nowrap' } },
+                  /*#__PURE__*/React.createElement("a", {
+                    href: '/wheels/' + variantSlug,
+                    onClick: function(e) { e.preventDefault(); navigate('/wheels/' + variantSlug); },
+                    style: { fontFamily: 'JetBrains Mono', fontSize: 12, color: tokens.primary, fontWeight: 700, textDecoration: 'none' }
+                  }, v.partNumber || v.id)
+                ),
+                /*#__PURE__*/React.createElement("td", { style: { padding: '10px 12px', fontFamily: 'JetBrains Mono', fontSize: 12, whiteSpace: 'nowrap' } }, v.size),
+                /*#__PURE__*/React.createElement("td", { style: { padding: '10px 12px' } }, v.finish || '—'),
+                /*#__PURE__*/React.createElement("td", { style: { padding: '10px 12px', whiteSpace: 'nowrap' } }, v.bolt || '—'),
+                /*#__PURE__*/React.createElement("td", { style: { padding: '10px 12px', whiteSpace: 'nowrap' } }, v.bore ? v.bore + 'mm' : '—'),
+                /*#__PURE__*/React.createElement("td", { style: { padding: '10px 12px', whiteSpace: 'nowrap' } }, v.loadRating ? v.loadRating + ' lbs' : '—'),
+                /*#__PURE__*/React.createElement("td", { style: { padding: '10px 12px', whiteSpace: 'nowrap' } }, v.offset || '—'),
+                /*#__PURE__*/React.createElement("td", { style: { padding: '10px 12px', fontFamily: 'Space Grotesk', fontWeight: 700, color: tokens.primary, whiteSpace: 'nowrap' } }, v.priceEach > 0 ? '$' + v.priceEach : 'Call')
+              );
+            })
+          )
+        )
+      )
+    )
+  );
+}
+
+// ─────────────── Mount App
+function WheelsPageRoot() {
+  var pathParts = window.location.pathname.split('/').filter(Boolean);
+  var isWheelPDP = pathParts.length > 1 && pathParts[0] === 'wheels';
+  var wheelSeg = isWheelPDP ? pathParts[pathParts.length - 1] : '';
+  var isStylePDP = wheelSeg.includes('_style-');
+  var pdp = isStylePDP ? /*#__PURE__*/React.createElement(WheelStylePDP, null) : /*#__PURE__*/React.createElement(WheelPDP, null);
+  return /*#__PURE__*/React.createElement(AppProvider, null, /*#__PURE__*/React.createElement(Header, null), /*#__PURE__*/React.createElement(GlobalFitmentBar, null), isWheelPDP ? pdp : /*#__PURE__*/React.createElement(WheelsPLP, null), /*#__PURE__*/React.createElement(Footer, null));
+}
+ReactDOM.createRoot(document.getElementById('app')).render(/*#__PURE__*/React.createElement(WheelsPageRoot, null));</script>
+</body>
+</html>

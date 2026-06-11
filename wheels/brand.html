@@ -1,0 +1,538 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheels | Custom Wheel Deal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#850824', 'primary-container': '#a62639',
+                        'secondary': '#5a5b84', 'secondary-container': '#cecdfd',
+                        'tertiary': '#543e00', 'tertiary-container': '#715400',
+                        'tertiary-fixed-dim': '#f9bd14',
+                        'on-surface': '#1a1c1e', 'on-surface-variant': '#584141',
+                        'surface': '#f9f9fc', 'surface-container-low': '#f3f3f6',
+                        'surface-container-high': '#e8e8ea', 'surface-container-highest': '#e2e2e5',
+                        'surface-container-lowest': '#ffffff',
+                        'outline': '#8c7071', 'outline-variant': '#e0bfbf',
+                        'error': '#ba1a1a', 'on-error': '#ffffff',
+                        'inverse-surface': '#2f3133', 'inverse-on-surface': '#f0f0f3',
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .signature-gradient { background: linear-gradient(135deg, #850824 0%, #a62639 100%); }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        @keyframes slide-up { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .animate-slide-up { animation: slide-up 0.3s ease-out; }
+        .filter-section { border-bottom: 1px solid rgba(224,191,191,0.2); padding-bottom: 1rem; }
+        .filter-section:last-of-type { border-bottom: none; padding-bottom: 0; }
+        .filter-section h4 { cursor: pointer; user-select: none; }
+        .filter-section .filter-body { transition: max-height 0.3s ease, opacity 0.2s ease; overflow: hidden; }
+        .filter-section .filter-body.collapsed { max-height: 0 !important; opacity: 0; padding-top: 0; }
+        .featured-badge { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.4rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; border: 1.5px solid transparent; }
+        .featured-badge:hover { border-color: #850824; }
+        .featured-badge.active { background: #850824; color: white; border-color: #850824; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+
+    <!-- Header (injected by JS) -->
+    <div id="headerMount"></div>
+
+    <!-- Breadcrumb -->
+    <div id="breadcrumbMount"></div>
+
+    <!-- Vehicle Reinforcement Bar -->
+    <div id="vehicleReinforcementBar" class="bg-surface-container-low border-b border-outline-variant/20 hidden"></div>
+
+    <!-- Hero Banner -->
+    <div class="signature-gradient text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 md:px-12 flex items-center gap-6">
+            <div id="brandLogoContainer" class="w-20 h-20 bg-white rounded-xl flex items-center justify-center p-2 flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-3xl">settings</span>
+            </div>
+            <div>
+                <h1 id="brandTitle" class="text-3xl md:text-4xl font-bold font-display">LOADING...</h1>
+                <p id="brandDescription" class="text-lg text-white/90 mt-1">Premium wheels from industry leaders</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content: Left Filters + Right Grid -->
+    <div class="max-w-7xl mx-auto px-4 md:px-12 py-8">
+        <!-- Native 4-col grid flattened; the Holbrook filter rail handles the left column. -->
+        <div class="block">
+
+            <!-- ═══════════════════════════════════════════════ -->
+            <!-- LEFT SIDE FILTERS (hidden; replaced by         -->
+            <!-- injected Holbrook filter rail)                 -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <div class="lg:col-span-1 hidden" aria-hidden="true">
+                <div class="bg-surface-container-lowest rounded-xl p-5 sticky top-28 border border-outline-variant/10 space-y-4 max-h-[85vh] overflow-y-auto">
+
+                    <h3 class="font-headline font-bold text-lg tracking-tight flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">tune</span>
+                        FILTERS
+                    </h3>
+
+                    <!-- Featured Filters -->
+                    <div class="filter-section">
+                        <h4 class="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3 flex items-center justify-between" onclick="toggleFilter(this)">
+                            Featured Filters
+                            <span class="material-symbols-outlined text-base text-on-surface-variant/50 chevron">expand_less</span>
+                        </h4>
+                        <div class="filter-body flex flex-wrap gap-2" id="featuredFilters">
+                            <span class="featured-badge bg-tertiary-fixed-dim/20 text-tertiary" data-featured="deals" onclick="toggleFeaturedBadge(this)">
+                                <span class="material-symbols-outlined text-sm">local_offer</span> Deals
+                            </span>
+                            <span class="featured-badge bg-blue-100 text-blue-800" data-featured="best-value" onclick="toggleFeaturedBadge(this)">
+                                <span class="material-symbols-outlined text-sm">thumb_up</span> Best Value
+                            </span>
+                            <span class="featured-badge bg-green-100 text-green-800" data-featured="in-stock" onclick="toggleFeaturedBadge(this)">
+                                <span class="material-symbols-outlined text-sm">check_circle</span> In Stock
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Size / Diameter Filter -->
+                    <div class="filter-section">
+                        <h4 class="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3 flex items-center justify-between" onclick="toggleFilter(this)">
+                            Diameter
+                            <span class="material-symbols-outlined text-base text-on-surface-variant/50 chevron">expand_less</span>
+                        </h4>
+                        <div class="filter-body space-y-2 max-h-44 overflow-y-auto" id="sizeFilter"></div>
+                    </div>
+
+                    <!-- Width Filter -->
+                    <div class="filter-section">
+                        <h4 class="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3 flex items-center justify-between" onclick="toggleFilter(this)">
+                            Width
+                            <span class="material-symbols-outlined text-base text-on-surface-variant/50 chevron">expand_less</span>
+                        </h4>
+                        <div class="filter-body space-y-2 max-h-44 overflow-y-auto" id="widthFilter"></div>
+                    </div>
+
+                    <!-- Finish Filter -->
+                    <div class="filter-section">
+                        <h4 class="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3 flex items-center justify-between" onclick="toggleFilter(this)">
+                            Finish / Color
+                            <span class="material-symbols-outlined text-base text-on-surface-variant/50 chevron">expand_less</span>
+                        </h4>
+                        <div class="filter-body space-y-2 max-h-44 overflow-y-auto" id="finishFilter"></div>
+                    </div>
+
+                    <!-- Bolt Pattern Filter -->
+                    <div class="filter-section">
+                        <h4 class="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3 flex items-center justify-between" onclick="toggleFilter(this)">
+                            Bolt Pattern
+                            <span class="material-symbols-outlined text-base text-on-surface-variant/50 chevron">expand_less</span>
+                        </h4>
+                        <div class="filter-body space-y-2 max-h-44 overflow-y-auto" id="boltPatternFilter"></div>
+                    </div>
+
+                    <!-- Lug Count Filter -->
+                    <div class="filter-section">
+                        <h4 class="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3 flex items-center justify-between" onclick="toggleFilter(this)">
+                            Lug Count
+                            <span class="material-symbols-outlined text-base text-on-surface-variant/50 chevron">expand_less</span>
+                        </h4>
+                        <div class="filter-body space-y-2 max-h-44 overflow-y-auto" id="lugCountFilter"></div>
+                    </div>
+
+                    <!-- Offset Filter -->
+                    <div class="filter-section">
+                        <h4 class="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3 flex items-center justify-between" onclick="toggleFilter(this)">
+                            Offset
+                            <span class="material-symbols-outlined text-base text-on-surface-variant/50 chevron">expand_less</span>
+                        </h4>
+                        <div class="filter-body space-y-2 max-h-44 overflow-y-auto" id="offsetFilter"></div>
+                    </div>
+
+                    <!-- Price Range -->
+                    <div class="filter-section">
+                        <h4 class="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3 flex items-center justify-between" onclick="toggleFilter(this)">
+                            Price Range
+                            <span class="material-symbols-outlined text-base text-on-surface-variant/50 chevron">expand_less</span>
+                        </h4>
+                        <div class="filter-body space-y-2">
+                            <label class="flex items-center gap-2 cursor-pointer hover:text-primary group">
+                                <input type="checkbox" class="price-filter rounded border-outline-variant text-primary focus:ring-primary/20" value="0-150">
+                                <span class="text-sm group-hover:text-primary transition-colors">Under $150</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer hover:text-primary group">
+                                <input type="checkbox" class="price-filter rounded border-outline-variant text-primary focus:ring-primary/20" value="150-250">
+                                <span class="text-sm group-hover:text-primary transition-colors">$150 - $250</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer hover:text-primary group">
+                                <input type="checkbox" class="price-filter rounded border-outline-variant text-primary focus:ring-primary/20" value="250-400">
+                                <span class="text-sm group-hover:text-primary transition-colors">$250 - $400</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer hover:text-primary group">
+                                <input type="checkbox" class="price-filter rounded border-outline-variant text-primary focus:ring-primary/20" value="400-600">
+                                <span class="text-sm group-hover:text-primary transition-colors">$400 - $600</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer hover:text-primary group">
+                                <input type="checkbox" class="price-filter rounded border-outline-variant text-primary focus:ring-primary/20" value="600+">
+                                <span class="text-sm group-hover:text-primary transition-colors">Over $600</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Sort -->
+                    <div class="filter-section">
+                        <h4 class="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3">Sort By</h4>
+                        <select id="sortSelect" class="w-full bg-surface-container-low border-none rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary/20">
+                            <option value="relevance">Relevance</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name">Name: A to Z</option>
+                        </select>
+                    </div>
+
+                    <!-- Active Filter Count + Reset -->
+                    <div class="pt-2">
+                        <div id="activeFilterCount" class="text-xs text-primary font-bold mb-2 hidden">0 filters active</div>
+                        <button id="resetFilters" class="w-full bg-surface-container-high text-on-surface py-2.5 rounded-md text-xs font-bold tracking-widest uppercase hover:bg-surface-container-highest transition-colors">
+                            RESET ALL FILTERS
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════ -->
+            <!-- PRODUCTS GRID                                  -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <div class="lg:col-span-3">
+                <div id="productCount" class="text-sm text-on-surface-variant mb-4">Loading wheels...</div>
+
+                <div id="loadingState" class="text-center py-12">
+                    <div class="inline-flex items-center gap-3 text-on-surface-variant">
+                        <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#850824" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+                        <span>Loading wheels...</span>
+                    </div>
+                </div>
+
+                <div id="productGrid" class="hidden grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+
+                <div id="emptyState" class="hidden text-center py-12">
+                    <span class="material-symbols-outlined text-5xl text-on-surface-variant/30 mb-4 block">search_off</span>
+                    <p class="text-on-surface-variant text-lg">No wheels found matching your filters.</p>
+                    <button onclick="resetAllFilters()" class="text-primary font-bold text-sm mt-4 hover:underline">Reset Filters</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (injected by JS) -->
+    <div id="footerMount"></div>
+
+    <!-- Scripts -->
+    <script src="../js/api.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/components.js"></script>
+
+    <script>
+        let allWheels = [];
+        let filteredWheels = [];
+        let activeFeatured = new Set();
+
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return { brand: params.get('brand') || '' };
+        }
+
+        // ─── Collapsible filter sections ─────────────────────────
+        function toggleFilter(header) {
+            const body = header.nextElementSibling;
+            const chevron = header.querySelector('.chevron');
+            if (body.classList.contains('collapsed')) {
+                body.classList.remove('collapsed');
+                body.style.maxHeight = body.scrollHeight + 'px';
+                if (chevron) chevron.textContent = 'expand_less';
+            } else {
+                body.classList.add('collapsed');
+                if (chevron) chevron.textContent = 'expand_more';
+            }
+        }
+
+        // ─── Featured badge toggle ───────────────────────────────
+        function toggleFeaturedBadge(el) {
+            const key = el.dataset.featured;
+            if (activeFeatured.has(key)) {
+                activeFeatured.delete(key);
+                el.classList.remove('active');
+            } else {
+                activeFeatured.add(key);
+                el.classList.add('active');
+            }
+            applyFilters();
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            document.getElementById('headerMount').innerHTML = HolbrookUI.renderHeader('wheels');
+            document.getElementById('footerMount').innerHTML = HolbrookUI.renderFooter();
+
+            if (typeof HolbrookCart !== 'undefined') HolbrookCart.init();
+            HolbrookUI.updateGarageCount();
+            HolbrookUI.renderVehicleBar();
+
+            // Filter listeners for static elements
+            document.querySelectorAll('.price-filter').forEach(f => f.addEventListener('change', applyFilters));
+            document.getElementById('sortSelect').addEventListener('change', applyFilters);
+            document.getElementById('resetFilters').addEventListener('click', resetAllFilters);
+
+            await loadWheels();
+        });
+
+        async function loadWheels() {
+            try {
+                const { brand } = getUrlParams();
+                if (!brand) {
+                    document.getElementById('loadingState').innerHTML = '<p class="text-error">Brand not specified.</p>';
+                    return;
+                }
+
+                // ── FIX: Look up properly-cased brand name from brands endpoint ──
+                let brandDisplayName = brand.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                let brandLogo = '';
+
+                try {
+                    const brands = await HolbrookAPI.getWheelBrands();
+                    const found = brands.find(b => b.slug === brand);
+                    if (found) {
+                        brandDisplayName = found.name;
+                        brandLogo = found.logo || '';
+                    }
+                } catch (e) {
+                    console.warn('Could not fetch wheel brands list:', e);
+                }
+
+                // Update hero
+                document.getElementById('brandTitle').textContent = brandDisplayName.toUpperCase();
+                document.getElementById('brandDescription').textContent = `Premium ${brandDisplayName} wheels`;
+                document.title = `${brandDisplayName} Wheels | Custom Wheel Deal & Wheels`;
+
+                if (brandLogo) {
+                    document.getElementById('brandLogoContainer').innerHTML =
+                        `<img src="${brandLogo}" alt="${brandDisplayName}" class="max-w-full max-h-full object-contain">`;
+                }
+
+                // Breadcrumb
+                document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb([
+                    { label: 'Wheels', href: 'index.html' },
+                    { label: brandDisplayName }
+                ]);
+
+                // Use properly-cased name for API call
+                const result = await HolbrookAPI.getWheelsByBrand(brandDisplayName);
+                allWheels = result.wheels || [];
+                filteredWheels = [...allWheels];
+
+                document.getElementById('brandDescription').textContent =
+                    `${allWheels.length} wheels available from ${brandDisplayName}`;
+
+                populateFilters();
+                renderProducts();
+                document.getElementById('loadingState').classList.add('hidden');
+                document.getElementById('productCount').textContent = `${allWheels.length} wheel${allWheels.length !== 1 ? 's' : ''} found`;
+            } catch (error) {
+                console.error('Failed to load wheels:', error);
+                document.getElementById('loadingState').innerHTML = '<p class="text-error">Failed to load wheels. Please try again.</p>';
+            }
+        }
+
+        function populateFilters() {
+            // Diameter
+            populateCheckboxGroup('sizeFilter', 'size-filter',
+                allWheels.map(w => w.diameter || '').filter(Boolean),
+                v => v + '"', (a, b) => Number(a) - Number(b));
+
+            // Width
+            populateCheckboxGroup('widthFilter', 'width-filter',
+                allWheels.map(w => w.width || '').filter(Boolean),
+                v => v + '"', (a, b) => Number(a) - Number(b));
+
+            // Finish
+            populateCheckboxGroup('finishFilter', 'finish-filter',
+                allWheels.map(w => w.finish).filter(Boolean),
+                v => v, (a, b) => a.localeCompare(b));
+
+            // Bolt Pattern
+            populateCheckboxGroup('boltPatternFilter', 'bolt-pattern-filter',
+                allWheels.map(w => w.boltCircle).filter(Boolean),
+                v => v, (a, b) => a.localeCompare(b));
+
+            // Lug Count
+            populateCheckboxGroup('lugCountFilter', 'lug-filter',
+                allWheels.map(w => w.lugCount).filter(v => v && v > 0),
+                v => v + ' lug', (a, b) => Number(a) - Number(b));
+
+            // Offset
+            populateCheckboxGroup('offsetFilter', 'offset-filter',
+                allWheels.map(w => w.offset).filter(Boolean),
+                v => v + 'mm', (a, b) => Number(a) - Number(b));
+
+            // Attach listeners to dynamic filters
+            document.querySelectorAll('.size-filter, .width-filter, .finish-filter, .bolt-pattern-filter, .lug-filter, .offset-filter').forEach(el => {
+                el.addEventListener('change', applyFilters);
+            });
+        }
+
+        function populateCheckboxGroup(containerId, filterClass, values, labelFn, sortFn) {
+            const unique = [...new Set(values.map(String))].sort(sortFn);
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const counts = {};
+            values.forEach(v => { const k = String(v); counts[k] = (counts[k] || 0) + 1; });
+
+            container.innerHTML = unique.map(v => `
+                <label class="flex items-center gap-2 cursor-pointer hover:text-primary group">
+                    <input type="checkbox" value="${v}" class="${filterClass} rounded border-outline-variant text-primary focus:ring-primary/20">
+                    <span class="text-sm group-hover:text-primary transition-colors">${labelFn(v)}</span>
+                    <span class="text-[10px] text-on-surface-variant/50 ml-auto">(${counts[v]})</span>
+                </label>
+            `).join('');
+        }
+
+        function applyFilters() {
+            const sizeFilters = getCheckedValues('.size-filter');
+            const widthFilters = getCheckedValues('.width-filter');
+            const finishFilters = getCheckedValues('.finish-filter');
+            const boltFilters = getCheckedValues('.bolt-pattern-filter');
+            const lugFilters = getCheckedValues('.lug-filter');
+            const offsetFilters = getCheckedValues('.offset-filter');
+            const priceFilters = getCheckedValues('.price-filter');
+
+            filteredWheels = allWheels.filter(w => {
+                if (sizeFilters.length > 0 && !sizeFilters.includes(String(w.diameter || w.size))) return false;
+                if (widthFilters.length > 0 && !widthFilters.includes(String(w.width))) return false;
+                if (finishFilters.length > 0 && !finishFilters.includes(w.finish)) return false;
+                if (boltFilters.length > 0 && !boltFilters.includes(w.boltCircle)) return false;
+                if (lugFilters.length > 0 && !lugFilters.includes(String(w.lugCount))) return false;
+                if (offsetFilters.length > 0 && !offsetFilters.includes(String(w.offset))) return false;
+
+                // Price
+                if (priceFilters.length > 0) {
+                    const price = w.price || 0;
+                    const matchesPrice = priceFilters.some(range => {
+                        if (range.endsWith('+')) return price >= parseInt(range);
+                        const [min, max] = range.split('-').map(Number);
+                        return price >= min && price < max;
+                    });
+                    if (!matchesPrice) return false;
+                }
+
+                // Featured
+                if (activeFeatured.has('deals') && w.price >= 300) return false;
+                if (activeFeatured.has('best-value') && w.price >= 400) return false;
+                if (activeFeatured.has('in-stock') && w.inStock === false) return false;
+
+                return true;
+            });
+
+            // Sort
+            const sortValue = document.getElementById('sortSelect').value;
+            switch (sortValue) {
+                case 'price-low': filteredWheels.sort((a, b) => (a.price||0) - (b.price||0)); break;
+                case 'price-high': filteredWheels.sort((a, b) => (b.price||0) - (a.price||0)); break;
+                case 'name': filteredWheels.sort((a, b) => (a.style||'').localeCompare(b.style||'')); break;
+            }
+
+            updateActiveFilterCount();
+            document.getElementById('productCount').textContent = `${filteredWheels.length} wheel${filteredWheels.length !== 1 ? 's' : ''} found`;
+            renderProducts();
+        }
+
+        function getCheckedValues(selector) {
+            return Array.from(document.querySelectorAll(selector + ':checked')).map(el => el.value);
+        }
+
+        function updateActiveFilterCount() {
+            const allCheckboxes = document.querySelectorAll('.lg\\:col-span-1 input[type="checkbox"]:checked');
+            const count = allCheckboxes.length + activeFeatured.size;
+            const countEl = document.getElementById('activeFilterCount');
+            if (count > 0) {
+                countEl.textContent = `${count} filter${count !== 1 ? 's' : ''} active`;
+                countEl.classList.remove('hidden');
+            } else {
+                countEl.classList.add('hidden');
+            }
+        }
+
+        function resetAllFilters() {
+            document.querySelectorAll('.lg\\:col-span-1 input[type="checkbox"]').forEach(el => el.checked = false);
+            document.getElementById('sortSelect').value = 'relevance';
+            activeFeatured.clear();
+            document.querySelectorAll('.featured-badge').forEach(b => b.classList.remove('active'));
+            filteredWheels = [...allWheels];
+            updateActiveFilterCount();
+            document.getElementById('productCount').textContent = `${filteredWheels.length} wheel${filteredWheels.length !== 1 ? 's' : ''} found`;
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            if (filteredWheels.length === 0) {
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filteredWheels.map(wheel => {
+                const detailUrl = `product.html?brand=${encodeURIComponent(wheel.brand)}&id=${wheel.id}`;
+                // Build spec chips
+                const chips = [];
+                if (wheel.boltCircle) chips.push(wheel.boltCircle);
+                if (wheel.lugCount) chips.push(wheel.lugCount + ' Lug');
+                if (wheel.offset) chips.push(wheel.offset + 'mm Offset');
+
+                return `
+                <div class="bg-surface-container-lowest rounded-xl overflow-hidden hover:shadow-lg transition-all border border-outline-variant/10 group animate-slide-up">
+                    <a href="${detailUrl}" class="block aspect-square bg-surface-container-low flex items-center justify-center overflow-hidden p-4">
+                        ${wheel.image ? `<img src="${wheel.image}" alt="${wheel.style}" class="w-3/4 h-3/4 object-contain group-hover:scale-110 transition-transform duration-500">` : `<span class="material-symbols-outlined text-6xl text-on-surface-variant/20">settings</span>`}
+                    </a>
+                    <div class="p-5 space-y-2">
+                        <div class="text-[10px] font-bold tracking-widest text-primary uppercase">${wheel.brand}</div>
+                        <a href="${detailUrl}" class="block"><h3 class="font-bold text-lg tracking-tight hover:text-primary transition-colors">${wheel.style || wheel.displayName}</h3></a>
+                        <div class="text-sm text-on-surface-variant">${wheel.size ? wheel.size : ''} ${wheel.finish ? '&middot; ' + wheel.finish : ''}</div>
+                        ${chips.length ? `<div class="flex flex-wrap gap-1 pt-1">${chips.map(c => `<span class="bg-secondary-container text-secondary px-2 py-0.5 rounded-full text-[9px] font-bold tracking-wider">${c}</span>`).join('')}</div>` : ''}
+                        <div class="flex items-end justify-between pt-2">
+                            <div>
+                                ${wheel.price ? `<span class="text-2xl font-bold">$${Number(wheel.price).toFixed(2)}</span><span class="text-xs text-on-surface-variant"> /ea</span>` : '<span class="text-sm text-on-surface-variant">Call for price</span>'}
+                            </div>
+                            <button onclick="HolbrookCart.addItem({id:'${wheel.id}',type:'wheel',name:'${(wheel.style||'').replace(/'/g,"\\'")}',brand:'${wheel.brand}',size:'${wheel.size}',price:${wheel.price||0},image:'${wheel.image}',qty:4}); showToast('Added to cart!')"
+                                class="signature-gradient text-white px-4 py-2 rounded-md text-[10px] font-bold tracking-widest uppercase hover:opacity-90 transition-all active:scale-95">
+                                ADD SET OF 4
+                            </button>
+                        </div>
+                        <div class="text-[10px] font-bold tracking-wider ${wheel.inStock !== false ? 'text-green-600' : 'text-on-surface-variant'}">
+                            ${wheel.inStock !== false ? 'IN STOCK' : 'CALL FOR AVAILABILITY'}
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+    </script>
+<!-- holbrook-filters: installed -->
+<script src="/js/holbrook-filters-core.js" defer></script>
+<script src="/js/wheel-filters.js" defer></script>
+<!-- /holbrook-filters -->
+</body>
+</html>

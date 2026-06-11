@@ -1,0 +1,328 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Tire Model - Custom Wheel Deal</title>
+    <meta name="description" id="metaDesc" content="Shop tires at Custom Wheel Deal with live pricing and inventory.">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'sans': ['Inter', 'sans-serif'], 'display': ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        'primary': '#850824', 'primary-container': '#a62639',
+                        'secondary': '#5a5b84', 'secondary-container': '#cecdfd',
+                        'tertiary': '#543e00', 'tertiary-container': '#715400',
+                        'tertiary-fixed-dim': '#f9bd14',
+                        'on-surface': '#1a1c1e', 'on-surface-variant': '#584141',
+                        'surface': '#f9f9fc', 'surface-container-low': '#f3f3f6',
+                        'surface-container-high': '#e8e8ea', 'surface-container-highest': '#e2e2e5',
+                        'surface-container-lowest': '#ffffff',
+                        'outline': '#8c7071', 'outline-variant': '#e0bfbf',
+                        'error': '#ba1a1a', 'on-error': '#ffffff',
+                        'inverse-surface': '#2f3133', 'inverse-on-surface': '#f0f0f3',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .signature-gradient { background: linear-gradient(135deg, #850824 0%, #a62639 100%); }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        @keyframes slide-up { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .animate-slide-up { animation: slide-up 0.3s ease-out; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+
+    <!-- Header (injected by JS) -->
+    <div id="headerMount"></div>
+
+    <!-- Breadcrumb -->
+    <div id="breadcrumbMount"></div>
+
+    <!-- Vehicle Reinforcement Bar -->
+    <div id="vehicleReinforcementBar" class="bg-surface-container-low border-b border-outline-variant/20 hidden"></div>
+
+    <!-- Model Hero -->
+    <section class="signature-gradient text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 md:px-12 flex items-center gap-6">
+            <div id="modelImageContainer" class="w-28 h-28 bg-white rounded-xl flex items-center justify-center p-2 flex-shrink-0">
+                <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#850824" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+                <div class="text-xs font-bold tracking-widest uppercase opacity-70 mb-1" id="heroBrandLabel">Loading...</div>
+                <h1 id="modelTitle" class="font-display font-bold text-3xl md:text-4xl">Loading...</h1>
+                <p id="modelSubtitle" class="text-lg opacity-90 mt-1"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content: Left Filters + Right Grid -->
+    <main class="max-w-7xl mx-auto px-4 md:px-12 py-8">
+        <!-- Native 4-col grid flattened; the Holbrook filter rail handles the left column. -->
+        <div class="block">
+
+            <!-- LEFT SIDE FILTERS (hidden; replaced by injected Holbrook filter rail) -->
+            <aside class="lg:col-span-1 hidden" aria-hidden="true">
+                <div class="bg-surface-container-lowest rounded-xl p-6 space-y-6 sticky top-28 border border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-lg tracking-tight flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">tune</span>
+                        FILTERS
+                    </h3>
+
+                    <!-- Size Filter -->
+                    <div>
+                        <h4 class="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3">Tire Size</h4>
+                        <select id="filterSize" class="w-full bg-surface-container-low border-none rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary/20">
+                            <option value="">All Sizes</option>
+                        </select>
+                    </div>
+
+                    <!-- Rim Diameter -->
+                    <div>
+                        <h4 class="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3">Rim Diameter</h4>
+                        <select id="filterRim" class="w-full bg-surface-container-low border-none rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary/20">
+                            <option value="">All Diameters</option>
+                        </select>
+                    </div>
+
+                    <!-- Sort -->
+                    <div>
+                        <h4 class="text-xs font-bold tracking-widest text-on-surface-variant uppercase mb-3">Sort By</h4>
+                        <select id="sortSelect" class="w-full bg-surface-container-low border-none rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary/20">
+                            <option value="size-asc">Size: Small to Large</option>
+                            <option value="size-desc">Size: Large to Small</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                        </select>
+                    </div>
+
+                    <!-- Reset -->
+                    <div class="pt-2 border-t border-outline-variant/20">
+                        <button onclick="resetFilters()" class="w-full bg-surface-container-high text-on-surface py-2.5 rounded-md text-xs font-bold tracking-widest uppercase hover:bg-surface-container-highest transition-colors">
+                            RESET FILTERS
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- PRODUCT GRID -->
+            <div class="lg:col-span-3">
+                <div id="productCount" class="text-sm text-on-surface-variant mb-6">Loading tires...</div>
+
+                <div id="loadingState" class="text-center py-16">
+                    <div class="inline-flex items-center gap-3 text-on-surface-variant">
+                        <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#850824" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+                        <span>Loading tires...</span>
+                    </div>
+                </div>
+
+                <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 hidden"></div>
+
+                <div id="noResults" class="text-center py-16 hidden">
+                    <span class="material-symbols-outlined text-5xl text-on-surface-variant/30 mb-4 block">search_off</span>
+                    <p class="text-on-surface-variant">No tires found for this model.</p>
+                    <a id="backToBrand" href="#" class="text-primary font-bold text-sm mt-4 inline-block hover:underline">Back to brand page</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (injected by JS) -->
+    <div id="footerMount"></div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/components.js"></script>
+
+    <script>
+    const params = new URLSearchParams(window.location.search);
+    const BRAND_NAME = params.get('brand') || '';
+    const MODEL_NAME = params.get('model') || '';
+    const MODEL_SLUG = MODEL_NAME.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+    function slugToName(slug) { return slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()); }
+    function nameToSlug(name) { return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+
+    let allTires = [];
+
+    function renderTires(tires) {
+        const grid = document.getElementById('productGrid');
+        if (!tires.length) {
+            grid.classList.add('hidden');
+            document.getElementById('noResults').classList.remove('hidden');
+            return;
+        }
+        document.getElementById('noResults').classList.add('hidden');
+        grid.classList.remove('hidden');
+
+        grid.innerHTML = tires.map(t => {
+            const detailUrl = `product.html?brand=${encodeURIComponent(t.brand)}&id=${t.id}`;
+            return `
+            <div class="bg-surface-container-lowest rounded-xl overflow-hidden hover:shadow-lg transition-all border border-outline-variant/10 group">
+                <a href="${detailUrl}" class="block aspect-square bg-surface-container-low flex items-center justify-center overflow-hidden p-4">
+                    ${t.image ? `<img src="${t.image}" alt="${t.displayName || t.model}" class="w-3/4 h-3/4 object-contain group-hover:scale-110 transition-transform duration-500">` : `<span class="material-symbols-outlined text-6xl text-on-surface-variant/20">tire_repair</span>`}
+                </a>
+                <div class="p-5 space-y-2">
+                    <div class="text-[10px] font-bold tracking-widest text-primary uppercase">${t.brand}</div>
+                    <a href="${detailUrl}" class="block"><h3 class="font-bold text-lg tracking-tight hover:text-primary transition-colors">${t.model}</h3></a>
+                    <div class="text-sm text-on-surface-variant">${t.size}</div>
+                    ${t.partNumber ? `<div class="text-xs text-on-surface-variant/60">PN: ${t.partNumber}</div>` : ''}
+                    <div class="flex items-end justify-between pt-2">
+                        <div>
+                            ${t.price ? `<span class="text-2xl font-bold">$${Number(t.price).toFixed(2)}</span><span class="text-xs text-on-surface-variant"> /ea</span>` : '<span class="text-sm text-on-surface-variant">Call for price</span>'}
+                        </div>
+                        <button onclick="addToCart(${JSON.stringify(t).replace(/"/g, '&quot;')})"
+                            class="signature-gradient text-white px-4 py-2 rounded-md text-[10px] font-bold tracking-widest uppercase hover:opacity-90 transition-all active:scale-95">
+                            ADD SET OF 4
+                        </button>
+                    </div>
+                    <div class="text-[10px] font-bold tracking-wider ${t.inStock ? 'text-green-600' : 'text-on-surface-variant'}">
+                        ${t.inStock ? 'IN STOCK' : 'CALL FOR AVAILABILITY'}
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function addToCart(tire) {
+        if (typeof HolbrookCart !== 'undefined') {
+            HolbrookCart.addItem({
+                id: tire.id, type: 'tire',
+                name: tire.model || tire.displayName,
+                brand: tire.brand, size: tire.size,
+                price: tire.price, image: tire.image, qty: 4
+            });
+            showToast('Added to cart!');
+        }
+    }
+
+    function applyFilters() {
+        const sizeVal = document.getElementById('filterSize').value;
+        const rimVal = document.getElementById('filterRim').value;
+        const sortVal = document.getElementById('sortSelect').value;
+
+        let filtered = allTires.filter(t => {
+            if (sizeVal && t.size !== sizeVal) return false;
+            if (rimVal && String(t.rimDiameter) !== rimVal) return false;
+            return true;
+        });
+
+        switch (sortVal) {
+            case 'size-asc': filtered.sort((a,b) => (a.rimDiameter||0) - (b.rimDiameter||0)); break;
+            case 'size-desc': filtered.sort((a,b) => (b.rimDiameter||0) - (a.rimDiameter||0)); break;
+            case 'price-asc': filtered.sort((a,b) => (a.price||0) - (b.price||0)); break;
+            case 'price-desc': filtered.sort((a,b) => (b.price||0) - (a.price||0)); break;
+        }
+
+        document.getElementById('productCount').textContent = `${filtered.length} tire${filtered.length !== 1 ? 's' : ''} found`;
+        renderTires(filtered);
+    }
+
+    function resetFilters() {
+        document.getElementById('filterSize').value = '';
+        document.getElementById('filterRim').value = '';
+        document.getElementById('sortSelect').value = 'size-asc';
+        applyFilters();
+    }
+
+    function populateFilters(tires) {
+        const sizes = [...new Set(tires.map(t => t.size).filter(Boolean))].sort();
+        const rims = [...new Set(tires.map(t => t.rimDiameter).filter(Boolean))].sort((a,b) => a - b);
+
+        const sizeEl = document.getElementById('filterSize');
+        sizes.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; sizeEl.appendChild(o); });
+
+        const rimEl = document.getElementById('filterRim');
+        rims.forEach(r => { const o = document.createElement('option'); o.value = r; o.textContent = r + '"'; rimEl.appendChild(o); });
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Render shared header with Garage
+        document.getElementById('headerMount').innerHTML = HolbrookUI.renderHeader('tires');
+        document.getElementById('footerMount').innerHTML = HolbrookUI.renderFooter();
+
+        if (typeof HolbrookCart !== 'undefined') HolbrookCart.init();
+        HolbrookUI.updateGarageCount();
+        HolbrookUI.renderVehicleBar();
+
+        let brandDisplayName = BRAND_NAME;
+        let modelDisplayName = MODEL_NAME;
+        const brandSlug = nameToSlug(BRAND_NAME);
+
+        try {
+            const brands = await HolbrookAPI.getTireBrands();
+            const match = brands.find(b => b.slug === brandSlug);
+            if (match) brandDisplayName = match.name;
+        } catch(e) {}
+
+        // Breadcrumb
+        document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb([
+            { label: 'Tires', href: 'index.html' },
+            { label: brandDisplayName, href: `brand.html?brand=${brandSlug}` },
+            { label: modelDisplayName }
+        ]);
+
+        document.getElementById('backToBrand').href = `brand.html?brand=${brandSlug}`;
+        document.title = `${brandDisplayName} ${modelDisplayName} Tires | Custom Wheel Deal & Wheels`;
+        document.getElementById('metaDesc').content = `Shop ${brandDisplayName} ${modelDisplayName} tires in all sizes.`;
+        document.getElementById('heroBrandLabel').textContent = brandDisplayName;
+        document.getElementById('modelTitle').textContent = modelDisplayName;
+        document.getElementById('modelSubtitle').textContent = `All sizes available`;
+
+        try {
+            let page = 1;
+            let moreItems = true;
+            allTires = [];
+
+            while (moreItems && page <= 10) {
+                const result = await HolbrookAPI.getTiresByBrand(brandDisplayName, { 'p-page': page });
+                const tires = result.tires || [];
+                allTires = allTires.concat(tires);
+                moreItems = result.moreItems;
+                page++;
+            }
+
+            const modelSlugLower = MODEL_SLUG.toLowerCase();
+            allTires = allTires.filter(t => {
+                const tModelSlug = (t.model || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                return tModelSlug === modelSlugLower;
+            });
+
+            document.getElementById('loadingState').classList.add('hidden');
+
+            if (allTires.length && allTires[0].image) {
+                document.getElementById('modelImageContainer').innerHTML =
+                    `<img src="${allTires[0].image}" alt="${modelDisplayName}" class="max-w-full max-h-full object-contain">`;
+            } else {
+                document.getElementById('modelImageContainer').innerHTML =
+                    `<span class="material-symbols-outlined text-4xl text-primary">tire_repair</span>`;
+            }
+
+            document.getElementById('productCount').textContent = `${allTires.length} tire${allTires.length !== 1 ? 's' : ''} found`;
+            populateFilters(allTires);
+            renderTires(allTires);
+
+        } catch (err) {
+            document.getElementById('loadingState').innerHTML = '<span class="text-error">Failed to load tires. Please refresh.</span>';
+            console.error(err);
+        }
+
+        ['filterSize', 'filterRim', 'sortSelect'].forEach(id => {
+            document.getElementById(id).addEventListener('change', applyFilters);
+        });
+    });
+    </script>
+<!-- holbrook-filters: installed -->
+<script src="/js/holbrook-filters-core.js" defer></script>
+<script src="/js/tire-filters.js" defer></script>
+<!-- /holbrook-filters -->
+</body>
+</html>

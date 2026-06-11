@@ -1,0 +1,714 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSync API Reference — Custom Wheel Deal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #ffffff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+        header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px 48px; border-bottom: 1px solid #e5e5e5; background: #ffffff;
+        }
+        .brand { font-weight: 700; font-size: 1.1rem; color: #1a1a1a; }
+        .brand span { color: #1e4b8e; }
+        .hero { padding: 60px 48px 40px; text-align: center; background: #ffffff; }
+        .hero h1 { font-size: 2.2rem; font-weight: 800; color: #1e4b8e; margin-bottom: 16px; }
+        .hero p { font-size: 1.05rem; color: #666; max-width: 700px; margin: 0 auto; }
+        .hero .source { font-size: 0.82rem; color: #888; margin-top: 12px; }
+        .hero .source a { color: #1e4b8e; }
+        .config-box { max-width: 960px; margin: 0 auto 40px; padding: 0 48px; }
+        .config-card { background: #f8fafc; border: 1px solid #e5e5e5; border-radius: 12px; padding: 28px 32px; }
+        .config-card h3 { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #1e4b8e; margin-bottom: 16px; }
+        .config-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e5e5e5; font-size: 0.92rem; }
+        .config-row:last-child { border-bottom: none; }
+        .config-label { color: #666; font-weight: 500; }
+        .config-value { font-family: 'SF Mono', 'Fira Code', monospace; color: #1a1a1a; background: #fff; padding: 2px 10px; border-radius: 4px; border: 1px solid #e5e5e5; font-size: 0.85rem; }
+        .content { max-width: 960px; margin: 0 auto; padding: 0 48px 60px; }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+        .stat-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 24px; text-align: center; }
+        .stat-number { font-size: 2rem; font-weight: 800; color: #1e4b8e; }
+        .stat-label { font-size: 0.85rem; color: #666; margin-top: 4px; }
+        .section { margin-bottom: 48px; }
+        .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #1e4b8e; }
+        .section-icon { width: 36px; height: 36px; background: #1e4b8e; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.1rem; }
+        .section-title { font-size: 1.4rem; font-weight: 700; color: #1a1a1a; }
+        .endpoint { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; margin-bottom: 16px; overflow: hidden; transition: box-shadow 0.2s ease; }
+        .endpoint:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+        .endpoint-header { display: flex; align-items: center; gap: 12px; padding: 18px 24px; cursor: pointer; user-select: none; }
+        .method-get { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 4px; background: #e8f5e9; color: #2e7d32; flex-shrink: 0; }
+        .method-post { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 4px; background: #e3f2fd; color: #1565c0; flex-shrink: 0; }
+        .endpoint-path { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.92rem; font-weight: 600; color: #1a1a1a; }
+        .endpoint-desc { font-size: 0.85rem; color: #666; margin-left: auto; }
+        .endpoint-details { padding: 0 24px 20px; border-top: 1px solid #f0f0f0; }
+        .params-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #1e4b8e; margin: 16px 0 10px; }
+        .param-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .param-table th { text-align: left; padding: 8px 12px; background: #f8fafc; font-weight: 600; color: #666; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.3px; }
+        .param-table td { padding: 8px 12px; border-top: 1px solid #f0f0f0; vertical-align: top; }
+        .pn { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.82rem; color: #1e4b8e; font-weight: 500; }
+        .req { font-size: 0.7rem; color: #e31837; font-weight: 600; }
+        .opt { font-size: 0.7rem; color: #888; }
+        .note-box { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 16px 20px; font-size: 0.88rem; color: #5d4037; margin-bottom: 12px; }
+        .note-box strong { color: #e65100; }
+        .warn-box { background: #fce4ec; border: 1px solid #ef9a9a; border-radius: 8px; padding: 16px 20px; font-size: 0.88rem; color: #b71c1c; margin-bottom: 12px; }
+        .param-group { font-size: 0.78rem; color: #1e4b8e; font-weight: 600; background: #f0f4f8; padding: 6px 12px; margin: 12px 0 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+        .code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.8rem; background: #1a1a1a; color: #e0e0e0; padding: 16px 20px; border-radius: 8px; overflow-x: auto; margin-top: 12px; line-height: 1.5; white-space: pre; }
+        .code .k { color: #82b1ff; }
+        .code .s { color: #c3e88d; }
+        .code .n { color: #f78c6c; }
+        footer { border-top: 1px solid #e5e5e5; padding: 32px 48px; text-align: center; background: #fff; }
+        footer p { font-size: 0.85rem; color: #888; }
+        footer .bold { font-weight: 700; color: #1a1a1a; }
+        @media (max-width: 768px) {
+            header, .hero, .content, .config-box { padding-left: 24px; padding-right: 24px; }
+            .hero h1 { font-size: 1.6rem; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .endpoint-desc { display: none; }
+            .config-row { flex-direction: column; gap: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="brand"><span>AutoSync</span> API Reference</div>
+    <div style="font-size: 0.85rem; color: #666;">Custom Wheel Deal &middot; Updated March 10, 2026</div>
+</header>
+
+<div class="hero">
+    <h1>AutoSync API v1.0 — Official Endpoint Map</h1>
+    <p>Complete reference sourced directly from the official Swagger spec at api.autosyncstudio.com. Covers all 18 endpoints across 6 categories.</p>
+    <div class="source">Source: <a href="https://api.autosyncstudio.com/docs/index.html" target="_blank">api.autosyncstudio.com/docs</a> &middot; Spec: <a href="https://api.autosyncstudio.com/docs/doc.json" target="_blank">doc.json</a></div>
+</div>
+
+<div class="config-box">
+    <div class="config-card">
+        <h3>API Configuration</h3>
+        <div class="config-row">
+            <span class="config-label">Production API</span>
+            <span class="config-value">https://api.autosyncstudio.com</span>
+        </div>
+        <div class="config-row">
+            <span class="config-label">Development API</span>
+            <span class="config-value">https://api-dev.autosyncstudio.com</span>
+        </div>
+        <div class="config-row">
+            <span class="config-label">API Key</span>
+            <span class="config-value">holbrooktire</span>
+        </div>
+        <div class="config-row">
+            <span class="config-label">Auth Method</span>
+            <span class="config-value">?key={apiKey} query parameter (every request)</span>
+        </div>
+        <div class="config-row">
+            <span class="config-label">Spec Version</span>
+            <span class="config-value">Swagger 2.0</span>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">18</div>
+            <div class="stat-label">Total Endpoints</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">5</div>
+            <div class="stat-label">Tire Endpoints</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">5</div>
+            <div class="stat-label">Vehicle Endpoints</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Wheel Endpoints</div>
+        </div>
+    </div>
+
+    <!-- ======== AUTH ======== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🔑</div>
+            <div class="section-title">Auth (2 endpoints)</div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/keys/config</span>
+                <span class="endpoint-desc">Get API key configuration</span>
+            </div>
+            <div class="endpoint-details">
+                <div class="params-title">Parameters</div>
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th></th><th>Description</th></tr>
+                    <tr><td><span class="pn">key</span></td><td>string</td><td><span class="req">required</span></td><td>API key</td></tr>
+                </table>
+                <p style="font-size:0.85rem; color:#666; margin-top:10px;">Returns your key's configuration including enabled features, pricing, inventory settings, etc.</p>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/keys/validate</span>
+                <span class="endpoint-desc">Check key validity</span>
+            </div>
+            <div class="endpoint-details">
+                <div class="params-title">Parameters</div>
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th></th><th>Description</th></tr>
+                    <tr><td><span class="pn">key</span></td><td>string</td><td><span class="req">required</span></td><td>API key</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======== STATUS ======== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">📡</div>
+            <div class="section-title">Status (1 endpoint)</div>
+        </div>
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/status</span>
+                <span class="endpoint-desc">Check if the service is available</span>
+            </div>
+            <div class="endpoint-details">
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th></th><th>Description</th></tr>
+                    <tr><td><span class="pn">key</span></td><td>string</td><td><span class="req">required</span></td><td>API key</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======== TIRES ======== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🛞</div>
+            <div class="section-title">Tires (5 endpoints)</div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/tires</span>
+                <span class="endpoint-desc">List tires (primary catalog endpoint)</span>
+            </div>
+            <div class="endpoint-details">
+                <div class="note-box"><strong>Primary endpoint</strong> — This is the main tire catalog endpoint with 65+ parameters for filtering, includes, and sorting.</div>
+
+                <div class="param-group">Key Filter Parameters (f-)</div>
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><span class="pn">f-query</span></td><td>string</td><td>Full-text search (part number, brand, model, size)</td></tr>
+                    <tr><td><span class="pn">f-brand</span></td><td>string</td><td>Filter by brand name, e.g. <code>Michelin</code></td></tr>
+                    <tr><td><span class="pn">f-brandIds</span></td><td>string</td><td>Comma-separated brand IDs, e.g. <code>265,267</code></td></tr>
+                    <tr><td><span class="pn">f-model</span></td><td>string</td><td>Filter by tire model name</td></tr>
+                    <tr><td><span class="pn">f-modelId</span></td><td>integer</td><td>Filter by model ID</td></tr>
+                    <tr><td><span class="pn">f-modelIds</span></td><td>string</td><td>Comma-separated model IDs</td></tr>
+                    <tr><td><span class="pn">f-sectionWidth</span></td><td>number</td><td>Filter by section width, e.g. <code>225</code> [mm]</td></tr>
+                    <tr><td><span class="pn">f-aspectRatio</span></td><td>number</td><td>Filter by aspect ratio, e.g. <code>45</code> (metric only)</td></tr>
+                    <tr><td><span class="pn">f-rimDiameter</span></td><td>number</td><td>Filter by rim diameter, e.g. <code>17</code> [inch]</td></tr>
+                    <tr><td><span class="pn">f-sizes</span></td><td>string</td><td>Comma-separated sizes, e.g. <code>225/65R17,235/70R16</code></td></tr>
+                    <tr><td><span class="pn">f-diameter</span></td><td>number</td><td>Filter by external diameter [inch]</td></tr>
+                    <tr><td><span class="pn">f-inchWidth</span></td><td>number</td><td>Filter by inch width (flotation tires)</td></tr>
+                    <tr><td><span class="pn">f-format</span></td><td>string</td><td><code>M</code> = metric, <code>F</code> = flotation, <code>U</code> = unknown</td></tr>
+                    <tr><td><span class="pn">f-minPrice</span></td><td>number</td><td>Minimum price [$]</td></tr>
+                    <tr><td><span class="pn">f-maxPrice</span></td><td>number</td><td>Maximum price [$]</td></tr>
+                    <tr><td><span class="pn">f-minSpeedRating</span></td><td>string</td><td>Minimum speed rating</td></tr>
+                    <tr><td><span class="pn">f-minLoadRating</span></td><td>integer</td><td>Minimum load rating</td></tr>
+                    <tr><td><span class="pn">f-winterClass</span></td><td>string</td><td>Winter classification filter</td></tr>
+                    <tr><td><span class="pn">f-andSegmentTags</span></td><td>string</td><td>Segment tags (AND logic), e.g. <code>All Terrain,All Weather</code></td></tr>
+                    <tr><td><span class="pn">f-orSegmentTags</span></td><td>string</td><td>Segment tags (OR logic)</td></tr>
+                    <tr><td><span class="pn">f-andVehicleTypeTags</span></td><td>string</td><td>Vehicle type tags (AND), e.g. <code>Car,SUV/Light Truck</code></td></tr>
+                    <tr><td><span class="pn">f-orVehicleTypeTags</span></td><td>string</td><td>Vehicle type tags (OR logic)</td></tr>
+                    <tr><td><span class="pn">f-id</span></td><td>integer</td><td>Filter by tire ID</td></tr>
+                    <tr><td><span class="pn">f-ids</span></td><td>string</td><td>Comma-separated tire IDs</td></tr>
+                    <tr><td><span class="pn">f-pn</span></td><td>string</td><td>Filter by part number</td></tr>
+                    <tr><td><span class="pn">f-inStock</span></td><td>boolean</td><td>Only tires in stock (requires inventory activation)</td></tr>
+                    <tr><td><span class="pn">f-hasPrice</span></td><td>boolean</td><td>Only tires with prices (requires pricing activation)</td></tr>
+                    <tr><td><span class="pn">f-hasRebates</span></td><td>boolean</td><td>Only tires with active rebates</td></tr>
+                </table>
+
+                <div class="param-group">Include Parameters (i-)</div>
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><span class="pn">i-img</span></td><td>boolean</td><td>Include image paths</td></tr>
+                    <tr><td><span class="pn">i-imgDetails</span></td><td>boolean</td><td>Include detailed image info</td></tr>
+                    <tr><td><span class="pn">i-specs</span></td><td>boolean</td><td>Include tire specifications</td></tr>
+                    <tr><td><span class="pn">i-price</span></td><td>boolean</td><td>Include pricing (requires pricing activation)</td></tr>
+                    <tr><td><span class="pn">i-rebates</span></td><td>boolean</td><td>Include rebate information</td></tr>
+                    <tr><td><span class="pn">i-inStock</span></td><td>boolean</td><td>Include stock availability</td></tr>
+                    <tr><td><span class="pn">i-inventory</span></td><td>boolean</td><td>Include inventory levels</td></tr>
+                    <tr><td><span class="pn">i-tags</span></td><td>boolean</td><td>Include segment and vehicle type tags</td></tr>
+                    <tr><td><span class="pn">i-coordinates</span></td><td>boolean</td><td>Include image coordinates for view-on-vehicle</td></tr>
+                </table>
+
+                <div class="param-group">Sort Parameters (s-)</div>
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><span class="pn">s-brand</span></td><td>string</td><td>Sort by brand (<code>asc</code> or <code>desc</code>)</td></tr>
+                    <tr><td><span class="pn">s-model</span></td><td>string</td><td>Sort by model (<code>asc</code> or <code>desc</code>)</td></tr>
+                </table>
+
+                <div class="note-box"><strong>Pagination:</strong> While <code>p-limit</code> and <code>p-page</code> are NOT valid, the API does support <code>p-size</code> (results per page). Default is ~10. Use <code>p-size=200</code> to get full results. The response includes <code>MoreItems: true/false</code> to indicate if more pages exist.</div>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/tires/brands</span>
+                <span class="endpoint-desc">List tire brands</span>
+            </div>
+            <div class="endpoint-details">
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><span class="pn">key</span></td><td>string</td><td>API key (required)</td></tr>
+                    <tr><td><span class="pn">i-logos</span></td><td>boolean</td><td>Include brand logos. Returns <code>BrandLogosUrlBase</code> and <code>Logo</code> filename per brand. Full URL = <code>BrandLogosUrlBase + Logo</code></td></tr>
+                    <tr><td><span class="pn">p-size</span></td><td>integer</td><td>Results per page (default ~10). Use <code>200</code> to get all brands.</td></tr>
+                    <tr><td><span class="pn">f-format</span></td><td>string</td><td>Filter by size format (<code>M</code>, <code>F</code>, or <code>U</code>)</td></tr>
+                    <tr><td><span class="pn">f-id</span></td><td>integer</td><td>Filter by brand ID</td></tr>
+                    <tr><td><span class="pn">f-inStock</span></td><td>boolean</td><td>Only brands with tires in stock</td></tr>
+                    <tr><td><span class="pn">f-hasPrice</span></td><td>boolean</td><td>Only brands with priced tires</td></tr>
+                </table>
+                <div class="note-box"><strong>Logo URL pattern:</strong> Brand logos follow the pattern <code>Brand_Name.webp</code> (spaces replaced with underscores). Example: <code>https://storage.googleapis.com/autosync-brand-logos/logos/Bridgestone.webp</code></div>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/tires/models</span>
+                <span class="endpoint-desc">List tire models</span>
+            </div>
+            <div class="endpoint-details">
+                <p style="font-size:0.85rem; color:#666; margin-top:12px;">Extensive filter set similar to <code>/tires</code> — supports all the same <code>f-</code> filters plus <code>f-aspectRatio2</code>, <code>f-diameter2</code>, etc. for dual-tire fitment scenarios.</p>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/tires/filters</span>
+                <span class="endpoint-desc">List tire filters (get available filter values)</span>
+            </div>
+            <div class="endpoint-details">
+                <p style="font-size:0.85rem; color:#666; margin-top:12px;">Returns available filter values (brands, sizes, etc.) that match the current filter criteria. Useful for building dynamic filter UIs that update based on selections. Supports the same <code>f-</code> filters as <code>/tires</code>.</p>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/tires/default_images</span>
+                <span class="endpoint-desc">List default tire images for lifted vehicles</span>
+            </div>
+            <div class="endpoint-details">
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><span class="pn">key</span></td><td>string</td><td>API key (required)</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======== VEHICLES ======== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🚗</div>
+            <div class="section-title">Vehicles (5 endpoints)</div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/vehicles/years</span>
+                <span class="endpoint-desc">List vehicle years</span>
+            </div>
+            <div class="endpoint-details">
+                <div class="warn-box"><strong>Limited results!</strong> This endpoint returns only ~10 years by default. Use <code>p-size=200</code> to get all years, or generate years client-side (recommended: current year + 1 down to 1960).</div>
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th></th><th>Description</th></tr>
+                    <tr><td><span class="pn">key</span></td><td>string</td><td><span class="req">required</span></td><td>API key</td></tr>
+                    <tr><td><span class="pn">p-size</span></td><td>integer</td><td><span class="opt">optional</span></td><td>Results per page (default ~10). Use <code>200</code> for all.</td></tr>
+                    <tr><td><span class="pn">f-types</span></td><td>string</td><td><span class="opt">optional</span></td><td>Comma-separated vehicle types, e.g. <code>car,cuv</code></td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/vehicles/makes</span>
+                <span class="endpoint-desc">List vehicle makes</span>
+            </div>
+            <div class="endpoint-details">
+                <div class="warn-box"><strong>Default limit is ~10!</strong> Always use <code>p-size=200</code> to get all makes. Without it, you'll only see ~10 makes for any given year (e.g., 43 makes exist for 2024).</div>
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th></th><th>Description</th></tr>
+                    <tr><td><span class="pn">key</span></td><td>string</td><td><span class="req">required</span></td><td>API key</td></tr>
+                    <tr><td><span class="pn">p-size</span></td><td>integer</td><td><span class="opt">optional</span></td><td>Results per page (default ~10). Use <code>200</code> for all.</td></tr>
+                    <tr><td><span class="pn">f-year</span></td><td>string</td><td><span class="opt">optional</span></td><td>Filter by year, e.g. <code>2025</code></td></tr>
+                    <tr><td><span class="pn">f-types</span></td><td>string</td><td><span class="opt">optional</span></td><td>Comma-separated vehicle types</td></tr>
+                    <tr><td><span class="pn">i-logos</span></td><td>boolean</td><td><span class="opt">optional</span></td><td>Include brand logos</td></tr>
+                    <tr><td><span class="pn">i-vehicleCount</span></td><td>boolean</td><td><span class="opt">optional</span></td><td>Include vehicle count per make</td></tr>
+                    <tr><td><span class="pn">i-aaiaBrandCode</span></td><td>boolean</td><td><span class="opt">optional</span></td><td>Include AAIA brand code</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/vehicles/models</span>
+                <span class="endpoint-desc">List vehicle models</span>
+            </div>
+            <div class="endpoint-details">
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th></th><th>Description</th></tr>
+                    <tr><td><span class="pn">key</span></td><td>string</td><td><span class="req">required</span></td><td>API key</td></tr>
+                    <tr><td><span class="pn">p-size</span></td><td>integer</td><td><span class="opt">optional</span></td><td>Results per page (default ~10). Use <code>200</code> for all.</td></tr>
+                    <tr><td><span class="pn">f-make</span></td><td>string</td><td><span class="opt">optional</span></td><td>Filter by make, e.g. <code>Chevrolet</code></td></tr>
+                    <tr><td><span class="pn">f-year</span></td><td>string</td><td><span class="opt">optional</span></td><td>Filter by year, e.g. <code>2025</code></td></tr>
+                    <tr><td><span class="pn">f-query</span></td><td>string</td><td><span class="opt">optional</span></td><td>Full-text search, e.g. <code>2025 Chevrolet</code></td></tr>
+                    <tr><td><span class="pn">f-types</span></td><td>string</td><td><span class="opt">optional</span></td><td>Comma-separated vehicle types</td></tr>
+                    <tr><td><span class="pn">i-img</span></td><td>boolean</td><td><span class="opt">optional</span></td><td>Include vehicle image paths (all angles, default color)</td></tr>
+                    <tr><td><span class="pn">i-img001</span></td><td>boolean</td><td><span class="opt">optional</span></td><td>Include side angle image</td></tr>
+                    <tr><td><span class="pn">i-img014</span></td><td>boolean</td><td><span class="opt">optional</span></td><td>Include rear angle image</td></tr>
+                    <tr><td><span class="pn">i-img032</span></td><td>boolean</td><td><span class="opt">optional</span></td><td>Include front angle image</td></tr>
+                    <tr><td><span class="pn">f-imgColor</span></td><td>string</td><td><span class="opt">optional</span></td><td>Preferred image color (<code>rand</code> = random)</td></tr>
+                    <tr><td><span class="pn">i-body</span></td><td>boolean</td><td><span class="opt">optional</span></td><td>Include body type</td></tr>
+                    <tr><td><span class="pn">i-drw</span></td><td>boolean</td><td><span class="opt">optional</span></td><td>Include DRW (Dual Rear Wheel) info</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/vehicles/submodels</span>
+                <span class="endpoint-desc">List vehicle sub models</span>
+            </div>
+            <div class="endpoint-details">
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th></th><th>Description</th></tr>
+                    <tr><td><span class="pn">key</span></td><td>string</td><td><span class="req">required</span></td><td>API key</td></tr>
+                    <tr><td><span class="pn">p-size</span></td><td>integer</td><td><span class="opt">optional</span></td><td>Results per page (default ~10). Use <code>200</code> for all.</td></tr>
+                    <tr><td><span class="pn">f-make</span></td><td>string</td><td><span class="opt">optional</span></td><td>Filter by make</td></tr>
+                    <tr><td><span class="pn">f-model</span></td><td>string</td><td><span class="opt">optional</span></td><td>Filter by model</td></tr>
+                    <tr><td><span class="pn">f-year</span></td><td>string</td><td><span class="opt">optional</span></td><td>Filter by year</td></tr>
+                    <tr><td><span class="pn">f-types</span></td><td>string</td><td><span class="opt">optional</span></td><td>Comma-separated vehicle types</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/vehicles</span>
+                <span class="endpoint-desc">List vehicles (full vehicle lookup)</span>
+            </div>
+            <div class="endpoint-details">
+                <div class="note-box"><strong>Full vehicle endpoint</strong> — 40+ parameters. Use for detailed vehicle lookups including fitments, images, colors, lifts, and plus-sizes.</div>
+                <div class="param-group">Key Filter Parameters</div>
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><span class="pn">f-year</span></td><td>string</td><td>Filter by year</td></tr>
+                    <tr><td><span class="pn">f-make</span></td><td>string</td><td>Filter by make</td></tr>
+                    <tr><td><span class="pn">f-model</span></td><td>string</td><td>Filter by model</td></tr>
+                    <tr><td><span class="pn">f-submodel</span></td><td>string</td><td>Filter by submodel</td></tr>
+                    <tr><td><span class="pn">f-query</span></td><td>string</td><td>Full-text search</td></tr>
+                    <tr><td><span class="pn">f-vin</span></td><td>string</td><td>Filter by VIN</td></tr>
+                    <tr><td><span class="pn">f-id</span></td><td>integer</td><td>Filter by vehicle ID</td></tr>
+                    <tr><td><span class="pn">f-body</span></td><td>string</td><td>Filter by body type, e.g. <code>coupe</code></td></tr>
+                    <tr><td><span class="pn">f-bed</span></td><td>string</td><td>Filter by bed type (pickup trucks)</td></tr>
+                    <tr><td><span class="pn">f-types</span></td><td>string</td><td>Comma-separated vehicle types</td></tr>
+                    <tr><td><span class="pn">f-region</span></td><td>string</td><td>Filter by region</td></tr>
+                </table>
+                <div class="param-group">Key Include Parameters</div>
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><span class="pn">i-fitments</span></td><td>boolean</td><td>Include OEM tire/wheel fitment data</td></tr>
+                    <tr><td><span class="pn">i-optionalFitments</span></td><td>boolean</td><td>Include optional fitments</td></tr>
+                    <tr><td><span class="pn">i-plusSizes</span></td><td>boolean</td><td>Include plus-size fitment options</td></tr>
+                    <tr><td><span class="pn">i-lifts</span></td><td>boolean</td><td>Include lift kit fitment data</td></tr>
+                    <tr><td><span class="pn">i-img</span></td><td>boolean</td><td>Include vehicle images (all angles)</td></tr>
+                    <tr><td><span class="pn">i-colors</span></td><td>boolean</td><td>Include available colors</td></tr>
+                    <tr><td><span class="pn">i-colorsWithImages</span></td><td>boolean</td><td>Include only colors with images</td></tr>
+                    <tr><td><span class="pn">i-tags</span></td><td>boolean</td><td>Include vehicle tags</td></tr>
+                    <tr><td><span class="pn">i-region</span></td><td>boolean</td><td>Include region info</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======== WHEELS ======== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">⚙️</div>
+            <div class="section-title">Wheels (4 endpoints)</div>
+        </div>
+
+        <div class="note-box"><strong>Integrated:</strong> Wheel brands, search, and styles are wired up in <code>wheels.html</code> and <code>api-client.js</code>. Brand logos use <code>i-logos=true</code> with <code>p-size=200</code>.</div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/wheels</span>
+                <span class="endpoint-desc">List wheels (primary wheel catalog)</span>
+            </div>
+            <div class="endpoint-details">
+                <div class="param-group">Key Filter Parameters</div>
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><span class="pn">f-query</span></td><td>string</td><td>Full-text search (part number, brand, model, sub model, finish)</td></tr>
+                    <tr><td><span class="pn">f-brand</span></td><td>string</td><td>Filter by brand, e.g. <code>TSW</code></td></tr>
+                    <tr><td><span class="pn">f-brandIds</span></td><td>string</td><td>Comma-separated brand IDs</td></tr>
+                    <tr><td><span class="pn">f-model</span></td><td>string</td><td>Filter by wheel model, e.g. <code>Vector</code></td></tr>
+                    <tr><td><span class="pn">f-styleId</span></td><td>integer</td><td>Filter by style ID</td></tr>
+                    <tr><td><span class="pn">f-sizes</span></td><td>string</td><td>Comma-separated sizes, e.g. <code>20x9.5,20x10.5</code></td></tr>
+                    <tr><td><span class="pn">f-diameters</span></td><td>string</td><td>Comma-separated diameters, e.g. <code>20,22,24</code> [inch]</td></tr>
+                    <tr><td><span class="pn">f-boltCircle</span></td><td>number</td><td>Bolt circle filter, e.g. <code>139.70</code> [mm]</td></tr>
+                    <tr><td><span class="pn">f-lugCount</span></td><td>integer</td><td>Lug count, e.g. <code>5</code></td></tr>
+                    <tr><td><span class="pn">f-offset</span></td><td>number</td><td>Filter by offset [mm]</td></tr>
+                    <tr><td><span class="pn">f-minOffset</span></td><td>number</td><td>Minimum offset [mm]</td></tr>
+                    <tr><td><span class="pn">f-maxOffset</span></td><td>number</td><td>Maximum offset [mm]</td></tr>
+                    <tr><td><span class="pn">f-minBore</span></td><td>number</td><td>Minimum bore [mm]</td></tr>
+                    <tr><td><span class="pn">f-minPrice</span></td><td>number</td><td>Minimum price [$]</td></tr>
+                    <tr><td><span class="pn">f-maxPrice</span></td><td>number</td><td>Maximum price [$]</td></tr>
+                    <tr><td><span class="pn">f-shortColors</span></td><td>string</td><td>Filter by colors</td></tr>
+                    <tr><td><span class="pn">f-shortFinishes</span></td><td>string</td><td>Filter by finishes</td></tr>
+                    <tr><td><span class="pn">f-inStock</span></td><td>boolean</td><td>Only wheels in stock</td></tr>
+                    <tr><td><span class="pn">f-pn</span></td><td>string</td><td>Filter by part number</td></tr>
+                    <tr><td><span class="pn">f-andSegmentTags</span></td><td>string</td><td>Segment tags (AND logic)</td></tr>
+                    <tr><td><span class="pn">f-andVehicleTypeTags</span></td><td>string</td><td>Vehicle type tags (AND logic)</td></tr>
+                </table>
+                <div class="param-group">Include Parameters</div>
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><span class="pn">i-img</span></td><td>boolean</td><td>Include all image paths</td></tr>
+                    <tr><td><span class="pn">i-imgDetails</span></td><td>boolean</td><td>Include detailed image info</td></tr>
+                    <tr><td><span class="pn">i-specs</span></td><td>boolean</td><td>Include wheel specifications</td></tr>
+                    <tr><td><span class="pn">i-price</span></td><td>boolean</td><td>Include pricing</td></tr>
+                    <tr><td><span class="pn">i-inStock</span></td><td>boolean</td><td>Include stock availability</td></tr>
+                    <tr><td><span class="pn">i-inventory</span></td><td>boolean</td><td>Include inventory levels</td></tr>
+                    <tr><td><span class="pn">i-tags</span></td><td>boolean</td><td>Include tags</td></tr>
+                    <tr><td><span class="pn">i-coordinates</span></td><td>boolean</td><td>Include coordinates for view-on-vehicle</td></tr>
+                </table>
+                <div class="param-group">Sort Parameters</div>
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><span class="pn">s-brand</span></td><td>string</td><td>Sort by brand (<code>asc</code> / <code>desc</code>)</td></tr>
+                    <tr><td><span class="pn">s-model</span></td><td>string</td><td>Sort by model (<code>asc</code> / <code>desc</code>)</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/wheels/brands</span>
+                <span class="endpoint-desc">List wheel brands</span>
+            </div>
+            <div class="endpoint-details">
+                <table class="param-table">
+                    <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><span class="pn">key</span></td><td>string</td><td>API key (required)</td></tr>
+                    <tr><td><span class="pn">f-id</span></td><td>integer</td><td>Filter by brand ID</td></tr>
+                    <tr><td><span class="pn">f-inStock</span></td><td>boolean</td><td>Only brands with wheels in stock</td></tr>
+                    <tr><td><span class="pn">i-logos</span></td><td>boolean</td><td>Include brand logos</td></tr>
+                    <tr><td><span class="pn">i-about</span></td><td>boolean</td><td>Include brand description</td></tr>
+                    <tr><td><span class="pn">i-imgBanner</span></td><td>boolean</td><td>Include banner image</td></tr>
+                    <tr><td><span class="pn">i-wheelCount</span></td><td>boolean</td><td>Include total wheel count</td></tr>
+                    <tr><td><span class="pn">i-wheelStyleCount</span></td><td>boolean</td><td>Include style count</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/wheels/styles</span>
+                <span class="endpoint-desc">List wheel styles</span>
+            </div>
+            <div class="endpoint-details">
+                <p style="font-size:0.85rem; color:#666; margin-top:12px;">Returns wheel styles with extensive filter support similar to <code>/wheels</code>. Use for style-level browsing (grouped by design rather than individual SKUs).</p>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-get">GET</span>
+                <span class="endpoint-path">/wheels/filters</span>
+                <span class="endpoint-desc">List wheel filters (get available filter values)</span>
+            </div>
+            <div class="endpoint-details">
+                <p style="font-size:0.85rem; color:#666; margin-top:12px;">Returns available filter values for wheels, similar to <code>/tires/filters</code>. Useful for building dynamic filter UIs.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======== E-COMMERCE ======== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🛒</div>
+            <div class="section-title">E-Commerce (1 endpoint)</div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method-post">POST</span>
+                <span class="endpoint-path">/request-for-quote</span>
+                <span class="endpoint-desc">Submit a request for quote</span>
+            </div>
+            <div class="endpoint-details">
+                <div class="note-box"><strong>Only POST endpoint</strong> in the entire API. Submits a quote request with customer info, vehicle, and selected products.</div>
+                <div class="params-title">Request Body (JSON)</div>
+                <div class="code">{
+  <span class="k">"customer"</span>: {                    <span style="color:#888;">// REQUIRED</span>
+    <span class="k">"firstName"</span>: <span class="s">"string"</span>,         <span style="color:#888;">// required, max 30 chars</span>
+    <span class="k">"lastName"</span>: <span class="s">"string"</span>,          <span style="color:#888;">// required, max 30 chars</span>
+    <span class="k">"email"</span>: <span class="s">"string"</span>,             <span style="color:#888;">// required, max 50 chars</span>
+    <span class="k">"phone"</span>: <span class="s">"string"</span>,             <span style="color:#888;">// required, min 10 chars</span>
+    <span class="k">"address"</span>: <span class="s">"string"</span>,           <span style="color:#888;">// optional, max 300 chars</span>
+    <span class="k">"message"</span>: <span class="s">"string"</span>            <span style="color:#888;">// optional, max 500 chars</span>
+  },
+  <span class="k">"vehicleId"</span>: <span class="n">12345</span>,              <span style="color:#888;">// REQUIRED - vehicle ID</span>
+  <span class="k">"fitmentId"</span>: <span class="n">678</span>,                <span style="color:#888;">// optional - fitment ID</span>
+  <span class="k">"products"</span>: [{                    <span style="color:#888;">// REQUIRED - array</span>
+    <span class="k">"id"</span>: <span class="n">123</span>,                      <span style="color:#888;">// required - product ID</span>
+    <span class="k">"qty"</span>: <span class="n">4</span>,                       <span style="color:#888;">// required - quantity</span>
+    <span class="k">"type"</span>: <span class="s">"tire"</span>                 <span style="color:#888;">// required - "tire" or "wheel"</span>
+  }],
+  <span class="k">"services"</span>: [{                    <span style="color:#888;">// optional</span>
+    <span class="k">"name"</span>: <span class="s">"Installation"</span>,        <span style="color:#888;">// required if services included</span>
+    <span class="k">"qty"</span>: <span class="n">4</span>                        <span style="color:#888;">// required</span>
+  }]
+}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======== ISSUES & RESOLUTIONS ======== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">✅</div>
+            <div class="section-title">Issues Found &amp; Resolved</div>
+        </div>
+
+        <div class="config-card" style="margin-bottom: 16px; border-color: #4caf50;">
+            <h3 style="color: #2e7d32;">1. Pagination — RESOLVED</h3>
+            <p style="font-size: 0.88rem; color: #666;">Old code used fake <code>p-limit</code> and <code>p-page</code> params. While not in the Swagger spec, we discovered <code>p-size</code> DOES work across all endpoints. Default page size is ~10, which caused dropdowns to show only 10 items. Fix: <code>p-size=200</code> on all vehicle endpoints. Response includes <code>MoreItems: true/false</code>.</p>
+        </div>
+
+        <div class="config-card" style="margin-bottom: 16px; border-color: #4caf50;">
+            <h3 style="color: #2e7d32;">2. Wrong Parameter Names — RESOLVED</h3>
+            <p style="font-size: 0.88rem; color: #666;">All param names corrected in <code>api-client.js</code>: <code>i-price</code>, <code>i-img</code>, <code>f-query</code>, <code>f-andSegmentTags</code>, <code>f-minPrice</code>, <code>f-maxPrice</code>, <code>f-minSpeedRating</code>.</p>
+        </div>
+
+        <div class="config-card" style="margin-bottom: 16px; border-color: #4caf50;">
+            <h3 style="color: #2e7d32;">3. Fabricated Endpoints — RESOLVED</h3>
+            <p style="font-size: 0.88rem; color: #666;">Removed fake endpoints. Vehicle-to-tire lookup now uses the correct two-step flow: <code>/vehicles?i-fitments=true</code> → extract <code>TireSize</code> from <code>Fitments[]</code> → <code>/tires?f-sizes={sizes}</code>.</p>
+        </div>
+
+        <div class="config-card" style="margin-bottom: 16px; border-color: #4caf50;">
+            <h3 style="color: #2e7d32;">4. API Key — RESOLVED</h3>
+            <p style="font-size: 0.88rem; color: #666;">Corrected from <code>"holbrook"</code> to <code>"holbrooktire"</code> in <code>config.js</code>.</p>
+        </div>
+
+        <div class="config-card" style="margin-bottom: 16px; border-color: #4caf50;">
+            <h3 style="color: #2e7d32;">5. Wheels Integration — RESOLVED</h3>
+            <p style="font-size: 0.88rem; color: #666;">All 4 wheel endpoints wired up in <code>api-client.js</code>. Wheel brands display with logos on <code>brands.html</code> and <code>wheels.html</code>. 107 wheel brands active.</p>
+        </div>
+    </div>
+
+    <!-- ======== KEY LEARNINGS ======== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">💡</div>
+            <div class="section-title">Key Implementation Notes</div>
+        </div>
+
+        <div class="note-box" style="margin-bottom: 16px;">
+            <strong>p-size is critical:</strong> Not in the Swagger spec but works on ALL endpoints. Default page size is ~10. Without <code>p-size=200</code>, vehicle dropdowns show only ~10 makes/models. Always include it.
+        </div>
+
+        <div class="note-box" style="margin-bottom: 16px;">
+            <strong>Brand logos follow a pattern:</strong> URL = <code>BrandLogosUrlBase</code> + <code>Brand.replace(/ /g, '_') + '.webp'</code>. Works for all 120 brands (13 tire + 107 wheel). Both <code>/tires/brands</code> and <code>/wheels/brands</code> support <code>i-logos=true</code>.
+        </div>
+
+        <div class="note-box" style="margin-bottom: 16px;">
+            <strong>Image URLs require i-img=true:</strong> The <code>ImgUrlBase</code> field only appears in responses when <code>i-img=true</code> is passed. Full image URL = <code>ImgUrlBase + ImgThumb</code> (or ImgAngle, ImgFront, ImgSide1, ImgSide2).
+        </div>
+
+        <div class="note-box" style="margin-bottom: 16px;">
+            <strong>API returns PascalCase:</strong> All response fields are PascalCase (Brand, Model, Price, ImgThumb). The normalization layer in <code>api-client.js</code> converts to lowercase for display code.
+        </div>
+
+        <div class="note-box" style="margin-bottom: 16px;">
+            <strong>Tire size formats:</strong> Three formats in the data: Metric (<code>P275/60R20</code>, <code>225/35ZR20</code>), Flotation (<code>31X10.50R15LT</code>), and Bias/Commercial (<code>11L-14</code>, <code>10R22.5</code>). The <code>Z</code> in ZR sizes must be handled in parsing (e.g., regex: <code>Z?[RBD]</code>).
+        </div>
+
+        <div class="note-box" style="margin-bottom: 16px;">
+            <strong>Client-side years recommended:</strong> The <code>/vehicles/years</code> endpoint returns limited results even with <code>p-size</code>. Generate years client-side (current year + 1 down to 1960) for full coverage.
+        </div>
+
+        <div class="config-card" style="margin-bottom: 16px;">
+            <h3>Correct API Flow for "Search by Vehicle"</h3>
+            <p style="font-size: 0.88rem; color: #666; line-height: 1.7;">
+                1. Generate years client-side (2027 → 1960) — don't use <code>/vehicles/years</code><br>
+                2. <code>GET /vehicles/makes?f-year=2025&p-size=200</code> → populate make dropdown (43 makes for 2024)<br>
+                3. <code>GET /vehicles/models?f-year=2025&f-make=Chevrolet&p-size=200</code> → populate model dropdown (20 models)<br>
+                4. <code>GET /vehicles/submodels?f-year=2025&f-make=Chevrolet&f-model=Silverado+1500&p-size=200</code> → populate submodel dropdown<br>
+                5. <code>GET /vehicles?f-year=2025&f-make=Chevrolet&f-model=Silverado+1500&f-submodel=LT&i-fitments=true</code> → get OEM tire sizes from <code>Fitments[].TireSize</code><br>
+                6. <code>GET /tires?f-sizes=275/60R20&i-img=true&i-price=true&i-specs=true</code> → get matching tires with images and pricing
+            </p>
+        </div>
+
+        <div class="config-card" style="margin-bottom: 16px;">
+            <h3>Correct API Flow for "Search by Size"</h3>
+            <p style="font-size: 0.88rem; color: #666; line-height: 1.7;">
+                1. <code>GET /tires?i-specs=true&p-size=500</code> → fetch all tires, extract unique <code>Size</code> values<br>
+                2. Parse sizes into cascading columns using <code>parseSize()</code> — handles metric, ZR, flotation, bias, commercial<br>
+                3. Populate first dropdown with unique col1 values, cascade col2 and col3 on selection<br>
+                4. <code>GET /tires?f-sizes={selectedSize}&i-img=true&i-price=true&i-specs=true</code> → get matching tires
+            </p>
+        </div>
+
+        <div class="config-card">
+            <h3>Active Data Summary (holbrooktire key)</h3>
+            <p style="font-size: 0.88rem; color: #666; line-height: 1.7;">
+                Tire brands: <strong>13</strong> (all with logos)<br>
+                Wheel brands: <strong>107</strong> (all with logos)<br>
+                Vehicle makes (2024): <strong>43</strong><br>
+                Unique tire sizes: <strong>212</strong> (metric, flotation, bias, commercial)<br>
+                Tire size formats: <strong>3</strong> — Metric (165), Flotation (23), Other/Bias (26)
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p><span class="bold">AutoSync</span> &middot; An Experience Driven Corporation &middot; Custom Wheel Deal API Reference &middot; Sourced from official Swagger spec</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Tire Details - Custom Wheel Deal</title>
+    <script>
+        (function () {
+            var path = location.pathname;
+            var idx = path.indexOf('/tires/');
+            var base = document.createElement('base');
+            base.href = location.origin + (idx >= 0 ? path.substring(0, idx + 7) : '/tires/');
+            document.head.appendChild(base);
+        })();
+    </script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'sans': ['Inter', 'sans-serif'], 'display': ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        'primary': '#850824', 'primary-container': '#a62639',
+                        'on-surface': '#1a1c1e', 'on-surface-variant': '#584141',
+                        'surface': '#f9f9fc', 'surface-container-low': '#f3f3f6',
+                        'surface-container-lowest': '#ffffff',
+                        'outline-variant': '#e0bfbf'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .signature-gradient { background: linear-gradient(135deg, #850824 0%, #a62639 100%); }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .img-thumb { cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s; }
+        .img-thumb.active, .img-thumb:hover { border-color: #850824; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface pt-[88px]">
+
+    <div id="headerMount"></div>
+
+    <div id="breadcrumbMount"></div>
+
+    <div id="vehicleReinforcementBar" class="bg-surface-container-low border-b border-outline-variant/20 hidden"></div>
+
+    <!-- Loading -->
+    <div id="loadingState" class="max-w-7xl mx-auto px-4 py-24 text-center">
+        <div class="inline-flex items-center gap-3 text-on-surface-variant">
+            <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#850824" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+            <span>Loading tire details...</span>
+        </div>
+    </div>
+
+    <!-- Product Detail -->
+    <main id="productDetail" class="max-w-7xl mx-auto px-4 py-8 hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+            <!-- Left: Images -->
+            <div>
+                <div id="mainImageWrap" class="bg-surface-container-low rounded-2xl flex items-center justify-center p-8 aspect-square mb-4">
+                    <img id="mainImage" src="" alt="" class="max-w-full max-h-full object-contain">
+                </div>
+                <div id="thumbnailRow" class="flex gap-3 justify-center"></div>
+            </div>
+
+            <!-- Right: Info -->
+            <div class="space-y-6">
+                <!-- Brand + Logo -->
+                <div class="flex items-center gap-3">
+                    <div id="brandLogoWrap" class="w-12 h-12 bg-surface-container-low rounded-lg flex items-center justify-center p-1 hidden">
+                        <img id="brandLogo" src="" alt="" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <span id="brandName" class="text-[10px] font-bold tracking-widest text-primary uppercase"></span>
+                </div>
+
+                <h1 id="tireModel" class="font-display font-bold text-3xl md:text-4xl tracking-tight"></h1>
+                <p id="tireDisplayName" class="text-on-surface-variant text-lg"></p>
+
+                <!-- Price -->
+                <div id="priceBlock" class="flex items-end gap-2">
+                    <span id="tirePrice" class="text-4xl font-bold"></span>
+                    <span class="text-on-surface-variant text-sm mb-1">/each</span>
+                </div>
+
+                <!-- Stock -->
+                <div id="stockBadge" class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold tracking-wider"></div>
+
+                <!-- Add to Cart -->
+                <div class="flex gap-3 items-center">
+                    <button id="addToCartBtn" class="signature-gradient text-white px-8 py-4 rounded-lg text-sm font-bold tracking-widest uppercase hover:opacity-90 transition-all active:scale-95 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-lg">shopping_cart</span>
+                        ADD SET OF 4 TO CART
+                    </button>
+                </div>
+
+                <!-- Quick Specs -->
+                <div class="border-t border-outline-variant/20 pt-6">
+                    <h3 class="font-display font-bold text-lg mb-4">Specifications</h3>
+                    <div id="specsGrid" class="grid grid-cols-2 gap-3"></div>
+                </div>
+
+                <!-- Description -->
+                <div id="descriptionBlock" class="border-t border-outline-variant/20 pt-6 hidden">
+                    <h3 class="font-display font-bold text-lg mb-3">Description</h3>
+                    <p id="tireDescription" class="text-on-surface-variant leading-relaxed"></p>
+                </div>
+
+                <!-- Part Number -->
+                <div id="partNumberBlock" class="text-xs text-on-surface-variant/60 border-t border-outline-variant/20 pt-4">
+                    Part Number: <span id="partNumber" class="font-mono"></span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Error -->
+    <div id="errorState" class="max-w-7xl mx-auto px-4 py-24 text-center hidden">
+        <span class="material-symbols-outlined text-6xl text-on-surface-variant/20 mb-4 block">error_outline</span>
+        <p class="text-on-surface-variant text-lg mb-2">Tire not found</p>
+        <p class="text-on-surface-variant/60 text-sm mb-6">The tire you're looking for may no longer be available.</p>
+        <a href="index.html" class="text-primary font-bold text-sm hover:underline">Browse all tire brands</a>
+    </div>
+
+    <div id="footerMount"></div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/components.js"></script>
+    <script>
+    // ── Source detection: sessionStorage › clean URL slug › query params ──
+    // Clean URL: /tires/Bridgestone_Blizzak-DM-V2_pn-016049_265-60R18/
+    // Legacy:    /tires/product.html?brand=Bridgestone&id=123
+
+    const _qp = new URLSearchParams(window.location.search);
+
+    let _storedProduct = null;
+    try {
+        const _raw = sessionStorage.getItem('holbrook.pendingProduct');
+        if (_raw) { _storedProduct = JSON.parse(_raw); sessionStorage.removeItem('holbrook.pendingProduct'); }
+    } catch(e) {}
+
+    // Find slug segment (contains underscore) in the path
+    const _slug = window.location.pathname.split('/').find(s => s.includes('_')) || null;
+
+    let BRAND_PARAM = _storedProduct ? _storedProduct.brand : (_qp.get('brand') || '');
+    let TIRE_ID     = _storedProduct ? String(_storedProduct.id) : (_qp.get('id') || '');
+    let PART_NUM    = _qp.get('pn') || '';
+
+    if (_slug && !_storedProduct) {
+        const _parts = _slug.split('_');
+        const _pnPart = _parts.find(p => p.startsWith('pn-'));
+        PART_NUM    = _pnPart ? _pnPart.replace('pn-', '') : '';
+        BRAND_PARAM = _parts[0]; // rough brand — corrected via API below
+        TIRE_ID     = '';
+    }
+
+    function toProductSlug(p) {
+        const brand = (p.brand || '').trim().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+        const name  = (p.model || p.displayName || '').trim().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+        const pn    = 'pn-' + (p.partNumber || '').replace(/[^a-zA-Z0-9]/g, '');
+        const size  = (p.size || '').replace(/\//g, '-').replace(/\s+/g, '').replace(/[^a-zA-Z0-9-]/g, '');
+        return `${brand}_${name}_${pn}_${size}`;
+    }
+
+    function setMainImage(src) {
+        document.getElementById('mainImage').src = src;
+        document.querySelectorAll('.img-thumb').forEach(el => {
+            el.classList.toggle('active', el.dataset.src === src);
+        });
+    }
+
+    function specRow(label, value) {
+        if (!value && value !== 0) return '';
+        return `
+            <div class="bg-surface-container-low rounded-lg px-4 py-3">
+                <div class="text-[10px] font-bold tracking-widest text-on-surface-variant/60 uppercase mb-1">${label}</div>
+                <div class="font-bold text-sm">${value}</div>
+            </div>`;
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        document.getElementById('headerMount').innerHTML = HolbrookUI.renderHeader('tires');
+        document.getElementById('footerMount').innerHTML = HolbrookUI.renderFooter();
+        document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb([]);
+        HolbrookUI.updateGarageCount();
+        HolbrookUI.renderVehicleBar();
+        if (typeof HolbrookCart !== 'undefined') HolbrookCart.init();
+
+        // Resolve exact brand name from slug (API needs proper casing e.g. "BFGoodrich")
+        if (_slug && !_storedProduct && BRAND_PARAM) {
+            const slugNorm = BRAND_PARAM.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            try {
+                const brands = await HolbrookAPI.getTireBrands();
+                const match = brands.find(b => b.slug === slugNorm);
+                if (match) BRAND_PARAM = match.name;
+            } catch(e) {}
+        }
+
+        if (!BRAND_PARAM && !_storedProduct) {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('errorState').classList.remove('hidden');
+            return;
+        }
+
+        try {
+            let tire = _storedProduct || null;
+            const filters = { 'i-img': true, 'i-price': true, 'i-specs': true, 'i-tags': true };
+
+            if (!tire && TIRE_ID) {
+                const params = { 'f-brand': BRAND_PARAM, 'f-id': TIRE_ID, 'p-size': 1, ...filters };
+                const qs = new URLSearchParams({ key: 'holbrooktire', ...params }).toString();
+                const res = await fetch(`https://api.autosyncstudio.com/tires?${qs}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    const imgBase = data.ImgUrlBase || '';
+                    if (data.Tires && data.Tires.length) {
+                        const t = data.Tires[0];
+                        tire = {
+                            id: t.Id, brand: t.Brand, model: t.Model || '', displayName: t.DisplayName || '',
+                            size: t.Size || `${t.SectionWidth || ''}/${t.AspectRatio || ''}R${t.RimDiameter || ''}`,
+                            price: t.Price || 0,
+                            image: t.ImgThumb ? imgBase + t.ImgThumb : '',
+                            imgAngle: t.ImgAngle ? imgBase + t.ImgAngle : '',
+                            imgFront: t.ImgFront ? imgBase + t.ImgFront : '',
+                            imgSide: t.ImgSide1 ? imgBase + t.ImgSide1 : '',
+                            partNumber: t.PartNumber || '', speedRating: t.SpeedRating || '',
+                            loadRating: t.LoadRating || '', treadDepth: t.TreadDepth || '',
+                            warranty: t.Warranty || 0, sidewall: t.Sidewall || '',
+                            description: t.Description || '', sectionWidth: t.SectionWidth,
+                            aspectRatio: t.AspectRatio, rimDiameter: t.RimDiameter,
+                            diameter: t.Diameter || t.OverallDiameter, weight: t.Weight,
+                            runFlat: t.RunFlat || false, inStock: t.InStock !== false,
+                        };
+                    }
+                }
+            } else if (!tire && PART_NUM) {
+                const result = await HolbrookAPI.getTiresByBrand(BRAND_PARAM);
+                tire = result.tires.find(t => t.partNumber === PART_NUM) || null;
+            }
+
+            if (!tire) {
+                document.getElementById('loadingState').classList.add('hidden');
+                document.getElementById('errorState').classList.remove('hidden');
+                return;
+            }
+
+            // Update URL to clean slug format (handles legacy ?brand=&id= URLs)
+            if (!_slug && tire) {
+                const cleanSlug = toProductSlug(tire);
+                const tiresBase = window.location.pathname.replace(/\/tires\/.*/, '') + '/tires/';
+                history.replaceState(null, '', tiresBase + cleanSlug + '/');
+            }
+
+            // Get brand info for logo
+            let brandLogo = '';
+            let brandSlug = BRAND_PARAM.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            try {
+                const brands = await HolbrookAPI.getTireBrands();
+                const match = brands.find(b => b.name === BRAND_PARAM);
+                if (match) {
+                    brandLogo = match.logo;
+                    brandSlug = match.slug;
+                }
+            } catch (e) {}
+
+            // Update page
+            document.title = `${tire.displayName || tire.model} - Custom Wheel Deal`;
+            document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb([
+                { text: 'Tires', href: 'index.html' },
+                { text: BRAND_PARAM, href: `brand.html?brand=${brandSlug}` },
+                { text: tire.model, href: '#' }
+            ]);
+            document.getElementById('brandName').textContent = tire.brand;
+            document.getElementById('tireModel').textContent = tire.model;
+            document.getElementById('tireDisplayName').textContent = tire.displayName || tire.size;
+
+            // Brand logo
+            if (brandLogo) {
+                document.getElementById('brandLogo').src = brandLogo;
+                document.getElementById('brandLogoWrap').classList.remove('hidden');
+            }
+
+            // Price
+            if (tire.price) {
+                document.getElementById('tirePrice').textContent = `$${Number(tire.price).toFixed(2)}`;
+            } else {
+                document.getElementById('priceBlock').innerHTML = '<span class="text-xl text-on-surface-variant">Call for pricing</span>';
+            }
+
+            // Stock
+            const stockEl = document.getElementById('stockBadge');
+            if (tire.inStock) {
+                stockEl.textContent = 'IN STOCK';
+                stockEl.classList.add('bg-green-100', 'text-green-700');
+            } else {
+                stockEl.textContent = 'CALL FOR AVAILABILITY';
+                stockEl.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+            }
+
+            // Images
+            const images = [];
+            if (tire.image) images.push({ src: tire.image, label: 'Tread' });
+            if (tire.imgAngle) images.push({ src: tire.imgAngle, label: 'Angle' });
+            if (tire.imgFront) images.push({ src: tire.imgFront, label: 'Front' });
+            if (tire.imgSide) images.push({ src: tire.imgSide, label: 'Side' });
+
+            if (images.length > 0) {
+                document.getElementById('mainImage').src = images[0].src;
+                document.getElementById('mainImage').alt = tire.displayName || tire.model;
+
+                if (images.length > 1) {
+                    document.getElementById('thumbnailRow').innerHTML = images.map(img =>
+                        `<div class="img-thumb w-16 h-16 bg-surface-container-low rounded-lg flex items-center justify-center p-1 ${img.src === images[0].src ? 'active' : ''}" data-src="${img.src}" onclick="setMainImage('${img.src}')">
+                            <img src="${img.src}" alt="${img.label}" class="max-w-full max-h-full object-contain">
+                        </div>`
+                    ).join('');
+                }
+            } else {
+                document.getElementById('mainImageWrap').innerHTML = '<span class="material-symbols-outlined text-8xl text-on-surface-variant/20">tire_repair</span>';
+            }
+
+            // Specs
+            const specsHTML = [
+                specRow('Size', tire.size),
+                specRow('Section Width', tire.sectionWidth ? tire.sectionWidth + 'mm' : ''),
+                specRow('Aspect Ratio', tire.aspectRatio),
+                specRow('Rim Diameter', tire.rimDiameter ? tire.rimDiameter + '"' : ''),
+                specRow('Speed Rating', tire.speedRating),
+                specRow('Load Rating', tire.loadRating),
+                specRow('Tread Depth', tire.treadDepth ? tire.treadDepth + '/32"' : ''),
+                specRow('Weight', tire.weight ? tire.weight + ' lbs' : ''),
+                specRow('Sidewall', tire.sidewall),
+                specRow('Run Flat', tire.runFlat ? 'Yes' : ''),
+                specRow('Warranty', tire.warranty ? tire.warranty.toLocaleString() + ' mi' : ''),
+                specRow('Diameter', tire.diameter ? tire.diameter + '"' : ''),
+            ].filter(Boolean).join('');
+            document.getElementById('specsGrid').innerHTML = specsHTML;
+
+            // Description
+            if (tire.description) {
+                document.getElementById('tireDescription').textContent = tire.description;
+                document.getElementById('descriptionBlock').classList.remove('hidden');
+            }
+
+            // Part number
+            if (tire.partNumber) {
+                document.getElementById('partNumber').textContent = tire.partNumber;
+            } else {
+                document.getElementById('partNumberBlock').classList.add('hidden');
+            }
+
+            // Add to cart
+            document.getElementById('addToCartBtn').addEventListener('click', () => {
+                if (typeof HolbrookCart !== 'undefined') {
+                    HolbrookCart.addItem({
+                        id: tire.id,
+                        type: 'tire',
+                        name: tire.model || tire.displayName,
+                        brand: tire.brand,
+                        size: tire.size,
+                        price: tire.price,
+                        image: tire.image,
+                        qty: 4
+                    });
+                    const toast = document.createElement('div');
+                    toast.className = 'fixed bottom-6 right-6 z-[999] bg-on-surface text-white px-6 py-3 rounded-md shadow-xl text-sm font-bold tracking-wider';
+                    toast.textContent = 'Set of 4 added to cart!';
+                    document.body.appendChild(toast);
+                    setTimeout(() => toast.remove(), 2500);
+                }
+            });
+
+            // Show product, hide loading
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('productDetail').classList.remove('hidden');
+
+        } catch (err) {
+            console.error('Error loading tire:', err);
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('errorState').classList.remove('hidden');
+        }
+    });
+    </script>
+<!-- holbrook-filters: installed -->
+<script src="/js/holbrook-filters-core.js" defer></script>
+<script src="/js/tire-filters.js" defer></script>
+<!-- /holbrook-filters -->
+</body>
+</html>

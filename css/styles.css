@@ -1,0 +1,64 @@
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #f9f9fc; color: #1a1c1e; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+body { min-height: 100vh; }
+#app { min-height: 100vh; display: flex; flex-direction: column; align-items: stretch; }
+#app > main { flex: 1; }
+#app > * { width: 100%; min-width: 0; box-sizing: border-box; }
+a { color: inherit; }
+button { font-family: inherit; }
+img { max-width: 100%; height: auto; }
+
+/* ─── Material Symbols ─── */
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 0; }
+::-webkit-scrollbar-track { background: #f3f3f6; }
+select:disabled { opacity: .4; cursor: not-allowed; }
+.rebate-strip::-webkit-scrollbar { display: none; }
+
+/* ─── Loading Spinner ─── */
+@keyframes htmSpin { to { transform: rotate(360deg); } }
+.spinner {
+  display: inline-block; width: 36px; height: 36px;
+  border: 3px solid #e5e7eb; border-top-color: #850824;
+  border-radius: 50%; animation: htmSpin 0.8s linear infinite;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .desktop-only { display: none !important; }
+  .mobile-grid-1 { grid-template-columns: 1fr !important; }
+
+  /* Header */
+  .resp-header-inner { padding: 10px 16px !important; justify-content: space-between !important; gap: 0 !important; }
+  .resp-nav { display: none !important; }
+  .resp-spacer { display: none !important; }
+
+  /* PLP */
+  .resp-plp-outer { padding: 20px 16px !important; }
+  .resp-plp-grid { grid-template-columns: 1fr !important; gap: 0 !important; }
+
+  /* PDP */
+  .resp-pdp-outer { padding: 20px 16px !important; }
+  .resp-pdp-grid { grid-template-columns: 1fr !important; }
+  .resp-h1-lg { font-size: 30px !important; }
+  .resp-h1-md { font-size: 24px !important; }
+
+  /* Locations + Footer */
+  .resp-locs-grid { grid-template-columns: 1fr !important; }
+  .resp-locs-outer { padding: 40px 16px 32px !important; }
+  .resp-footer-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+  .resp-footer-outer { padding: 40px 16px 24px !important; }
+  .resp-footer-bar { padding: 16px !important; }
+
+  /* GlobalFitmentBar */
+  .resp-fitbar-inner { padding: 10px 16px !important; flex-wrap: wrap !important; gap: 8px !important; }
+  .resp-fitbar-selects { flex-wrap: wrap !important; gap: 6px !important; }
+  .resp-fitbar-select { flex: 1 1 140px !important; min-width: 0 !important; }
+}
+@media (min-width: 769px) {
+  .mobile-only { display: none !important; }
+}

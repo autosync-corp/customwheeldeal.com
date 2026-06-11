@@ -1,0 +1,63 @@
+# ─── Holbrook Tire Center ───
+
+# Enable mod_rewrite
+RewriteEngine On
+
+# Force HTTPS (uncomment in production)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Directory index
+DirectoryIndex index.html
+
+# ─── Compression ───
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# ─── Browser Caching ───
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 1 hour"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>
+
+# ─── Security Headers ───
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Tire brand pages — /tires/michelin/, /tires/bridgestone/, etc.
+# Brand slugs are lowercase letters, numbers, hyphens only (one path segment)
+# Must come BEFORE the PDP rule so brand URLs don't fall through to tires/index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^tires/([a-z0-9-]+)/?$ /tires/_brand/index.html [L]
+
+# Tire PDP URLs — /tires/Michelin__Pilot_Sport_PS2_model-291
+# These contain uppercase + __ so they don't match the brand rule above
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^tires/.+$ /tires/index.html [L]
+
+# Wheel brand pages — /wheels/fuel/, /wheels/kmc/, etc.
+# Brand slugs are lowercase letters, numbers, hyphens, parens (one path segment)
+# Must come BEFORE the PDP rule so brand URLs don't fall through to wheels/index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^wheels/([a-z0-9()-]+)/?$ /wheels/_brand/index.html [L]
+
+# Wheel PDP URLs — /wheels/Fuel__Zephyr_style-12345
+# These contain uppercase + __ so they don't match the brand rule above
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^wheels/.+$ /wheels/index.html [L]
+
+# ─── Custom Error Pages ───
+ErrorDocument 404 /index.html

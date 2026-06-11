@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/tires/*/", "destination": "/tires/_brand/index.html" },
+    { "source": "/tires/*", "destination": "/tires/_brand/index.html" },
+    { "source": "/wheels/*/", "destination": "/wheels/_brand/index.html" },
+    { "source": "/wheels/*", "destination": "/wheels/_brand/index.html" }
+  ]
+}

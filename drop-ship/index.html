@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drop-Ship Tires to Home — Michigan Delivery | Custom Wheel Deal</title>
+  <meta name="description" content="Have your tires shipped directly to your door. Exclusive to Michigan residential addresses. Full payment at checkout, tracking emailed when your order ships.">
+  <link rel="canonical" href="https://customwheeldeal.com/drop-ship/">
+  <meta property="og:title" content="Drop-Ship Tires to Home — Michigan Delivery | Custom Wheel Deal">
+  <meta property="og:description" content="Skip the shop visit. Have your tires delivered straight to your front door. Available exclusively within our Michigan delivery zones.">
+  <meta property="og:url" content="https://customwheeldeal.com/drop-ship/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Custom Wheel Deal">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I have my tires delivered to my home?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Custom Wheel Deal offers direct home delivery exclusively to verified residential addresses within our Michigan delivery zones. Your tires ship from our warehouse straight to your front door."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who is drop-ship delivery best for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Drop-ship delivery is ideal for DIYers who install their own tires, or customers who have a specific local technician they prefer to use for installation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is full payment required for home delivery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because drop-shipped tires bypass our service bays and leave our facility permanently, full 100% payment is required at checkout to initiate the warehouse pull and shipping process. This is different from our in-store service which only requires a 25% deposit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I track my tire delivery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tracking information is emailed to you the moment your order leaves our warehouse and hits the road. You will receive a tracking number to follow your shipment in real time."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v9">
+</head>
+<body>
+<div id="app"></div>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="/js/setup.js?v9"></script>
+<script src="/js/data.js?v9"></script>
+<script src="/js/api.js?v9"></script>
+<script src="/js/cart.js?v9"></script>
+<script src="/js/layout.js?v10"></script>
+<script>
+function DropShipPage() {
+  var primary = tokens.primary;
+  var ink = tokens.ink;
+  var mute = tokens.mute;
+  var line = tokens.line;
+  var surfLow = tokens.surfLow;
+
+  var steps = [
+    { number: '1', icon: 'shopping_cart', title: 'Shop & Checkout', body: 'Choose your tires and complete full 100% payment at checkout. This immediately initiates the warehouse pull and shipping process.' },
+    { number: '2', icon: 'local_shipping', title: 'Order Hits the Road', body: 'Tracking information is emailed to you the moment your order ships from our warehouse. Follow your delivery in real time.' },
+    { number: '3', icon: 'home', title: 'Delivered to Your Door', body: 'Your tires arrive at your verified Michigan residential address, ready for your installer or your own hands.' }
+  ];
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null,
+
+    /* ── Hero ── */
+    /*#__PURE__*/React.createElement('div', { style: { background: 'linear-gradient(135deg, #1a1c1e 0%, #0f1a2e 100%)', color: '#fff', padding: '80px 24px 72px', textAlign: 'center' } },
+      /*#__PURE__*/React.createElement('div', { style: { maxWidth: 700, margin: '0 auto' } },
+        /*#__PURE__*/React.createElement('div', { style: { display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(59,130,246,.15)', border: '1px solid rgba(59,130,246,.35)', borderRadius: 999, padding: '4px 14px', fontSize: 11, fontWeight: 800, letterSpacing: '.16em', textTransform: 'uppercase', color: '#93c5fd', marginBottom: 20 } },
+          /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 14 } }, 'local_shipping'),
+          'Exclusive Michigan Benefit'
+        ),
+        /*#__PURE__*/React.createElement('h1', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(32px, 5vw, 50px)', fontWeight: 700, lineHeight: 1.1, margin: '0 0 20px', letterSpacing: '-.02em' } },
+          'Drop-Ship to Home'
+        ),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 18, lineHeight: 1.6, color: 'rgba(255,255,255,.72)', maxWidth: 540, margin: '0 auto' } },
+          'Skip the shop visit and have your tires delivered straight to your front door — exclusively available to verified residential addresses within our Michigan delivery zones.'
+        )
+      )
+    ),
+
+    /*#__PURE__*/React.createElement('div', { style: { maxWidth: 860, margin: '0 auto', padding: '0 24px' } },
+
+      /* ── Notice Banner ── */
+      /*#__PURE__*/React.createElement('div', { style: { margin: '32px 0 0', padding: '16px 20px', background: '#eff6ff', border: '1px solid #93c5fd', borderRadius: 10, display: 'flex', alignItems: 'flex-start', gap: 12 } },
+        /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 20, color: '#2563eb', flexShrink: 0, marginTop: 1 } }, 'info'),
+        /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.6, color: '#1e3a8a' } },
+          /*#__PURE__*/React.createElement('strong', null, 'Michigan residents only. '),
+          'Direct home delivery is an exclusive feature available only to verified residential addresses within our Michigan delivery zones.'
+        )
+      ),
+
+      /* ── Best For ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '56px 0 48px', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 20 } },
+          /*#__PURE__*/React.createElement('div', { style: { background: surfLow, borderRadius: 12, padding: '28px 24px', display: 'flex', gap: 14, alignItems: 'flex-start' } },
+            /*#__PURE__*/React.createElement('div', { style: { width: 42, height: 42, borderRadius: 10, background: 'rgba(192,0,12,.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 } },
+              /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 20, color: primary } }, 'handyman')
+            ),
+            /*#__PURE__*/React.createElement('div', null,
+              /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 15, color: ink, marginBottom: 4 } }, 'Best For'),
+              /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.6, color: mute } }, 'DIYers who install their own tires, or customers who prefer to use a specific local technician for installation.')
+            )
+          ),
+          /*#__PURE__*/React.createElement('div', { style: { background: surfLow, borderRadius: 12, padding: '28px 24px', display: 'flex', gap: 14, alignItems: 'flex-start' } },
+            /*#__PURE__*/React.createElement('div', { style: { width: 42, height: 42, borderRadius: 10, background: 'rgba(192,0,12,.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 } },
+              /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 20, color: primary } }, 'payments')
+            ),
+            /*#__PURE__*/React.createElement('div', null,
+              /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 15, color: ink, marginBottom: 4 } }, 'Payment Terms'),
+              /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.6, color: mute } }, 'Full 100% payment is required at checkout. Because these tires leave our facility permanently, we cannot accept partial deposits for home delivery orders.')
+            )
+          )
+        )
+      ),
+
+      /* ── How It Works ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '64px 0', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, color: ink, margin: '0 0 40px', textAlign: 'center' } }, 'How It Works'),
+        /*#__PURE__*/React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 20 } },
+          steps.map(function(s) {
+            return /*#__PURE__*/React.createElement('div', { key: s.number, style: { display: 'flex', gap: 20, alignItems: 'flex-start', background: surfLow, borderRadius: 12, padding: '22px 22px' } },
+              /*#__PURE__*/React.createElement('div', { style: { width: 40, height: 40, borderRadius: '50%', background: primary, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 16, flexShrink: 0 } }, s.number),
+              /*#__PURE__*/React.createElement('div', { style: { paddingTop: 6 } },
+                /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 15, color: ink, marginBottom: 4 } }, s.title),
+                /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.6, color: mute } }, s.body)
+              )
+            );
+          })
+        )
+      ),
+
+      /* ── CTA ── */
+      /*#__PURE__*/React.createElement('div', { style: { textAlign: 'center', padding: '64px 24px 80px' } },
+        /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 700, color: ink, margin: '0 0 12px' } }, 'Ready to Order?'),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 16, color: mute, maxWidth: 420, margin: '0 auto 28px', lineHeight: 1.6 } }, 'Shop our full tire inventory and select drop-ship delivery at checkout.'),
+        /*#__PURE__*/React.createElement('a', { href: '/tires/', style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: primary, color: '#fff', borderRadius: 8, fontWeight: 800, fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: 'none' } },
+          /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18 } }, 'tire_repair'),
+          'Shop Tires'
+        )
+      )
+
+    )
+  );
+}
+
+function DropShipMount() {
+  return /*#__PURE__*/React.createElement(AppProvider, { defaults: window.TWEAK_DEFAULTS },
+    /*#__PURE__*/React.createElement(Header, null),
+    /*#__PURE__*/React.createElement('main', null, /*#__PURE__*/React.createElement(DropShipPage, null)),
+    /*#__PURE__*/React.createElement(Footer, null));
+}
+ReactDOM.createRoot(document.getElementById('app')).render(/*#__PURE__*/React.createElement(DropShipMount));
+</script>
+</body>
+</html>

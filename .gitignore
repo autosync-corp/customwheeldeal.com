@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Large deploy artifacts
+*.zip
+
+# Large data files
+rebates.csv
+
+# Node modules (if ever added)
+node_modules/
+
+# Environment files
+.env
+.env.local

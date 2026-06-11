@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>25% Secure Deposit — How It Works | Custom Wheel Deal</title>
+  <meta name="description" content="Custom Wheel Deal requires a 25% refundable deposit to reserve your tires and appointment. Secure checkout, instant confirmation, and flexible 24-hour cancellation policy.">
+  <link rel="canonical" href="https://customwheeldeal.com/deposit/">
+  <meta property="og:title" content="25% Secure Deposit — How It Works | Custom Wheel Deal">
+  <meta property="og:description" content="Your tires are locked in the moment you check out. Remaining 75% is paid at the shop after the job is done to your satisfaction.">
+  <meta property="og:url" content="https://customwheeldeal.com/deposit/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Custom Wheel Deal">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why does Custom Wheel Deal require a deposit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 25% deposit locks in your exact tire size from our warehouse the moment you check out — they are 100% yours. It also reserves your appointment bay and Hunter equipment exclusively for your vehicle at your chosen time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the deposit refundable if I cancel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. If you cancel or reschedule at least 24 hours in advance, your deposit is refunded in full, no questions asked. Note: if tires or wheels had to be shipped to the shop, shipping and handling costs are non-refundable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When do I pay the remaining balance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The remaining 75% balance is collected at the shop after the service is fully completed to your satisfaction. You inspect the work before paying."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my payment information secure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All transactions are encrypted and processed through our secure payment gateway. Custom Wheel Deal never stores your full credit card information."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v9">
+</head>
+<body>
+<div id="app"></div>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="/js/setup.js?v9"></script>
+<script src="/js/data.js?v9"></script>
+<script src="/js/api.js?v9"></script>
+<script src="/js/cart.js?v9"></script>
+<script src="/js/layout.js?v10"></script>
+<script>
+function DepositPage() {
+  var primary = tokens.primary;
+  var ink = tokens.ink;
+  var mute = tokens.mute;
+  var line = tokens.line;
+  var surfLow = tokens.surfLow;
+
+  var depositReasons = [
+    {
+      icon: 'inventory_2',
+      title: 'Your Tires Are Locked In',
+      body: 'The second you check out, our system pulls your exact tire size from our warehouse. They are 100% yours — no risk of them selling out before your appointment.'
+    },
+    {
+      icon: 'event_available',
+      title: 'No Waiting in Line',
+      body: 'Your bay and our advanced Hunter equipment are reserved exclusively for your vehicle at your chosen time. No delays, no double-booking.'
+    },
+    {
+      icon: 'undo',
+      title: 'Flexible Cancellation*',
+      body: 'Life happens. Cancel or reschedule at least 24 hours in advance and we\'ll refund your deposit immediately — no questions asked.*'
+    }
+  ];
+  var steps = [
+    {
+      number: '1',
+      icon: 'mark_email_read',
+      title: 'Instant Confirmation',
+      body: 'You\'ll receive an email and text confirmation with your appointment details and a digital receipt for your 25% deposit.'
+    },
+    {
+      number: '2',
+      icon: 'directions_car',
+      title: 'Drop Off Your Vehicle',
+      body: 'Arrive at your scheduled time. Our technicians will be prepped and ready to get your vehicle right into the bay.'
+    },
+    {
+      number: '3',
+      icon: 'thumb_up',
+      title: 'Drive Away Happy',
+      body: 'Once our certified team finishes the job, you\'ll inspect the work and pay the remaining balance. Not happy? We make it right first.'
+    }
+  ];
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null,
+
+    /* ── Hero ── */
+    /*#__PURE__*/React.createElement('div', { style: { background: 'linear-gradient(135deg, #1a1c1e 0%, #0f1a2e 100%)', color: '#fff', padding: '80px 24px 72px', textAlign: 'center' } },
+      /*#__PURE__*/React.createElement('div', { style: { maxWidth: 700, margin: '0 auto' } },
+        /*#__PURE__*/React.createElement('div', { style: { display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(34,197,94,.15)', border: '1px solid rgba(34,197,94,.35)', borderRadius: 999, padding: '4px 14px', fontSize: 11, fontWeight: 800, letterSpacing: '.16em', textTransform: 'uppercase', color: '#4ade80', marginBottom: 20 } },
+          /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 14 } }, 'lock'),
+          'Secure Deposit'
+        ),
+        /*#__PURE__*/React.createElement('h1', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(32px, 5vw, 50px)', fontWeight: 700, lineHeight: 1.1, margin: '0 0 20px', letterSpacing: '-.02em' } },
+          'About Your 25%', /*#__PURE__*/React.createElement('br', null), 'Secure Deposit'
+        ),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 18, lineHeight: 1.6, color: 'rgba(255,255,255,.72)', maxWidth: 560, margin: '0 auto' } },
+          'To guarantee your chosen time slot and instantly reserve your tires in our inventory, we require a 25% fully refundable deposit today. The remaining 75% is paid at the shop after the job is done to your satisfaction.'
+        )
+      )
+    ),
+
+    /*#__PURE__*/React.createElement('div', { style: { maxWidth: 900, margin: '0 auto', padding: '0 24px' } },
+
+      /* ── Why We Ask ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '72px 0', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, color: ink, margin: '0 0 36px', textAlign: 'center' } }, 'Why Do We Request a Deposit?'),
+        /*#__PURE__*/React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 16 } },
+          depositReasons.map(function(r) {
+            return /*#__PURE__*/React.createElement('div', { key: r.title, style: { display: 'flex', gap: 16, alignItems: 'flex-start', background: surfLow, borderRadius: 12, padding: '22px 20px' } },
+              /*#__PURE__*/React.createElement('div', { style: { width: 42, height: 42, borderRadius: 10, background: 'rgba(192,0,12,.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 } },
+                /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 20, color: primary } }, r.icon)
+              ),
+              /*#__PURE__*/React.createElement('div', null,
+                /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 15, color: ink, marginBottom: 4 } }, r.title),
+                /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.6, color: mute } }, r.body)
+              )
+            );
+          })
+        )
+      ),
+
+      /* ── Secure Checkout ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '48px 0', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('div', { style: { background: '#f0fdf4', border: '1px solid #86efac', borderRadius: 14, padding: '28px 28px', display: 'flex', gap: 20, alignItems: 'flex-start' } },
+          /*#__PURE__*/React.createElement('div', { style: { width: 48, height: 48, borderRadius: 12, background: 'rgba(34,197,94,.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 } },
+            /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 24, color: '#16a34a' } }, 'lock')
+          ),
+          /*#__PURE__*/React.createElement('div', null,
+            /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 17, color: '#14532d', marginBottom: 8 } }, 'Secure Checkout'),
+            /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.6, color: '#166534' } },
+              /*#__PURE__*/React.createElement('strong', null, 'Our Promise: '),
+              'Your security is our priority. All transactions are encrypted and processed through our secure payment gateway. We never store your full credit card information.'
+            )
+          )
+        )
+      ),
+
+      /* ── What Happens Next ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '72px 0', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, color: ink, margin: '0 0 40px', textAlign: 'center' } }, 'What Happens Next?'),
+        /*#__PURE__*/React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 20 } },
+          steps.map(function(s) {
+            return /*#__PURE__*/React.createElement('div', { key: s.number, style: { display: 'flex', gap: 20, alignItems: 'flex-start' } },
+              /*#__PURE__*/React.createElement('div', { style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0 } },
+                /*#__PURE__*/React.createElement('div', { style: { width: 40, height: 40, borderRadius: '50%', background: primary, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 16, flexShrink: 0 } }, s.number)
+              ),
+              /*#__PURE__*/React.createElement('div', { style: { paddingTop: 6 } },
+                /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 16, color: ink, marginBottom: 4 } }, s.title),
+                /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.6, color: mute } }, s.body)
+              )
+            );
+          })
+        )
+      ),
+
+      /* ── Fine Print ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '40px 0 72px' } },
+        /*#__PURE__*/React.createElement('div', { style: { background: surfLow, borderRadius: 10, padding: '20px 20px' } },
+          /*#__PURE__*/React.createElement('div', { style: { fontSize: 12, lineHeight: 1.7, color: mute } },
+            /*#__PURE__*/React.createElement('strong', { style: { color: ink } }, 'Cancellation policy: '),
+            'By completing your purchase you agree to our 24-hour rescheduling policy. ',
+            /*#__PURE__*/React.createElement('strong', null, '* '),
+            'If tires and/or wheels needed to be shipped to us, shipping and handling expenses from your 25% deposit are non-refundable.'
+          )
+        ),
+        /*#__PURE__*/React.createElement('div', { style: { textAlign: 'center', marginTop: 40 } },
+          /*#__PURE__*/React.createElement('a', { href: '/tires/', style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: primary, color: '#fff', borderRadius: 8, fontWeight: 800, fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: 'none' } },
+            /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18 } }, 'tire_repair'),
+            'Shop Tires'
+          )
+        )
+      )
+
+    )
+  );
+}
+
+function DepositMount() {
+  return /*#__PURE__*/React.createElement(AppProvider, { defaults: window.TWEAK_DEFAULTS },
+    /*#__PURE__*/React.createElement(Header, null),
+    /*#__PURE__*/React.createElement('main', null, /*#__PURE__*/React.createElement(DepositPage, null)),
+    /*#__PURE__*/React.createElement(Footer, null));
+}
+ReactDOM.createRoot(document.getElementById('app')).render(/*#__PURE__*/React.createElement(DepositMount));
+</script>
+</body>
+</html>

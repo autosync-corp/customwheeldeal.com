@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TPMS Diagnosis, Replacement & Reset | Custom Wheel Deal — Michigan</title>
+  <meta name="description" content="Expert TPMS diagnosis, sensor replacement, and OBD-II reset at Custom Wheel Deal. Digital scan tools, sensor-safe mounting, factory-spec relearn. Three Detroit-area locations.">
+  <link rel="canonical" href="https://customwheeldeal.com/services/tpms/">
+  <meta property="og:title" content="TPMS Diagnosis, Replacement & Reset | Custom Wheel Deal">
+  <meta property="og:description" content="That yellow tire light won't go away? Our technicians use digital TPMS scan tools to test, replace, and reset your sensors quickly and accurately.">
+  <meta property="og:url" content="https://customwheeldeal.com/services/tpms/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Custom Wheel Deal">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TPMS Diagnosis, Replacement & Reset | Custom Wheel Deal">
+  <meta name="twitter:description" content="That yellow tire light won't go away? Our technicians use digital TPMS scan tools to test, replace, and reset your sensors quickly and accurately.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "TPMS Diagnosis, Replacement & Reset",
+    "provider": {
+      "@type": "AutoRepair",
+      "name": "Custom Wheel Deal",
+      "url": "https://customwheeldeal.com",
+      "areaServed": { "@type": "State", "name": "Michigan" }
+    },
+    "description": "Professional TPMS sensor diagnosis, replacement, and OBD-II relearn reset using digital wireless scan tools and sensor-safe tire mounting equipment.",
+    "serviceType": "TPMS Service"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is my TPMS light on after adding air?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If the TPMS light stays on after you've inflated your tires to the correct pressure, the system needs a professional reset. After adding air, you may need to drive for a few miles for the sensors to update, or the sensors may need to be relearned to your vehicle's computer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does a flashing TPMS light mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A TPMS light that flashes for about 60 seconds when you start your vehicle and then stays solid indicates a system malfunction — typically a dead sensor battery or a failed sensor. This is different from a solid light, which simply means low tire pressure."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long do TPMS sensors last?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "TPMS sensor batteries typically last between 5 and 10 years, or around 100,000 miles. Because the battery is sealed inside the sensor, it cannot be replaced separately — the entire sensor must be replaced when the battery dies."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a TPMS reset after a tire rotation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. After a tire rotation, the sensors move to new wheel positions and your vehicle's computer needs to be updated to match. We perform a full OBD-II relearn to sync your sensors to your dashboard so the correct tire position is always displayed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe to drive with the TPMS light on?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A malfunctioning TPMS means you won't receive a warning if you suffer a sudden pressure loss while driving. We recommend getting it diagnosed promptly, as driving on an underinflated tire can cause a blowout and significant wheel damage."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v9">
+</head>
+<body>
+<div id="app"></div>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="/js/setup.js?v9"></script>
+<script src="/js/data.js?v9"></script>
+<script src="/js/api.js?v9"></script>
+<script src="/js/cart.js?v9"></script>
+<script src="/js/layout.js?v10"></script>
+<script>
+function TPMSPage() {
+  var primary = tokens.primary;
+  var ink = tokens.ink;
+  var mute = tokens.mute;
+  var line = tokens.line;
+  var surfLow = tokens.surfLow;
+
+  var lightMeanings = [
+    {
+      icon: 'circle',
+      iconColor: '#f59e0b',
+      title: 'Solid TPMS Light',
+      body: 'One or more tires has low air pressure. Add air as soon as possible. If the light stays on after inflating, the system needs a professional reset.'
+    },
+    {
+      icon: 'flare',
+      iconColor: primary,
+      title: 'Flashing TPMS Light',
+      body: 'If the light flashes for 60 seconds at startup and then stays solid, the TPMS system itself is malfunctioning — likely a dead sensor battery or failed sensor.'
+    }
+  ];
+  var services = [
+    {
+      number: '01',
+      icon: 'sensors',
+      title: 'Digital Diagnostic Testing',
+      body: 'Before we replace anything, we use advanced wireless TPMS scan tools to ping each sensor individually — checking battery life, internal tire temperature, and sensor function without removing the tire from the rim.'
+    },
+    {
+      number: '02',
+      icon: 'shield',
+      title: 'Sensor-Safe Tire Mounting',
+      body: 'Our Hunter TCX53 Tire Changer is designed to avoid TPMS sensor placement during removal and installation. Your expensive sensors are never at risk of being crushed or damaged.'
+    },
+    {
+      number: '03',
+      icon: 'sync',
+      title: 'Precision TPMS Relearn & Reset',
+      body: 'After a tire rotation, alignment, or new sensor installation, we perform full factory-spec OBD-II relearns to sync your sensors to your dashboard perfectly — turning off that warning light for good.'
+    }
+  ];
+  var replacementReasons = [
+    { icon: 'battery_low', title: 'Dead Sensor Battery', body: 'TPMS batteries last 5–10 years (or ~100,000 miles) and cannot be replaced separately. When the battery dies, the entire sensor must be replaced.' },
+    { icon: 'water_damage', title: 'Corrosion', body: 'Metal valve stems corrode over time from road salt and moisture, causing slow air leaks or sensor failure.' },
+    { icon: 'hardware', title: 'Physical Damage', body: 'Rough roads, severe potholes, or improper tire changes at low-tech shops can snap or crack the sensor.' }
+  ];
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null,
+
+    /* ── Hero ── */
+    /*#__PURE__*/React.createElement('div', { style: { background: 'linear-gradient(135deg, #1a1c1e 0%, #1f2029 100%)', color: '#fff', padding: '80px 24px 72px', textAlign: 'center' } },
+      /*#__PURE__*/React.createElement('div', { style: { maxWidth: 760, margin: '0 auto' } },
+        /*#__PURE__*/React.createElement('div', { style: { display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(245,158,11,.15)', border: '1px solid rgba(245,158,11,.4)', borderRadius: 999, padding: '4px 14px', fontSize: 11, fontWeight: 800, letterSpacing: '.16em', textTransform: 'uppercase', color: '#fbbf24', marginBottom: 20 } },
+          /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 14 } }, 'sensors'),
+          'Tire Pressure Monitoring'
+        ),
+        /*#__PURE__*/React.createElement('h1', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 700, lineHeight: 1.1, margin: '0 0 20px', letterSpacing: '-.02em' } },
+          'TPMS Diagnosis,', /*#__PURE__*/React.createElement('br', null), 'Replacement & Reset'
+        ),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 18, lineHeight: 1.6, color: 'rgba(255,255,255,.72)', maxWidth: 620, margin: '0 auto 12px' } },
+          'That little yellow horseshoe light on your dashboard shouldn\'t be ignored.'
+        ),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 16, lineHeight: 1.6, color: 'rgba(255,255,255,.55)', maxWidth: 600, margin: '0 auto 32px' } },
+          'Your Tire Pressure Monitoring System is a vital safety feature. When the light stays on, blinks, or fails to reset after adding air, your sensors need professional attention.'
+        ),
+        /*#__PURE__*/React.createElement('a', { href: '/locations/', style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: primary, color: '#fff', borderRadius: 8, fontWeight: 800, fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: 'none' } },
+          /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18 } }, 'location_on'),
+          'Find a Location'
+        )
+      )
+    ),
+
+    /*#__PURE__*/React.createElement('div', { style: { maxWidth: 1160, margin: '0 auto', padding: '0 24px' } },
+
+      /* ── What Does Your Light Mean ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '72px 0', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('div', { style: { textAlign: 'center', marginBottom: 44 } },
+          /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(24px, 3vw, 34px)', fontWeight: 700, color: ink, margin: '0 0 12px' } }, 'What Does Your TPMS Light Mean?'),
+          /*#__PURE__*/React.createElement('p', { style: { fontSize: 16, color: mute, maxWidth: 520, margin: '0 auto' } }, 'Not all tire light warnings mean the same thing. Understanding what your dashboard is telling you can save you from a flat tire or a damaged rim.')
+        ),
+        /*#__PURE__*/React.createElement('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, maxWidth: 800, margin: '0 auto' } },
+          lightMeanings.map(function(l) {
+            return /*#__PURE__*/React.createElement('div', { key: l.title, style: { background: surfLow, borderRadius: 12, padding: '28px 24px', display: 'flex', gap: 16, alignItems: 'flex-start' } },
+              /*#__PURE__*/React.createElement('div', { style: { width: 44, height: 44, borderRadius: 10, background: 'rgba(0,0,0,.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 } },
+                /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 22, color: l.iconColor } }, l.icon)
+              ),
+              /*#__PURE__*/React.createElement('div', null,
+                /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 16, color: ink, marginBottom: 8 } }, l.title),
+                /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.6, color: mute } }, l.body)
+              )
+            );
+          })
+        )
+      ),
+
+      /* ── Why Choose Holbrook ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '72px 0', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('div', { style: { textAlign: 'center', marginBottom: 48 } },
+          /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(24px, 3vw, 34px)', fontWeight: 700, color: ink, margin: '0 0 12px' } }, 'Why Choose Custom Wheel Deal for TPMS Service?'),
+          /*#__PURE__*/React.createElement('p', { style: { fontSize: 16, color: mute, maxWidth: 540, margin: '0 auto' } }, 'TPMS sensors are delicate electronic components. Handling them requires precision, specialized tools, and technical expertise.')
+        ),
+        /*#__PURE__*/React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 24 } },
+          services.map(function(s) {
+            return /*#__PURE__*/React.createElement('div', { key: s.title, style: { display: 'flex', gap: 24, alignItems: 'flex-start', background: surfLow, borderRadius: 12, padding: '28px 28px' } },
+              /*#__PURE__*/React.createElement('div', { style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, flexShrink: 0 } },
+                /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'JetBrains Mono', fontSize: 11, fontWeight: 700, color: primary, letterSpacing: '.08em' } }, s.number),
+                /*#__PURE__*/React.createElement('div', { style: { width: 44, height: 44, borderRadius: 10, background: 'rgba(192,0,12,.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+                  /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 22, color: primary } }, s.icon)
+                )
+              ),
+              /*#__PURE__*/React.createElement('div', null,
+                /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 17, color: ink, marginBottom: 8 } }, s.title),
+                /*#__PURE__*/React.createElement('div', { style: { fontSize: 15, lineHeight: 1.7, color: mute } }, s.body)
+              )
+            );
+          })
+        )
+      ),
+
+      /* ── When Do Sensors Need Replacing ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '72px 0', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('div', { style: { textAlign: 'center', marginBottom: 48 } },
+          /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(24px, 3vw, 34px)', fontWeight: 700, color: ink, margin: '0 0 12px' } }, 'When Do TPMS Sensors Need to Be Replaced?'),
+          /*#__PURE__*/React.createElement('p', { style: { fontSize: 16, color: mute, maxWidth: 500, margin: '0 auto' } }, 'Like any electronic device, TPMS sensors don\'t last forever. You may need a replacement if:')
+        ),
+        /*#__PURE__*/React.createElement('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 24 } },
+          replacementReasons.map(function(r) {
+            return /*#__PURE__*/React.createElement('div', { key: r.title, style: { background: surfLow, borderRadius: 12, padding: '28px 24px', textAlign: 'center' } },
+              /*#__PURE__*/React.createElement('div', { style: { width: 48, height: 48, borderRadius: 12, background: 'rgba(192,0,12,.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' } },
+                /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 24, color: primary } }, r.icon)
+              ),
+              /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 16, color: ink, marginBottom: 8 } }, r.title),
+              /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.6, color: mute } }, r.body)
+            );
+          })
+        )
+      ),
+
+      /* ── CTA ── */
+      /*#__PURE__*/React.createElement('div', { style: { textAlign: 'center', padding: '72px 24px 80px' } },
+        /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 700, color: ink, margin: '0 0 16px' } }, 'Clear Your Dashboard Today'),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 17, color: mute, maxWidth: 520, margin: '0 auto 32px', lineHeight: 1.6 } }, "Driving with a malfunctioning TPMS means you won't get an alert if you suffer a sudden puncture on the highway. Protect your safety and your peace of mind."),
+        /*#__PURE__*/React.createElement('div', { style: { display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' } },
+          /*#__PURE__*/React.createElement('a', { href: '/locations/', style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: primary, color: '#fff', borderRadius: 8, fontWeight: 800, fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: 'none' } },
+            /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18 } }, 'location_on'),
+            'Find a Location'
+          ),
+          /*#__PURE__*/React.createElement('a', { href: '/tires/', style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: '#fff', color: ink, border: '1px solid ' + line, borderRadius: 8, fontWeight: 800, fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: 'none' } },
+            /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18 } }, 'tire_repair'),
+            'Shop Tires'
+          )
+        )
+      )
+
+    )
+  );
+}
+
+function TPMSMount() {
+  return /*#__PURE__*/React.createElement(AppProvider, { defaults: window.TWEAK_DEFAULTS },
+    /*#__PURE__*/React.createElement(Header, null),
+    /*#__PURE__*/React.createElement('main', null, /*#__PURE__*/React.createElement(TPMSPage, null)),
+    /*#__PURE__*/React.createElement(Footer, null));
+}
+ReactDOM.createRoot(document.getElementById('app')).render(/*#__PURE__*/React.createElement(TPMSMount));
+</script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Wheel & Rim Repair | Custom Wheel Deal — Detroit, Michigan</title>
+  <meta name="description" content="Expert wheel and rim repair at Custom Wheel Deal on W 7 Mile Rd, Detroit. Curb rash restoration, pothole bend straightening, and bead leak repair. Save hundreds vs. a dealership replacement.">
+  <link rel="canonical" href="https://customwheeldeal.com/services/wheel-repair/">
+  <meta property="og:title" content="Professional Wheel & Rim Repair | Custom Wheel Deal — Detroit">
+  <meta property="og:description" content="Hit a pothole or scraped a curb? Our Detroit shop repairs curb rash, bent rims, and bead leaks for a fraction of dealership replacement cost.">
+  <meta property="og:image" content="https://customwheeldeal.com/assets/wheel-repair.webp">
+  <meta property="og:url" content="https://customwheeldeal.com/services/wheel-repair/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Custom Wheel Deal">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Professional Wheel & Rim Repair | Custom Wheel Deal — Detroit">
+  <meta name="twitter:description" content="Hit a pothole or scraped a curb? Our Detroit shop repairs curb rash, bent rims, and bead leaks for a fraction of dealership replacement cost.">
+  <meta name="twitter:image" content="https://customwheeldeal.com/assets/wheel-repair.webp">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Wheel & Rim Repair",
+    "provider": {
+      "@type": "AutoRepair",
+      "name": "Custom Wheel Deal",
+      "url": "https://customwheeldeal.com",
+      "location": {
+        "@type": "Place",
+        "name": "Custom Wheel Deal — Detroit",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "21221 W Seven Mile Rd",
+          "addressLocality": "Detroit",
+          "addressRegion": "MI",
+          "postalCode": "48219",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": { "@type": "City", "name": "Detroit, Michigan" }
+    },
+    "description": "Professional wheel and rim repair services including curb rash restoration, pothole bend straightening, and corrosion bead leak repair. Available at the Detroit W 7 Mile Rd location only.",
+    "serviceType": "Wheel and Rim Repair"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can a bent rim be repaired?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In most cases, yes. Minor to moderate bends caused by potholes can be straightened using specialized hydraulic wheel-straightening technology to restore the wheel to a factory-spec round shape. However, wheels with structural cracks or severe damage may not be safe to repair and will need replacement."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does wheel repair cost compared to replacement?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A single OEM factory replacement wheel from a dealership can cost $400 to $800 or more. Professional wheel repair at Custom Wheel Deal restores your original rim for a fraction of that cost, saving you hundreds of dollars."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is curb rash on a wheel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Curb rash refers to the scratches, scrapes, and gouges left on a wheel's finish after it makes contact with a curb or concrete. We restore the finish through smoothing, refinishing, and color-matching so the wheel looks like new."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does my tire keep losing air pressure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A tire that repeatedly loses pressure with no visible puncture is often caused by corrosion on the inside lip of the wheel. Road salt and moisture corrode the bead seat, preventing an airtight seal. We clean, grind, and reseal the bead seat to fix this permanently."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is Custom Wheel Deal's wheel repair service available?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Wheel and rim repair is exclusively available at our Detroit location at 21221 W Seven Mile Rd, Detroit, MI 48219. Call 313-257-7777 to schedule an appointment."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v9">
+</head>
+<body>
+<div id="app"></div>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="/js/setup.js?v9"></script>
+<script src="/js/data.js?v9"></script>
+<script src="/js/api.js?v9"></script>
+<script src="/js/cart.js?v9"></script>
+<script src="/js/layout.js?v10"></script>
+<script>
+function WheelRepairPage() {
+  var primary = tokens.primary;
+  var ink = tokens.ink;
+  var mute = tokens.mute;
+  var line = tokens.line;
+  var surfLow = tokens.surfLow;
+
+  var repairServices = [
+    {
+      number: '01',
+      icon: 'auto_fix_high',
+      title: 'Curb Rash & Cosmetic Restoration',
+      body: 'Scraping an expensive alloy or custom wheel against concrete hurts. We smooth out, refinish, and color-match scraped, scratched, or gouged rims. Whether your wheels are painted, clear-coated, or machined, we restore the finish so they look like they just rolled off the showroom floor.'
+    },
+    {
+      number: '02',
+      icon: 'straighten',
+      title: 'Pothole Bend Straightening',
+      body: 'Even a minor, invisible bend can cause a persistent highway vibration or a slow, frustrating air leak along the tire bead. Using specialized hydraulic wheel-straightening technology, we restore the wheel to a perfectly round, factory-spec shape.'
+    },
+    {
+      number: '03',
+      icon: 'water_damage',
+      title: 'Corrosion & Bead Leaks',
+      body: 'Road salt, moisture, and brake dust corrode the inside lip of your wheel over time, preventing the tire bead from sealing perfectly and causing constant low pressure warnings. We clean, grind down, and reseal the bead seat for a flawless, airtight fit.'
+    }
+  ];
+  var whyPoints = [
+    { icon: 'analytics', title: 'Advanced Diagnostics', body: 'Our Hunter digital wheel balancers verify your repaired wheel is tracking perfectly straight and true before it goes back on your vehicle.' },
+    { icon: 'health_and_safety', title: 'Safety-First Approach', body: 'If a wheel has structural cracks or severe damage that compromises integrity, we will tell you upfront. We only perform structural repairs when 100% certain the wheel can safely return to the road.' },
+    { icon: 'savings', title: 'Massive Savings', body: 'A single OEM wheel from a dealership can cost $400–$800+. Our professional repair services restore your original wheel for a fraction of that cost.' }
+  ];
+  var warningSigns = [
+    'A continuous vibration in your steering wheel or seat at highway speeds.',
+    'One specific tire keeps losing air pressure, forcing you to constantly refill it.',
+    'You recently hit a pothole, curb, or road debris and heard a loud thud.',
+    'You can visually see a flat spot or ding along the outer edge of your metal rim.'
+  ];
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null,
+
+    /* ── Hero ── */
+    /*#__PURE__*/React.createElement('div', { style: { background: 'linear-gradient(135deg, #1a1c1e 0%, #1f2029 100%)', color: '#fff', padding: '80px 24px 72px', textAlign: 'center' } },
+      /*#__PURE__*/React.createElement('div', { style: { maxWidth: 760, margin: '0 auto' } },
+        /*#__PURE__*/React.createElement('div', { style: { display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(192,0,12,.18)', border: '1px solid rgba(192,0,12,.4)', borderRadius: 999, padding: '4px 14px', fontSize: 11, fontWeight: 800, letterSpacing: '.16em', textTransform: 'uppercase', color: '#ff8080', marginBottom: 16 } },
+          /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 14 } }, 'location_on'),
+          'Detroit — W 7 Mile Rd Only'
+        ),
+        /*#__PURE__*/React.createElement('h1', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 700, lineHeight: 1.1, margin: '0 0 20px', letterSpacing: '-.02em' } },
+          'Professional Wheel', /*#__PURE__*/React.createElement('br', null), '& Rim Repair'
+        ),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 18, lineHeight: 1.6, color: 'rgba(255,255,255,.72)', maxWidth: 600, margin: '0 auto 12px' } },
+          'Hit a nasty pothole? Scraped a curb while parking? A damaged wheel doesn\'t just ruin the look of your vehicle — it can cause unsafe driving conditions, ruin your alignment, and lead to rapid, uneven tire wear.'
+        ),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 16, lineHeight: 1.6, color: 'rgba(255,255,255,.55)', maxWidth: 580, margin: '0 auto 32px' } },
+          'Before you spend hundreds at a dealership, bring it to Custom Wheel Deal. Our wheel restoration services can save you money and bring your rims back to life.'
+        ),
+        /*#__PURE__*/React.createElement('a', { href: '/locations/detroit/', style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: primary, color: '#fff', borderRadius: 8, fontWeight: 800, fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: 'none' } },
+          /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18 } }, 'location_on'),
+          'Detroit Location'
+        )
+      )
+    ),
+
+    /*#__PURE__*/React.createElement('div', { style: { maxWidth: 1160, margin: '0 auto', padding: '0 24px' } },
+
+      /* ── Location callout banner ── */
+      /*#__PURE__*/React.createElement('div', { style: { margin: '32px 0 0', padding: '16px 20px', background: '#fffbeb', border: '1px solid #fcd34d', borderRadius: 10, display: 'flex', alignItems: 'center', gap: 12 } },
+        /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 20, color: '#d97706', flexShrink: 0 } }, 'info'),
+        /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, color: '#92400e' } },
+          /*#__PURE__*/React.createElement('strong', null, 'Available exclusively at our Detroit location: '),
+          '21221 W Seven Mile Rd, Detroit, MI 48219 — ',
+          /*#__PURE__*/React.createElement('a', { href: 'tel:3132577777', style: { color: '#92400e', fontWeight: 700 } }, '313-257-7777')
+        )
+      ),
+
+      /* ── Repair Services ── */
+      /*#__PURE__*/React.createElement('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 56, alignItems: 'center', padding: '72px 0', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('div', null,
+          /*#__PURE__*/React.createElement('div', { style: { fontSize: 11, fontWeight: 800, letterSpacing: '.16em', textTransform: 'uppercase', color: primary, marginBottom: 12 } }, 'What We Fix'),
+          /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(24px, 3vw, 34px)', fontWeight: 700, color: ink, margin: '0 0 32px', lineHeight: 1.2 } }, 'Our Comprehensive Wheel Repair Services'),
+          /*#__PURE__*/React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 28 } },
+            repairServices.map(function(s) {
+              return /*#__PURE__*/React.createElement('div', { key: s.title, style: { display: 'flex', gap: 16, alignItems: 'flex-start' } },
+                /*#__PURE__*/React.createElement('div', { style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, flexShrink: 0 } },
+                  /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'JetBrains Mono', fontSize: 10, fontWeight: 700, color: primary, letterSpacing: '.08em' } }, s.number),
+                  /*#__PURE__*/React.createElement('div', { style: { width: 38, height: 38, borderRadius: 8, background: 'rgba(192,0,12,.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+                    /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18, color: primary } }, s.icon)
+                  )
+                ),
+                /*#__PURE__*/React.createElement('div', null,
+                  /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 15, color: ink, marginBottom: 6 } }, s.title),
+                  /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.65, color: mute } }, s.body)
+                )
+              );
+            })
+          )
+        ),
+        /*#__PURE__*/React.createElement('div', { style: { borderRadius: 16, overflow: 'hidden', background: surfLow, aspectRatio: '4/3' } },
+          /*#__PURE__*/React.createElement('img', {
+            src: '/assets/wheel-repair.webp',
+            alt: 'Professional wheel and rim repair at Custom Wheel Deal Detroit',
+            style: { width: '100%', height: '100%', objectFit: 'cover' },
+            loading: 'lazy'
+          })
+        )
+      ),
+
+      /* ── Why Choose Holbrook ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '72px 0', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('div', { style: { textAlign: 'center', marginBottom: 48 } },
+          /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(24px, 3vw, 34px)', fontWeight: 700, color: ink, margin: '0 0 12px' } }, 'Why Choose Custom Wheel Deal for Wheel Repair?'),
+          /*#__PURE__*/React.createElement('p', { style: { fontSize: 16, color: mute, maxWidth: 500, margin: '0 auto' } }, 'Handling premium, custom, and factory alloy wheels requires precision. We don\'t cut corners.')
+        ),
+        /*#__PURE__*/React.createElement('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 24 } },
+          whyPoints.map(function(p) {
+            return /*#__PURE__*/React.createElement('div', { key: p.title, style: { background: surfLow, borderRadius: 12, padding: '28px 24px', textAlign: 'center' } },
+              /*#__PURE__*/React.createElement('div', { style: { width: 48, height: 48, borderRadius: 12, background: 'rgba(192,0,12,.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' } },
+                /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 24, color: primary } }, p.icon)
+              ),
+              /*#__PURE__*/React.createElement('div', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 16, color: ink, marginBottom: 8 } }, p.title),
+              /*#__PURE__*/React.createElement('div', { style: { fontSize: 14, lineHeight: 1.6, color: mute } }, p.body)
+            );
+          })
+        )
+      ),
+
+      /* ── Warning Signs ── */
+      /*#__PURE__*/React.createElement('div', { style: { padding: '72px 0', borderBottom: '1px solid ' + line } },
+        /*#__PURE__*/React.createElement('div', { style: { maxWidth: 760, margin: '0 auto' } },
+          /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(24px, 3vw, 34px)', fontWeight: 700, color: ink, margin: '0 0 12px', textAlign: 'center' } }, 'Signs Your Wheel Might Be Bent or Damaged'),
+          /*#__PURE__*/React.createElement('p', { style: { fontSize: 16, color: mute, textAlign: 'center', marginBottom: 36 } }, 'Wheel damage is sometimes hidden on the inside lip where you can\'t see it. Watch for these warning signs:'),
+          /*#__PURE__*/React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 14 } },
+            warningSigns.map(function(s, i) {
+              return /*#__PURE__*/React.createElement('div', { key: i, style: { display: 'flex', gap: 14, alignItems: 'flex-start', background: surfLow, borderRadius: 10, padding: '16px 18px' } },
+                /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18, color: primary, flexShrink: 0, marginTop: 1 } }, 'warning'),
+                /*#__PURE__*/React.createElement('div', { style: { fontSize: 15, lineHeight: 1.5, color: ink } }, s)
+              );
+            })
+          )
+        )
+      ),
+
+      /* ── CTA ── */
+      /*#__PURE__*/React.createElement('div', { style: { textAlign: 'center', padding: '72px 24px 80px' } },
+        /*#__PURE__*/React.createElement('h2', { style: { fontFamily: 'Space Grotesk', fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 700, color: ink, margin: '0 0 16px' } }, "Don't Replace It — Repair It!"),
+        /*#__PURE__*/React.createElement('p', { style: { fontSize: 17, color: mute, maxWidth: 500, margin: '0 auto 32px', lineHeight: 1.6 } }, "Save your wheels and protect your wallet. Bring your vehicle to our Detroit location and let our team inspect the damage with an honest evaluation."),
+        /*#__PURE__*/React.createElement('div', { style: { display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' } },
+          /*#__PURE__*/React.createElement('a', { href: '/locations/detroit/', style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: primary, color: '#fff', borderRadius: 8, fontWeight: 800, fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: 'none' } },
+            /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18 } }, 'location_on'),
+            'Detroit Location'
+          ),
+          /*#__PURE__*/React.createElement('a', { href: '/wheels/', style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: '#fff', color: ink, border: '1px solid ' + line, borderRadius: 8, fontWeight: 800, fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: 'none' } },
+            /*#__PURE__*/React.createElement('span', { className: 'material-symbols-outlined', style: { fontSize: 18 } }, 'album'),
+            'Shop Wheels'
+          )
+        )
+      )
+
+    )
+  );
+}
+
+function WheelRepairMount() {
+  return /*#__PURE__*/React.createElement(AppProvider, { defaults: window.TWEAK_DEFAULTS },
+    /*#__PURE__*/React.createElement(Header, null),
+    /*#__PURE__*/React.createElement('main', null, /*#__PURE__*/React.createElement(WheelRepairPage, null)),
+    /*#__PURE__*/React.createElement(Footer, null));
+}
+ReactDOM.createRoot(document.getElementById('app')).render(/*#__PURE__*/React.createElement(WheelRepairMount));
+</script>
+</body>
+</html>

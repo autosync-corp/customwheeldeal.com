@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/assets/favicon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build a Tire & Wheel Package | Custom Wheel Deal — Michigan</title>
+  <meta name="description" content="Build your perfect tire and wheel package with our interactive visualizer. See exactly how they look on your vehicle before you buy. Available at all three Holbrook locations in Michigan.">
+  <link rel="canonical" href="https://customwheeldeal.com/packages/">
+  <meta property="og:title" content="Build a Tire & Wheel Package | Custom Wheel Deal">
+  <meta property="og:description" content="Build your perfect tire and wheel package with our interactive visualizer. See exactly how they look on your vehicle before you buy.">
+  <meta property="og:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
+  <meta property="og:url" content="https://customwheeldeal.com/packages/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Custom Wheel Deal">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Build a Tire & Wheel Package | Custom Wheel Deal">
+  <meta name="twitter:description" content="Build your perfect tire and wheel package with our interactive visualizer. See exactly how they look on your vehicle before you buy.">
+  <meta name="twitter:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Build a Tire & Wheel Package",
+    "description": "Build your perfect tire and wheel package with our interactive visualizer. See exactly how they look on your vehicle before you buy.",
+    "url": "https://customwheeldeal.com/packages/",
+    "provider": {
+      "@type": "AutoRepair",
+      "name": "Custom Wheel Deal",
+      "url": "https://customwheeldeal.com",
+      "areaServed": {
+        "@type": "State",
+        "name": "Michigan"
+      }
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.autosyncstudio.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v9">
+
+  <style>
+    #autosync-visualizer { width: 100%; min-height: 720px; height: calc(100vh - 80px); background: #000; }
+    #autosync-visualizer iframe { border: none !important; border-radius: 0 !important; width: 100%; height: 100%; display: block; }
+  </style>
+</head>
+<body>
+<div id="app"></div>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="/js/setup.js?v9"></script>
+<script src="/js/data.js?v9"></script>
+<script src="/js/api.js?v9"></script>
+<script src="/js/cart.js?v9"></script>
+<script src="/js/layout.js?v10"></script>
+<script src="https://vvs-dev.autosyncstudio.com/js/Autosync.js"></script>
+<script>
+async function handleVVSCart(wheels, tires, vehicle) {
+  if (!window.HolbrookCart) { alert('Cart unavailable. Please refresh and try again.'); return; }
+
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:9999;';
+  overlay.innerHTML = '<div style="background:#fff;border-radius:12px;padding:32px 40px;text-align:center;font-family:Space Grotesk,sans-serif;">'
+    + '<div style="font-size:22px;font-weight:700;color:#1a1c1e;">Adding to cart…</div>'
+    + '<div style="font-size:14px;color:#6b7280;margin-top:8px;">Please wait a moment.</div></div>';
+  document.body.appendChild(overlay);
+
+  try {
+    for (var i = 0; i < wheels.length; i++) {
+      var w = wheels[i];
+      await HolbrookCart.addItem({
+        id:          String(w.partNumber || w.id || ('wheel-' + i)),
+        type:        'wheel',
+        name:        w.model  || 'Wheel',
+        brand:       w.brand  || '',
+        size:        (w.diameter || '') + 'x' + (w.width || ''),
+        price:       Number(w.price || 0),
+        qty:         Number(w.quantity || 4),
+        image:       w.img0001 || w.img0002 || '',
+        partNumber:  String(w.partNumber || ''),
+        vehicle:     vehicle || '',
+      });
+    }
+    for (var j = 0; j < tires.length; j++) {
+      var t = tires[j];
+      await HolbrookCart.addItem({
+        id:         String(t.partNumber || t.id || ('tire-' + j)),
+        type:       'tire',
+        name:       t.model  || 'Tire',
+        brand:      t.brand  || '',
+        size:       t.size   || '',
+        price:      Number(t.price || 0),
+        qty:        Number(t.quantity || 4),
+        image:      t.imgAngle || t.imgFront || t.imgSide1 || '',
+        partNumber: String(t.partNumber || ''),
+        vehicle:    vehicle || '',
+      });
+    }
+    window.location.href = '/cart/';
+  } catch (err) {
+    document.body.removeChild(overlay);
+    console.error('[Holbrook VVS] Cart add failed:', err);
+    alert('Could not add to cart: ' + (err.message || 'Unknown error') + '. Please try again.');
+  }
+}
+
+function PackageBuilderPage() {
+  useEffect(function() {
+    if (typeof Autosync === 'undefined') return;
+    var instance = new Autosync({
+      id: 'autosync-visualizer',
+      key: 'holbrooktire',
+      adaptiveHeight: false,
+      disableQuoteForm: true,
+      homeStyle: 'vehicle_make_selection',
+      productSegment: ['tires', 'vehicles', 'wheels'],
+      onEvent: function(e) {
+        if (!e || e.event !== 'submitQuote') return;
+        var d = e.data || {};
+        var wheels = d.wheels || [];
+        var tires  = d.tires  || [];
+        if (!wheels.length && !tires.length) return;
+        var v = d.vehicle || {};
+        var vehicleStr = [v.year, v.make, v.model, v.submodel].filter(Boolean).join(' ');
+        handleVVSCart(wheels, tires, vehicleStr);
+      },
+      scrollBar: true,
+      startPage: 'home',
+      widget: false,
+      defaultShoppingTypeOnVehicle: 'packages',
+    });
+    window.__holbrookVVS = instance;
+  }, []);
+  return /*#__PURE__*/React.createElement("div", { id: 'autosync-visualizer' });
+}
+function PackageBuilderMount() {
+  return /*#__PURE__*/React.createElement(AppProvider, { defaults: window.TWEAK_DEFAULTS },
+    /*#__PURE__*/React.createElement(Header, null),
+    /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement(PackageBuilderPage, null)),
+    /*#__PURE__*/React.createElement(Footer, null));
+}
+ReactDOM.createRoot(document.getElementById('app')).render(/*#__PURE__*/React.createElement(PackageBuilderMount));
+</script>
+</body>
+</html>
