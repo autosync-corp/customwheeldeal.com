@@ -97,10 +97,11 @@ function VisualizerPage() {
     var instance = new Autosync({
       id: 'autosync-visualizer',
       key: 'customwheeldeal',
+      apiUrl: 'https://api.autosyncstudio.com/',
       adaptiveHeight: false,
       disableQuoteForm: true,
       homeStyle: 'vehicle_make_selection',
-      productSegment: ['vehicles', 'wheels'],
+      productSegment: ['tires', 'vehicles', 'wheels'],
       onEvent: function(e) {
         if (!e || e.event !== 'submitQuote') return;
         var d = e.data || {};
