@@ -76,7 +76,7 @@ function Header() {
     return () => document.removeEventListener('mousedown', onClick);
   }, []);
   var _vNavSlug = (vehicle && vehicle.year && vehicle.make && vehicle.model) ? (vehicle.year + '-' + vehicle.make.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '') + '-' + vehicle.model.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '') + (vehicle.submodel ? '-' + vehicle.submodel.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '') : '')) : '';
-  const navItems = [['Tires', '/tires/'], ['Wheels', '/wheels/'], ['Brands', '/brands/'], ['Packages', '/packages/'], ['Visualizer', '/visualizer/'], ['Rebates', '/rebates/']];
+  const navItems = [['Wheels', '/wheels/'], ['Brands', '/brands/'], ['Packages', '/packages/'], ['Visualizer', '/visualizer/'], ['Rebates', '/rebates/']];
   const iconBtn = {
     position: 'relative',
     display: 'flex',
@@ -116,7 +116,7 @@ function Header() {
     className: "resp-nav",
     style: { display: 'flex', gap: 26, fontSize: 12, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase' }
   }, navItems.map(([l, p]) => /*#__PURE__*/React.createElement("a", {
-    key: p, href: (_vNavSlug && (p === '/tires/' || p === '/wheels/')) ? p + '?v=' + _vNavSlug : p,
+    key: p, href: (_vNavSlug && p === '/wheels/') ? p + '?v=' + _vNavSlug : p,
     style: { color: 'rgba(255,255,255,.82)', textDecoration: 'none', paddingBottom: 2, borderBottom: route.startsWith(p) ? `2px solid ${tokens.primary}` : '2px solid transparent' }
   }, l))), /*#__PURE__*/React.createElement("div", { className: "resp-spacer", style: { flex: 1 } }), /*#__PURE__*/React.createElement("div", {
     ref: garageRef,
@@ -471,7 +471,7 @@ function Footer() {
       { label: 'All Packages', href: '/packages/' },
       { label: 'By Vehicle', href: '/shop/' },
       { label: 'By Wheel Brand', href: '/wheels/' },
-      { label: 'By Tire Brand', href: '/tires/' },
+      { label: 'By Wheel Brand', href: '/wheels/' },
       { label: 'Winter Packages', href: '/packages/' },
       { label: 'Clearance', href: '/deals/' }
     ]],
