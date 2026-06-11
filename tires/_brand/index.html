@@ -59,7 +59,7 @@ function brandUrlSlug(name) {
 
 // ─── LocationsStrip ───────────────────────────────────────────────────────────
 function LocationsStrip() {
-  const { locations } = window.HOLBROOK_DATA;
+  const { locations } = window.CWD_DATA;
   return /*#__PURE__*/React.createElement("section", { style: { background: '#fff', padding: '72px 32px 64px', borderTop: `1px solid ${tokens.lineSoft}` } },
     /*#__PURE__*/React.createElement("div", { style: { maxWidth: 1320, margin: '0 auto' } },
       /*#__PURE__*/React.createElement("div", { style: { textAlign: 'center', marginBottom: 40 } },
@@ -67,7 +67,7 @@ function LocationsStrip() {
         /*#__PURE__*/React.createElement(Headline, { size: "h2", style: { fontSize: 32, margin: 0 } }, "Installed by people who know your car.")),
       /*#__PURE__*/React.createElement("div", { style: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 } },
         locations.map(l => /*#__PURE__*/React.createElement("div", { key: l.id, style: { background: tokens.surfLow, borderRadius: 14, padding: '28px 28px', display: 'flex', flexDirection: 'column', gap: 14 } },
-          /*#__PURE__*/React.createElement(Eyebrow, { color: tokens.primary }, "Holbrook \xB7 ", l.city),
+          /*#__PURE__*/React.createElement(Eyebrow, { color: tokens.primary }, "CWD \xB7 ", l.city),
           /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontSize: 20, fontWeight: 700, letterSpacing: '-.01em', color: tokens.ink, lineHeight: 1.3 } }, l.addr),
           /*#__PURE__*/React.createElement("div", { style: { fontSize: 14, color: tokens.taupe, lineHeight: 1.6 } }, l.city, ", MI ", l.zip, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", { style: { color: tokens.mute } }, l.hours)),
           /*#__PURE__*/React.createElement("a", { href: `tel:${l.phoneTel}`, style: { color: tokens.primary, fontSize: 17, fontWeight: 700, textDecoration: 'none', fontFamily: 'Space Grotesk', marginTop: 'auto', display: 'inline-flex', alignItems: 'center', gap: 8 } },
@@ -92,7 +92,7 @@ function GlobalFitmentBar() {
   const [submodelsLoading, setSubmodelsLoading] = useState(false);
   const [fitmentsLoading, setFitmentsLoading] = useState(false);
   const [vehicleData, setVehicleData] = useState(null);
-  const staticMakes = window.HOLBROOK_DATA.vehicleMakes.map(function(m) { return m.name; });
+  const staticMakes = window.CWD_DATA.vehicleMakes.map(function(m) { return m.name; });
   useEffect(() => {
     if (!year) { setMakes([]); setMake(''); return; }
     setMakesLoading(true);
@@ -143,11 +143,11 @@ function GlobalFitmentBar() {
       var submodelSlug = submodel ? submodel.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '') : '';
       var vehicleSlug = year + '-' + makeSlug + '-' + modelSlug + (submodelSlug ? '-' + submodelSlug : '');
       try {
-        sessionStorage.setItem('holbrook.vehicleSlug', JSON.stringify({ year: year, make: make, model: model, submodel: submodel || undefined, slug: vehicleSlug, tireSize: selectedFitment ? selectedFitment.label : undefined, sizeSource: selectedFitment ? selectedFitment.source : undefined }));
+        sessionStorage.setItem('cwd.vehicleSlug', JSON.stringify({ year: year, make: make, model: model, submodel: submodel || undefined, slug: vehicleSlug, tireSize: selectedFitment ? selectedFitment.label : undefined, sizeSource: selectedFitment ? selectedFitment.source : undefined }));
       } catch(e) {}
     }
   };
-  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #850824 100%)';
+  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #ea580c 100%)';
   const barBorder = '1px solid rgba(255,255,255,.08)';
   const barShadow = 'inset 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(232,52,78,.15)';
   const fld = { background: 'rgba(255,255,255,.1)', border: '1px solid rgba(255,255,255,.18)', padding: '10px 32px 10px 14px', fontFamily: 'Inter', fontSize: 13, fontWeight: 600, color: '#fff', appearance: 'none', borderRadius: 6, minWidth: 130, cursor: 'pointer' };
@@ -612,7 +612,7 @@ function TireBrandPage() {
           /*#__PURE__*/React.createElement('h1', { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 'clamp(26px,3.5vw,40px)', color: '#fff', margin: '0 0 8px', lineHeight: 1.1 } },
             loading ? /*#__PURE__*/React.createElement('span', { style: { opacity: .4 } }, '…') : brandName),
           !loading && models.length > 0 && /*#__PURE__*/React.createElement('p', { style: { fontSize: 14, color: '#94a3b8', margin: 0 } },
-            models.length + ' model' + (models.length !== 1 ? 's' : '') + ' available at Holbrook')))),
+            models.length + ' model' + (models.length !== 1 ? 's' : '') + ' available at Custom Wheel Deal')))),
 
     // Fitment banner
     !notFound && vehicle && fitmentFilter && /*#__PURE__*/React.createElement('div', {
@@ -677,8 +677,8 @@ function TireBrandPage() {
                           var _specificSz = vehicle && vehicle.selectedSize && /\/.*R/i.test(String(vehicle.selectedSize)) ? vehicle.selectedSize : null;
                           var isChecked = sz.staggered ? sizeF === sz.sizeKey : (_specificSz ? sz.size === _specificSz : (diamF ? filteredVehicleSizes.some(function(s) { return !s.staggered && String(s.diameter) === diamF && s.size === sz.size; }) : false));
                           var handleChange = sz.staggered
-                            ? function() { setDiamF(''); setSizeF(sz.sizeKey); setSizeInput(sz.label); setPage(1); if (vehicle) { setVehicle(Object.assign({}, vehicle, { selectedSize: sz.sizeKey, sizeSource: sz.source })); try { var stored = JSON.parse(sessionStorage.getItem('holbrook.vehicleSlug') || '{}'); stored.tireSize = sz.sizeKey; stored.sizeSource = sz.source; sessionStorage.setItem('holbrook.vehicleSlug', JSON.stringify(stored)); } catch(e) {} } }
-                            : function() { selectDiameter(sz.diameter); if (vehicle) { setVehicle(Object.assign({}, vehicle, { selectedSize: String(sz.diameter), sizeSource: sz.source })); try { var stored = JSON.parse(sessionStorage.getItem('holbrook.vehicleSlug') || '{}'); stored.rimDiameter = Number(sz.diameter); stored.sizeSource = sz.source; sessionStorage.setItem('holbrook.vehicleSlug', JSON.stringify(stored)); } catch(e) {} } };
+                            ? function() { setDiamF(''); setSizeF(sz.sizeKey); setSizeInput(sz.label); setPage(1); if (vehicle) { setVehicle(Object.assign({}, vehicle, { selectedSize: sz.sizeKey, sizeSource: sz.source })); try { var stored = JSON.parse(sessionStorage.getItem('cwd.vehicleSlug') || '{}'); stored.tireSize = sz.sizeKey; stored.sizeSource = sz.source; sessionStorage.setItem('cwd.vehicleSlug', JSON.stringify(stored)); } catch(e) {} } }
+                            : function() { selectDiameter(sz.diameter); if (vehicle) { setVehicle(Object.assign({}, vehicle, { selectedSize: String(sz.diameter), sizeSource: sz.source })); try { var stored = JSON.parse(sessionStorage.getItem('cwd.vehicleSlug') || '{}'); stored.rimDiameter = Number(sz.diameter); stored.sizeSource = sz.source; sessionStorage.setItem('cwd.vehicleSlug', JSON.stringify(stored)); } catch(e) {} } };
                           return /*#__PURE__*/React.createElement(FilterCheck, {
                             key: sz.staggered ? sz.sizeKey : (sz.size || sz.diameter),
                             type: 'radio',

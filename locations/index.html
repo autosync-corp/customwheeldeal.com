@@ -5,17 +5,17 @@
   <link rel="icon" href="/assets/favicon.webp">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Locations — Custom Wheel Deal | Metro Detroit</title>
-  <meta name="description" content="Three Metro Detroit locations in Holbrook, Chesterfield, and Roseville.">
+  <meta name="description" content="Three Metro Detroit locations in Detroit, Roseville, and Chesterfield.">
   <link rel="canonical" href="https://customwheeldeal.com/locations/">
   <meta property="og:title" content="Our Locations — Custom Wheel Deal | Metro Detroit">
-  <meta property="og:description" content="Three Metro Detroit locations in Holbrook, Chesterfield, and Roseville.">
+  <meta property="og:description" content="Three Metro Detroit locations in Detroit, Roseville, and Chesterfield.">
   <meta property="og:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
   <meta property="og:url" content="https://customwheeldeal.com/locations/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Custom Wheel Deal">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Our Locations — Custom Wheel Deal | Metro Detroit">
-  <meta name="twitter:description" content="Three Metro Detroit locations in Holbrook, Chesterfield, and Roseville.">
+  <meta name="twitter:description" content="Three Metro Detroit locations in Detroit, Roseville, and Chesterfield.">
   <meta name="twitter:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,7 +101,7 @@ function Btn({
       color: '#fff'
     },
     primaryGrad: {
-      background: 'linear-gradient(135deg,#850824 0%,#a62639 100%)',
+      background: 'linear-gradient(135deg,#ea580c 0%,#c2410c 100%)',
       color: '#fff'
     },
     dark: {
@@ -533,8 +533,8 @@ function AppProvider({
   const [lastOrder, setLastOrder] = useState(null);
 
   // API-loaded brand lists
-  const [tireBrands, setTireBrands] = useState(window.HOLBROOK_DATA.brands);
-  const [wheelBrandsList, setWheelBrandsList] = useState(window.HOLBROOK_DATA.wheelBrandList);
+  const [tireBrands, setTireBrands] = useState(window.CWD_DATA.brands);
+  const [wheelBrandsList, setWheelBrandsList] = useState(window.CWD_DATA.wheelBrandList);
   const [apiReady, setApiReady] = useState(false);
 
   // Load brand data from API on mount
@@ -556,15 +556,15 @@ function AppProvider({
             return b.name;
           });
           if (apiBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiBrands.length, 'tire brands from API');
+            console.log('[CWD] Loaded', apiBrands.length, 'tire brands from API');
             setTireBrands(apiBrands);
-            window.HOLBROOK_DATA.brands = apiBrands;
+            window.CWD_DATA.brands = apiBrands;
           }
         } else {
-          console.warn('[Holbrook] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
+          console.warn('[CWD] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Tire brands API failed:', tRes.reason);
+        console.warn('[CWD] Tire brands API failed:', tRes.reason);
       }
       if (wRes.status === 'fulfilled') {
         const items = extractItems(wRes.value);
@@ -579,18 +579,18 @@ function AppProvider({
             return b.name;
           });
           if (apiWheelBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiWheelBrands.length, 'wheel brands from API');
+            console.log('[CWD] Loaded', apiWheelBrands.length, 'wheel brands from API');
             setWheelBrandsList(apiWheelBrands);
-            window.HOLBROOK_DATA.wheelBrandList = apiWheelBrands;
-            window.HOLBROOK_DATA.wheelBrands = apiWheelBrands.map(function (b) {
+            window.CWD_DATA.wheelBrandList = apiWheelBrands;
+            window.CWD_DATA.wheelBrands = apiWheelBrands.map(function (b) {
               return b.name;
             });
           }
         } else {
-          console.warn('[Holbrook] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
+          console.warn('[CWD] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Wheel brands API failed:', wRes.reason);
+        console.warn('[CWD] Wheel brands API failed:', wRes.reason);
       }
       setApiReady(true);
     });
@@ -724,7 +724,7 @@ function VVSBanner() {
   if (route === '/' || route === '' || route === '/vvs') return null;
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #850824 100%)',
+      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #ea580c 100%)',
       color: '#fff'
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -784,7 +784,7 @@ function VVSBanner() {
 function LocationsStrip() {
   const {
     locations
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   return /*#__PURE__*/React.createElement("section", {
     style: {
       background: '#fff',
@@ -830,7 +830,7 @@ function LocationsStrip() {
     }
   }, /*#__PURE__*/React.createElement(Eyebrow, {
     color: tokens.primary
-  }, "Holbrook \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
+  }, "CWD \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'Space Grotesk',
       fontSize: 22,
@@ -839,7 +839,7 @@ function LocationsStrip() {
       color: tokens.ink,
       lineHeight: 1.25
     }
-  }, l.name || ("Holbrook · " + l.city)), /*#__PURE__*/React.createElement("div", {
+  }, l.name || ("Custom Wheel Deal · " + l.city)), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'Space Grotesk',
       fontSize: 16,
@@ -905,7 +905,7 @@ function GlobalFitmentBar() {
   const [fitmentsLoading, setFitmentsLoading] = useState(false);
 
   // Static fallback makes (always available)
-  const staticMakes = window.HOLBROOK_DATA.vehicleMakes.map(function (m) {
+  const staticMakes = window.CWD_DATA.vehicleMakes.map(function (m) {
     return m.name;
   });
   useEffect(() => {
@@ -1042,7 +1042,7 @@ function GlobalFitmentBar() {
       navigate('/shop');
     }
   };
-  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #850824 100%)';
+  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #ea580c 100%)';
   const barBorder = '1px solid rgba(255,255,255,.08)';
   const barShadow = 'inset 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(232,52,78,.15)';
   const fld = {
@@ -1415,13 +1415,13 @@ function LocationsIndex() {
       fontWeight: 700,
       margin: "0 0 12px"
     }
-  }, "Holbrook"), /*#__PURE__*/React.createElement("div", {
+  }, "Custom Wheel Deal"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 14,
       color: tokens.graphite,
       lineHeight: 1.6
     }
-  }, /*#__PURE__*/React.createElement("div", null, "15240 Red Arrow Hwy"), /*#__PURE__*/React.createElement("div", null, "Holbrook, MI 48060"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", null, "15240 Red Arrow Hwy"), /*#__PURE__*/React.createElement("div", null, "Detroit, MI 48060"), /*#__PURE__*/React.createElement("div", {
     style: {
       color: tokens.primary,
       fontWeight: 600,

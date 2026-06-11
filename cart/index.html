@@ -5,18 +5,18 @@
   <link rel="icon" href="/assets/favicon.webp">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart | Custom Wheel Deal — Michigan</title>
-  <meta name="description" content="Review your tire and wheel selections. Pay 25% deposit today, balance due at installation. Professional mount and balance at any Holbrook location.">
+  <meta name="description" content="Review your tire and wheel selections. Pay 25% deposit today, balance due at installation. Professional mount and balance at any Custom Wheel Deal location.">
   <meta name="robots" content="noindex">
   <link rel="canonical" href="https://customwheeldeal.com/cart/">
   <meta property="og:title" content="Your Cart | Custom Wheel Deal">
-  <meta property="og:description" content="Review your tire and wheel selections. Pay 25% deposit today, balance due at installation. Professional mount and balance at any Holbrook location.">
+  <meta property="og:description" content="Review your tire and wheel selections. Pay 25% deposit today, balance due at installation. Professional mount and balance at any Custom Wheel Deal location.">
   <meta property="og:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
   <meta property="og:url" content="https://customwheeldeal.com/cart/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Custom Wheel Deal">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Your Cart | Custom Wheel Deal">
-  <meta name="twitter:description" content="Review your tire and wheel selections. Pay 25% deposit today, balance due at installation. Professional mount and balance at any Holbrook location.">
+  <meta name="twitter:description" content="Review your tire and wheel selections. Pay 25% deposit today, balance due at installation. Professional mount and balance at any Custom Wheel Deal location.">
   <meta name="twitter:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,7 +101,7 @@ function Btn({
       color: '#fff'
     },
     primaryGrad: {
-      background: 'linear-gradient(135deg,#850824 0%,#a62639 100%)',
+      background: 'linear-gradient(135deg,#ea580c 0%,#c2410c 100%)',
       color: '#fff'
     },
     dark: {
@@ -527,8 +527,8 @@ function AppProvider({
     return path + search;
   });
   const [lastOrder, setLastOrder] = useState(null);
-  const [tireBrands, setTireBrands] = useState(window.HOLBROOK_DATA.brands);
-  const [wheelBrandsList, setWheelBrandsList] = useState(window.HOLBROOK_DATA.wheelBrandList);
+  const [tireBrands, setTireBrands] = useState(window.CWD_DATA.brands);
+  const [wheelBrandsList, setWheelBrandsList] = useState(window.CWD_DATA.wheelBrandList);
   const [apiReady, setApiReady] = useState(false);
   useEffect(() => {
     const BRAND_CDN = 'https://storage.googleapis.com/autosync-brand-logos/logos/';
@@ -548,15 +548,15 @@ function AppProvider({
             return b.name;
           });
           if (apiBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiBrands.length, 'tire brands from API');
+            console.log('[CWD] Loaded', apiBrands.length, 'tire brands from API');
             setTireBrands(apiBrands);
-            window.HOLBROOK_DATA.brands = apiBrands;
+            window.CWD_DATA.brands = apiBrands;
           }
         } else {
-          console.warn('[Holbrook] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
+          console.warn('[CWD] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Tire brands API failed:', tRes.reason);
+        console.warn('[CWD] Tire brands API failed:', tRes.reason);
       }
       if (wRes.status === 'fulfilled') {
         const items = extractItems(wRes.value);
@@ -571,18 +571,18 @@ function AppProvider({
             return b.name;
           });
           if (apiWheelBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiWheelBrands.length, 'wheel brands from API');
+            console.log('[CWD] Loaded', apiWheelBrands.length, 'wheel brands from API');
             setWheelBrandsList(apiWheelBrands);
-            window.HOLBROOK_DATA.wheelBrandList = apiWheelBrands;
-            window.HOLBROOK_DATA.wheelBrands = apiWheelBrands.map(function (b) {
+            window.CWD_DATA.wheelBrandList = apiWheelBrands;
+            window.CWD_DATA.wheelBrands = apiWheelBrands.map(function (b) {
               return b.name;
             });
           }
         } else {
-          console.warn('[Holbrook] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
+          console.warn('[CWD] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Wheel brands API failed:', wRes.reason);
+        console.warn('[CWD] Wheel brands API failed:', wRes.reason);
       }
       setApiReady(true);
     });
@@ -631,8 +631,8 @@ function AppProvider({
   };
   // Sync Medusa lineItemIds on mount so remove/update can reference them
   useEffect(function() {
-    if (!window.HolbrookCart) return;
-    HolbrookCart.getItems().then(function(medusaItems) {
+    if (!window.CWDCart) return;
+    CWDCart.getItems().then(function(medusaItems) {
       if (!medusaItems || !medusaItems.length) return;
       setCart(function(prev) {
         if (!prev.length) return medusaItems;
@@ -655,10 +655,10 @@ function AppProvider({
       if (hit) return prev.map(p => p.id === pkg.id ? { ...p, qty: p.qty + qty } : p);
       return [...prev, { ...pkg, qty }];
     });
-    if (window.HolbrookCart) {
+    if (window.CWDCart) {
       try {
-        await HolbrookCart.addItem({ ...pkg, qty });
-        const medusaItems = await HolbrookCart.getItems();
+        await CWDCart.addItem({ ...pkg, qty });
+        const medusaItems = await CWDCart.getItems();
         if (medusaItems) {
           setCart(prev => prev.map(p => {
             const mi = medusaItems.find(m => m.id === p.id);
@@ -672,26 +672,26 @@ function AppProvider({
     const item = cart.find(p => p.id === id);
     if (qty <= 0) {
       setCart(prev => prev.filter(p => p.id !== id));
-      if (window.HolbrookCart && item && item.lineItemId) {
-        HolbrookCart.removeItem(item.lineItemId).catch(function() {});
+      if (window.CWDCart && item && item.lineItemId) {
+        CWDCart.removeItem(item.lineItemId).catch(function() {});
       }
       return;
     }
     setCart(prev => prev.map(p => p.id === id ? { ...p, qty } : p));
-    if (window.HolbrookCart && item && item.lineItemId) {
-      try { await HolbrookCart.updateQty(item.lineItemId, qty); } catch(e) { console.warn('[Cart] Medusa update failed:', e); }
+    if (window.CWDCart && item && item.lineItemId) {
+      try { await CWDCart.updateQty(item.lineItemId, qty); } catch(e) { console.warn('[Cart] Medusa update failed:', e); }
     }
   };
   const removeItem = id => {
     const item = cart.find(p => p.id === id);
     setCart(prev => prev.filter(p => p.id !== id));
-    if (window.HolbrookCart && item && item.lineItemId) {
-      HolbrookCart.removeItem(item.lineItemId).catch(function(e) { console.warn('[Cart] Medusa remove failed:', e); });
+    if (window.CWDCart && item && item.lineItemId) {
+      CWDCart.removeItem(item.lineItemId).catch(function(e) { console.warn('[Cart] Medusa remove failed:', e); });
     }
   };
   const clearCart = () => {
     setCart([]);
-    if (window.HolbrookCart) HolbrookCart.clear().catch(function() {});
+    if (window.CWDCart) CWDCart.clear().catch(function() {});
   };
   const navigate = r => {
     const routeMap = {
@@ -761,7 +761,7 @@ function VVSBanner() {
   if (route === '/' || route === '' || route === '/vvs') return null;
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #850824 100%)',
+      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #ea580c 100%)',
       color: '#fff'
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -821,7 +821,7 @@ function VVSBanner() {
 function LocationsStrip() {
   const {
     locations
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   return /*#__PURE__*/React.createElement("section", {
     style: {
       background: '#fff',
@@ -867,7 +867,7 @@ function LocationsStrip() {
     }
   }, /*#__PURE__*/React.createElement(Eyebrow, {
     color: tokens.primary
-  }, "Holbrook \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
+  }, "CWD \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'Space Grotesk',
       fontSize: 20,
@@ -928,7 +928,7 @@ function GlobalFitmentBar() {
   const [makesLoading, setMakesLoading] = useState(false);
   const [modelsLoading, setModelsLoading] = useState(false);
   const [submodelsLoading, setSubmodelsLoading] = useState(false);
-  const staticMakes = window.HOLBROOK_DATA.vehicleMakes.map(function (m) {
+  const staticMakes = window.CWD_DATA.vehicleMakes.map(function (m) {
     return m.name;
   });
   useEffect(() => {
@@ -1014,7 +1014,7 @@ function GlobalFitmentBar() {
       navigate('/shop');
     }
   };
-  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #850824 100%)';
+  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #ea580c 100%)';
   const barBorder = '1px solid rgba(255,255,255,.08)';
   const barShadow = 'inset 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(232,52,78,.15)';
   const fld = {
@@ -1574,7 +1574,7 @@ function CartPage() {
     style: {
       marginTop: 18,
       padding: 16,
-      background: 'linear-gradient(135deg,#850824,#a62639)',
+      background: 'linear-gradient(135deg,#ea580c,#c2410c)',
       color: '#fff',
       borderRadius: 10
     }

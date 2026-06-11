@@ -1,5 +1,5 @@
-const HolbrookCart = (() => {
-  const MEDUSA_URL = 'https://holbrook-medusa.medusajs.app';
+﻿const CWDCart = (() => {
+  const MEDUSA_URL = 'https://customwheeldeal-medusa.medusajs.app';
   const PUB_KEY = 'pk_358a5681030f0eb3b532cb1eec073294c355d371af0f14cb217d700702266842';
   const REGION_ID = 'reg_01KRH3QA6EXHMJ6C05139NH0TK';
   const STRIPE_PK = 'pk_test_51TWI9AAcBHUUqvZkY4efxZ7Psfk88Bch2DaZTZw25eKMSIz8VW69UN47hgLhsgfwW9WdukDwCM4zRFTP0ZCvClsD007utRldVc';
@@ -8,7 +8,7 @@ const HolbrookCart = (() => {
     wheel: 'variant_01KRH5KD6F35WRB08TNMWHS793'
   };
   const FEE_VARIANT = 'variant_01KRYN1WRCNH424JGSCTE3NKJZ';
-  const CART_KEY = 'holbrook_cart_id';
+  const CART_KEY = 'cwd_cart_id';
 
   const listeners = [];
 
@@ -303,4 +303,4 @@ const HolbrookCart = (() => {
   };
 })();
 
-window.HolbrookCart = HolbrookCart;
+window.CWDCart = CWDCart;

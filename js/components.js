@@ -1,5 +1,5 @@
-/**
- * Holbrook Tires — Shared UI Components
+﻿/**
+ * Custom Wheel Deal — Shared UI Components
  * Renders header (with Garage), footer, breadcrumb, vehicle reinforcement bar,
  * left-side filter panel, and utility functions.
  *
@@ -7,7 +7,7 @@
  * switch between them. A vehicle thumbnail + info bar appears on product pages
  * to reinforce that results are filtered to the selected vehicle's fitment.
  */
-const HolbrookUI = (() => {
+const CWDUI = (() => {
 
   // ─── Determine relative root path based on page depth ─────────
   // depth 0 (/ or /index.html)        → '.'
@@ -33,8 +33,8 @@ const HolbrookUI = (() => {
   // ═══════════════════════════════════════════════════════════════
   //  GARAGE SYSTEM — Save/recall vehicles via sessionStorage
   // ═══════════════════════════════════════════════════════════════
-  const GARAGE_KEY = 'holbrook_garage';
-  const ACTIVE_VEHICLE_KEY = 'holbrook_active_vehicle';
+  const GARAGE_KEY = 'cwd_garage';
+  const ACTIVE_VEHICLE_KEY = 'cwd_active_vehicle';
 
   function getGarage() {
     try { return JSON.parse(sessionStorage.getItem(GARAGE_KEY)) || []; }
@@ -120,7 +120,7 @@ const HolbrookUI = (() => {
           const isActive = active && active.year === v.year && active.make === v.make && active.model === v.model;
           return `
           <div class="flex items-center gap-3 px-4 py-3 hover:bg-surface-container-low transition-colors cursor-pointer ${isActive ? 'bg-primary/5 border-l-2 border-primary' : ''}"
-               onclick="HolbrookUI.setActiveVehicle(JSON.parse(this.dataset.vehicle))" data-vehicle='${JSON.stringify(v).replace(/'/g, "&#39;")}'>
+               onclick="CWDUI.setActiveVehicle(JSON.parse(this.dataset.vehicle))" data-vehicle='${JSON.stringify(v).replace(/'/g, "&#39;")}'>
             <div class="w-16 h-10 rounded bg-surface-container-high flex items-center justify-center flex-shrink-0 overflow-hidden">
               ${v.image ? `<img src="${v.image}" alt="${v.year} ${v.make} ${v.model}" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-on-surface-variant/40 text-lg">directions_car</span>`}
             </div>
@@ -128,7 +128,7 @@ const HolbrookUI = (() => {
               <div class="text-sm font-bold truncate">${v.year} ${v.make} ${v.model}</div>
               <div class="text-[10px] text-on-surface-variant truncate">${v.submodel || ''}</div>
             </div>
-            <button onclick="event.stopPropagation(); HolbrookUI.removeFromGarage(${i})" class="text-on-surface-variant/40 hover:text-error transition-colors flex-shrink-0" title="Remove from garage">
+            <button onclick="event.stopPropagation(); CWDUI.removeFromGarage(${i})" class="text-on-surface-variant/40 hover:text-error transition-colors flex-shrink-0" title="Remove from garage">
               <span class="material-symbols-outlined text-base">close</span>
             </button>
           </div>`;
@@ -197,8 +197,8 @@ const HolbrookUI = (() => {
     const navLinks = navItems.map(n => {
       const active = n.key === activePage;
       const cls = active
-        ? 'text-[#850824] border-b-2 border-[#850824] pb-1'
-        : 'text-on-surface-variant hover:text-[#a62639]';
+        ? 'text-[#ea580c] border-b-2 border-[#ea580c] pb-1'
+        : 'text-on-surface-variant hover:text-[#c2410c]';
       return `<a class="${cls} transition-colors duration-200" href="${n.href}">${n.label}</a>`;
     }).join('\n');
 
@@ -206,7 +206,7 @@ const HolbrookUI = (() => {
     <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-sm">
       <nav class="flex justify-between items-center px-8 py-4 max-w-full mx-auto">
         <div class="flex items-center gap-8">
-          <a href="${root}/index.html" class="bg-slate-900 rounded-lg px-3 py-1 inline-flex items-center"><img src="/images/Holbrook-tirecenter-logo-dark_BG.png" alt="Holbrook Tire Center" class="h-14 object-contain"></a>
+          <a href="${root}/index.html" class="bg-slate-900 rounded-lg px-3 py-1 inline-flex items-center"><img src="/assets/logo-dark-bg.png" alt="Custom Wheel Deal" class="h-14 object-contain"></a>
           <div class="hidden md:flex gap-6 items-center font-['Space_Grotesk'] font-bold uppercase tracking-wider text-sm">
             ${navLinks}
           </div>
@@ -219,7 +219,7 @@ const HolbrookUI = (() => {
           <div class="flex items-center gap-4 text-on-surface-variant">
             <!-- GARAGE ICON -->
             <div class="relative" id="garageToggle">
-              <button onclick="HolbrookUI.toggleGarageDropdown()" class="relative cursor-pointer hover:text-primary transition-colors" title="My Garage">
+              <button onclick="CWDUI.toggleGarageDropdown()" class="relative cursor-pointer hover:text-primary transition-colors" title="My Garage">
                 <span class="material-symbols-outlined">garage</span>
                 <span data-garage-count class="absolute -top-2 -right-2 bg-tertiary-fixed-dim text-tertiary text-[10px] font-bold w-5 h-5 rounded-full items-center justify-center hidden">0</span>
               </button>
@@ -278,7 +278,7 @@ const HolbrookUI = (() => {
             <div class="text-sm font-bold text-on-surface">${vehicle.year} ${vehicle.make} ${vehicle.model}</div>
             <div class="text-[11px] text-on-surface-variant">${vehicle.submodel ? vehicle.submodel + ' · ' : ''}Showing products that fit this vehicle exclusively</div>
           </div>
-          <button onclick="HolbrookUI.setActiveVehicle(null)" class="text-xs font-bold text-on-surface-variant hover:text-primary transition-colors tracking-wider uppercase flex-shrink-0">
+          <button onclick="CWDUI.setActiveVehicle(null)" class="text-xs font-bold text-on-surface-variant hover:text-primary transition-colors tracking-wider uppercase flex-shrink-0">
             CLEAR
           </button>
           <a href="${root}/vehicles/index.html" class="text-xs font-bold text-primary hover:underline tracking-wider uppercase flex-shrink-0">
@@ -378,7 +378,7 @@ const HolbrookUI = (() => {
       <div class="max-w-7xl mx-auto px-12 py-16">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div>
-            <div class="mb-4"><img src="/images/Holbrook_tire_logo_for_dark_bck.png" alt="Holbrook Tire Center" class="h-20 object-contain"></div>
+            <div class="mb-4"><img src="/assets/logo-dark-bg.png" alt="Custom Wheel Deal" class="h-20 object-contain"></div>
             <p class="text-slate-400 text-xs leading-relaxed uppercase tracking-tighter">
               The gold standard in automotive performance tires and wheels. Precision engineered.
             </p>
@@ -410,12 +410,12 @@ const HolbrookUI = (() => {
           </div>
         </div>
         <div class="border-t border-slate-800 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <span class="text-[10px] text-slate-500 tracking-widest uppercase">&copy; 2026 Holbrook Performance Tires. Precision Engineered.</span>
+          <span class="text-[10px] text-slate-500 tracking-widest uppercase">&copy; 2026 Custom Wheel Deal. Precision Engineered.</span>
           <div class="flex gap-4 mt-4 md:mt-0">
-            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-[#a62639] transition-colors cursor-pointer">
+            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-[#c2410c] transition-colors cursor-pointer">
               <span class="material-symbols-outlined text-sm">public</span>
             </div>
-            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-[#a62639] transition-colors cursor-pointer">
+            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-[#c2410c] transition-colors cursor-pointer">
               <span class="material-symbols-outlined text-sm">alternate_email</span>
             </div>
           </div>
@@ -448,7 +448,7 @@ const HolbrookUI = (() => {
             <span class="text-2xl font-bold">$${product.price}</span>
             <span class="text-xs text-on-surface-variant"> /ea</span>
           </div>
-          <button onclick="HolbrookCart.addItem({id:'${product.id}',type:'${type}',name:'${(product.model || product.style || '').replace(/'/g, "\\'")}',brand:'${product.brand}',size:'${product.size}',price:'${product.price}',image:'${product.image}',qty:4}); showToast('Added to cart!')"
+          <button onclick="CWDCart.addItem({id:'${product.id}',type:'${type}',name:'${(product.model || product.style || '').replace(/'/g, "\\'")}',brand:'${product.brand}',size:'${product.size}',price:'${product.price}',image:'${product.image}',qty:4}); showToast('Added to cart!')"
             class="signature-gradient text-white px-4 py-2 rounded-md text-[10px] font-bold tracking-widest uppercase hover:opacity-90 transition-all active:scale-95">
             ADD SET OF 4
           </button>
@@ -492,13 +492,13 @@ const HolbrookUI = (() => {
     return `
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>${title} | HOLBROOK Tires &amp; Wheels</title>
+    <title>${title} | Custom Wheel Deal</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"><\/script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <style>
       .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-      .signature-gradient { background: linear-gradient(135deg, #850824 0%, #a62639 100%); }
+      .signature-gradient { background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%); }
       body { font-family: 'Inter', sans-serif; background-color: #f9f9fc; color: #1a1c1e; }
       h1, h2, h3, .font-headline { font-family: 'Space Grotesk', sans-serif; }
       @keyframes slide-up { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -514,7 +514,7 @@ const HolbrookUI = (() => {
         theme: {
           extend: {
             colors: {
-              "primary": "#850824", "primary-container": "#a62639",
+              "primary": "#ea580c", "primary-container": "#c2410c",
               "secondary": "#5a5b84", "secondary-container": "#cecdfd",
               "tertiary": "#543e00", "tertiary-container": "#715400",
               "tertiary-fixed-dim": "#f9bd14",

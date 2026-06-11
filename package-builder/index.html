@@ -151,7 +151,7 @@ function Btn({
       color: '#fff'
     },
     primaryGrad: {
-      background: 'linear-gradient(135deg,#850824 0%,#a62639 100%)',
+      background: 'linear-gradient(135deg,#ea580c 0%,#c2410c 100%)',
       color: '#fff'
     },
     dark: {
@@ -563,8 +563,8 @@ function AppProvider({
     return path + search;
   });
   const [lastOrder, setLastOrder] = useState(null);
-  const [tireBrands, setTireBrands] = useState(window.HOLBROOK_DATA.brands);
-  const [wheelBrandsList, setWheelBrandsList] = useState(window.HOLBROOK_DATA.wheelBrandList);
+  const [tireBrands, setTireBrands] = useState(window.CWD_DATA.brands);
+  const [wheelBrandsList, setWheelBrandsList] = useState(window.CWD_DATA.wheelBrandList);
   const [apiReady, setApiReady] = useState(false);
   useEffect(() => {
     const BRAND_CDN = 'https://storage.googleapis.com/autosync-brand-logos/logos/';
@@ -584,15 +584,15 @@ function AppProvider({
             return b.name;
           });
           if (apiBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiBrands.length, 'tire brands from API');
+            console.log('[CWD] Loaded', apiBrands.length, 'tire brands from API');
             setTireBrands(apiBrands);
-            window.HOLBROOK_DATA.brands = apiBrands;
+            window.CWD_DATA.brands = apiBrands;
           }
         } else {
-          console.warn('[Holbrook] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
+          console.warn('[CWD] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Tire brands API failed:', tRes.reason);
+        console.warn('[CWD] Tire brands API failed:', tRes.reason);
       }
       if (wRes.status === 'fulfilled') {
         const items = extractItems(wRes.value);
@@ -607,18 +607,18 @@ function AppProvider({
             return b.name;
           });
           if (apiWheelBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiWheelBrands.length, 'wheel brands from API');
+            console.log('[CWD] Loaded', apiWheelBrands.length, 'wheel brands from API');
             setWheelBrandsList(apiWheelBrands);
-            window.HOLBROOK_DATA.wheelBrandList = apiWheelBrands;
-            window.HOLBROOK_DATA.wheelBrands = apiWheelBrands.map(function (b) {
+            window.CWD_DATA.wheelBrandList = apiWheelBrands;
+            window.CWD_DATA.wheelBrands = apiWheelBrands.map(function (b) {
               return b.name;
             });
           }
         } else {
-          console.warn('[Holbrook] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
+          console.warn('[CWD] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Wheel brands API failed:', wRes.reason);
+        console.warn('[CWD] Wheel brands API failed:', wRes.reason);
       }
       setApiReady(true);
     });
@@ -750,7 +750,7 @@ function VVSBanner() {
   if (route === '/' || route === '' || route === '/vvs') return null;
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #850824 100%)',
+      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #ea580c 100%)',
       color: '#fff'
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -810,7 +810,7 @@ function VVSBanner() {
 function LocationsStrip() {
   const {
     locations
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   return /*#__PURE__*/React.createElement("section", {
     style: {
       background: '#fff',
@@ -856,7 +856,7 @@ function LocationsStrip() {
     }
   }, /*#__PURE__*/React.createElement(Eyebrow, {
     color: tokens.primary
-  }, "Holbrook \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
+  }, "CWD \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'Space Grotesk',
       fontSize: 20,
@@ -923,7 +923,7 @@ function GlobalFitmentBar() {
   const [fitmentsLoading, setFitmentsLoading] = useState(false);
 
   // Static fallback makes (always available)
-  const staticMakes = window.HOLBROOK_DATA.vehicleMakes.map(function (m) {
+  const staticMakes = window.CWD_DATA.vehicleMakes.map(function (m) {
     return m.name;
   });
   useEffect(() => {
@@ -1067,14 +1067,14 @@ function GlobalFitmentBar() {
       var modelSlug = model.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
       var vehicleSlug = year + '-' + makeSlug + '-' + modelSlug;
       try {
-        sessionStorage.setItem('holbrook.vehicleSlug', JSON.stringify({
+        sessionStorage.setItem('cwd.vehicleSlug', JSON.stringify({
           year: year, make: make, model: model, submodel: submodel || undefined, slug: vehicleSlug
         }));
       } catch(e) {}
       window.location.href = '/packages/?v=' + vehicleSlug;
     }
   };
-  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #850824 100%)';
+  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #ea580c 100%)';
   const barBorder = '1px solid rgba(255,255,255,.08)';
   const barShadow = 'inset 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(232,52,78,.15)';
   const fld = {
@@ -1544,7 +1544,7 @@ function PackageCard({
     },
     onMouseOver: e => {
       e.currentTarget.style.boxShadow = '0 12px 28px rgba(0,0,0,.12)';
-      e.currentTarget.style.borderColor = 'rgba(133,8,36,.25)';
+      e.currentTarget.style.borderColor = 'rgba(234,88,12,.25)';
     },
     onMouseOut: e => {
       e.currentTarget.style.boxShadow = 'none';
@@ -1667,7 +1667,7 @@ function PackagesPage() {
   const {
     packages,
     categories
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   const {
     route,
     vehicle,
@@ -1701,10 +1701,10 @@ function PackagesPage() {
 
     // Check sessionStorage first (set by fitment bar navigation — has exact data)
     try {
-      var raw = sessionStorage.getItem('holbrook.vehicleSlug');
+      var raw = sessionStorage.getItem('cwd.vehicleSlug');
       if (raw) {
         var saved = JSON.parse(raw);
-        sessionStorage.removeItem('holbrook.vehicleSlug');
+        sessionStorage.removeItem('cwd.vehicleSlug');
         if (saved && saved.slug === slug) {
           applyFitments(saved.year, saved.make, saved.model, saved.submodel);
           return;
@@ -1963,7 +1963,7 @@ function PackagesPage() {
       alignItems: 'center',
       gap: 16,
       padding: '14px 18px',
-      background: 'linear-gradient(90deg, rgba(133,8,36,.06) 0%, rgba(232,52,78,.04) 100%)',
+      background: 'linear-gradient(90deg, rgba(234,88,12,.06) 0%, rgba(232,52,78,.04) 100%)',
       border: `1px solid ${tokens.primary}20`,
       borderLeft: `3px solid ${tokens.primary}`,
       borderRadius: 8,
@@ -2042,7 +2042,7 @@ function PackagePDP({
 }) {
   const {
     packages
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   const {
     route,
     navigate,
@@ -2333,7 +2333,7 @@ function PackagePDP({
     style: {
       marginTop: 18,
       padding: '14px 16px',
-      background: 'rgba(133,8,36,.2)',
+      background: 'rgba(234,88,12,.2)',
       border: '1px solid rgba(232,52,78,.3)',
       borderRadius: 8,
       display: 'flex',
@@ -2479,7 +2479,7 @@ function PackagePDP({
       lineHeight: 1.7,
       color: tokens.graphite
     }
-  }, tab === 'overview' && /*#__PURE__*/React.createElement("p", null, "The ", /*#__PURE__*/React.createElement("strong", null, pkg.name), " package pairs ", pkg.wheelBrand, "'s ", pkg.wheelModel, " in ", pkg.finish, " with ", pkg.tireBrand, "'s ", pkg.tireModel, " in ", pkg.size.split(' · ')[1], ". Hand-matched for ", pkg.fit.toLowerCase(), " use, every set is mounted and road-force balanced at our Roseville shop before it ships or rolls into the install bay."), tab === 'fitment' && /*#__PURE__*/React.createElement("p", null, "Confirmed fitment for your selected vehicle. Includes hub-centric rings, chrome lug nuts, and TPMS sensors pre-programmed to your VIN."), tab === 'reviews' && /*#__PURE__*/React.createElement("p", null, pkg.reviews, " verified buyers. ", pkg.rating, "/5 average across Michigan installs."), tab === 'warranty' && /*#__PURE__*/React.createElement("p", null, "Every installed package is covered by manufacturer warranty plus Holbrook's 12-month road-hazard protection.")));
+  }, tab === 'overview' && /*#__PURE__*/React.createElement("p", null, "The ", /*#__PURE__*/React.createElement("strong", null, pkg.name), " package pairs ", pkg.wheelBrand, "'s ", pkg.wheelModel, " in ", pkg.finish, " with ", pkg.tireBrand, "'s ", pkg.tireModel, " in ", pkg.size.split(' · ')[1], ". Hand-matched for ", pkg.fit.toLowerCase(), " use, every set is mounted and road-force balanced at our Roseville shop before it ships or rolls into the install bay."), tab === 'fitment' && /*#__PURE__*/React.createElement("p", null, "Confirmed fitment for your selected vehicle. Includes hub-centric rings, chrome lug nuts, and TPMS sensors pre-programmed to your VIN."), tab === 'reviews' && /*#__PURE__*/React.createElement("p", null, pkg.reviews, " verified buyers. ", pkg.rating, "/5 average across Michigan installs."), tab === 'warranty' && /*#__PURE__*/React.createElement("p", null, "Every installed package is covered by manufacturer warranty plus Custom Wheel Deal's 12-month road-hazard protection.")));
 }
 
 // ─────────────── Mount App

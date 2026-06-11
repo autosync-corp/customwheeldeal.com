@@ -33,11 +33,11 @@ function extractName(item) {
 const api = {
   async _fetch(path, params) {
     const url = API_BASE + path + '?' + params;
-    console.log('[Holbrook API]', url);
+    console.log('[CWD API]', url);
     const res = await fetch(url);
     if (!res.ok) throw new Error('API ' + res.status + ': ' + res.statusText);
     const data = await res.json();
-    console.log('[Holbrook API] Response:', path, data);
+    console.log('[CWD API] Response:', path, data);
     return data;
   },
   async fetchTires(filters = {}) {
@@ -241,7 +241,7 @@ const api = {
   // Results are cached in localStorage for 1 hour â€” instant on return visits.
   // On first visit (or expired cache): fetches all brands in 4 parallel batches, no delays.
   async fetchRebates() {
-    const CACHE_KEY = 'holbrook_rebates_v3';
+    const CACHE_KEY = 'cwd_rebates_v3';
     const CACHE_TTL  = 60 * 60 * 1000; // 1 hour â€” serve from cache
     const STALE_TTL  = 30 * 60 * 1000; // 30 min â€” background-refresh if older
 
@@ -373,9 +373,9 @@ api.fetchAllBrandTires = async function(perBrand) {
     'Bfgoodrich','General','Kumho','Nexen','Dunlop','Nokian',
     'Mickey Thompson','Uniroyal'
   ];
-  console.log('[Holbrook API] Fetching tires for', keyBrands.length, 'key brands @', perBrand, 'each');
+  console.log('[CWD API] Fetching tires for', keyBrands.length, 'key brands @', perBrand, 'each');
   var result = await this._fetchBrands('/tires', 'Tires', keyBrands, perBrand, { 'i-specs': true, 'i-tags': true });
-  console.log('[Holbrook API] Total tires loaded:', result.items.length);
+  console.log('[CWD API] Total tires loaded:', result.items.length);
   return { Tires: result.items, ImgUrlBase: result.imgUrlBase, MoreItems: false };
 };
 
@@ -388,9 +388,9 @@ api.fetchAllBrandWheels = async function(perBrand) {
     'Status','Lock Offroad','Fittipaldi Offroad','4PLAY','Asanti Black Label',
     'Anthem Off-Road','ATX','Revenge Luxury'
   ];
-  console.log('[Holbrook API] Fetching wheels for', keyBrands.length, 'key brands @', perBrand, 'each');
+  console.log('[CWD API] Fetching wheels for', keyBrands.length, 'key brands @', perBrand, 'each');
   var result = await this._fetchBrands('/wheels', 'Wheels', keyBrands, perBrand, { 'i-specs': true, 'f-imgFormat': 'webp' });
-  console.log('[Holbrook API] Total wheels loaded:', result.items.length);
+  console.log('[CWD API] Total wheels loaded:', result.items.length);
   return { Wheels: result.items, ImgUrlBase: result.imgUrlBase, MoreItems: false };
 };
 

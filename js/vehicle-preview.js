@@ -1,4 +1,4 @@
-// ─── js/vehicle-preview.js — "Preview on my vehicle" modal using AutoSync VVS Express
+﻿// ─── js/vehicle-preview.js — "Preview on my vehicle" modal using AutoSync VVS Express
 //
 // The VVSE script auto-discovers `<div class="vvse" data-onload-callback="...">`
 // placeholders during its initial DOM scan, so dynamically-inserted placeholders
@@ -18,24 +18,24 @@
 // module script tag. Either pages just need <script src="/js/vehicle-preview.js"></script>.
 (function ensureVvseScript() {
   if (typeof document === 'undefined') return;
-  if (document.querySelector('script[data-holbrook-vvse]')) return;
+  if (document.querySelector('script[data-cwd-vvse]')) return;
   var s = document.createElement('script');
   s.setAttribute('type', 'module');
   s.setAttribute('crossorigin', '');
   s.async = true;
   s.src = 'https://vvs.autosyncstudio.com/express/dist/vvse.js';
-  s.setAttribute('data-holbrook-vvse', '1');
+  s.setAttribute('data-cwd-vvse', '1');
   (document.head || document.documentElement).appendChild(s);
 })();
 (function ensureVvseHost() {
   if (typeof document === 'undefined') return;
   function inject() {
     if (!document.body) { setTimeout(inject, 50); return; }
-    if (document.getElementById('holbrook-vvse-host')) return;
+    if (document.getElementById('cwd-vvse-host')) return;
     var host = document.createElement('div');
-    host.id = 'holbrook-vvse-host';
+    host.id = 'cwd-vvse-host';
     host.className = 'vvse';
-    host.setAttribute('data-onload-callback', 'onHolbrookVvseReady');
+    host.setAttribute('data-onload-callback', 'onCWDVvseReady');
     // Hidden parking spot when the modal is closed.
     host.style.cssText = 'position:fixed;left:-99999px;top:-99999px;width:1px;height:1px;overflow:hidden;visibility:hidden;';
     var msg = document.createElement('div');
@@ -44,39 +44,39 @@
     msg.textContent = 'Loading VVS Express...';
     host.appendChild(msg);
     document.body.appendChild(host);
-    window._holbrookVvseHostEl = host;
+    window._cwdVvseHostEl = host;
   }
   inject();
 })();
 
 // Single global callback the VVSE script invokes once on page load.
-window.onHolbrookVvseReady = function(initVvse) {
-  if (window._holbrookVvse) return; // already inited
+window.onCWDVvseReady = function(initVvse) {
+  if (window._cwdVvse) return; // already inited
   if (typeof initVvse !== 'function') {
     console.error('[VVSE] callback received non-function');
     return;
   }
   try {
     var vvse = initVvse({
-      apiKey: 'holbrooktire',
+      apiKey: 'customwheeldeal',
       apiUrl: 'https://api.autosyncstudio.com/',
       height: '560px'
     });
-    window._holbrookVvse = vvse;
-    window._holbrookVvseReady = true;
-    try { window.dispatchEvent(new Event('holbrook:vvse-ready')); } catch (_) {}
+    window._cwdVvse = vvse;
+    window._cwdVvseReady = true;
+    try { window.dispatchEvent(new Event('cwd:vvse-ready')); } catch (_) {}
     console.log('[VVSE] ready');
   } catch (e) {
     console.error('[VVSE] init failed:', e);
-    window._holbrookVvseError = e;
-    try { window.dispatchEvent(new Event('holbrook:vvse-error')); } catch (_) {}
+    window._cwdVvseError = e;
+    try { window.dispatchEvent(new Event('cwd:vvse-error')); } catch (_) {}
   }
 };
 
-function _holbrookParkVvseHost() {
+function _cwdParkVvseHost() {
   // Cache a reference once injected so we can find the host even if the modal
   // already removed it from its slot before our cleanup ran.
-  var host = window._holbrookVvseHostEl || document.getElementById('holbrook-vvse-host');
+  var host = window._cwdVvseHostEl || document.getElementById('cwd-vvse-host');
   if (!host) return;
   if (host.parentElement !== document.body) {
     if (host.parentElement) host.parentElement.removeChild(host);
@@ -85,8 +85,8 @@ function _holbrookParkVvseHost() {
   host.style.cssText = 'position:fixed;left:-99999px;top:-99999px;width:1px;height:1px;overflow:hidden;visibility:hidden;';
 }
 
-function _holbrookMountVvseHost(slot) {
-  var host = window._holbrookVvseHostEl || document.getElementById('holbrook-vvse-host');
+function _cwdMountVvseHost(slot) {
+  var host = window._cwdVvseHostEl || document.getElementById('cwd-vvse-host');
   if (!host || !slot) return false;
   // If the host was orphaned (no parent), just append to slot.
   if (host.parentElement !== slot) slot.appendChild(host);
@@ -108,7 +108,7 @@ function VehiclePreviewModal(props) {
   // can't see the host anymore (that's what caused "host could not be mounted"
   // on second open).
   function onClose() {
-    _holbrookParkVvseHost();
+    _cwdParkVvseHost();
     if (typeof onCloseProp === 'function') onCloseProp();
   }
 
@@ -266,7 +266,7 @@ function VehiclePreviewModal(props) {
       // Inspect the iframe inside the host — gives us a hint whether VVSE
       // actually mounted any rendering surface.
       try {
-        var host = window._holbrookVvseHostEl;
+        var host = window._cwdVvseHostEl;
         var ifr = host && host.querySelector('iframe');
         console.log('[VVSE-debug] iframe in host:', ifr, ifr && {
           width: ifr.offsetWidth,
@@ -292,7 +292,7 @@ function VehiclePreviewModal(props) {
       if (!hasAnyAngle()) {
         console.warn('[VVSE] no angles available for this vehicle — visualization not supported');
         if (alive) {
-          setError('VVS Express doesn\'t have visualization artwork for your ' + ((vehicle && (vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model)) || 'vehicle') + ' yet. The package details and prices above are still accurate — installation runs at any Holbrook location.');
+          setError('VVS Express doesn\'t have visualization artwork for your ' + ((vehicle && (vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model)) || 'vehicle') + ' yet. The package details and prices above are still accurate — installation runs at any Custom Wheel Deal location.');
           setLoading(false);
         }
         return;
@@ -329,19 +329,19 @@ function VehiclePreviewModal(props) {
   // down the DOM, guaranteeing we move the host back to <body> in time even if
   // the user closes via something other than our wrapped onClose handler.
   React.useLayoutEffect(function() {
-    return function() { _holbrookParkVvseHost(); };
+    return function() { _cwdParkVvseHost(); };
   }, []);
 
   useEffect(function() {
     var cancel = null;
 
     function start() {
-      if (!_holbrookMountVvseHost(slotRef.current)) {
+      if (!_cwdMountVvseHost(slotRef.current)) {
         setError('Visualizer host could not be mounted.');
         setLoading(false);
         return;
       }
-      var vvse = window._holbrookVvse;
+      var vvse = window._cwdVvse;
       if (!vvse) {
         setError('Visualizer not ready yet.');
         setLoading(false);
@@ -352,37 +352,37 @@ function VehiclePreviewModal(props) {
 
     function onErr() { setError('Visualizer failed to load.'); setLoading(false); }
 
-    if (window._holbrookVvseReady) {
+    if (window._cwdVvseReady) {
       start();
-    } else if (window._holbrookVvseError) {
+    } else if (window._cwdVvseError) {
       onErr();
     } else {
       var onReady = function() { start(); };
-      window.addEventListener('holbrook:vvse-ready', onReady);
-      window.addEventListener('holbrook:vvse-error', onErr);
+      window.addEventListener('cwd:vvse-ready', onReady);
+      window.addEventListener('cwd:vvse-error', onErr);
       var timeout = setTimeout(function() {
-        if (!window._holbrookVvseReady) {
+        if (!window._cwdVvseReady) {
           setError('Visualizer did not start in time. Refresh the page and try again.');
           setLoading(false);
         }
       }, 10000);
       return function() {
         clearTimeout(timeout);
-        window.removeEventListener('holbrook:vvse-ready', onReady);
-        window.removeEventListener('holbrook:vvse-error', onErr);
+        window.removeEventListener('cwd:vvse-ready', onReady);
+        window.removeEventListener('cwd:vvse-error', onErr);
         if (cancel) cancel();
-        _holbrookParkVvseHost();
+        _cwdParkVvseHost();
       };
     }
 
     return function() {
       if (cancel) cancel();
-      _holbrookParkVvseHost();
+      _cwdParkVvseHost();
     };
   }, []);
 
   function handleAngle(dir) {
-    var vvse = window._holbrookVvse;
+    var vvse = window._cwdVvse;
     if (!vvse) return;
     try {
       if (dir === 'next' && typeof vvse.goToNextVehicleAngle === 'function') vvse.goToNextVehicleAngle();
@@ -453,7 +453,7 @@ function VehiclePreviewModal(props) {
         }
       },
         /*#__PURE__*/React.createElement("div", {
-          style: { position: 'absolute', inset: 0, background: 'radial-gradient(circle at 12% 50%, rgba(133,8,36,.45), transparent 55%), radial-gradient(circle at 88% 50%, rgba(227,24,55,.22), transparent 60%)', pointerEvents: 'none' }
+          style: { position: 'absolute', inset: 0, background: 'radial-gradient(circle at 12% 50%, rgba(234,88,12,.45), transparent 55%), radial-gradient(circle at 88% 50%, rgba(234,88,12,.22), transparent 60%)', pointerEvents: 'none' }
         }),
         /*#__PURE__*/React.createElement("button", {
           onClick: onClose,
@@ -464,7 +464,7 @@ function VehiclePreviewModal(props) {
         }, /*#__PURE__*/React.createElement(Icon, { name: 'close', size: 20 })),
         /*#__PURE__*/React.createElement("div", { style: { position: 'relative' } },
           /*#__PURE__*/React.createElement("div", {
-            style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '4px 12px', background: 'rgba(227,24,55,.16)', border: '1px solid rgba(227,24,55,.4)', borderRadius: 999, fontSize: 10, fontWeight: 800, letterSpacing: '.16em', textTransform: 'uppercase', color: '#ff5970' }
+            style: { display: 'inline-flex', alignItems: 'center', gap: 8, padding: '4px 12px', background: 'rgba(234,88,12,.16)', border: '1px solid rgba(234,88,12,.4)', borderRadius: 999, fontSize: 10, fontWeight: 800, letterSpacing: '.16em', textTransform: 'uppercase', color: '#fb923c' }
           },
             /*#__PURE__*/React.createElement(Icon, { name: 'visibility', size: 13 }),
             'Preview on your vehicle'
@@ -489,7 +489,7 @@ function VehiclePreviewModal(props) {
         loading && /*#__PURE__*/React.createElement("div", {
           style: { position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 14, color: tokens.taupe, fontSize: 13, pointerEvents: 'none', background: 'rgba(247,247,250,.92)' }
         },
-          /*#__PURE__*/React.createElement("div", { style: { width: 36, height: 36, border: '3px solid rgba(133,8,36,.15)', borderTopColor: tokens.primary, borderRadius: '50%', animation: 'htmSpin 0.8s linear infinite' } }),
+          /*#__PURE__*/React.createElement("div", { style: { width: 36, height: 36, border: '3px solid rgba(234,88,12,.15)', borderTopColor: tokens.primary, borderRadius: '50%', animation: 'htmSpin 0.8s linear infinite' } }),
           /*#__PURE__*/React.createElement("style", null, '@keyframes htmSpin { to { transform: rotate(360deg); } }'),
           /*#__PURE__*/React.createElement("div", { style: { fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 14, color: tokens.ink } }, 'Rendering your build'),
           /*#__PURE__*/React.createElement("div", { style: { fontSize: 12, color: tokens.taupe } }, 'Placing the wheels and tires on your ' + ((vehicle && (vehicle.make + ' ' + vehicle.model)) || 'vehicle') + '…')

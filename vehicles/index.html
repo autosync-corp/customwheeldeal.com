@@ -14,7 +14,7 @@
                 extend: {
                     fontFamily: { 'sans': ['Inter', 'sans-serif'], 'display': ['Space Grotesk', 'sans-serif'] },
                     colors: {
-                        'primary': '#850824', 'primary-container': '#a62639',
+                        'primary': '#ea580c', 'primary-container': '#c2410c',
                         'on-surface': '#1a1c1e', 'on-surface-variant': '#584141',
                         'surface': '#f9f9fc', 'surface-container-low': '#f3f3f6',
                         'surface-container-lowest': '#ffffff',
@@ -25,7 +25,7 @@
         }
     </script>
     <style>
-        .signature-gradient { background: linear-gradient(135deg, #850824 0%, #a62639 100%); }
+        .signature-gradient { background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%); }
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
@@ -72,7 +72,7 @@
         <!-- Loading State -->
         <div id="loadingState" class="text-center py-16">
             <div class="inline-flex items-center gap-3 text-on-surface-variant">
-                <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#850824" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#ea580c" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
                 <span>Loading vehicle makes...</span>
             </div>
         </div>
@@ -169,7 +169,7 @@
         if (state.submodel) {
             crumbs.push({ text: state.submodel, href: '#' });
         }
-        document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb(crumbs);
+        document.getElementById('breadcrumbMount').innerHTML = CWDUI.renderBreadcrumb(crumbs);
     }
 
     // ── Card builder ────────────────────────────────────────────
@@ -199,7 +199,7 @@
 
         try {
             if (!state.allMakes.length) {
-                state.allMakes = await HolbrookAPI.getVehicleMakes(state.year);
+                state.allMakes = await CWDAPI.getVehicleMakes(state.year);
             }
             renderMakes(state.allMakes);
         } catch (err) {
@@ -227,7 +227,7 @@
         showLoading();
 
         try {
-            const models = await HolbrookAPI.getVehicleModels(state.year, makeName);
+            const models = await CWDAPI.getVehicleModels(state.year, makeName);
             if (!models.length) { showEmpty(); return; }
             grid.innerHTML = models.map(m =>
                 makeCard(m, `${state.year} ${makeName}`, '', `selectModel('${m.replace(/'/g, "\\'")}')`)
@@ -250,7 +250,7 @@
         showLoading();
 
         try {
-            const submodels = await HolbrookAPI.getVehicleSubmodels(state.year, state.make, modelName);
+            const submodels = await CWDAPI.getVehicleSubmodels(state.year, state.make, modelName);
             if (!submodels.length) {
                 // No submodels — go directly to fitment
                 loadFitment(null);
@@ -278,7 +278,7 @@
     async function loadFitment(submodel) {
         showLoading();
         try {
-            const vehicle = await HolbrookAPI.getVehicle(state.year, state.make, state.model, submodel || undefined);
+            const vehicle = await CWDAPI.getVehicle(state.year, state.make, state.model, submodel || undefined);
             state.vehicle = vehicle;
 
             if (!vehicle) {
@@ -354,7 +354,7 @@
 
         // Shop Tires → clean URL with fitment data in sessionStorage
         const vehicleSlug = vehicleName.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
-        sessionStorage.setItem('holbrook.pendingFitment', JSON.stringify({
+        sessionStorage.setItem('cwd.pendingFitment', JSON.stringify({
             sizes: [f.tireSize], vehicleName, slug: vehicleSlug,
             year: state.year, make: state.make, model: state.model
         }));
@@ -392,18 +392,18 @@
     // ── Init ────────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
         // Render shared components
-        document.getElementById('headerMount').innerHTML = HolbrookUI.renderHeader('vehicles');
-        document.getElementById('footerMount').innerHTML = HolbrookUI.renderFooter();
-        document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb([
+        document.getElementById('headerMount').innerHTML = CWDUI.renderHeader('vehicles');
+        document.getElementById('footerMount').innerHTML = CWDUI.renderFooter();
+        document.getElementById('breadcrumbMount').innerHTML = CWDUI.renderBreadcrumb([
             { text: 'Vehicles', href: '#' }
         ]);
-        HolbrookUI.updateGarageCount();
+        CWDUI.updateGarageCount();
 
-        if (typeof HolbrookCart !== 'undefined') HolbrookCart.init();
+        if (typeof CWDCart !== 'undefined') CWDCart.init();
 
         // Populate year selector
         const yearSel = document.getElementById('yearSelect');
-        HolbrookAPI.getVehicleYears().forEach(y => {
+        CWDAPI.getVehicleYears().forEach(y => {
             const o = document.createElement('option');
             o.value = y; o.textContent = y;
             if (y === state.year) o.selected = true;

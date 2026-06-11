@@ -15,7 +15,7 @@
                 extend: {
                     fontFamily: { 'sans': ['Inter', 'sans-serif'], 'display': ['Space Grotesk', 'sans-serif'] },
                     colors: {
-                        'primary': '#850824', 'primary-container': '#a62639',
+                        'primary': '#ea580c', 'primary-container': '#c2410c',
                         'on-surface': '#1a1c1e', 'on-surface-variant': '#584141',
                         'surface': '#f9f9fc', 'surface-container-low': '#f3f3f6',
                         'surface-container-lowest': '#ffffff',
@@ -26,14 +26,14 @@
         }
     </script>
     <style>
-        .signature-gradient { background: linear-gradient(135deg, #850824 0%, #a62639 100%); }
+        .signature-gradient { background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%); }
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .deal-card { transition: transform 0.2s, box-shadow 0.2s; }
         .deal-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
         .brand-chip { transition: all 0.15s; }
-        .brand-chip.active { background: #850824; color: white; }
+        .brand-chip.active { background: #ea580c; color: white; }
     </style>
 </head>
 <body class="bg-surface text-on-surface">
@@ -42,7 +42,7 @@
     <header class="signature-gradient text-white sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
             <a href="../index.html" class="bg-slate-900 rounded-lg px-3 py-1 inline-flex items-center">
-                <img src="/images/Holbrook-tirecenter-logo-dark_BG.png" alt="Custom Wheel Deal" class="h-14 object-contain">
+                <img src="/assets/logo-dark-bg.png" alt="Custom Wheel Deal" class="h-14 object-contain">
             </a>
             <div class="hidden md:flex gap-8 items-center font-bold text-sm tracking-wider">
                 <a href="../index.html" class="hover:opacity-80 transition">HOME</a>
@@ -89,7 +89,7 @@
         <!-- Loading state -->
         <div id="loadingState" class="text-center py-16">
             <div class="inline-flex items-center gap-3 text-on-surface-variant">
-                <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#850824" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#ea580c" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
                 <span>Loading deals...</span>
             </div>
         </div>
@@ -139,7 +139,7 @@
     <footer class="bg-slate-900 text-white mt-16 py-12">
         <div class="max-w-7xl mx-auto px-4">
             <div class="mb-8">
-                <img src="/images/Holbrook_tire_logo_for_dark_bck.png" alt="Custom Wheel Deal" class="h-20 object-contain mb-4">
+                <img src="/assets/logo-dark-bg.png" alt="Custom Wheel Deal" class="h-20 object-contain mb-4">
             </div>
             <div class="grid grid-cols-3 gap-8 mb-8">
                 <div>
@@ -169,7 +169,7 @@
                 </div>
             </div>
             <div class="border-t border-slate-800 pt-6 text-center">
-                <span class="text-[10px] text-slate-500 tracking-widest uppercase">&copy; 2026 Holbrook Performance Tires. Precision Engineered.</span>
+                <span class="text-[10px] text-slate-500 tracking-widest uppercase">&copy; 2026 Custom Wheel Deal. Precision Engineered.</span>
             </div>
         </div>
     </footer>

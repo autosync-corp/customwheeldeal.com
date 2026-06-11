@@ -4,26 +4,26 @@
   <meta charset="UTF-8">
   <link rel="icon" href="/assets/favicon.webp">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Wheel Deal Holbrook, MI — Tires, Wheels &amp; Service</title>
-  <meta name="description" content="Visit Custom Wheel Deal in Holbrook, MI at 15240 Red Arrow Hwy. Call (586) 226-2424.">
+  <title>Custom Wheel Deal Detroit, MI — Tires, Wheels &amp; Service</title>
+  <meta name="description" content="Visit Custom Wheel Deal in Detroit, MI at 15240 Red Arrow Hwy. Call (586) 226-2424.">
   <link rel="canonical" href="https://customwheeldeal.com/locations/holbrook/">
-  <meta property="og:title" content="Custom Wheel Deal Holbrook, MI — Tires, Wheels &amp; Service">
-  <meta property="og:description" content="Visit Custom Wheel Deal in Holbrook, MI at 15240 Red Arrow Hwy. Call (586) 226-2424.">
+  <meta property="og:title" content="Custom Wheel Deal Detroit, MI — Tires, Wheels &amp; Service">
+  <meta property="og:description" content="Visit Custom Wheel Deal in Detroit, MI at 15240 Red Arrow Hwy. Call (586) 226-2424.">
   <meta property="og:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
   <meta property="og:url" content="https://customwheeldeal.com/locations/holbrook/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Custom Wheel Deal">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Custom Wheel Deal Holbrook, MI — Tires, Wheels &amp; Service">
-  <meta name="twitter:description" content="Visit Custom Wheel Deal in Holbrook, MI at 15240 Red Arrow Hwy. Call (586) 226-2424.">
+  <meta name="twitter:title" content="Custom Wheel Deal Detroit, MI — Tires, Wheels &amp; Service">
+  <meta name="twitter:description" content="Visit Custom Wheel Deal in Detroit, MI at 15240 Red Arrow Hwy. Call (586) 226-2424.">
   <meta name="twitter:image" content="https://customwheeldeal.com/assets/hero-service-bay.webp">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"TireShop","name":"Custom Wheel Deal — Holbrook",
-   "address":{"@type":"PostalAddress","streetAddress":"15240 Red Arrow Hwy","addressLocality":"Holbrook","addressRegion":"MI","postalCode":"48060"},
+  {"@context":"https://schema.org","@type":"TireShop","name":"Custom Wheel Deal — Detroit",
+   "address":{"@type":"PostalAddress","streetAddress":"15240 Red Arrow Hwy","addressLocality":"Custom Wheel Deal","addressRegion":"MI","postalCode":"48060"},
    "telephone":"(586) 226-2424","geo":{"@type":"GeoCoordinates","latitude":42.8053,"longitude":-82.7906}}
   </script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://customwheeldeal.com/"},{"@type":"ListItem","position":2,"name":"Locations","item":"https://customwheeldeal.com/locations/"},{"@type":"ListItem","position":3,"name":"Holbrook","item":"https://customwheeldeal.com/locations/holbrook/"}]}
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://customwheeldeal.com/"},{"@type":"ListItem","position":2,"name":"Locations","item":"https://customwheeldeal.com/locations/"},{"@type":"ListItem","position":3,"name":"Custom Wheel Deal","item":"https://customwheeldeal.com/locations/holbrook/"}]}
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,7 +108,7 @@ function Btn({
       color: '#fff'
     },
     primaryGrad: {
-      background: 'linear-gradient(135deg,#850824 0%,#a62639 100%)',
+      background: 'linear-gradient(135deg,#ea580c 0%,#c2410c 100%)',
       color: '#fff'
     },
     dark: {
@@ -540,8 +540,8 @@ function AppProvider({
   const [lastOrder, setLastOrder] = useState(null);
 
   // API-loaded brand lists
-  const [tireBrands, setTireBrands] = useState(window.HOLBROOK_DATA.brands);
-  const [wheelBrandsList, setWheelBrandsList] = useState(window.HOLBROOK_DATA.wheelBrandList);
+  const [tireBrands, setTireBrands] = useState(window.CWD_DATA.brands);
+  const [wheelBrandsList, setWheelBrandsList] = useState(window.CWD_DATA.wheelBrandList);
   const [apiReady, setApiReady] = useState(false);
 
   // Load brand data from API on mount
@@ -563,15 +563,15 @@ function AppProvider({
             return b.name;
           });
           if (apiBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiBrands.length, 'tire brands from API');
+            console.log('[CWD] Loaded', apiBrands.length, 'tire brands from API');
             setTireBrands(apiBrands);
-            window.HOLBROOK_DATA.brands = apiBrands;
+            window.CWD_DATA.brands = apiBrands;
           }
         } else {
-          console.warn('[Holbrook] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
+          console.warn('[CWD] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Tire brands API failed:', tRes.reason);
+        console.warn('[CWD] Tire brands API failed:', tRes.reason);
       }
       if (wRes.status === 'fulfilled') {
         const items = extractItems(wRes.value);
@@ -586,18 +586,18 @@ function AppProvider({
             return b.name;
           });
           if (apiWheelBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiWheelBrands.length, 'wheel brands from API');
+            console.log('[CWD] Loaded', apiWheelBrands.length, 'wheel brands from API');
             setWheelBrandsList(apiWheelBrands);
-            window.HOLBROOK_DATA.wheelBrandList = apiWheelBrands;
-            window.HOLBROOK_DATA.wheelBrands = apiWheelBrands.map(function (b) {
+            window.CWD_DATA.wheelBrandList = apiWheelBrands;
+            window.CWD_DATA.wheelBrands = apiWheelBrands.map(function (b) {
               return b.name;
             });
           }
         } else {
-          console.warn('[Holbrook] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
+          console.warn('[CWD] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Wheel brands API failed:', wRes.reason);
+        console.warn('[CWD] Wheel brands API failed:', wRes.reason);
       }
       setApiReady(true);
     });
@@ -731,7 +731,7 @@ function VVSBanner() {
   if (route === '/' || route === '' || route === '/vvs') return null;
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #850824 100%)',
+      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #ea580c 100%)',
       color: '#fff'
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -791,7 +791,7 @@ function VVSBanner() {
 function LocationsStrip() {
   const {
     locations
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   return /*#__PURE__*/React.createElement("section", {
     style: {
       background: '#fff',
@@ -837,7 +837,7 @@ function LocationsStrip() {
     }
   }, /*#__PURE__*/React.createElement(Eyebrow, {
     color: tokens.primary
-  }, "Holbrook \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
+  }, "CWD \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'Space Grotesk',
       fontSize: 20,
@@ -903,7 +903,7 @@ function GlobalFitmentBar() {
   const [fitmentsLoading, setFitmentsLoading] = useState(false);
 
   // Static fallback makes (always available)
-  const staticMakes = window.HOLBROOK_DATA.vehicleMakes.map(function (m) {
+  const staticMakes = window.CWD_DATA.vehicleMakes.map(function (m) {
     return m.name;
   });
   useEffect(() => {
@@ -1040,7 +1040,7 @@ function GlobalFitmentBar() {
       navigate('/shop');
     }
   };
-  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #850824 100%)';
+  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #ea580c 100%)';
   const barBorder = '1px solid rgba(255,255,255,.08)';
   const barShadow = 'inset 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(232,52,78,.15)';
   const fld = {
@@ -1407,7 +1407,7 @@ function LocationPage() {
       color: "#fff",
       fontWeight: 600
     }
-  }, "Holbrook")), /*#__PURE__*/React.createElement(Eyebrow, {
+  }, "Custom Wheel Deal")), /*#__PURE__*/React.createElement(Eyebrow, {
     color: "#ffc220"
   }, "Location"), /*#__PURE__*/React.createElement(Headline, {
     size: "h1",
@@ -1415,7 +1415,7 @@ function LocationPage() {
       color: "#fff",
       marginTop: 8
     }
-  }, "Custom Wheel Deal \u2014 Holbrook"))), /*#__PURE__*/React.createElement("section", {
+  }, "Custom Wheel Deal \u2014 Detroit"))), /*#__PURE__*/React.createElement("section", {
     style: {
       maxWidth: 1200,
       margin: "0 auto",
@@ -1463,7 +1463,7 @@ function LocationPage() {
     style: {
       fontSize: 15
     }
-  }, "15240 Red Arrow Hwy, Holbrook, MI 48060")), /*#__PURE__*/React.createElement("div", {
+  }, "15240 Red Arrow Hwy, Detroit, MI 48060")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       alignItems: "center",
@@ -1553,7 +1553,7 @@ function LocationPage() {
       gap: 16
     }
   }, [{
-    city: "Holbrook",
+    city: "Detroit",
     slug: "holbrook"
   }, {
     city: "Chesterfield",
@@ -1569,8 +1569,8 @@ function LocationPage() {
         padding: "10px 24px",
         fontSize: 14,
         fontWeight: 600,
-        background: l.city === "Holbrook" ? tokens.primary : "#fff",
-        color: l.city === "Holbrook" ? "#fff" : tokens.ink,
+        background: l.city === "Custom Wheel Deal" ? tokens.primary : "#fff",
+        color: l.city === "Custom Wheel Deal" ? "#fff" : tokens.ink,
         borderRadius: 6,
         textDecoration: "none",
         border: "1px solid " + tokens.line

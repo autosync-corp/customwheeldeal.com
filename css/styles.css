@@ -1,4 +1,4 @@
-/* ─── Reset & Base ─── */
+﻿/* ─── Reset & Base ─── */
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: #f9f9fc; color: #1a1c1e; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
 body { min-height: 100vh; }
@@ -23,7 +23,7 @@ select:disabled { opacity: .4; cursor: not-allowed; }
 @keyframes htmSpin { to { transform: rotate(360deg); } }
 .spinner {
   display: inline-block; width: 36px; height: 36px;
-  border: 3px solid #e5e7eb; border-top-color: #850824;
+  border: 3px solid #e5e7eb; border-top-color: #ea580c;
   border-radius: 50%; animation: htmSpin 0.8s linear infinite;
 }
 

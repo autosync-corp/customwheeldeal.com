@@ -28,11 +28,11 @@ function useIsMobile(bp) {
 
 // Design tokens
 const tokens = {
-  primary: '#850824',
-  primaryHover: '#a62639',
-  primaryAccent: '#e8344e',
-  legacyRed: '#e31837',
-  ink: '#1a1c1e',
+  primary: '#ea580c',
+  primaryHover: '#c2410c',
+  primaryAccent: '#fb923c',
+  legacyRed: '#ea580c',
+  ink: '#111111',
   taupe: '#584141',
   graphite: '#3a4250',
   mute: '#6b7280',

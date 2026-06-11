@@ -100,7 +100,7 @@ function Btn({
       color: '#fff'
     },
     primaryGrad: {
-      background: 'linear-gradient(135deg,#850824 0%,#a62639 100%)',
+      background: 'linear-gradient(135deg,#ea580c 0%,#c2410c 100%)',
       color: '#fff'
     },
     dark: {
@@ -526,8 +526,8 @@ function AppProvider({
     return path + search;
   });
   const [lastOrder, setLastOrder] = useState(null);
-  const [tireBrands, setTireBrands] = useState(window.HOLBROOK_DATA.brands);
-  const [wheelBrandsList, setWheelBrandsList] = useState(window.HOLBROOK_DATA.wheelBrandList);
+  const [tireBrands, setTireBrands] = useState(window.CWD_DATA.brands);
+  const [wheelBrandsList, setWheelBrandsList] = useState(window.CWD_DATA.wheelBrandList);
   const [apiReady, setApiReady] = useState(false);
   useEffect(() => {
     const BRAND_CDN = 'https://storage.googleapis.com/autosync-brand-logos/logos/';
@@ -547,15 +547,15 @@ function AppProvider({
             return b.name;
           });
           if (apiBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiBrands.length, 'tire brands from API');
+            console.log('[CWD] Loaded', apiBrands.length, 'tire brands from API');
             setTireBrands(apiBrands);
-            window.HOLBROOK_DATA.brands = apiBrands;
+            window.CWD_DATA.brands = apiBrands;
           }
         } else {
-          console.warn('[Holbrook] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
+          console.warn('[CWD] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Tire brands API failed:', tRes.reason);
+        console.warn('[CWD] Tire brands API failed:', tRes.reason);
       }
       if (wRes.status === 'fulfilled') {
         const items = extractItems(wRes.value);
@@ -570,18 +570,18 @@ function AppProvider({
             return b.name;
           });
           if (apiWheelBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiWheelBrands.length, 'wheel brands from API');
+            console.log('[CWD] Loaded', apiWheelBrands.length, 'wheel brands from API');
             setWheelBrandsList(apiWheelBrands);
-            window.HOLBROOK_DATA.wheelBrandList = apiWheelBrands;
-            window.HOLBROOK_DATA.wheelBrands = apiWheelBrands.map(function (b) {
+            window.CWD_DATA.wheelBrandList = apiWheelBrands;
+            window.CWD_DATA.wheelBrands = apiWheelBrands.map(function (b) {
               return b.name;
             });
           }
         } else {
-          console.warn('[Holbrook] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
+          console.warn('[CWD] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Wheel brands API failed:', wRes.reason);
+        console.warn('[CWD] Wheel brands API failed:', wRes.reason);
       }
       setApiReady(true);
     });
@@ -708,9 +708,9 @@ function AppProvider({
 function GlobalFitmentBar() { return null; }
 function LocationsStrip() {
   var locs = [
-    { name: 'Holbrook Tire & Auto Service', addr: '32105 Gratiot Ave', city: 'Roseville, MI 48066', hours: 'Mon-Fri 8-6 · Sat 8-3', phone: '586-871-1111' },
+    { name: 'Custom Wheel Deal', addr: '32105 Gratiot Ave', city: 'Roseville, MI 48066', hours: 'Mon-Fri 8-6 · Sat 8-3', phone: '586-871-1111' },
     { name: 'Custom Wheel Deal', addr: '21221 West 7 Mile Road', city: 'Detroit, MI 48219', hours: 'Mon-Fri 8-6 · Sat 8-3', phone: '313-257-7777' },
-    { name: 'Holbrook Tire & Glass Center', addr: '5 W McNichols Rd', city: 'Highland Park, MI 48203', hours: 'Mon-Fri 8-6 · Sat 8-3', phone: '313-868-0200' },
+    { name: 'Custom Wheel Deal & Glass Center', addr: '5 W McNichols Rd', city: 'Highland Park, MI 48203', hours: 'Mon-Fri 8-6 · Sat 8-3', phone: '313-868-0200' },
   ];
   return React.createElement('section', { style: { background: tokens.surfLow, padding: '56px 32px', marginTop: 0 } },
     React.createElement('div', { style: { maxWidth: 1320, margin: '0 auto' } },
@@ -739,7 +739,7 @@ function HomePage() {
     if (typeof Autosync === 'undefined') return;
     Autosync({
       id: 'autosync-visualizer-home',
-      key: 'holbrooktire',
+      key: 'customwheeldeal',
       homeStyle: 'lookup',
       widget: {
         vehiclesLookup: true,
@@ -789,7 +789,7 @@ function HomePage() {
           return React.createElement('a', {
             key: item.title, href: item.href,
             style: { display: 'block', background: '#fff', border: '1px solid ' + tokens.line, borderRadius: 12, padding: 28, textDecoration: 'none', color: tokens.ink, transition: 'all .2s' },
-            onMouseOver: function(e) { e.currentTarget.style.boxShadow = '0 10px 24px rgba(0,0,0,.09)'; e.currentTarget.style.borderColor = 'rgba(133,8,36,.3)'; e.currentTarget.style.transform = 'translateY(-2px)'; },
+            onMouseOver: function(e) { e.currentTarget.style.boxShadow = '0 10px 24px rgba(0,0,0,.09)'; e.currentTarget.style.borderColor = 'rgba(234,88,12,.3)'; e.currentTarget.style.transform = 'translateY(-2px)'; },
             onMouseOut: function(e) { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = tokens.line; e.currentTarget.style.transform = 'none'; }
           },
             React.createElement(Icon, { name: item.icon, size: 36, style: { color: tokens.primary } }),

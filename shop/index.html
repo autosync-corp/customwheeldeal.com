@@ -131,7 +131,7 @@ function Btn({
       color: '#fff'
     },
     primaryGrad: {
-      background: 'linear-gradient(135deg,#850824 0%,#a62639 100%)',
+      background: 'linear-gradient(135deg,#ea580c 0%,#c2410c 100%)',
       color: '#fff'
     },
     dark: {
@@ -557,8 +557,8 @@ function AppProvider({
     return path + search;
   });
   const [lastOrder, setLastOrder] = useState(null);
-  const [tireBrands, setTireBrands] = useState(window.HOLBROOK_DATA.brands);
-  const [wheelBrandsList, setWheelBrandsList] = useState(window.HOLBROOK_DATA.wheelBrandList);
+  const [tireBrands, setTireBrands] = useState(window.CWD_DATA.brands);
+  const [wheelBrandsList, setWheelBrandsList] = useState(window.CWD_DATA.wheelBrandList);
   const [apiReady, setApiReady] = useState(false);
   useEffect(() => {
     const BRAND_CDN = 'https://storage.googleapis.com/autosync-brand-logos/logos/';
@@ -578,15 +578,15 @@ function AppProvider({
             return b.name;
           });
           if (apiBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiBrands.length, 'tire brands from API');
+            console.log('[CWD] Loaded', apiBrands.length, 'tire brands from API');
             setTireBrands(apiBrands);
-            window.HOLBROOK_DATA.brands = apiBrands;
+            window.CWD_DATA.brands = apiBrands;
           }
         } else {
-          console.warn('[Holbrook] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
+          console.warn('[CWD] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Tire brands API failed:', tRes.reason);
+        console.warn('[CWD] Tire brands API failed:', tRes.reason);
       }
       if (wRes.status === 'fulfilled') {
         const items = extractItems(wRes.value);
@@ -601,18 +601,18 @@ function AppProvider({
             return b.name;
           });
           if (apiWheelBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiWheelBrands.length, 'wheel brands from API');
+            console.log('[CWD] Loaded', apiWheelBrands.length, 'wheel brands from API');
             setWheelBrandsList(apiWheelBrands);
-            window.HOLBROOK_DATA.wheelBrandList = apiWheelBrands;
-            window.HOLBROOK_DATA.wheelBrands = apiWheelBrands.map(function (b) {
+            window.CWD_DATA.wheelBrandList = apiWheelBrands;
+            window.CWD_DATA.wheelBrands = apiWheelBrands.map(function (b) {
               return b.name;
             });
           }
         } else {
-          console.warn('[Holbrook] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
+          console.warn('[CWD] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Wheel brands API failed:', wRes.reason);
+        console.warn('[CWD] Wheel brands API failed:', wRes.reason);
       }
       setApiReady(true);
     });
@@ -744,7 +744,7 @@ function VVSBanner() {
   if (route === '/' || route === '' || route === '/vvs') return null;
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #850824 100%)',
+      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #ea580c 100%)',
       color: '#fff'
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -804,7 +804,7 @@ function VVSBanner() {
 function LocationsStrip() {
   const {
     locations
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   return /*#__PURE__*/React.createElement("section", {
     style: {
       background: '#fff',
@@ -850,7 +850,7 @@ function LocationsStrip() {
     }
   }, /*#__PURE__*/React.createElement(Eyebrow, {
     color: tokens.primary
-  }, "Holbrook \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
+  }, "CWD \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'Space Grotesk',
       fontSize: 20,
@@ -916,7 +916,7 @@ function GlobalFitmentBar() {
   const [fitmentsLoading, setFitmentsLoading] = useState(false);
 
   // Static fallback makes (always available)
-  const staticMakes = window.HOLBROOK_DATA.vehicleMakes.map(function (m) {
+  const staticMakes = window.CWD_DATA.vehicleMakes.map(function (m) {
     return m.name;
   });
   useEffect(() => {
@@ -1053,7 +1053,7 @@ function GlobalFitmentBar() {
       navigate('/shop');
     }
   };
-  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #850824 100%)';
+  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #ea580c 100%)';
   const barBorder = '1px solid rgba(255,255,255,.08)';
   const barShadow = 'inset 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(232,52,78,.15)';
   const fld = {
@@ -1388,21 +1388,21 @@ function ShopPage() {
     kicker: 'Start with rubber',
     title: 'Shop Tires',
     sub: vehicle ? `Guaranteed fit · ${vehicle.year} ${vehicle.make} ${vehicle.model}` : 'All-season, performance, winter, all-terrain',
-    img: '/assets/holbrook-tires-stack.jpg',
+    img: '/assets/shop-tires-stack.jpg',
     accent: tokens.primary
   }, {
     id: 'wheels',
     kicker: 'Start with style',
     title: 'Shop Wheels',
     sub: 'Forged, flow-formed, cast · 17" – 24"',
-    img: '/assets/holbrook-garage.jpg',
+    img: '/assets/shop-garage.jpg',
     accent: '#fff'
   }, {
     id: 'packages',
     kicker: 'Build a package',
     title: 'Shop Packages',
     sub: 'Pre-mounted · Road-force balanced · Ship ready to install',
-    img: '/assets/holbrook-lobby.jpg',
+    img: '/assets/shop-lobby.jpg',
     accent: tokens.yellow,
     featured: true
   }];
@@ -1609,7 +1609,7 @@ function CheckoutPage() {
   } = useApp();
   const {
     locations
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   const [mode, setMode] = useState('install');
   const [store, setStore] = useState(locations[0].id);
   const [contact, setContact] = useState({
@@ -1715,7 +1715,7 @@ function CheckoutPage() {
     onClick: () => setMode('install'),
     icon: "garage_home",
     eyebrow: `${depositPct}% today · rest at install`,
-    title: "Install at Holbrook",
+    title: "Schedule Installation",
     desc: "Reserve your package with a deposit. Pay the remainder when your car leaves the bay.",
     pill: "Most popular"
   }), /*#__PURE__*/React.createElement(ModeCard, {
@@ -1752,7 +1752,7 @@ function CheckoutPage() {
     }),
     placeholder: "you@example.com"
   })), mode === 'install' ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(CheckoutSection, {
-    title: "Pick your Holbrook location"
+    title: "Pick your location"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
@@ -1792,7 +1792,7 @@ function CheckoutPage() {
     style: {
       color: tokens.primary
     }
-  }, "Holbrook"), /*#__PURE__*/React.createElement("div", {
+  }, "Custom Wheel Deal"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'Space Grotesk',
       fontWeight: 700,
@@ -2062,7 +2062,7 @@ function CheckoutPage() {
     style: {
       marginTop: 16,
       padding: 16,
-      background: 'linear-gradient(135deg,#850824,#a62639)',
+      background: 'linear-gradient(135deg,#ea580c,#c2410c)',
       color: '#fff',
       borderRadius: 10
     }
@@ -2172,10 +2172,10 @@ function ModeCard({
       cursor: 'pointer',
       borderRadius: 14,
       padding: 28,
-      background: active ? title.includes('Install') ? 'linear-gradient(135deg,#850824,#a62639)' : tokens.slate900 : '#fff',
+      background: active ? title.includes('Install') ? 'linear-gradient(135deg,#ea580c,#c2410c)' : tokens.slate900 : '#fff',
       color: active ? '#fff' : tokens.ink,
       border: active ? '2px solid transparent' : `2px solid ${tokens.line}`,
-      boxShadow: active ? '0 12px 28px rgba(133,8,36,.25)' : 'none',
+      boxShadow: active ? '0 12px 28px rgba(234,88,12,.25)' : 'none',
       transition: 'all .18s ease-out'
     }
   }, pill && /*#__PURE__*/React.createElement("div", {
@@ -2341,7 +2341,7 @@ function ConfirmationPage() {
   } = useApp();
   const {
     locations
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   if (!lastOrder) {
     useEffect(() => navigate('/'), []);
     return null;
@@ -2355,7 +2355,7 @@ function ConfirmationPage() {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      background: lastOrder.mode === 'install' ? 'linear-gradient(135deg,#850824,#a62639)' : tokens.slate900,
+      background: lastOrder.mode === 'install' ? 'linear-gradient(135deg,#ea580c,#c2410c)' : tokens.slate900,
       color: '#fff',
       padding: '56px 48px',
       borderRadius: 16,
@@ -2399,7 +2399,7 @@ function ConfirmationPage() {
       maxWidth: 580,
       lineHeight: 1.6
     }
-  }, lastOrder.mode === 'install' ? `Thanks, ${lastOrder.contact.name || 'friend'}. A Holbrook team member will call ${lastOrder.contact.phone || 'you'} within 24 hours to confirm your install at ${loc?.city}.` : `Your package is being mounted and balanced in Roseville. We'll email tracking within 24 hours.`))), /*#__PURE__*/React.createElement("div", {
+  }, lastOrder.mode === 'install' ? `Thanks, ${lastOrder.contact.name || 'friend'}. A Custom Wheel Deal team member will call ${lastOrder.contact.phone || 'you'} within 24 hours to confirm your install at ${loc?.city}.` : `Your package is being mounted and balanced in Roseville. We'll email tracking within 24 hours.`))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
@@ -2450,7 +2450,7 @@ function ConfirmationPage() {
       fontWeight: 700,
       marginTop: 6
     }
-  }, "Holbrook \xB7 ", loc?.city), /*#__PURE__*/React.createElement("div", {
+  }, "CWD \xB7 ", loc?.city), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       color: tokens.graphite,
@@ -2588,7 +2588,7 @@ function VVSPage() {
     style: {
       color: tokens.primaryAccent
     }
-  }), "vvs.autosyncstudio.com/holbrooktire"), /*#__PURE__*/React.createElement("div", {
+  }), "vvs.autosyncstudio.com/customwheeldeal"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 6
@@ -2602,7 +2602,7 @@ function VVSPage() {
       background: c
     }
   })))), /*#__PURE__*/React.createElement("iframe", {
-    src: "https://vvs.autosyncstudio.com/holbrooktire",
+    src: "https://vvs.autosyncstudio.com/customwheeldeal",
     title: "Visual Vehicle Studio",
     style: {
       width: '100%',

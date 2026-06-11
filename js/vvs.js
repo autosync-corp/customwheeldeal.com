@@ -1,17 +1,17 @@
-/**
- * Holbrook Tires — Visual Vehicle Studio (VVS) Integration
+﻿/**
+ * Custom Wheel Deal — Visual Vehicle Studio (VVS) Integration
  * Provides "View on Vehicle" modal overlay for product pages.
  *
  * Usage:
- *   HolbrookVVS.open()             — Open VVS at home
- *   HolbrookVVS.open('tires')      — Open VVS on tires page
- *   HolbrookVVS.open('wheels')     — Open VVS on wheels page
- *   HolbrookVVS.close()            — Close the VVS modal
+ *   CWDVVS.open()             — Open VVS at home
+ *   CWDVVS.open('tires')      — Open VVS on tires page
+ *   CWDVVS.open('wheels')     — Open VVS on wheels page
+ *   CWDVVS.close()            — Close the VVS modal
  *
  * The VVS embed is lazy-loaded: the Autosync.js script is only fetched
  * when the user first clicks "View on Vehicle", keeping page weight low.
  */
-const HolbrookVVS = (() => {
+const CWDVVS = (() => {
 
     let modalEl = null;
     let vvsInstance = null;
@@ -28,7 +28,7 @@ const HolbrookVVS = (() => {
             <div id="vvs-backdrop" style="position:absolute;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);"></div>
             <div style="position:relative;z-index:1;max-width:1200px;width:95%;margin:2vh auto 0;height:92vh;display:flex;flex-direction:column;">
                 <!-- Header bar -->
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:linear-gradient(135deg,#850824,#a62639);border-radius:12px 12px 0 0;color:#fff;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:linear-gradient(135deg,#ea580c,#c2410c);border-radius:12px 12px 0 0;color:#fff;">
                     <div style="display:flex;align-items:center;gap:10px;">
                         <span class="material-symbols-outlined" style="font-size:24px;">view_in_ar</span>
                         <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;">Visual Vehicle Studio</span>
@@ -41,7 +41,7 @@ const HolbrookVVS = (() => {
                 <!-- VVS container -->
                 <div id="vvs-modal-body" style="flex:1;background:#fff;border-radius:0 0 12px 12px;overflow:hidden;position:relative;">
                     <div id="vvs-modal-loader" style="display:flex;align-items:center;justify-content:center;height:100%;gap:12px;color:#584141;font-family:Inter,sans-serif;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" style="animation:spin 1s linear infinite;"><circle cx="12" cy="12" r="10" fill="none" stroke="#850824" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" style="animation:spin 1s linear infinite;"><circle cx="12" cy="12" r="10" fill="none" stroke="#ea580c" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
                         <span>Loading Visual Vehicle Studio...</span>
                     </div>
                     <div id="autosync-visualizer-modal"></div>
@@ -101,7 +101,7 @@ const HolbrookVVS = (() => {
             if (!vvsInstance && window.Autosync) {
                 vvsInstance = new Autosync({
                     id: 'autosync-visualizer-modal',
-                    key: 'holbrooktire',
+                    key: 'customwheeldeal',
                     adaptiveHeight: false,
                     disableQuoteForm: false,
                     homeStyle: 'vehicle_make_selection',
@@ -111,7 +111,7 @@ const HolbrookVVS = (() => {
                     widget: false,
                     onEvent: function({event, data}) {
                         if (event === 'quote_submitted') {
-                            console.log('[Holbrook VVS Modal] Quote submitted:', data);
+                            console.log('[CWD VVS Modal] Quote submitted:', data);
                         }
                     }
                 });

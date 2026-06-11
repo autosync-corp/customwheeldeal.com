@@ -1,5 +1,5 @@
 ﻿// ─────────────── data.js — All static data (brands, tires, wheels, packages, locations, categories)
-window.HOLBROOK_DATA = {
+window.CWD_DATA = {
   BRAND_CDN: 'https://storage.googleapis.com/autosync-brand-logos/logos/',
   VEH_CDN: 'https://storage.googleapis.com/autosync-brand-logos/vehicles/',
 
@@ -86,9 +86,9 @@ window.HOLBROOK_DATA = {
   ],
 
   locations: [
-    { id:'roseville',     name:'Holbrook Tire & Auto Service', city:'Roseville',     addr:'32105 Gratiot Ave',      zip:'48066', phone:'586-871-1111', phoneTel:'+15868711111', hours:'Mon-Fri 8-6 \u00b7 Sat 8-3' },
-    { id:'detroit',       name:'Custom Wheel Deal',         city:'Detroit',       addr:'21221 W Seven Mile Rd.', zip:'48219', phone:'313-257-7777', phoneTel:'+13132577777', hours:'Mon-Fri 8-6 \u00b7 Sat 8-3' },
-    { id:'highland-park', name:'Holbrook Tire & Auto Glass',   city:'Highland Park', addr:'5 W McNichols Rd.',      zip:'48203', phone:'313-868-0200', phoneTel:'+13138680200', hours:'Mon-Fri 8-6 \u00b7 Sat 8-3' },
+    { id:'holbrook',     name:'Custom Wheel Deal', city:'Detroit',      addr:'21221 W Seven Mile Rd', zip:'48219', phone:'313-257-7777', phoneTel:'+13132577777', hours:'Mon-Fri 8-6 \u00b7 Sat 8-3' },
+    { id:'roseville',    name:'Custom Wheel Deal', city:'Roseville',    addr:'32105 Gratiot Ave',     zip:'48066', phone:'586-871-1111', phoneTel:'+15868711111', hours:'Mon-Fri 8-6 \u00b7 Sat 8-3' },
+    { id:'chesterfield', name:'Custom Wheel Deal', city:'Chesterfield', addr:'49765 Gratiot Ave',     zip:'48051', phone:'586-257-7778', phoneTel:'+15862577778', hours:'Mon-Fri 8-6 \u00b7 Sat 8-3' },
   ],
 
   categories: [
@@ -101,8 +101,8 @@ window.HOLBROOK_DATA = {
   ],
 };
 // Initialize tires/wheels with static fallbacks
-window.HOLBROOK_DATA.tires = window.HOLBROOK_DATA._staticTires.slice();
-window.HOLBROOK_DATA.wheels = window.HOLBROOK_DATA._staticWheels.slice();
+window.CWD_DATA.tires = window.CWD_DATA._staticTires.slice();
+window.CWD_DATA.wheels = window.CWD_DATA._staticWheels.slice();
 
 // ─────────────── Rebates data
 window.REBATES = [

@@ -1,4 +1,4 @@
-const HOLBROOK_TIRE_BRANDS = [
+﻿const CWD_TIRE_BRANDS = [
   {
     "name": "Bfgoodrich",
     "slug": "bfgoodrich",

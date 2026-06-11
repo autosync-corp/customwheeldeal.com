@@ -1,5 +1,5 @@
-/*!
- * Holbrook Tire Filters
+﻿/*!
+ * CWD Tire Filters
  * --------------------
  * Left-rail filter sidebar for the tire landing page (/tires/brand.html) and
  * every tire brand product page (/tires/{brand}/index.html).
@@ -21,7 +21,7 @@
  * Additionally renders a vehicle-fitment card at the top so the user always
  * sees the vehicle these products are limited to (breadcrumb consistency).
  *
- * Requires holbrook-filters-core.js to be loaded first.
+ * Requires cwd-filters-core.js to be loaded first.
  */
 (function () {
   'use strict';
@@ -42,18 +42,18 @@
   // so year/make/model read naturally.
   // --------------------------------------------------------------------
   function injectUppercaseStyle() {
-    if (document.getElementById('holbrook-tire-filters-style')) return;
+    if (document.getElementById('cwd-tire-filters-style')) return;
     const style = document.createElement('style');
-    style.id = 'holbrook-tire-filters-style';
+    style.id = 'cwd-tire-filters-style';
     style.textContent = [
-      '.holbrook-filters-sidebar .holbrook-filter-header,',
-      '.holbrook-filters-sidebar .holbrook-filter-body,',
-      '.holbrook-filters-sidebar h2,',
-      '.holbrook-filters-sidebar select,',
-      '.holbrook-filters-sidebar > * > label { text-transform: uppercase; letter-spacing: 0.04em; }',
-      '.holbrook-filters-sidebar .holbrook-vehicle-card,',
-      '.holbrook-filters-sidebar .holbrook-vehicle-card * { text-transform: none; letter-spacing: normal; }',
-      '.holbrook-filters-sidebar .holbrook-vehicle-card .uppercase { text-transform: uppercase; }'
+      '.cwd-filters-sidebar .cwd-filter-header,',
+      '.cwd-filters-sidebar .cwd-filter-body,',
+      '.cwd-filters-sidebar h2,',
+      '.cwd-filters-sidebar select,',
+      '.cwd-filters-sidebar > * > label { text-transform: uppercase; letter-spacing: 0.04em; }',
+      '.cwd-filters-sidebar .cwd-vehicle-card,',
+      '.cwd-filters-sidebar .cwd-vehicle-card * { text-transform: none; letter-spacing: normal; }',
+      '.cwd-filters-sidebar .cwd-vehicle-card .uppercase { text-transform: uppercase; }'
     ].join('\n');
     document.head.appendChild(style);
   }
@@ -175,12 +175,12 @@
   };
 
   function start() {
-    if (!window.HolbrookFilters) {
-      console.warn('[HolbrookTireFilters] core not loaded');
+    if (!window.CWDFilters) {
+      console.warn('[CWDTireFilters] core not loaded');
       return;
     }
     injectUppercaseStyle();
-    window.HolbrookFilters.mount(config);
+    window.CWDFilters.mount(config);
   }
 
   if (document.readyState === 'loading') {

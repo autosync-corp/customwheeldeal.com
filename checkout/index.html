@@ -102,7 +102,7 @@ function Btn({
       color: '#fff'
     },
     primaryGrad: {
-      background: 'linear-gradient(135deg,#850824 0%,#a62639 100%)',
+      background: 'linear-gradient(135deg,#ea580c 0%,#c2410c 100%)',
       color: '#fff'
     },
     dark: {
@@ -528,8 +528,8 @@ function AppProvider({
     return path + search;
   });
   const [lastOrder, setLastOrder] = useState(null);
-  const [tireBrands, setTireBrands] = useState(window.HOLBROOK_DATA.brands);
-  const [wheelBrandsList, setWheelBrandsList] = useState(window.HOLBROOK_DATA.wheelBrandList);
+  const [tireBrands, setTireBrands] = useState(window.CWD_DATA.brands);
+  const [wheelBrandsList, setWheelBrandsList] = useState(window.CWD_DATA.wheelBrandList);
   const [apiReady, setApiReady] = useState(false);
   useEffect(() => {
     const BRAND_CDN = 'https://storage.googleapis.com/autosync-brand-logos/logos/';
@@ -549,15 +549,15 @@ function AppProvider({
             return b.name;
           });
           if (apiBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiBrands.length, 'tire brands from API');
+            console.log('[CWD] Loaded', apiBrands.length, 'tire brands from API');
             setTireBrands(apiBrands);
-            window.HOLBROOK_DATA.brands = apiBrands;
+            window.CWD_DATA.brands = apiBrands;
           }
         } else {
-          console.warn('[Holbrook] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
+          console.warn('[CWD] Tire brands: no items found. Keys:', tRes.value ? Object.keys(tRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Tire brands API failed:', tRes.reason);
+        console.warn('[CWD] Tire brands API failed:', tRes.reason);
       }
       if (wRes.status === 'fulfilled') {
         const items = extractItems(wRes.value);
@@ -572,18 +572,18 @@ function AppProvider({
             return b.name;
           });
           if (apiWheelBrands.length > 0) {
-            console.log('[Holbrook] Loaded', apiWheelBrands.length, 'wheel brands from API');
+            console.log('[CWD] Loaded', apiWheelBrands.length, 'wheel brands from API');
             setWheelBrandsList(apiWheelBrands);
-            window.HOLBROOK_DATA.wheelBrandList = apiWheelBrands;
-            window.HOLBROOK_DATA.wheelBrands = apiWheelBrands.map(function (b) {
+            window.CWD_DATA.wheelBrandList = apiWheelBrands;
+            window.CWD_DATA.wheelBrands = apiWheelBrands.map(function (b) {
               return b.name;
             });
           }
         } else {
-          console.warn('[Holbrook] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
+          console.warn('[CWD] Wheel brands: no items found. Keys:', wRes.value ? Object.keys(wRes.value) : 'null');
         }
       } else {
-        console.warn('[Holbrook] Wheel brands API failed:', wRes.reason);
+        console.warn('[CWD] Wheel brands API failed:', wRes.reason);
       }
       setApiReady(true);
     });
@@ -632,8 +632,8 @@ function AppProvider({
   };
   // Sync Medusa lineItemIds on mount so remove/update can reference them
   useEffect(function() {
-    if (!window.HolbrookCart) return;
-    HolbrookCart.getItems().then(function(medusaItems) {
+    if (!window.CWDCart) return;
+    CWDCart.getItems().then(function(medusaItems) {
       if (!medusaItems || !medusaItems.length) return;
       setCart(function(prev) {
         if (!prev.length) return medusaItems;
@@ -656,10 +656,10 @@ function AppProvider({
       if (hit) return prev.map(p => p.id === pkg.id ? { ...p, qty: p.qty + qty } : p);
       return [...prev, { ...pkg, qty }];
     });
-    if (window.HolbrookCart) {
+    if (window.CWDCart) {
       try {
-        await HolbrookCart.addItem({ ...pkg, qty });
-        const medusaItems = await HolbrookCart.getItems();
+        await CWDCart.addItem({ ...pkg, qty });
+        const medusaItems = await CWDCart.getItems();
         if (medusaItems) {
           setCart(prev => prev.map(p => {
             const mi = medusaItems.find(m => m.id === p.id);
@@ -673,26 +673,26 @@ function AppProvider({
     const item = cart.find(p => p.id === id);
     if (qty <= 0) {
       setCart(prev => prev.filter(p => p.id !== id));
-      if (window.HolbrookCart && item && item.lineItemId) {
-        HolbrookCart.removeItem(item.lineItemId).catch(function() {});
+      if (window.CWDCart && item && item.lineItemId) {
+        CWDCart.removeItem(item.lineItemId).catch(function() {});
       }
       return;
     }
     setCart(prev => prev.map(p => p.id === id ? { ...p, qty } : p));
-    if (window.HolbrookCart && item && item.lineItemId) {
-      try { await HolbrookCart.updateQty(item.lineItemId, qty); } catch(e) { console.warn('[Cart] Medusa update failed:', e); }
+    if (window.CWDCart && item && item.lineItemId) {
+      try { await CWDCart.updateQty(item.lineItemId, qty); } catch(e) { console.warn('[Cart] Medusa update failed:', e); }
     }
   };
   const removeItem = id => {
     const item = cart.find(p => p.id === id);
     setCart(prev => prev.filter(p => p.id !== id));
-    if (window.HolbrookCart && item && item.lineItemId) {
-      HolbrookCart.removeItem(item.lineItemId).catch(function(e) { console.warn('[Cart] Medusa remove failed:', e); });
+    if (window.CWDCart && item && item.lineItemId) {
+      CWDCart.removeItem(item.lineItemId).catch(function(e) { console.warn('[Cart] Medusa remove failed:', e); });
     }
   };
   const clearCart = () => {
     setCart([]);
-    if (window.HolbrookCart) HolbrookCart.clear().catch(function() {});
+    if (window.CWDCart) CWDCart.clear().catch(function() {});
   };
   const navigate = r => {
     const routeMap = {
@@ -762,7 +762,7 @@ function VVSBanner() {
   if (route === '/' || route === '' || route === '/vvs') return null;
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #850824 100%)',
+      background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 60%, #ea580c 100%)',
       color: '#fff'
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -822,7 +822,7 @@ function VVSBanner() {
 function LocationsStrip() {
   const {
     locations
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   return /*#__PURE__*/React.createElement("section", {
     style: {
       background: '#fff',
@@ -868,7 +868,7 @@ function LocationsStrip() {
     }
   }, /*#__PURE__*/React.createElement(Eyebrow, {
     color: tokens.primary
-  }, "Holbrook \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
+  }, "CWD \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'Space Grotesk',
       fontSize: 20,
@@ -934,7 +934,7 @@ function GlobalFitmentBar() {
   const [fitmentsLoading, setFitmentsLoading] = useState(false);
 
   // Static fallback makes (always available)
-  const staticMakes = window.HOLBROOK_DATA.vehicleMakes.map(function (m) {
+  const staticMakes = window.CWD_DATA.vehicleMakes.map(function (m) {
     return m.name;
   });
   useEffect(() => {
@@ -1071,7 +1071,7 @@ function GlobalFitmentBar() {
       navigate('/shop');
     }
   };
-  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #850824 100%)';
+  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #ea580c 100%)';
   const barBorder = '1px solid rgba(255,255,255,.08)';
   const barShadow = 'inset 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(232,52,78,.15)';
   const fld = {
@@ -1406,7 +1406,7 @@ function CheckoutPage() {
   } = useApp();
   const {
     locations
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   const [mode, setMode] = useState('install');
   const [store, setStore] = useState(locations[0].id);
   const [contact, setContact] = useState({
@@ -1457,7 +1457,7 @@ function CheckoutPage() {
   }
   const placeOrder = async () => {
     setPayError('');
-    if (!window.HolbrookCart) { setPayError('Cart unavailable. Please refresh.'); return; }
+    if (!window.CWDCart) { setPayError('Cart unavailable. Please refresh.'); return; }
     if (!stripeRef.current || !elementsRef.current) { setPayError('Payment form is still loading. Try again in a moment.'); return; }
     if (!contact.email) { setPayError('Please enter your email.'); return; }
     if (mode === 'ship' && (!addr.street || !addr.city || !addr.zip)) { setPayError('Please enter your shipping address.'); return; }
@@ -1467,32 +1467,32 @@ function CheckoutPage() {
       // reflects the current local cart + the current fee breakdown. Tire/wheel
       // line items use the real product price; install/disposal/tax/shipping
       // are added as separate fee line items via the Service Fee variant.
-      let medusaCart = await HolbrookCart.getCartData();
+      let medusaCart = await CWDCart.getCartData();
       if (medusaCart && (medusaCart.items || []).length > 0) {
         for (const li of medusaCart.items) {
-          try { await HolbrookCart.removeItem(li.id); } catch (e) { console.warn('[Checkout] failed to remove stale line item:', e); }
+          try { await CWDCart.removeItem(li.id); } catch (e) { console.warn('[Checkout] failed to remove stale line item:', e); }
         }
       }
       const totalUnits = cart.reduce((s, it) => s + (it.qty || 0), 0);
       for (const it of cart) {
-        await HolbrookCart.addItem({
+        await CWDCart.addItem({
           id: it.id, type: it.type, name: it.name, brand: it.brand, size: it.size,
           price: Number(it.price || 0), image: it.image, qty: it.qty,
           title: it.name || undefined
         });
       }
       if (mode === 'install') {
-        if (install > 0) await HolbrookCart.addFeeItem({ title: 'Installation & Balance', unitPrice: install, quantity: 1, kind: 'install' });
-        if (disposal > 0) await HolbrookCart.addFeeItem({ title: 'Tire Disposal', unitPrice: disposal, quantity: 1, kind: 'disposal' });
+        if (install > 0) await CWDCart.addFeeItem({ title: 'Installation & Balance', unitPrice: install, quantity: 1, kind: 'install' });
+        if (disposal > 0) await CWDCart.addFeeItem({ title: 'Tire Disposal', unitPrice: disposal, quantity: 1, kind: 'disposal' });
       } else {
-        if (ship > 0) await HolbrookCart.addFeeItem({ title: 'Shipping & Freight', unitPrice: ship, quantity: 1, kind: 'shipping' });
+        if (ship > 0) await CWDCart.addFeeItem({ title: 'Shipping & Freight', unitPrice: ship, quantity: 1, kind: 'shipping' });
       }
-      if (tax > 0) await HolbrookCart.addFeeItem({ title: 'MI Sales Tax', unitPrice: tax, quantity: 1, kind: 'tax' });
-      medusaCart = await HolbrookCart.getCartData();
+      if (tax > 0) await CWDCart.addFeeItem({ title: 'MI Sales Tax', unitPrice: tax, quantity: 1, kind: 'tax' });
+      medusaCart = await CWDCart.getCartData();
       if (!medusaCart || !(medusaCart.items || []).length) throw new Error('Could not sync cart items to Medusa.');
       const nameParts = (contact.name || 'Customer').trim().split(/\s+/);
       const firstName = nameParts[0] || 'Customer';
-      const lastName = nameParts.slice(1).join(' ') || 'Holbrook';
+      const lastName = nameParts.slice(1).join(' ') || 'Custom Wheel Deal';
       const loc = locations.find(l => l.id === store);
       const useAddr = mode === 'ship'
         ? { street: addr.street, city: addr.city, state: addr.state, zip: addr.zip }
@@ -1507,14 +1507,14 @@ function CheckoutPage() {
         country_code: 'us',
         phone: contact.phone || '',
       };
-      await HolbrookCart.updateCart({ email: contact.email, shipping_address: addressObj, billing_address: addressObj });
-      const options = await HolbrookCart.getShippingOptions();
+      await CWDCart.updateCart({ email: contact.email, shipping_address: addressObj, billing_address: addressObj });
+      const options = await CWDCart.getShippingOptions();
       if (!options.length) throw new Error('No shipping options configured for this region.');
-      await HolbrookCart.addShippingMethod(options[0].id);
+      await CWDCart.addShippingMethod(options[0].id);
       const { error: submitError } = await elementsRef.current.submit();
       if (submitError) throw new Error(submitError.message || 'Card details invalid.');
-      const pc = await HolbrookCart.createPaymentCollection();
-      const pcWithSession = await HolbrookCart.initStripeSession(pc.id);
+      const pc = await CWDCart.createPaymentCollection();
+      const pcWithSession = await CWDCart.initStripeSession(pc.id);
       const session = (pcWithSession.payment_sessions || [])[0];
       const clientSecret = session && session.data && session.data.client_secret;
       if (!clientSecret) throw new Error('Stripe session did not return a client_secret.');
@@ -1525,7 +1525,7 @@ function CheckoutPage() {
         redirect: 'if_required',
       });
       if (confirmError) throw new Error(confirmError.message || 'Payment was not authorized.');
-      const order = await HolbrookCart.completeCart();
+      const order = await CWDCart.completeCart();
       const orderId = order.display_id ? 'HB' + order.display_id : (order.id || ('HB' + Math.floor(Math.random() * 900000 + 100000)));
       setLastOrder({ id: orderId, mode, store, contact, addr, pref, total, dueToday, dueLater, items: cart, financing, depositPct });
       clearCart();
@@ -1579,7 +1579,7 @@ function CheckoutPage() {
     onClick: () => setMode('install'),
     icon: "garage_home",
     eyebrow: `${depositPct}% today · rest at install`,
-    title: "Install at Holbrook",
+    title: "Schedule Installation",
     desc: "Reserve your package with a deposit. Pay the remainder when your car leaves the bay.",
     pill: "Most popular"
   }), /*#__PURE__*/React.createElement(ModeCard, {
@@ -1616,7 +1616,7 @@ function CheckoutPage() {
     }),
     placeholder: "you@example.com"
   })), mode === 'install' ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(CheckoutSection, {
-    title: "Pick your Holbrook location"
+    title: "Pick your location"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
@@ -1656,7 +1656,7 @@ function CheckoutPage() {
     style: {
       color: tokens.primary
     }
-  }, "Holbrook"), /*#__PURE__*/React.createElement("div", {
+  }, "Custom Wheel Deal"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'Space Grotesk',
       fontWeight: 700,
@@ -1949,7 +1949,7 @@ function CheckoutPage() {
     style: {
       marginTop: 16,
       padding: 16,
-      background: 'linear-gradient(135deg,#850824,#a62639)',
+      background: 'linear-gradient(135deg,#ea580c,#c2410c)',
       color: '#fff',
       borderRadius: 10
     }
@@ -2060,10 +2060,10 @@ function ModeCard({
       cursor: 'pointer',
       borderRadius: 14,
       padding: 28,
-      background: active ? title.includes('Install') ? 'linear-gradient(135deg,#850824,#a62639)' : tokens.slate900 : '#fff',
+      background: active ? title.includes('Install') ? 'linear-gradient(135deg,#ea580c,#c2410c)' : tokens.slate900 : '#fff',
       color: active ? '#fff' : tokens.ink,
       border: active ? '2px solid transparent' : `2px solid ${tokens.line}`,
-      boxShadow: active ? '0 12px 28px rgba(133,8,36,.25)' : 'none',
+      boxShadow: active ? '0 12px 28px rgba(234,88,12,.25)' : 'none',
       transition: 'all .18s ease-out'
     }
   }, pill && /*#__PURE__*/React.createElement("div", {
@@ -2205,7 +2205,7 @@ function StripePaymentSection({ amount, stripeRef, elementsRef }) {
   const [initError, setInitError] = useState('');
   useEffect(() => {
     if (!window.Stripe) { setInitError('Stripe.js failed to load. Check your network or ad blocker.'); return; }
-    const pk = window.HolbrookCart && window.HolbrookCart.config && window.HolbrookCart.config.stripePk;
+    const pk = window.CWDCart && window.CWDCart.config && window.CWDCart.config.stripePk;
     if (!pk) { setInitError('Stripe publishable key missing.'); return; }
     const stripe = window.Stripe(pk);
     const elements = stripe.elements({
@@ -2245,7 +2245,7 @@ function ConfirmationPage() {
   } = useApp();
   const {
     locations
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   if (!lastOrder) {
     useEffect(() => navigate('/'), []);
     return null;
@@ -2259,7 +2259,7 @@ function ConfirmationPage() {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      background: lastOrder.mode === 'install' ? 'linear-gradient(135deg,#850824,#a62639)' : tokens.slate900,
+      background: lastOrder.mode === 'install' ? 'linear-gradient(135deg,#ea580c,#c2410c)' : tokens.slate900,
       color: '#fff',
       padding: '56px 48px',
       borderRadius: 16,
@@ -2303,7 +2303,7 @@ function ConfirmationPage() {
       maxWidth: 580,
       lineHeight: 1.6
     }
-  }, lastOrder.mode === 'install' ? `Thanks, ${lastOrder.contact.name || 'friend'}. A Holbrook team member will call ${lastOrder.contact.phone || 'you'} within 24 hours to confirm your install at ${loc?.city}.` : `Your package is being mounted and balanced in Roseville. We'll email tracking within 24 hours.`))), /*#__PURE__*/React.createElement("div", {
+  }, lastOrder.mode === 'install' ? `Thanks, ${lastOrder.contact.name || 'friend'}. A Custom Wheel Deal team member will call ${lastOrder.contact.phone || 'you'} within 24 hours to confirm your install at ${loc?.city}.` : `Your package is being mounted and balanced in Roseville. We'll email tracking within 24 hours.`))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
@@ -2354,7 +2354,7 @@ function ConfirmationPage() {
       fontWeight: 700,
       marginTop: 6
     }
-  }, "Holbrook \xB7 ", loc?.city), /*#__PURE__*/React.createElement("div", {
+  }, "CWD \xB7 ", loc?.city), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       color: tokens.graphite,
@@ -2494,7 +2494,7 @@ function VVSPage() {
     style: {
       color: tokens.primaryAccent
     }
-  }), "vvs.autosyncstudio.com/holbrooktire"), /*#__PURE__*/React.createElement("div", {
+  }), "vvs.autosyncstudio.com/customwheeldeal"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 6
@@ -2508,7 +2508,7 @@ function VVSPage() {
       background: c
     }
   })))), /*#__PURE__*/React.createElement("iframe", {
-    src: "https://vvs.autosyncstudio.com/holbrooktire",
+    src: "https://vvs.autosyncstudio.com/customwheeldeal",
     title: "Visual Vehicle Studio",
     style: {
       width: '100%',

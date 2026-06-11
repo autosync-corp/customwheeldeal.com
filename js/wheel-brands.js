@@ -1,4 +1,4 @@
-const HOLBROOK_WHEEL_BRANDS = [
+﻿const CWD_WHEEL_BRANDS = [
   {
     "name": "4PLAY",
     "slug": "4play",

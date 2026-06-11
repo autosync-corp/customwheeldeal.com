@@ -5,7 +5,7 @@
   <link rel="icon" href="/assets/favicon.webp">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Build a Tire & Wheel Package | Custom Wheel Deal — Michigan</title>
-  <meta name="description" content="Build your perfect tire and wheel package with our interactive visualizer. See exactly how they look on your vehicle before you buy. Available at all three Holbrook locations in Michigan.">
+  <meta name="description" content="Build your perfect tire and wheel package with our interactive visualizer. See exactly how they look on your vehicle before you buy. Available at all our locations in Michigan.">
   <link rel="canonical" href="https://customwheeldeal.com/packages/">
   <meta property="og:title" content="Build a Tire & Wheel Package | Custom Wheel Deal">
   <meta property="og:description" content="Build your perfect tire and wheel package with our interactive visualizer. See exactly how they look on your vehicle before you buy.">
@@ -60,7 +60,7 @@
 <script src="https://vvs-dev.autosyncstudio.com/js/Autosync.js"></script>
 <script>
 async function handleVVSCart(wheels, tires, vehicle) {
-  if (!window.HolbrookCart) { alert('Cart unavailable. Please refresh and try again.'); return; }
+  if (!window.CWDCart) { alert('Cart unavailable. Please refresh and try again.'); return; }
 
   var overlay = document.createElement('div');
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:9999;';
@@ -72,7 +72,7 @@ async function handleVVSCart(wheels, tires, vehicle) {
   try {
     for (var i = 0; i < wheels.length; i++) {
       var w = wheels[i];
-      await HolbrookCart.addItem({
+      await CWDCart.addItem({
         id:          String(w.partNumber || w.id || ('wheel-' + i)),
         type:        'wheel',
         name:        w.model  || 'Wheel',
@@ -87,7 +87,7 @@ async function handleVVSCart(wheels, tires, vehicle) {
     }
     for (var j = 0; j < tires.length; j++) {
       var t = tires[j];
-      await HolbrookCart.addItem({
+      await CWDCart.addItem({
         id:         String(t.partNumber || t.id || ('tire-' + j)),
         type:       'tire',
         name:       t.model  || 'Tire',
@@ -103,7 +103,7 @@ async function handleVVSCart(wheels, tires, vehicle) {
     window.location.href = '/cart/';
   } catch (err) {
     document.body.removeChild(overlay);
-    console.error('[Holbrook VVS] Cart add failed:', err);
+    console.error('[CWD VVS] Cart add failed:', err);
     alert('Could not add to cart: ' + (err.message || 'Unknown error') + '. Please try again.');
   }
 }
@@ -113,7 +113,7 @@ function PackageBuilderPage() {
     if (typeof Autosync === 'undefined') return;
     var instance = new Autosync({
       id: 'autosync-visualizer',
-      key: 'holbrooktire',
+      key: 'customwheeldeal',
       adaptiveHeight: false,
       disableQuoteForm: true,
       homeStyle: 'vehicle_make_selection',
@@ -133,7 +133,7 @@ function PackageBuilderPage() {
       widget: false,
       defaultShoppingTypeOnVehicle: 'packages',
     });
-    window.__holbrookVVS = instance;
+    window.__cwdVVS = instance;
   }, []);
   return /*#__PURE__*/React.createElement("div", { id: 'autosync-visualizer' });
 }

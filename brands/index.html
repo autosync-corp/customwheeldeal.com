@@ -50,7 +50,7 @@
 function LocationsStrip() {
   const {
     locations
-  } = window.HOLBROOK_DATA;
+  } = window.CWD_DATA;
   return /*#__PURE__*/React.createElement("section", {
     style: {
       background: '#fff',
@@ -96,7 +96,7 @@ function LocationsStrip() {
     }
   }, /*#__PURE__*/React.createElement(Eyebrow, {
     color: tokens.primary
-  }, "Holbrook \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
+  }, "CWD \xB7 ", l.city), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'Space Grotesk',
       fontSize: 20,
@@ -159,7 +159,7 @@ function GlobalFitmentBar() {
   const [modelsLoading, setModelsLoading] = useState(false);
   const [submodelsLoading, setSubmodelsLoading] = useState(false);
   const [fitmentsLoading, setFitmentsLoading] = useState(false);
-  const staticMakes = window.HOLBROOK_DATA.vehicleMakes.map(function (m) {
+  const staticMakes = window.CWD_DATA.vehicleMakes.map(function (m) {
     return m.name;
   });
   useEffect(() => {
@@ -229,7 +229,7 @@ function GlobalFitmentBar() {
       navigate('/shop');
     }
   };
-  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #850824 100%)';
+  const barBg = 'linear-gradient(90deg, #5e0519 0%, #7a0820 45%, #ea580c 100%)';
   const barBorder = '1px solid rgba(255,255,255,.08)';
   const barShadow = 'inset 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(232,52,78,.15)';
   const fld = { background: 'rgba(255,255,255,.1)', border: '1px solid rgba(255,255,255,.18)', padding: '10px 32px 10px 14px', fontFamily: 'Inter', fontSize: 13, fontWeight: 600, color: '#fff', appearance: 'none', borderRadius: 6, minWidth: 130, cursor: 'pointer' };
@@ -305,7 +305,7 @@ function BrandCard({ brand, href }) {
     },
     onMouseOver: function(e) {
       e.currentTarget.style.boxShadow = '0 10px 24px rgba(0,0,0,.09)';
-      e.currentTarget.style.borderColor = 'rgba(133,8,36,.3)';
+      e.currentTarget.style.borderColor = 'rgba(234,88,12,.3)';
       e.currentTarget.style.transform = 'translateY(-2px)';
     },
     onMouseOut: function(e) {
@@ -343,8 +343,8 @@ function BrandSkeletonGrid({ cols }) {
 }
 
 function BrandsPage() {
-  var [tireBrands, setTireBrands] = React.useState(window.HOLBROOK_DATA.brands || []);
-  var [wheelBrands, setWheelBrands] = React.useState(window.HOLBROOK_DATA.wheelBrandList || []);
+  var [tireBrands, setTireBrands] = React.useState(window.CWD_DATA.brands || []);
+  var [wheelBrands, setWheelBrands] = React.useState(window.CWD_DATA.wheelBrandList || []);
   var [loading, setLoading] = React.useState(true);
 
   React.useEffect(function() {
@@ -382,7 +382,7 @@ function BrandsPage() {
           'Every brand you trust.'
         ),
         /*#__PURE__*/React.createElement('p', { style: { fontSize: 15, color: '#94a3b8', maxWidth: 520, margin: '0 auto', lineHeight: 1.6 } },
-          'Holbrook carries hundreds of tire and wheel brands. Browse by category or search your favourite below.'
+          'Custom Wheel Deal carries hundreds of tire and wheel brands. Browse by category or search your favourite below.'
         )
       )
     ),

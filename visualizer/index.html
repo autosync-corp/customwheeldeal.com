@@ -5,7 +5,7 @@
   <link rel="icon" href="/assets/favicon.webp">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Visual Vehicle Studio — See Tires & Wheels on Your Vehicle | Custom Wheel Deal</title>
-  <meta name="description" content="Use the Holbrook Visual Vehicle Studio to see how tires and wheels look on your exact vehicle before you buy. Select your year, make, and model to get started.">
+  <meta name="description" content="Use the Custom Wheel Deal Visual Vehicle Studio to see how tires and wheels look on your exact vehicle before you buy. Select your year, make, and model to get started.">
   <link rel="canonical" href="https://customwheeldeal.com/visualizer/">
   <meta property="og:title" content="Visual Vehicle Studio | Custom Wheel Deal">
   <meta property="og:description" content="See exactly how new tires and wheels will look on your vehicle before you buy.">
@@ -40,7 +40,7 @@
 <script src="https://vvs-dev.autosyncstudio.com/js/Autosync.js"></script>
 <script>
 async function handleVVSCart(wheels, tires, vehicle) {
-  if (!window.HolbrookCart) { alert('Cart unavailable. Please refresh and try again.'); return; }
+  if (!window.CWDCart) { alert('Cart unavailable. Please refresh and try again.'); return; }
 
   // Show overlay so user knows something is happening
   var overlay = document.createElement('div');
@@ -54,7 +54,7 @@ async function handleVVSCart(wheels, tires, vehicle) {
     for (var i = 0; i < wheels.length; i++) {
       var w = wheels[i];
       var finish = [w.finish, w.color, w.accent].filter(Boolean).join(' ');
-      await HolbrookCart.addItem({
+      await CWDCart.addItem({
         id:          String(w.partNumber || w.id || ('wheel-' + i)),
         type:        'wheel',
         name:        w.model  || 'Wheel',
@@ -69,7 +69,7 @@ async function handleVVSCart(wheels, tires, vehicle) {
     }
     for (var j = 0; j < tires.length; j++) {
       var t = tires[j];
-      await HolbrookCart.addItem({
+      await CWDCart.addItem({
         id:         String(t.partNumber || t.id || ('tire-' + j)),
         type:       'tire',
         name:       t.model  || 'Tire',
@@ -85,7 +85,7 @@ async function handleVVSCart(wheels, tires, vehicle) {
     window.location.href = '/cart/';
   } catch (err) {
     document.body.removeChild(overlay);
-    console.error('[Holbrook VVS] Cart add failed:', err);
+    console.error('[CWD VVS] Cart add failed:', err);
     alert('Could not add to cart: ' + (err.message || 'Unknown error') + '. Please try again.');
   }
 }
@@ -96,7 +96,7 @@ function VisualizerPage() {
     // Re-create on remount; Autosync handles its own DOM lifecycle inside the container.
     var instance = new Autosync({
       id: 'autosync-visualizer',
-      key: 'holbrooktire',
+      key: 'customwheeldeal',
       adaptiveHeight: false,
       disableQuoteForm: true,
       homeStyle: 'vehicle_make_selection',
@@ -115,7 +115,7 @@ function VisualizerPage() {
       startPage: 'home',
       widget: false,
     });
-    window.__holbrookVVS = instance;
+    window.__cwdVVS = instance;
   }, []);
   return /*#__PURE__*/React.createElement("div", { id: 'autosync-visualizer' });
 }

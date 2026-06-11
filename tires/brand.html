@@ -13,7 +13,7 @@
                 extend: {
                     fontFamily: { 'sans': ['Inter', 'sans-serif'], 'display': ['Space Grotesk', 'sans-serif'] },
                     colors: {
-                        'primary': '#850824', 'primary-container': '#a62639',
+                        'primary': '#ea580c', 'primary-container': '#c2410c',
                         'secondary': '#5a5b84', 'secondary-container': '#cecdfd',
                         'tertiary': '#543e00', 'tertiary-container': '#715400',
                         'tertiary-fixed-dim': '#f9bd14',
@@ -30,7 +30,7 @@
         }
     </script>
     <style>
-        .signature-gradient { background: linear-gradient(135deg, #850824 0%, #a62639 100%); }
+        .signature-gradient { background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%); }
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Space Grotesk', sans-serif; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
@@ -42,8 +42,8 @@
         .filter-section .filter-body { transition: max-height 0.3s ease, opacity 0.2s ease; overflow: hidden; }
         .filter-section .filter-body.collapsed { max-height: 0 !important; opacity: 0; padding-top: 0; }
         .featured-badge { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.4rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; border: 1.5px solid transparent; }
-        .featured-badge:hover { border-color: #850824; }
-        .featured-badge.active { background: #850824; color: white; border-color: #850824; }
+        .featured-badge:hover { border-color: #ea580c; }
+        .featured-badge.active { background: #ea580c; color: white; border-color: #ea580c; }
     </style>
 </head>
 <body class="bg-surface text-on-surface">
@@ -72,7 +72,7 @@
 
     <!-- Main Content: Left Filters + Right Product Grid -->
     <main class="max-w-7xl mx-auto px-4 md:px-12 py-8">
-        <!-- Native 4-col grid flattened; the Holbrook filter rail injected from /js/holbrook-filters-core.js takes the left column. -->
+        <!-- Native 4-col grid flattened; the CWD filter rail injected from /js/cwd-filters-core.js takes the left column. -->
         <div class="block">
 
             <!-- ═══════════════════════════════════════════════ -->
@@ -283,7 +283,7 @@
                 <!-- Loading state -->
                 <div id="loadingState" class="text-center py-16">
                     <div class="inline-flex items-center gap-3 text-on-surface-variant">
-                        <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#850824" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" class="animate-spin"><circle cx="12" cy="12" r="10" fill="none" stroke="#ea580c" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
                         <span>Loading tires...</span>
                     </div>
                 </div>
@@ -348,12 +348,12 @@
 
         // Inject shared header, breadcrumb, footer
         document.addEventListener('DOMContentLoaded', async () => {
-            document.getElementById('headerMount').innerHTML = HolbrookUI.renderHeader('tires');
-            document.getElementById('footerMount').innerHTML = HolbrookUI.renderFooter();
+            document.getElementById('headerMount').innerHTML = CWDUI.renderHeader('tires');
+            document.getElementById('footerMount').innerHTML = CWDUI.renderFooter();
 
-            if (typeof HolbrookCart !== 'undefined') HolbrookCart.init();
-            HolbrookUI.updateGarageCount();
-            HolbrookUI.renderVehicleBar();
+            if (typeof CWDCart !== 'undefined') CWDCart.init();
+            CWDUI.updateGarageCount();
+            CWDUI.renderVehicleBar();
 
             await loadBrandData();
 
@@ -376,7 +376,7 @@
                 let brandLogo = '';
 
                 try {
-                    const brands = await HolbrookAPI.getTireBrands();
+                    const brands = await CWDAPI.getTireBrands();
                     const found = brands.find(b => b.slug === brandSlug);
                     if (found) {
                         brandDisplayName = found.name;  // Properly cased: "Pirelli", "Mickey Thompson", etc.
@@ -387,7 +387,7 @@
                 }
 
                 // Use the properly-cased brand name for the API call
-                const result = await HolbrookAPI.getTiresByBrand(brandDisplayName);
+                const result = await CWDAPI.getTiresByBrand(brandDisplayName);
                 allProducts = result.tires || [];
                 filteredProducts = [...allProducts];
 
@@ -411,7 +411,7 @@
                 }
 
                 // Breadcrumb
-                document.getElementById('breadcrumbMount').innerHTML = HolbrookUI.renderBreadcrumb([
+                document.getElementById('breadcrumbMount').innerHTML = CWDUI.renderBreadcrumb([
                     { label: 'Tires', href: 'index.html' },
                     { label: currentBrand.name }
                 ]);
@@ -630,7 +630,7 @@
 
         function saveProduct(productId) {
             const p = allProducts.find(x => String(x.id) === String(productId));
-            if (p) sessionStorage.setItem('holbrook.pendingProduct', JSON.stringify(p));
+            if (p) sessionStorage.setItem('cwd.pendingProduct', JSON.stringify(p));
         }
 
         function displayProducts(products) {
@@ -686,8 +686,8 @@
         }
 
         function addToCart(product) {
-            if (typeof HolbrookCart !== 'undefined') {
-                HolbrookCart.addItem({
+            if (typeof CWDCart !== 'undefined') {
+                CWDCart.addItem({
                     id: product.id, type: 'tire',
                     name: product.model || product.displayName,
                     brand: product.brand, size: product.size,
@@ -701,9 +701,9 @@
             document.getElementById('loadingState').innerHTML = `<span class="text-error">${message}</span>`;
         }
     </script>
-<!-- holbrook-filters: installed -->
-<script src="/js/holbrook-filters-core.js" defer></script>
+<!-- cwd-filters: installed -->
+<script src="/js/cwd-filters-core.js" defer></script>
 <script src="/js/tire-filters.js" defer></script>
-<!-- /holbrook-filters -->
+<!-- /cwd-filters -->
 </body>
 </html>

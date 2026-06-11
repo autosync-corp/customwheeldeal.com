@@ -1,5 +1,5 @@
-/*!
- * Holbrook Filters Core
+﻿/*!
+ * CWD Filters Core
  * --------------------
  * Shared engine for left-side filter sidebars across tire and wheel pages.
  *
@@ -11,14 +11,14 @@
  *   4. Fetch available filter facets from the AutoSync API (falling back to the
  *      values already present in the product cards on the page).
  *   5. Apply filters client-side against the product-grid DOM, honoring URL state.
- *   6. Dispatch a `holbrook:filtersChanged` CustomEvent when selections change so
+ *   6. Dispatch a `cwd:filtersChanged` CustomEvent when selections change so
  *      other scripts can respond (analytics, product cards, etc.).
  *
  * Designed to be consumed by js/tire-filters.js and js/wheel-filters.js which
  * supply a category-specific configuration object.
  *
  * Dependencies: Tailwind (already loaded site-wide via CDN) and Material Symbols.
- * No module system required - exposed on window as `HolbrookFilters`.
+ * No module system required - exposed on window as `CWDFilters`.
  */
 (function (global) {
   'use strict';
@@ -26,8 +26,8 @@
   // ------------------------------------------------------------------
   // Utility helpers
   // ------------------------------------------------------------------
-  const SELECTED_VEHICLE_KEY = 'holbrook.selectedVehicle';
-  const GARAGE_KEY = 'holbrook.garage';
+  const SELECTED_VEHICLE_KEY = 'cwd.selectedVehicle';
+  const GARAGE_KEY = 'cwd.garage';
 
   function el(tag, attrs, children) {
     const node = document.createElement(tag);
@@ -91,7 +91,7 @@
 
   // ------------------------------------------------------------------
   // Product grid discovery
-  // Tries a list of common selectors used on Holbrook pages.
+  // Tries a list of common selectors used on CWD pages.
   // If nothing matches, falls back to the first <main> grandchild with >= 2
   // elements that look like product cards.
   // ------------------------------------------------------------------
@@ -121,7 +121,7 @@
   // ------------------------------------------------------------------
   // Native sidebar detection
   //
-  // The Holbrook site ships brand.html / model.html pages with their own
+  // The CWD site ships brand.html / model.html pages with their own
   // left-rail filter UI (Rim Diameter, Speed Rating, Featured Filters,
   // Finish, Bolt Pattern, etc). We want OUR sidebar to be the single
   // visible filter rail, so when we detect one of these native sidebars
@@ -162,16 +162,16 @@
   function absorbNativeSidebar(native) {
     if (!native) return null;
     // Only absorb once - check for our hidden wrapper as the sentinel.
-    if (!native.querySelector(':scope > .holbrook-native-filters-hidden')) {
+    if (!native.querySelector(':scope > .cwd-native-filters-hidden')) {
       const hidden = document.createElement('div');
-      hidden.className = 'holbrook-native-filters-hidden';
+      hidden.className = 'cwd-native-filters-hidden';
       hidden.style.display = 'none';
       hidden.setAttribute('aria-hidden', 'true');
       while (native.firstChild) hidden.appendChild(native.firstChild);
       native.appendChild(hidden);
     }
-    native.id = 'holbrookFiltersSidebar';
-    native.classList.add('holbrook-filters-sidebar');
+    native.id = 'cwdFiltersSidebar';
+    native.classList.add('cwd-filters-sidebar');
     native.setAttribute('aria-label', 'Product filters');
     return native;
   }
@@ -184,25 +184,25 @@
   // ------------------------------------------------------------------
   function injectSidebarLayout(productGrid) {
     // Already injected? Re-use.
-    const existing = document.getElementById('holbrookFiltersSidebar');
+    const existing = document.getElementById('cwdFiltersSidebar');
     if (existing) return existing;
 
     const parent = productGrid.parentElement;
     if (!parent) return null;
 
     const wrapper = el('div', {
-      class: 'holbrook-filters-shell flex flex-col lg:flex-row gap-8 items-start w-full'
+      class: 'cwd-filters-shell flex flex-col lg:flex-row gap-8 items-start w-full'
     });
 
     const sidebar = el('aside', {
-      id: 'holbrookFiltersSidebar',
-      class: 'holbrook-filters-sidebar w-full lg:w-72 flex-shrink-0 lg:sticky lg:top-28 self-start',
+      id: 'cwdFiltersSidebar',
+      class: 'cwd-filters-sidebar w-full lg:w-72 flex-shrink-0 lg:sticky lg:top-28 self-start',
       role: 'complementary',
       'aria-label': 'Product filters'
     });
 
     const gridWrap = el('div', {
-      class: 'holbrook-filters-results flex-1 min-w-0 w-full'
+      class: 'cwd-filters-results flex-1 min-w-0 w-full'
     });
 
     // Rebuild DOM: wrapper replaces grid, grid goes into gridWrap.
@@ -244,7 +244,7 @@
     if (!vehicle) {
       return el('a', {
         href: '/vehicles/',
-        class: 'holbrook-vehicle-card block rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-4 hover:border-primary/40 transition-colors'
+        class: 'cwd-vehicle-card block rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-4 hover:border-primary/40 transition-colors'
       }, [
         el('div', { class: 'flex items-center gap-3' }, [
           el('span', { class: 'material-symbols-outlined text-primary text-2xl' }, 'directions_car'),
@@ -257,7 +257,7 @@
     }
     const title = [vehicle.year, vehicle.make, vehicle.model].filter(Boolean).join(' ');
     const sub = [vehicle.trim, vehicle.submodel].filter(Boolean).join(' · ');
-    return el('div', { class: 'holbrook-vehicle-card rounded-xl border border-primary/30 bg-primary/5 p-3' }, [
+    return el('div', { class: 'cwd-vehicle-card rounded-xl border border-primary/30 bg-primary/5 p-3' }, [
       el('div', { class: 'flex items-start gap-3' }, [
         vehicle.thumbnail
           ? el('img', { src: vehicle.thumbnail, alt: title, class: 'w-16 h-12 object-cover rounded-md bg-surface-container-low flex-shrink-0' })
@@ -286,7 +286,7 @@
 
     const header = el('button', {
       type: 'button',
-      class: 'holbrook-filter-header w-full flex items-center justify-between py-4 text-left',
+      class: 'cwd-filter-header w-full flex items-center justify-between py-4 text-left',
       'aria-expanded': expanded ? 'true' : 'false',
       onclick: () => onToggle(group.id)
     }, [
@@ -305,7 +305,7 @@
     ]);
 
     const body = el('div', {
-      class: 'holbrook-filter-body pb-4 space-y-2 ' + (expanded ? '' : 'hidden')
+      class: 'cwd-filter-body pb-4 space-y-2 ' + (expanded ? '' : 'hidden')
     });
 
     if (group.type === 'range') {
@@ -378,7 +378,7 @@
       });
     }
 
-    const wrap = el('div', { class: 'holbrook-filter-group border-b border-outline-variant/30 last:border-b-0' });
+    const wrap = el('div', { class: 'cwd-filter-group border-b border-outline-variant/30 last:border-b-0' });
     wrap.appendChild(header);
     wrap.appendChild(body);
     return wrap;
@@ -387,7 +387,7 @@
   function renderSidebar(sidebar, config, state, handlers) {
     // Preserve the hidden native-filters wrapper (if present) across
     // re-renders so native page scripts can still query their own DOM.
-    const preserved = sidebar.querySelector(':scope > .holbrook-native-filters-hidden');
+    const preserved = sidebar.querySelector(':scope > .cwd-native-filters-hidden');
     sidebar.innerHTML = '';
     if (preserved) sidebar.appendChild(preserved);
 
@@ -519,11 +519,11 @@
 
   // ------------------------------------------------------------------
   // AutoSync API client
-  // Uses window.AutoSyncAPI if present, otherwise falls back to HolbrookAPI,
+  // Uses window.AutoSyncAPI if present, otherwise falls back to CWDAPI,
   // otherwise skips (grid-inferred facets will be used).
   // ------------------------------------------------------------------
   function apiClient() {
-    const api = global.AutoSyncAPI || global.HolbrookAPI || null;
+    const api = global.AutoSyncAPI || global.CWDAPI || null;
     if (!api) return null;
     return {
       async getTireFacets(vehicleId) {
@@ -545,7 +545,7 @@
   async function mount(config) {
     const grid = findProductGrid();
     if (!grid) {
-      console.warn('[HolbrookFilters] Could not locate a product grid; filters not rendered.');
+      console.warn('[CWDFilters] Could not locate a product grid; filters not rendered.');
       return null;
     }
 
@@ -583,7 +583,7 @@
         if (facets) state.facets = Object.assign({}, state.facets, facets);
       }
     } catch (e) {
-      console.warn('[HolbrookFilters] Facet API call failed, falling back to grid inference:', e);
+      console.warn('[CWDFilters] Facet API call failed, falling back to grid inference:', e);
     }
     // Fill any gaps from the grid
     const facetKeys = (config.groups || []).filter((g) => g.type !== 'range').map((g) => g.dataKey || g.id);
@@ -622,7 +622,7 @@
       sortGrid(grid, state.sort);
       state.resultCount = applyFiltersToGrid(grid, state, config.groups || []);
       rerender();
-      document.dispatchEvent(new CustomEvent('holbrook:filtersChanged', {
+      document.dispatchEvent(new CustomEvent('cwd:filtersChanged', {
         detail: { category: config.category, active: state.active, sort: state.sort, resultCount: state.resultCount }
       }));
     }
@@ -638,7 +638,7 @@
         rerender();
       }
     });
-    document.addEventListener('holbrook:vehicleChanged', (e) => {
+    document.addEventListener('cwd:vehicleChanged', (e) => {
       state.vehicle = (e && e.detail) || readSelectedVehicle();
       rerender();
     });
@@ -649,5 +649,5 @@
     return { state, rerender };
   }
 
-  global.HolbrookFilters = { mount };
+  global.CWDFilters = { mount };
 })(window);
