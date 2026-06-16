@@ -76,7 +76,7 @@ function Header() {
     return () => document.removeEventListener('mousedown', onClick);
   }, []);
   var _vNavSlug = (vehicle && vehicle.year && vehicle.make && vehicle.model) ? (vehicle.year + '-' + vehicle.make.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '') + '-' + vehicle.model.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '') + (vehicle.submodel ? '-' + vehicle.submodel.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '') : '')) : '';
-  const navItems = [['Wheels', '/wheels/'], ['Brands', '/brands/'], ['Packages', '/packages/'], ['Visualizer', '/visualizer/'], ['Rebates', '/rebates/']];
+  const navItems = [['Wheels', '/wheels/'], ['Brands', '/brands/'], ['Packages', '/packages/'], ['Visualizer', '/visualizer/']];
   const iconBtn = {
     position: 'relative',
     display: 'flex',
@@ -470,7 +470,6 @@ function Footer() {
     ['Shop', [
       { label: 'All Packages', href: '/packages/' },
       { label: 'By Vehicle', href: '/shop/' },
-      { label: 'By Wheel Brand', href: '/wheels/' },
       { label: 'By Wheel Brand', href: '/wheels/' },
       { label: 'Winter Packages', href: '/packages/' },
       { label: 'Clearance', href: '/deals/' }
